@@ -17,6 +17,7 @@ gem 'uglifier'
 group :development, :test do
   gem 'pry-rails'
   gem 'rspec-rails'
+  gem 'rubocop'
 end
 
 group :test do

@@ -23,7 +23,7 @@ describe 'faring_direball' do
     get '/faring_direball.json'
 
     actual = JSON.parse(response.body)
-    expect(actual).to eq({
+    expect(actual).to eq(
       'bonus' => 'value',
       'feed_url' => 'https://app.jonallured.com/faring_direball.json',
       'items' => [
@@ -33,6 +33,6 @@ describe 'faring_direball' do
         'title' => 'Best Post',
         'url' => 'https://daringfireball.net/best_post.html'
       ]
-    })
+    )
   end
 end

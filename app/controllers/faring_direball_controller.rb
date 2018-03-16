@@ -1,6 +1,6 @@
 class FaringDireballController < ApplicationController
   def index
-    url = "https://daringfireball.net/feeds/json"
+    url = 'https://daringfireball.net/feeds/json'
 
     response = Faraday.get url
 
