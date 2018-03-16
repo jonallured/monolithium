@@ -9,6 +9,7 @@ gem 'pg', '0.21.0'
 gem 'puma'
 
 gem 'faraday'
+gem 'haml'
 gem 'jbuilder'
 gem 'sass-rails'
 gem 'uglifier'
