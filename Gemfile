@@ -8,11 +8,13 @@ gem 'rails', '5.1.5'
 gem 'pg', '0.21.0'
 gem 'puma'
 
+gem 'decent_exposure'
 gem 'faraday'
 gem 'haml'
 gem 'jbuilder'
 gem 'sass-rails'
 gem 'uglifier'
+gem 'webpacker'
 
 group :development, :test do
   gem 'pry-rails'
@@ -21,5 +23,13 @@ group :development, :test do
 end
 
 group :test do
+  gem 'capybara'
+  gem 'chromedriver-helper'
+  gem 'factory_bot_rails'
+  gem 'selenium-webdriver'
   gem 'webmock'
+end
+
+group :development do
+  gem 'rails-erd'
 end

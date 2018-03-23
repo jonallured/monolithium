@@ -1,0 +1,135 @@
+$text: #eee;
+$textDisabled: #aaa;
+
+$pageBackground: #111;
+
+$background: #800080;
+$backgroundHover: darken($background, 5%);
+$backgroundDisabled: darken($background, 10%);
+$highlight: lighten($background, 25%);
+
+$font: verdana;
+
+body {
+  background-color: $pageBackground;
+  color: $text;
+  font-family: $font;
+  margin: 0;
+  padding: 0;
+
+  ::selection {
+    background: $highlight;
+  }
+
+  :focus {
+    outline: none;
+  }
+
+  input:focus {
+    border-bottom: 8px solid $highlight;
+  }
+
+  button:focus {
+    background-color: $highlight;
+  }
+
+  input, button {
+    font-family: $font;
+  }
+}
+
+#wrapper {
+  width: 700px;
+  margin: 0 auto;
+}
+
+h3 {
+  text-align: center;
+  font-weight: normal;
+}
+
+main {
+  aside {
+    menu {
+      display: flex;
+      justify-content: space-between;
+      padding: 20px 0;
+
+      a {
+        color: $background;
+        font-size: 24px;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    section {
+      height: 70px;
+      transition: height 0.1s ease-in-out;
+      overflow: hidden;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+
+      &.collapse {
+        height: 0;
+      }
+
+      input {
+        padding: 4px 0;
+        font-size: 20px;
+        border: none;
+        width: 295px;
+        background-color: $pageBackground;
+        border-bottom: 8px solid $background;
+        color: $text;
+      }
+
+      button {
+        background-color: $background;
+        color: $text;
+        font-size: 20px;
+        padding: 6px 16px 10px;
+        border: none;
+      }
+    }
+  }
+
+  ul {
+    margin: 0;
+    padding: 0px;
+    font-size: 40px;
+    list-style: none;
+  }
+
+  li {
+    background-color: $background;
+    margin: 0;
+    padding: 16px;
+    display: flex;
+
+    &:hover {
+      background-color: $backgroundHover;
+      cursor: pointer;
+    }
+
+    &.touched {
+      background-color: $backgroundDisabled;
+      color: #aaa;
+
+      &:hover {
+        background-color: $backgroundDisabled;
+        cursor: default;
+      }
+    }
+
+    .name {
+      margin: 0;
+      padding: 0;
+      flex-grow: 2;
+    }
+  }
+}

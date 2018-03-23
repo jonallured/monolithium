@@ -18,6 +18,7 @@ Bundler.require(*Rails.groups)
 
 module Monolithium
   class Application < Rails::Application
+    config.active_record.schema_format = :sql
     config.generators.system_tests = nil
     config.load_defaults 5.1
   end
