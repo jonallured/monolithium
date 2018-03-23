@@ -1,7 +1,4 @@
 Rails.application.configure do
-  # Verifies that versions and hashed value of the package contents in the project's package.json
-  config.webpacker.check_yarn_integrity = false
-
   config.action_controller.perform_caching = true
   config.action_mailer.perform_caching = false
   config.active_record.dump_schema_after_migration = false
@@ -18,6 +15,7 @@ Rails.application.configure do
   config.log_tags = [:request_id]
   config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
   config.read_encrypted_secrets = true
+  config.webpacker.check_yarn_integrity = false
 
   if ENV['RAILS_LOG_TO_STDOUT'].present?
     logger           = ActiveSupport::Logger.new(STDOUT)

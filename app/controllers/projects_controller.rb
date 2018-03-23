@@ -11,13 +11,13 @@ class ProjectsController < ApplicationController
   end
 
   def update
-    project.update touched_at: Time.now
+    project.update touched_at: Time.zone.now
     head :no_content
   end
 
   private
 
   def project_params
-    params.require(:project).permit(:name).merge(touched_at: Time.now)
+    params.require(:project).permit(:name).merge(touched_at: Time.zone.now)
   end
 end
