@@ -19,17 +19,11 @@ const Menu = styled.menu`
   }
 `
 
-const ErrorHeading = styled.h3`
+const ErrorMessage = styled.h3`
   background-color: ${colors.error};
   color: #000;
   padding: 8px;
 `
-
-class ErrorMessage extends React.Component {
-  render() {
-    return <ErrorHeading>{this.props.message}</ErrorHeading>
-  }
-}
 
 const Section = styled.section`
   height: 70px;
@@ -106,7 +100,7 @@ class ProjectActions extends React.Component {
           </a>
         </Menu>
         {this.props.errorMessage && (
-          <ErrorMessage message={this.props.errorMessage} />
+          <ErrorMessage>{this.props.errorMessage}</ErrorMessage>
         )}
         {this.state.showNewProject && <NewProject {...newProjectProps} />}
       </aside>
