@@ -41,7 +41,7 @@ const Section = styled.section`
     padding: 4px 0;
     font-size: 20px;
     border: none;
-    width: 295px;
+    width: 100%;
     background-color: ${colors.pageBackground};
     border-bottom: 8px solid ${colors.background};
     color: ${colors.text};
@@ -53,6 +53,7 @@ const Section = styled.section`
     font-size: 20px;
     padding: 6px 16px 10px;
     border: none;
+    margin-left: 20px;
   }
 `
 
