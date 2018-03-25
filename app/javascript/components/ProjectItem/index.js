@@ -1,13 +1,48 @@
 import React from "react"
+import styled from "styled-components"
+
+const colors = {
+  background: "#800080",
+  backgroundHover: "#670067",
+  backgroundDisabled: "#4d004d"
+}
+
+const ListItem = styled.li`
+  background-color: ${colors.background};
+  margin: 0;
+  padding: 16px;
+  display: flex;
+
+  &:hover {
+    background-color: ${colors.backgroundHover};
+    cursor: pointer;
+  }
+
+  &.touched {
+    background-color: ${colors.backgroundDisabled};
+    color: #aaa;
+
+    &:hover {
+      background-color: ${colors.backgroundDisabled};
+      cursor: default;
+    }
+  }
+
+  .name {
+    margin: 0;
+    padding: 0;
+    flex-grow: 2;
+  }
+`
 
 const ProjectItem = ({ project, touchProject }) => {
   const handleClick = () => touchProject(project)
 
   return (
-    <li onClick={handleClick} className={project.isTouched && "touched"}>
+    <ListItem onClick={handleClick} className={project.isTouched && "touched"}>
       <span className="name">{project.name}</span>
       <span className="touched_at">{project.touched_at}</span>
-    </li>
+    </ListItem>
   )
 }
 

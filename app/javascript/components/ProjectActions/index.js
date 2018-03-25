@@ -1,15 +1,73 @@
 import React from "react"
+import styled from "styled-components"
+
+const colors = {
+  background: "#800080",
+  backgroundHover: "#670067",
+  backgroundDisabled: "#4d004d",
+  error: "#ffff00",
+  pageBackground: "#111",
+  text: "#eee"
+}
+
+const Menu = styled.menu`
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 0;
+
+  a {
+    color: ${colors.background};
+    font-size: 24px;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+`
+
+const ErrorHeading = styled.h3`
+  background-color: ${colors.error};
+  color: #000;
+  padding: 8px;
+`
 
 class ErrorMessage extends React.Component {
   render() {
-    const style = {
-      backgroundColor: "yellow",
-      color: "black",
-      padding: "8px"
-    }
-    return <h3 style={style}>{this.props.message}</h3>
+    return <ErrorHeading>{this.props.message}</ErrorHeading>
   }
 }
+
+const Section = styled.section`
+  height: 70px;
+  transition: height 0.1s ease-in-out;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  &.collapse {
+    height: 0;
+  }
+
+  input {
+    padding: 4px 0;
+    font-size: 20px;
+    border: none;
+    width: 295px;
+    background-color: ${colors.pageBackground};
+    border-bottom: 8px solid ${colors.background};
+    color: ${colors.text};
+  }
+
+  button {
+    background-color: ${colors.background};
+    color: ${colors.text};
+    font-size: 20px;
+    padding: 6px 16px 10px;
+    border: none;
+  }
+`
 
 class NewProject extends React.Component {
   handleClick = () => {
@@ -22,7 +80,7 @@ class NewProject extends React.Component {
 
   render() {
     return (
-      <section>
+      <Section>
         <input
           type="text"
           name="name"
@@ -32,7 +90,7 @@ class NewProject extends React.Component {
           }}
         />
         <button onClick={this.handleClick}>Create</button>
-      </section>
+      </Section>
     )
   }
 }
@@ -49,11 +107,11 @@ class ProjectActions extends React.Component {
     const newProjectProps = { createProject: this.props.createProject }
     return (
       <aside>
-        <menu>
+        <Menu>
           <a href="#" onClick={this.toggleNewProject}>
             Create Project
           </a>
-        </menu>
+        </Menu>
         {this.props.errorMessage && (
           <ErrorMessage message={this.props.errorMessage} />
         )}
