@@ -1,0 +1,5 @@
+{
+  "app/javascript/components/*/index.js": { "type": "component" },
+  "app/javascript/packs/*.js": { "type": "pack" },
+  "app/javascript/*/test.js": { "type": "jest" }
+}
