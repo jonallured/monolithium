@@ -1,14 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 
-const colors = {
-  background: "#800080",
-  backgroundHover: "#670067",
-  backgroundDisabled: "#4d004d",
-  error: "#ffff00",
-  pageBackground: "#111",
-  text: "#eee"
-}
+import colors from "shared/colors"
 
 const Menu = styled.menu`
   display: flex;
