@@ -1,6 +1,6 @@
-import React from 'react'
+import React from "react"
 
-const ProjectItem = ({project, touchProject}) => {
+const ProjectItem = ({ project, touchProject }) => {
   const handleClick = () => touchProject(project)
 
   return (

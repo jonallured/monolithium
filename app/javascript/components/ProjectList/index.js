@@ -1,8 +1,8 @@
-import React from 'react'
+import React from "react"
 
-import ProjectItem from '../ProjectItem'
+import ProjectItem from "../ProjectItem"
 
-const ProjectList = ({projects, touchProject}) => {
+const ProjectList = ({ projects, touchProject }) => {
   const projectItems = projects.map(project => {
     const props = {
       key: project.id,
@@ -13,9 +13,7 @@ const ProjectList = ({projects, touchProject}) => {
     return <ProjectItem {...props} />
   })
 
-  return (
-    <ul>{projectItems}</ul>
-  )
+  return <ul>{projectItems}</ul>
 }
 
 export default ProjectList

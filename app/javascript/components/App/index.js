@@ -1,7 +1,7 @@
-import React from 'react'
+import React from "react"
 
-import ProjectActions from '../ProjectActions'
-import ProjectList from '../ProjectList'
+import ProjectActions from "../ProjectActions"
+import ProjectList from "../ProjectList"
 
 class App extends React.Component {
   constructor(props) {
@@ -21,14 +21,15 @@ class App extends React.Component {
     if (!project.touched) {
       this.router.updateProject(project.id)
       project.isTouched = true
-      this.setState({projects: this.projects})
+      this.setState({ projects: this.projects })
     }
   }
 
   createProject = newProject => {
-    this.router.createProject(newProject)
-      .then(projects => this.setState({projects}))
-      .catch(errorMessage => this.setState({errorMessage}))
+    this.router
+      .createProject(newProject)
+      .then(projects => this.setState({ projects }))
+      .catch(errorMessage => this.setState({ errorMessage }))
   }
 
   render() {
@@ -40,7 +41,14 @@ class App extends React.Component {
     return (
       <div>
         <ProjectActions {...projectActionsProps} />
-        { this.projects.length > 0 ? (<ProjectList projects={this.projects} touchProject={this.touchProject} />) : (<h3>No projects - create one!</h3>) }
+        {this.projects.length > 0 ? (
+          <ProjectList
+            projects={this.projects}
+            touchProject={this.touchProject}
+          />
+        ) : (
+          <h3>No projects - create one!</h3>
+        )}
       </div>
     )
   }

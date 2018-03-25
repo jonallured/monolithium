@@ -9,6 +9,11 @@
     "react-dom": "^16.2.0"
   },
   "devDependencies": {
+    "prettier": "1.11.1",
     "webpack-dev-server": "2.11.2"
+  },
+  "scripts": {
+    "prettier": "prettier --write 'app/javascript/**/*.js'",
+    "prettier-diff": "prettier --list-different 'app/javascript/**/*.js'"
   }
 }
