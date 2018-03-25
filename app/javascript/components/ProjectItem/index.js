@@ -1,11 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 
-const colors = {
-  background: "#800080",
-  backgroundHover: "#670067",
-  backgroundDisabled: "#4d004d"
-}
+import colors from "shared/colors"
 
 const ListItem = styled.li`
   background-color: ${colors.background};
