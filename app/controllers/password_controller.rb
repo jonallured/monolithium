@@ -3,10 +3,11 @@ class PasswordController < ApplicationController
 
   def create
     if password_matches?
+      path = session.fetch(:redirect_to, root_path)
       session.clear
       session[:admin_password] = params[:admin_password]
       flash[:notice] = 'Password saved to session'
-      redirect_to root_path
+      redirect_to path
     else
       flash[:error] = 'Password did not match'
       redirect_to sign_in_path

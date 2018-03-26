@@ -12,6 +12,7 @@ class ApplicationController < ActionController::Base
   def ensure_admin
     return if session_password_matches?
     session.clear
+    session[:redirect_to] = request.path
     redirect_to sign_in_path
   end
 end
