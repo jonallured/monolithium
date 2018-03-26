@@ -1,6 +1,11 @@
 require 'rails_helper'
 
 describe 'User creates new project', js: true do
+  before do
+    allow_any_instance_of(ApplicationController)
+      .to receive(:session_password_matches?).and_return(true)
+  end
+
   scenario 'creating first project' do
     visit '/projects'
     click_on 'Create Project'
