@@ -1,0 +1,8 @@
+%h1 Admin Password
+
+- if flash[:error]
+  %h2= flash[:error]
+
+= form_for :admin_password do |f|
+  = password_field_tag :admin_password
+  = f.submit 'Sign In'

@@ -1,4 +1,7 @@
 - content_for :head do
   = stylesheet_link_tag 'static', media: 'all'
 
+- if flash[:notice]
+  %h2= flash[:notice]
+
 = image_tag 'monolith.jpg'
