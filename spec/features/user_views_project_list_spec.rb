@@ -1,6 +1,11 @@
 require 'rails_helper'
 
 feature 'User views project list', js: true do
+  before do
+    allow_any_instance_of(ApplicationController)
+      .to receive(:session_password_matches?).and_return(true)
+  end
+
   scenario 'with no projects' do
     visit '/projects'
     expect(page).to have_content 'No projects - create one!'

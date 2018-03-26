@@ -1,4 +1,6 @@
 class FaringDireballController < ApplicationController
+  skip_before_action :ensure_admin
+
   def index
     url = 'https://daringfireball.net/feeds/json'
 

@@ -1,6 +1,11 @@
 require 'rails_helper'
 
 feature 'User updates project', js: true do
+  before do
+    allow_any_instance_of(ApplicationController)
+      .to receive(:session_password_matches?).and_return(true)
+  end
+
   scenario 'project is updated' do
     FactoryBot.create :project, name: 'Older'
     project = FactoryBot.create :project
