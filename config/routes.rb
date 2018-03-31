@@ -6,5 +6,13 @@ Rails.application.routes.draw do
   post 'sign_in', to: 'password#create'
   get 'sign_out', to: 'password#clear', as: :sign_out
 
+  scope :api do
+    scope :v1 do
+      get 'work_weeks/:year/:number', to: 'work_weeks#show'
+      patch 'work_days/:id', to: 'work_days#update'
+      get :pto_reports, to: 'pto_reports#index'
+    end
+  end
+
   root to: 'static#root'
 end
