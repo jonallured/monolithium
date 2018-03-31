@@ -12,6 +12,10 @@ Metrics/BlockLength:
   Exclude:
     - 'spec/**/*'
 
+Metrics/LineLength:
+  Exclude:
+    - 'app/views/**/*.jbuilder'
+
 Style/Documentation:
   Enabled: false
 
