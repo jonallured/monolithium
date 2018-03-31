@@ -9,4 +9,5 @@
 /public/packs-test
 /tmp/*
 /yarn-error.log
+db/structure.sql
 yarn-debug.log*
