@@ -1,6 +1,7 @@
 class Router {
   sendRequest = (url, method = "GET", body = null) => {
-    const clientToken = document.querySelector("#client_token").dataset.clientToken
+    const clientToken = document.querySelector("#client_token").dataset
+      .clientToken
 
     const headers = {
       "Content-Type": "application/json",
@@ -27,7 +28,8 @@ class Router {
 
   updateState(state, ids) {
     const body = JSON.stringify({ state: state, ids: ids })
-    const clientToken = document.querySelector("#client_token").dataset.clientToken
+    const clientToken = document.querySelector("#client_token").dataset
+      .clientToken
     const headers = {
       "Content-Type": "application/json",
       "X-CLIENT-TOKEN": clientToken
