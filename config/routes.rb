@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :projects, only: %i[create index update]
   get 'faring_direball', to: 'faring_direball#index'
+  get :entries, to: 'entries#index'
 
   get 'sign_in', to: 'password#new', as: :sign_in
   post 'sign_in', to: 'password#create'
@@ -11,6 +12,9 @@ Rails.application.routes.draw do
       get 'work_weeks/:year/:number', to: 'work_weeks#show'
       patch 'work_days/:id', to: 'work_days#update'
       get :pto_reports, to: 'pto_reports#index'
+
+      get :entries, to: 'api/v1/entries#index'
+      post :entries, to: 'api/v1/entries#update'
     end
   end
 
