@@ -15,6 +15,7 @@ Metrics/BlockLength:
 Metrics/LineLength:
   Exclude:
     - 'app/views/**/*.jbuilder'
+    - 'app/models/feedbin.rb'
 
 Style/Documentation:
   Enabled: false
