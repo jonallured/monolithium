@@ -31,5 +31,6 @@ group :test do
 end
 
 group :development do
+  gem 'dotenv-rails'
   gem 'rails-erd'
 end
