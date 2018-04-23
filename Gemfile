@@ -5,7 +5,7 @@ ruby '2.5.1'
 
 gem 'rails', '5.1.5'
 
-gem 'pg', '0.21.0'
+gem 'pg'
 gem 'puma'
 
 gem 'decent_exposure'
