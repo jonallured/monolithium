@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 ruby '2.5.1'
 #ruby-gemset=monolithium
 
-gem 'rails', '5.1.5'
+gem 'rails', '5.2.0'
 
 gem 'pg'
 gem 'puma'
