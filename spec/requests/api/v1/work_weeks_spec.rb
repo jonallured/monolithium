@@ -131,9 +131,16 @@ describe 'GET /api/v1/work_weeks/:year/:number' do
 
         expect(response.code).to eq '200'
         response_json = JSON.parse response.body
-        actual_dates = response_json['work_days'].map { |day| day['date'] }
+        columns = %w[date adjust_minutes in_minutes out_minutes pto_minutes]
+        actual_dates = response_json['work_days'].pluck(*columns)
         expect(actual_dates).to eq(
-          ['2017-01-02', '2017-01-03', '2017-01-04', '2017-01-05', '2017-01-06']
+          [
+            ['2017-01-02', 0, 0, 0, 0],
+            ['2017-01-03', 0, 0, 0, 0],
+            ['2017-01-04', 0, 0, 0, 0],
+            ['2017-01-05', 0, 0, 0, 0],
+            ['2017-01-06', 0, 0, 0, 0]
+          ]
         )
       end
     end
