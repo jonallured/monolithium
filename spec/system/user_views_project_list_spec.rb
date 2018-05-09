@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'User views project list', js: true do
+describe 'User views project list', js: true do
   include_examples 'admin password required', '/projects'
 
   context 'signed in as admin' do
