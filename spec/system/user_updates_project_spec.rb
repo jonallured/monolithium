@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'User updates project', js: true do
+describe 'User updates project', js: true do
   context 'signed in as admin' do
     include_context 'session password matches'
 

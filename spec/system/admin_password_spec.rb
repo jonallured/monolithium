@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Admin Password' do
+describe 'Admin Password' do
   scenario 'signing in without redirect_to lands on home page' do
     visit '/sign_in'
     fill_in 'admin_password', with: 'shhh'
