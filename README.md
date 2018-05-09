@@ -1,24 +1,33 @@
-# README
+# Monolithium [![CircleCI][badge]][circleci]
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is my personal little Rails monolith where I keep all the little things
+that I've built for myself.
 
-Things you may want to cover:
+## Dum Reader
 
-* Ruby version
+I love RSS so much I made an RSS reader that rides on top of [the Feedbin
+API][feedbin]. It was the project that I used to learn React and is something
+that I use every day!
 
-* System dependencies
+## Forty API
 
-* Configuration
+Monolithium is also my API server for [Forty][forty-macos], my personal time
+tracking app.
 
-* Database creation
+## Update Queue
 
-* Database initialization
+I feel strongly about keeping my projects up-to-date, so I made a thing to keep
+track of which apps are due for an update. It's really just a list of projects
+with timestamps to keep track of update state.
 
-* How to run the test suite
+## Faring Direball
 
-* Services (job queues, cache servers, search engines, etc.)
+Due to a quirk in how Gruber does his feed, Feedbin and other RSS readers send
+you to the article he's commenting on instead of his post. I hate this. So I
+mirror his feed and remove that quirk so that it links to his post instead. Did
+I mention I'm crazy about RSS?
 
-* Deployment instructions
-
-* ...
+[badge]: https://circleci.com/gh/jonallured/monolithium.svg?style=svg
+[circleci]: https://circleci.com/gh/jonallured/monolithium
+[feedbin]: https://github.com/feedbin/feedbin-api
+[forty-macos]: https://github.com/jonallured/forty-macos
