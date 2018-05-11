@@ -2,7 +2,7 @@ import React from "react"
 import { configure, mount } from "enzyme"
 import Adapter from "enzyme-adapter-react-16"
 
-import Entry from "Entry"
+import Entry from "../../../shared/dum_reader/Entry"
 import App from "./index"
 
 configure({ adapter: new Adapter() })
