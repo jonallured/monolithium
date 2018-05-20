@@ -16,7 +16,7 @@ class HooksController < ApplicationController
   private
 
   def hook_params
-    payload = JSON.parse request.body.read
+    payload = JSON.parse payload_body
     { payload: payload }
   end
 
@@ -35,9 +35,6 @@ class HooksController < ApplicationController
   end
 
   def compute_signature
-    request.body.rewind
-    payload_body = request.body.read
-    request.body.rewind
     sha1 = OpenSSL::HMAC.hexdigest(
       OpenSSL::Digest.new('sha1'),
       # this should come from secrets!!
@@ -45,5 +42,9 @@ class HooksController < ApplicationController
       payload_body
     )
     'sha1=' + sha1
+  end
+
+  def payload_body
+    @payload_body ||= request.body.read
   end
 end
