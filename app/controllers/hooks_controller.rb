@@ -3,7 +3,7 @@ class HooksController < ApplicationController
   skip_before_action :ensure_admin
   before_action :verify_signature
 
-  expose :hook
+  expose(:hook) { Hook.new(hook_params) }
 
   def create
     if hook.save

@@ -57,5 +57,19 @@ describe 'POST /hooks' do
         expect(hook.payload).to eq body
       end
     end
+
+    context 'with a tricky payload' do
+      it 'does not try to find a Hook with that id' do
+        expect_any_instance_of(HooksController)
+          .to receive(:compute_signature).and_return('valid-signature')
+        body = { 'hook_id' => 123 }
+
+        post '/hooks', params: body, headers: headers, as: :json
+
+        expect(Hook.count).to eq 1
+        hook = Hook.first
+        expect(hook.payload).to eq body
+      end
+    end
   end
 end
