@@ -37,8 +37,7 @@ class HooksController < ApplicationController
   def compute_signature
     sha1 = OpenSSL::HMAC.hexdigest(
       OpenSSL::Digest.new('sha1'),
-      # this should come from secrets!!
-      ENV['HUB_SIGNATURE'],
+      Rails.application.secrets.hub_signature,
       payload_body
     )
     'sha1=' + sha1
