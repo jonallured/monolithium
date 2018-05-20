@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :projects, only: %i[create index update]
   get 'faring_direball', to: 'faring_direball#index'
   get :entries, to: 'entries#index'
+  get :hooks, to: 'hooks#index'
   post :hooks, to: 'hooks#create'
 
   get 'sign_in', to: 'password#new', as: :sign_in

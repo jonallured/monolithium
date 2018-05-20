@@ -1,8 +1,9 @@
 class HooksController < ApplicationController
-  protect_from_forgery with: :null_session
-  skip_before_action :ensure_admin
-  before_action :verify_signature
+  protect_from_forgery with: :null_session, only: :create
+  skip_before_action :ensure_admin, only: :create
+  before_action :verify_signature, only: :create
 
+  expose(:hooks) { Hook.order(id: :desc).limit(20) }
   expose(:hook) { Hook.new(hook_params) }
 
   def create
