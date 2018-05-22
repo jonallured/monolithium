@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get :entries, to: 'entries#index'
   get :hooks, to: 'hooks#index'
   post :hooks, to: 'hooks#create'
+  get :artsy_pull_requests, to: 'artsy_pull_requests#index'
 
   get 'sign_in', to: 'password#new', as: :sign_in
   post 'sign_in', to: 'password#create'
