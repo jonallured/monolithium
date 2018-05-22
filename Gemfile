@@ -13,6 +13,7 @@ gem 'faraday'
 gem 'haml'
 gem 'jbuilder'
 gem 'sass-rails'
+gem 'sidekiq'
 gem 'uglifier'
 gem 'webpacker'
 
