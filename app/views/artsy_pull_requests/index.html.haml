@@ -1,10 +1,13 @@
 - content_for :head do
   = javascript_include_tag 'application'
 
+%main#root= javascript_pack_tag 'artsy_pull_requests'
+
 :javascript
+  var root = document.getElementById("root")
   App.cable.subscriptions.create('ArtsyPullRequestChannel', {
     received: function(data) {
-      console.log('websocket fired')
-      console.log(data)
+      var event = new CustomEvent('NewPullRequest', { detail: data })
+      root.dispatchEvent(event)
     }
   })
