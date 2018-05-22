@@ -5,6 +5,7 @@ class ArtsyPullRequest
 
   def as_json(_options)
     {
+      id: id,
       title: title,
       url: url,
       username: username
@@ -15,6 +16,10 @@ class ArtsyPullRequest
 
   def pull_request_data
     @hook.payload['pull_request']
+  end
+
+  def id
+    pull_request_data['id']
   end
 
   def title
