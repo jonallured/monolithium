@@ -27,7 +27,7 @@ class ArtsyPullRequest
   end
 
   def url
-    pull_request_data['url']
+    pull_request_data['html_url']
   end
 
   def username
