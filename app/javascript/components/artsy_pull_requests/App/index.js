@@ -26,8 +26,7 @@ export class App extends React.Component {
 
   handleNewPullRequest = e => {
     const newPullRequest = e.detail
-    this.state.pullRequests.unshift(newPullRequest)
-    this.setState({ pullRequests: this.state.pullRequests })
+    this.setState({ pullRequests: [newPullRequest, ...this.state.pullRequests] })
   }
 
   computePullRequestTags = () => {
