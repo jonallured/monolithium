@@ -24,9 +24,20 @@ jobs:
           paths:
             - vendor/bundle
 
+      - restore_cache:
+          name: Restore yarn cache
+          keys:
+            - yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}
+
       - run:
           name: Yarn install
           command: yarn install
+
+      - save_cache:
+          name: Save yarn cache
+          key: yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          paths:
+            - node_modules/
 
       - run:
           name: Lock chromedriver
