@@ -3,8 +3,14 @@ import styled from "styled-components"
 
 const PRList = styled.ul`
   font-size: 40px;
-  list-style: none;
   line-height: 1.6em;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  li {
+    padding: 10px 20px;
+  }
 
   a {
     color: black;
@@ -33,7 +39,7 @@ export class App extends React.Component {
 
   computePullRequestTags = () => {
     return this.state.pullRequests.map(pullRequest => (
-      <li key={pullRequest.id}>
+      <li key={pullRequest.id} style={{ backgroundColor: pullRequest.color }}>
         <a href={pullRequest.url}>
           {pullRequest.title} by @{pullRequest.username}
         </a>

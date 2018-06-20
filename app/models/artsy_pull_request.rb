@@ -5,6 +5,7 @@ class ArtsyPullRequest
 
   def as_json(_options)
     {
+      color: color,
       id: id,
       title: title,
       url: url,
@@ -16,6 +17,11 @@ class ArtsyPullRequest
 
   def pull_request_data
     @hook.payload['pull_request']
+  end
+
+  def color
+    hex = Digest::MD5.hexdigest([id.to_s, title, username].join)[0...6]
+    "##{hex}"
   end
 
   def id
