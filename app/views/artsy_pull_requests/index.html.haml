@@ -3,6 +3,11 @@
 
 %main#root= javascript_pack_tag 'artsy_pull_requests'
 
+:sass
+  body
+    margin: 0
+    padding: 0
+
 :javascript
   var root = document.getElementById("root")
   App.cable.subscriptions.create('ArtsyPullRequestChannel', {
