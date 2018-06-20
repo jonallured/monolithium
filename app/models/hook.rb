@@ -16,6 +16,6 @@ class Hook < ApplicationRecord
   end
 
   def pull_request?
-    payload.keys.include?('pull_request')
+    payload.key?('pull_request')
   end
 end
