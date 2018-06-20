@@ -14,7 +14,7 @@ jobs:
 
       - restore_cache:
           name: Restore bundler cache
-          key: monolithium-{{ checksum "Gemfile.lock" }}
+          key: bundler-{{ checksum "Gemfile.lock" }}
 
       - run:
           name: Bundle install
@@ -22,13 +22,13 @@ jobs:
 
       - save_cache:
           name: Save bundler cache
-          key: monolithium-{{ checksum "Gemfile.lock" }}
+          key: bundler-{{ checksum "Gemfile.lock" }}
           paths:
             - vendor/bundle
 
       - restore_cache:
           name: Restore yarn cache
-          key: yarn-packages-{{ checksum "yarn.lock" }}
+          key: yarn-{{ checksum "yarn.lock" }}
 
       - run:
           name: Yarn install
@@ -36,7 +36,7 @@ jobs:
 
       - save_cache:
           name: Save yarn cache
-          key: yarn-packages-{{ checksum "yarn.lock" }}
+          key: yarn-{{ checksum "yarn.lock" }}
           paths:
             - node_modules/
 
