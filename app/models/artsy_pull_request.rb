@@ -7,6 +7,7 @@ class ArtsyPullRequest
     {
       color: color,
       id: id,
+      repo: repo,
       title: title,
       url: url,
       username: username
@@ -26,6 +27,10 @@ class ArtsyPullRequest
 
   def id
     pull_request_data['id']
+  end
+
+  def repo
+    @hook.payload['repository']['full_name']
   end
 
   def title
