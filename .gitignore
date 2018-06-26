@@ -2,6 +2,7 @@
 !/tmp/.keep
 .byebug_history
 .env
+.sass-cache
 .yarn-integrity
 /.bundle
 /log/*
