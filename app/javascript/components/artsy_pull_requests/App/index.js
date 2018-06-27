@@ -40,7 +40,7 @@ export class App extends React.Component {
   computePullRequestTags = () => {
     return this.state.pullRequests.map(pullRequest => (
       <li key={pullRequest.id} style={{ backgroundColor: pullRequest.color }}>
-        <a href={pullRequest.url}>
+        <a href={pullRequest.url} target="_blank">
           {pullRequest.title} by @{pullRequest.username} on {pullRequest.repo}
         </a>
       </li>
