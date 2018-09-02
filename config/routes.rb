@@ -18,6 +18,16 @@ Rails.application.routes.draw do
 
       get :entries, to: 'api/v1/entries#index'
       post :entries, to: 'api/v1/entries#update'
+
+      get :teams, to: 'api/teams#index'
+
+      namespace :current_season, module: 'api/current_season' do
+        get :characters, to: 'characters#index'
+        get :rando_picks, to: 'rando_picks#index'
+        post :rando_picks, to: 'rando_picks#create'
+        get 'weeks/:week_number/active_teams', to: 'active_teams#index'
+        post :picks, to: 'picks#create'
+      end
     end
   end
 
