@@ -1,22 +1,17 @@
-class Pick < ActiveRecord::Base
+class Pick < ApplicationRecord
   belongs_to :character
   belongs_to :week
   belongs_to :team
+
+  delegate :delta, to: :game
+  delegate :complete?, to: :game, prefix: true
 
   def correct?
     game.winning_team == team
   end
 
-  def delta
-    game.delta
-  end
-
   def score
     PickScore.for self
-  end
-
-  def game_complete?
-    game.complete?
   end
 
   private

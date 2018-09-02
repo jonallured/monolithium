@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe CurrentPick do
-  describe "#week_number" do
+  describe '#week_number' do
     it "returns the number of the pick's week" do
       week = Week.create number: 1
       pick = Pick.create week: week
@@ -10,7 +10,7 @@ describe CurrentPick do
     end
   end
 
-  describe "#team_id" do
+  describe '#team_id' do
     it "returns the id of the pick's team" do
       team = Team.create
       pick = Pick.create team: team

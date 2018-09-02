@@ -4,12 +4,12 @@ class Rando
   end
 
   def self.losses
-    RandomPick.count - self.wins
+    RandomPick.count - wins
   end
 
   def self.ratio
-    ratio = self.wins / RandomPick.count.to_f
-    sprintf( "%0.03f", ratio)
+    ratio = wins / RandomPick.count.to_f
+    format('%0.03f', ratio)
   end
 
   def self.running_record
