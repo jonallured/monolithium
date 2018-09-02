@@ -1,4 +1,4 @@
-class RandomPick < ActiveRecord::Base
+class RandomPick < ApplicationRecord
   belongs_to :week
   belongs_to :team
 
