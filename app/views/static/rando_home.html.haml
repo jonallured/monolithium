@@ -1,0 +1,105 @@
+- content_for :head do
+  = stylesheet_link_tag 'rando', media: 'all'
+
+%header
+  %h1 The Rando Calrissian Football Pool
+
+%div#page
+  %p= link_to "Seasons", rando_seasons_path
+
+  %aside
+    %h2 Rando's Record
+    %p #{wins}-#{losses} (#{ratio})
+
+  %article
+    :markdown
+      ## Rules
+
+      Rando Calrissian, known throughout the galaxy for his habit of random
+      gambling, invites you to join his modified NFL survivor pool. Read on for
+      the rules.
+
+      ## Picks
+
+      Each week Rando will secretly pick an NFL team at random. You pick one as
+      well. After that week's games have been played, each player's pick is
+      scored and one of four things could happen:
+
+      1. Your team wins and Rando's team loses: congrats, you've just earned
+         some points (more on this in a bit) and you're through to the next week.
+      2. Your team wins and so does Rando's team: no points, but you're still
+         through to the next week.
+      3. Your team loses and so does Rando's team: you get through to the next
+         week, but you lose some points.
+      4. Your team loses, but Rando's wins: tough luck, you're out of the pool
+         and you lose some points.
+
+      You have until midnight each Wednesday to email in your pick. Rando's
+      choice is revealed every Thursday morning. If you do not send in a pick,
+      then you automatically get the team that is playing Rando's pick.
+
+      ## Points
+
+      You start with zero points and then outcomes 1, 3 and 4 above add or
+      subtract from that amount. Points are based on the delta of the scores of
+      your team and their opponent. Say the Bears beat the Packers by 14. If
+      you took the Bears and get outcome 1, then you just picked up 14 points.
+      If you took the Packers and get outcome 3, then you lose 14 points. Same
+      goes for outcome 4 - you'd lose 14 points.
+
+      ## Entry Fees
+
+      The fee to enter the pool is $10 per player, payable via PayPal to
+      jon.allured@gmail.com.
+
+      ## Aliases
+
+      One thing Rando prides himself on is taking care of the needs of his
+      clients.  He understands that his clientele are a certain type of person
+      and that privacy is very important to them. To this end, aliases are
+      assigned to each player. When picks are announced, no one knows who has
+      picked which team.
+
+      ## The Jar Jar Penalty
+
+      After your rookie season, you are subject to the Jar Jar Penalty. The
+      last veteran player to send their entry fee will get Jar Jar as their
+      alias.  Turn that money in!
+
+      ## Weekly Emails
+
+      Thursday morning the picks email goes out where you can see which teams
+      have been picked - this is the email where you find out Rando's pick.
+
+      Tuesday morning the results email goes out that recaps the week and
+      updates the standings with how each player did.
+
+      ## Re-entry
+
+      Once per season, a player that was knocked out may pay to re-enter the
+      pool the following week. The fee for re-entry is based on the week they
+      want to re-enter. Say a player is knocked out in the first week and wants
+      to pay to re-enter week two. That player would have to pay $10 * 2 or
+      $20. Say a player is knocked out in week 9 and wants to re-enter week 10,
+      that player would have to pay $10 * 10 or $100.
+
+      Re-entry is expensive, but allows players that get screwed early in the
+      season to get back in. It also allows players doing well at the end of
+      the season to keep going with a great score. In both cases, the pot grows
+      and it just means more money for the winners.
+
+      ## End of the Season
+
+      Players are ranked by points and at the end of the season, the top three
+      players get paid. Yes, you can have a negative amount of points.
+
+      It's possible to be knocked out and still place in the rankings - getting
+      knocked out just means you aren't able to score any further points.
+
+      An end of season summary email goes out with the final standings and the
+      winners are paid out.
+
+      ## Payouts
+
+      At the end of the season, the top three players are paid out in a
+      65-25-10 split of the pot.

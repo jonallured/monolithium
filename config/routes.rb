@@ -10,6 +10,16 @@ Rails.application.routes.draw do
   post 'sign_in', to: 'password#create'
   get 'sign_out', to: 'password#clear', as: :sign_out
 
+  namespace :rando, module: :rando_pool do
+    get '/seasons', to: 'seasons#index', as: :seasons
+    get '/seasons/:season_name', to: 'seasons#show', as: :season
+    get '/seasons/:season_name/weeks/:week_number', to: 'weeks#show', as: :season_week
+    get '/seasons/:season_name/characters/:character_id', to: 'characters#show', as: :season_character
+  end
+
+  get '/rando/stats', to: 'static#rando_stats'
+  get '/rando', to: 'static#rando_home'
+
   scope :api do
     scope :v1 do
       get 'work_weeks/:year/:number', to: 'work_weeks#show'
