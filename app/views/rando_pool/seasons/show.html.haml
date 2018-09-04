@@ -1,0 +1,25 @@
+- content_for :head do
+  = stylesheet_link_tag 'rando', media: 'all'
+
+%header
+  %h1 The Rando Calrissian Football Pool
+
+%div#page
+  %p= link_to "Seasons", rando_seasons_path
+
+  %h1 Season #{season.name}
+
+  %ul
+    - for week in weeks
+      %li= link_to "Week #{week.number}", rando_season_week_path(season.name, week.number)
+
+  %table
+    %thead
+      %tr
+        %th Alias
+        %th Score
+    %tbody
+      - for character in characters
+        %tr{class: character_status(character).downcase}
+          %td= character.name
+          %td= character.score

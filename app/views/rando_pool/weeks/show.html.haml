@@ -1,0 +1,51 @@
+- content_for :head do
+  = stylesheet_link_tag 'rando', media: 'all'
+
+%header
+  %h1 The Rando Calrissian Football Pool
+
+%div#page
+  %p= link_to season.name, rando_season_path(season.name)
+
+  %nav
+    - if prev_week
+      %p.prev_week= link_to "Week #{prev_week.number}", rando_season_week_path(season.name, prev_week.number)
+
+    - if next_week
+      %p.next_week= link_to "Week #{next_week.number}", rando_season_week_path(season.name, next_week.number)
+
+  %h1 Week #{week.number}
+
+  - if rando_pick && rando_pick.game.complete?
+    %p= rando_result(rando_pick)
+
+  %table
+    %thead
+      %tr
+        %th(colspan=2) Away
+        %th(colspan=2) Home
+    %tbody
+      - for game in games
+        %tr
+          %td= game.away_team.name
+          %td= game.away_score
+          %td= game.home_team.name
+          %td= game.home_score
+
+  %table
+    %thead
+      %tr
+        %th Alias
+        %th Pick
+        %th Result
+        %th Score
+    %tbody
+      - for pick in picks
+        %tr
+          %td= link_to pick.character.name, rando_season_character_path(season.name, pick.character.id)
+          %td= pick.team.name
+          %td= pick_result(pick)
+          %td= pick.score
+
+  - if week.complete?
+    %p Pick of the week: #{pick_presenter.text}.
