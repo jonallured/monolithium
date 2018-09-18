@@ -26,54 +26,54 @@ function renderRunningRecord() {
 
   var yAxis = d3.axisLeft(y);
 
-var xAxisScale = d3.scaleBand()
+  var xAxisScale = d3.scaleBand()
     .domain(Array(data.length).fill().map((_,i) => i+1))
     .range([ 0, width])
     .padding(0.1)
 
-var xAxis = d3.axisBottom(xAxisScale);
+  var xAxis = d3.axisBottom(xAxisScale);
 
-var svg = d3.select("#running-record-data").append("svg")
+  var svg = d3.select("#running-record-data").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-svg.selectAll(".bar")
+  svg.selectAll(".bar")
     .data(data)
     .enter().append("rect")
     .attr("class", function(d) {
-        if (d < 0){
-            return "bar negative";
-        } else {
-            return "bar positive";
-        }
+      if (d < 0){
+        return "bar negative";
+      } else {
+        return "bar positive";
+      }
     })
     .attr("y", function(d) {
-        if (d > 0){
-            return y(d);
-        } else {
-            return y(0);
-        }
+      if (d > 0){
+        return y(d);
+      } else {
+        return y(0);
+      }
     })
     .attr("x", function(d, i) {
       return xAxisScale(i + 1)
     })
     .attr("width", xAxisScale.bandwidth())
     .attr("height", function(d) {
-        return Math.abs(y(d) - y(0));
+      return Math.abs(y(d) - y(0));
     })
 
   svg.append("g")
-      .attr("class", "y axis")
-      .call(yAxis);
+    .attr("class", "y axis")
+    .call(yAxis);
 
   svg.append("g")
-      .attr("class", "baseline")
-      .append("line")
-      .attr("y1", y(0))
-      .attr("y2", y(0))
-      .attr("x2", width);
+    .attr("class", "baseline")
+    .append("line")
+    .attr("y1", y(0))
+    .attr("y2", y(0))
+    .attr("x2", width);
 }
 
 function renderCharts() {
@@ -109,14 +109,14 @@ function renderCharts() {
       .call(d3.axisBottom(x));
 
     var bar = g.selectAll(".new-bar")
-        .data(season.pick_counts)
+      .data(season.pick_counts)
       .enter().append("g")
-        .attr("class", "new-bar")
-        .attr("transform", function(d, i) {
-          var thisX = x(i + 1)
-          var thisY = height - omg - y(d)
-          return "translate(" + thisX + "," + thisY + ")"
-        })
+      .attr("class", "new-bar")
+      .attr("transform", function(d, i) {
+        var thisX = x(i + 1)
+        var thisY = height - omg - y(d)
+        return "translate(" + thisX + "," + thisY + ")"
+      })
 
     bar.append("rect")
       .attr("width", x.bandwidth())
