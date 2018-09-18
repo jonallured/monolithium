@@ -76,7 +76,6 @@ GEM
       dotenv (= 2.5.0)
       railties (>= 3.2, < 6.0)
     erubi (1.7.1)
-    execjs (2.7.0)
     factory_bot (4.10.0)
       activesupport (>= 3.0.0)
     factory_bot_rails (4.10.0)
@@ -231,8 +230,6 @@ GEM
     tilt (2.0.8)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
-    uglifier (4.1.12)
-      execjs (>= 0.3.0, < 3)
     unicode-display_width (1.4.0)
     webmock (3.4.2)
       addressable (>= 2.3.6)
@@ -271,7 +268,6 @@ DEPENDENCIES
   sass-rails
   selenium-webdriver
   sidekiq
-  uglifier
   webmock
   webpacker
 
