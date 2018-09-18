@@ -15,7 +15,6 @@ gem 'jbuilder'
 gem 'redcarpet'
 gem 'sass-rails'
 gem 'sidekiq'
-gem 'uglifier'
 gem 'webpacker'
 
 group :development, :test do
