@@ -27,7 +27,15 @@ you to the article he's commenting on instead of his post. I hate this. So I
 mirror his feed and remove that quirk so that it links to his post instead. Did
 I mention I'm crazy about RSS?
 
+## Rando
+
+I run a Star Wars-themed modified NFL survivor pool called The Rando Calrissian
+Football Pool. That is a sentence that I never get used to writing. Monolithium
+is both the home of the website for this pool and also serves as the API server
+for the [iOS client app][rando_admin].
+
 [badge]: https://circleci.com/gh/jonallured/monolithium.svg?style=svg
 [circleci]: https://circleci.com/gh/jonallured/monolithium
 [feedbin]: https://github.com/feedbin/feedbin-api
 [forty-macos]: https://github.com/jonallured/forty-macos
+[rando_admin]: https://github.com/jonallured/rando_admin
