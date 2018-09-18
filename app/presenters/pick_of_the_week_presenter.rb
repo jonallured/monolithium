@@ -30,7 +30,7 @@ class PickOfTheWeekPresenter
   end
 
   def delta
-    games.last.delta
+    @games.last.delta
   end
 
   def multiple_picks?
@@ -38,11 +38,7 @@ class PickOfTheWeekPresenter
   end
 
   def picks_of_the_week
-    games.select{ |game| game.delta == delta }
-  end
-
-  def games
-    @games
+    @games.select { |game| game.delta == delta }
   end
 
   def joined_team_names(team_type)
