@@ -17,6 +17,7 @@ Metrics/LineLength:
   Exclude:
     - 'app/views/**/*.jbuilder'
     - 'app/models/feedbin.rb'
+    - 'config/routes.rb'
 
 Style/Documentation:
   Enabled: false
