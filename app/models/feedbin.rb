@@ -153,6 +153,7 @@ class Feedbin
 
     def uncached_entries
       return [] unless uncached_ids.any?
+
       @uncached_entries ||= JSON.parse(@connection.get("#{Endpoint::ENTRIES}?ids=#{uncached_ids.join(',')}").body)
     end
   end

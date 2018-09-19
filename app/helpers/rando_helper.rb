@@ -16,6 +16,7 @@ module RandoHelper
 
   def pick_result(pick)
     return '-' unless pick.game_complete?
+
     pick.correct? ? 'Won' : 'Lost'
   end
 

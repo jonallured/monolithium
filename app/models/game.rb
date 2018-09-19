@@ -5,16 +5,19 @@ class Game < ApplicationRecord
 
   def winning_team
     return nil unless complete?
+
     home_score > away_score ? home_team : away_team
   end
 
   def losing_team
     return nil unless complete?
+
     home_score < away_score ? home_team : away_team
   end
 
   def delta
     return nil unless complete?
+
     (home_score - away_score).abs
   end
 
