@@ -8,7 +8,7 @@ module RandoHelper
       picks = "Rando's pick was the #{winner}, who beat the #{loser}."
     else
       result = 'Points this week'
-      picks = "Rando's pick was the #{loser}, who beat the #{winer}."
+      picks = "Rando's pick was the #{loser}, who beat the #{winner}."
     end
 
     [result, picks].join(' - ')
