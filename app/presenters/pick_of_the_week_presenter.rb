@@ -48,6 +48,7 @@ class PickOfTheWeekPresenter
 
   def joined_names(team_names)
     return team_names.first if team_names.size == 1
+
     final = team_names.pop
 
     first = team_names.join(', ')

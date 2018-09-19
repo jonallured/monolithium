@@ -28,6 +28,7 @@ class HooksController < ApplicationController
 
   def signatures_match?
     return false unless hub_signature
+
     signature = compute_signature
     Rack::Utils.secure_compare(signature, hub_signature)
   end

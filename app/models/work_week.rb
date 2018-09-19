@@ -26,6 +26,7 @@ class WorkWeek
 
   def dates
     raise InvalidDates unless @year.positive? && @number.positive?
+
     (1..5).map { |day| Date.commercial(@year, @number, day) }
   rescue StandardError
     raise InvalidDates
