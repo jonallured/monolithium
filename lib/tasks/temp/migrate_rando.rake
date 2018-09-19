@@ -1,3 +1,4 @@
+require 'open-uri'
 require 'csv'
 
 task migrate_rando: :environment do
@@ -11,8 +12,8 @@ task migrate_rando: :environment do
     Character,  # belongs_to Player, Season
     Pick        # belongs_to Character, Week, Team
   ].each do |klass|
-    path = "export/#{klass.to_s.downcase}.csv"
-    rows = CSV.read(path, headers: true)
+    data = open("http://jonallured.com/rando/#{klass.to_s.downcase}.csv").read
+    rows = CSV.parse(data, headers: true)
 
     rows.each do |row|
       attrs = row.to_hash
