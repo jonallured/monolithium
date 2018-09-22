@@ -6,7 +6,8 @@ class ApiController < ActionController::Base
   private
 
   def client_token_valid?
-    Rails.application.secrets.client_token == request.headers['X-CLIENT-TOKEN']
+    client_token = request.headers['X-CLIENT-TOKEN']
+    Rails.application.secrets.client_token == client_token
   end
 
   def validate_client_token
