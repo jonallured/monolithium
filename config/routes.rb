@@ -24,15 +24,15 @@ Rails.application.routes.draw do
     namespace :v1 do
       get :entries, to: 'entries#index'
       post :entries, to: 'entries#update'
+
+      get 'work_weeks/:year/:number', to: 'work_weeks#show'
+      patch 'work_days/:id', to: 'work_days#update'
+      get :pto_reports, to: 'pto_reports#index'
     end
   end
 
   scope :api do
     scope :v1 do
-      get 'work_weeks/:year/:number', to: 'work_weeks#show'
-      patch 'work_days/:id', to: 'work_days#update'
-      get :pto_reports, to: 'pto_reports#index'
-
       get :teams, to: 'api/teams#index'
 
       namespace :current_season, module: 'api/current_season' do
