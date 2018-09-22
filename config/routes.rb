@@ -28,13 +28,13 @@ Rails.application.routes.draw do
       get 'work_weeks/:year/:number', to: 'work_weeks#show'
       patch 'work_days/:id', to: 'work_days#update'
       get :pto_reports, to: 'pto_reports#index'
+
+      get :teams, to: 'teams#index'
     end
   end
 
   scope :api do
     scope :v1 do
-      get :teams, to: 'api/teams#index'
-
       namespace :current_season, module: 'api/current_season' do
         get :characters, to: 'characters#index'
         get :rando_picks, to: 'rando_picks#index'
