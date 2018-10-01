@@ -5,4 +5,8 @@ class Season < ApplicationRecord
   def self.current
     order(:id).last
   end
+
+  def player_emails
+    characters.map(&:player).map(&:email)
+  end
 end
