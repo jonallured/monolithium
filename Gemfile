@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 ruby '2.5.3'
-# ruby-gemset=monolithium
+#ruby-gemset=monolithium
 
 gem 'rails', '5.2.1'
 
