@@ -11,7 +11,8 @@ class Entry
   end
 
   def title
-    CGI.unescapeHTML @data['title']
+    data_title = @data['title'] || ''
+    CGI.unescapeHTML data_title
   end
 
   def feed_title
