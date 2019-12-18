@@ -1,6 +1,16 @@
 import Entry from "shared/dum_reader/Entry"
 import Router from "shared/dum_reader/Router"
 
+const sortByDate = (lhsEntry, rhsEntry) => {
+  if (lhsEntry.date < rhsEntry.date) {
+    return -1
+  } else if (lhsEntry.date > rhsEntry.date) {
+    return 1
+  } else {
+    return 0
+  }
+}
+
 class Reader {
   constructor() {
     this.router = new Router()
@@ -54,9 +64,15 @@ class Reader {
     unread_entries, // eslint-disable-line camelcase
     timestamp
   }) => {
-    const archivedEntries = archived_entries.map(data => new Entry(data))
-    const savedEntries = saved_entries.map(data => new Entry(data))
-    const unreadEntries = unread_entries.map(data => new Entry(data))
+    const archivedEntries = archived_entries
+      .map(data => new Entry(data))
+      .sort(sortByDate)
+    const savedEntries = saved_entries
+      .map(data => new Entry(data))
+      .sort(sortByDate)
+    const unreadEntries = unread_entries
+      .map(data => new Entry(data))
+      .sort(sortByDate)
 
     this.resetState(archivedEntries, savedEntries, unreadEntries, timestamp)
     this.refreshCallback()
