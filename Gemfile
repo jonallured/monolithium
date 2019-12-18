@@ -16,21 +16,21 @@ gem 'sass-rails'
 gem 'sidekiq'
 gem 'webpacker'
 
+group :development do
+  gem 'dotenv-rails'
+  gem 'rails-erd'
+end
+
 group :development, :test do
   gem 'pry-rails'
   gem 'rspec-rails'
   gem 'rubocop-rails'
+  gem 'webdrivers'
 end
 
 group :test do
   gem 'capybara'
-  gem 'chromedriver-helper'
   gem 'factory_bot_rails'
   gem 'selenium-webdriver'
   gem 'webmock'
-end
-
-group :development do
-  gem 'dotenv-rails'
-  gem 'rails-erd'
 end
