@@ -153,7 +153,7 @@ describe 'GET /api/v1/work_weeks/:year/:number' do
         response_json = JSON.parse response.body
         actual_dates = response_json['work_days'].map { |day| day['date'] }
         expect(actual_dates).to eq(
-          ['2017-01-30', '2017-01-31', '2017-02-01', '2017-02-02', '2017-02-03']
+          %w[2017-01-30 2017-01-31 2017-02-01 2017-02-02 2017-02-03]
         )
       end
     end

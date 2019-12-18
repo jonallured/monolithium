@@ -50,12 +50,12 @@ describe WorkWeek do
         expect(WorkDay.count).to eq 5
         dates = work_week.work_days.map(&:date).map(&:to_s)
         expect(dates).to eq(
-          [
-            '2017-01-02',
-            '2017-01-03',
-            '2017-01-04',
-            '2017-01-05',
-            '2017-01-06'
+          %w[
+            2017-01-02
+            2017-01-03
+            2017-01-04
+            2017-01-05
+            2017-01-06
           ]
         )
       end
