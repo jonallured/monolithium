@@ -34,7 +34,7 @@ describe PickOfTheWeekPresenter do
         winner2 = game2.winning_team.name
         loser2 = game2.losing_team.name
         delta = game1.delta
-        expect(text).to eq("A tie! The #{winner1} and #{winner2} beat the #{loser1} and #{loser2} (respectively) by #{delta}") # rubocop:disable Metrics/LineLength
+        expect(text).to eq("A tie! The #{winner1} and #{winner2} beat the #{loser1} and #{loser2} (respectively) by #{delta}") # rubocop:disable Layout/LineLength
       end
     end
   end

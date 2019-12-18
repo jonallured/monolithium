@@ -19,7 +19,7 @@ gem 'webpacker'
 group :development, :test do
   gem 'pry-rails'
   gem 'rspec-rails'
-  gem 'rubocop'
+  gem 'rubocop-rails'
 end
 
 group :test do

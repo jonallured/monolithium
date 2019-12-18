@@ -7,7 +7,7 @@ class WorkWeek
     work_week = new(year, number)
     work_week.find_or_create
     work_week
-  rescue InvalidDates # rubocop:disable Lint/HandleExceptions
+  rescue InvalidDates # rubocop:disable Lint/SuppressedException
     # year and/or number failed to parse as valid date
   end
 

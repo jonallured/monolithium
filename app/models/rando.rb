@@ -9,7 +9,7 @@ class Rando
 
   def self.ratio
     ratio = wins / RandomPick.count.to_f
-    format('%0.03f', ratio)
+    format('%0.03f', ratio) # rubocop:disable Style/FormatStringToken
   end
 
   def self.running_record

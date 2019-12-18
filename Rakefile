@@ -7,13 +7,13 @@ if %w[development test].include? Rails.env
   RuboCop::RakeTask.new(:rubocop)
 
   desc 'run prettier diff'
-  task :prettier_diff do
+  task prettier_diff: :environment do
     system 'yarn run prettier-diff'
     abort 'prettier-diff failed' unless $CHILD_STATUS.exitstatus.zero?
   end
 
   desc 'run jest tests'
-  task :jest do
+  task jest: :environment do
     system 'yarn run test'
     abort 'jest failed' unless $CHILD_STATUS.exitstatus.zero?
   end
