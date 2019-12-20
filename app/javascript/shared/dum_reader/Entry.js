@@ -15,15 +15,15 @@ class Entry {
   }
 
   archive() {
-    this.status = "archived"
+    this.status = 'archived'
   }
 
   save() {
-    this.status = "saved"
+    this.status = 'saved'
   }
 
   markUnread() {
-    this.status = "unread"
+    this.status = 'unread'
   }
 }
 

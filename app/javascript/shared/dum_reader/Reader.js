@@ -1,5 +1,5 @@
-import Entry from "shared/dum_reader/Entry"
-import Router from "shared/dum_reader/Router"
+import Entry from 'shared/dum_reader/Entry'
+import Router from 'shared/dum_reader/Router'
 
 const sortByDate = (lhsEntry, rhsEntry) => {
   if (lhsEntry.date < rhsEntry.date) {
@@ -16,8 +16,8 @@ class Reader {
     this.router = new Router()
     this.refreshCallback = null
 
-    this.type = "unread"
-    this.resetState([], [], [], "")
+    this.type = 'unread'
+    this.resetState([], [], [], '')
   }
 
   resetState(archivedEntries, savedEntries, unreadEntries, timestamp) {
@@ -37,13 +37,13 @@ class Reader {
     this.type = type
 
     switch (type) {
-      case "archived":
+      case 'archived':
         this.entries = this.archivedEntries
         break
-      case "saved":
+      case 'saved':
         this.entries = this.savedEntries
         break
-      case "unread":
+      case 'unread':
         this.entries = this.unreadEntries
         break
     }
@@ -62,7 +62,7 @@ class Reader {
     archived_entries, // eslint-disable-line camelcase
     saved_entries, // eslint-disable-line camelcase
     unread_entries, // eslint-disable-line camelcase
-    timestamp
+    timestamp,
   }) => {
     const archivedEntries = archived_entries
       .map(data => new Entry(data))

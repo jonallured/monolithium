@@ -1,7 +1,6 @@
-import React from "react"
-import styled from "styled-components"
-
-import colors from "shared/dum_reader/colors"
+import React from 'react'
+import styled from 'styled-components'
+import colors from '../../../shared/dum_reader/colors'
 
 const Wrapper = styled.footer`
   border-top: 2px solid ${colors.darkGray};
@@ -36,7 +35,7 @@ const Notice = styled.span`
   color: ${colors.black};
   margin: 6px 0 0;
   padding: 4px 8px;
-  visibility: ${props => (props.notice ? "visible" : "hidden")};
+  visibility: ${props => (props.notice ? 'visible' : 'hidden')};
 
   &.fade {
     opacity: 0;
@@ -53,7 +52,7 @@ const Footer = ({ count, fade, notice, timestamp, type }) => (
       {count} {type} as of {timestamp}
     </EntryCount>
     <p>
-      <Notice notice={notice} className={fade ? "fade" : ""}>
+      <Notice notice={notice} className={fade ? 'fade' : ''}>
         {notice}
       </Notice>
     </p>
