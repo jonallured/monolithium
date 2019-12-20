@@ -1,28 +1,24 @@
-import React from "react"
-import { configure, mount } from "enzyme"
-import Adapter from "enzyme-adapter-react-16"
-
-import Entry from "../../../shared/dum_reader/Entry"
-import App from "./index"
-
-configure({ adapter: new Adapter() })
+import React from 'react'
+import { configure, mount } from 'enzyme'
+import Entry from '../../../shared/dum_reader/Entry'
+import App from './index'
 
 const refreshNoop = () => {}
 
-describe("App", () => {
-  it("sets initial state", () => {
+describe('App', () => {
+  it('sets initial state', () => {
     const props = { reader: { entries: [], refresh: refreshNoop } }
     const app = new App(props)
 
     expect(app.state).toEqual({
       entries: props.reader.entries,
       fade: false,
-      help: "hidden",
-      notice: null
+      help: 'hidden',
+      notice: null,
     })
   })
 
-  it("clears notice and fade on transition end", () => {
+  it('clears notice and fade on transition end', () => {
     const props = { reader: { entries: [], refresh: refreshNoop } }
     const app = mount(<App {...props} />).instance()
 
@@ -34,9 +30,9 @@ describe("App", () => {
 
   it("computes props for it's children", () => {
     const entries = [new Entry({ id: 123 })]
-    const timestamp = "right now"
+    const timestamp = 'right now'
     const props = {
-      reader: { entries: entries, timestamp: timestamp, refresh: refreshNoop }
+      reader: { entries: entries, timestamp: timestamp, refresh: refreshNoop },
     }
     const app = mount(<App {...props} />).instance()
 
@@ -44,12 +40,12 @@ describe("App", () => {
       helpProps,
       headerProps,
       mainProps,
-      footerProps
+      footerProps,
     } = app.computeProps()
 
     expect(helpProps).toEqual({
       closeHelp: app.closeHelp,
-      visibility: "hidden"
+      visibility: 'hidden',
     })
     expect(headerProps).toEqual({ openHelp: app.openHelp })
     expect(mainProps).toEqual({ entries: entries })
@@ -57,7 +53,7 @@ describe("App", () => {
       count: entries.length,
       notice: null,
       fade: false,
-      timestamp: timestamp
+      timestamp: timestamp,
     })
   })
 })

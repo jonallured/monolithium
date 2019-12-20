@@ -1,12 +1,10 @@
-import React from "react"
-import styled from "styled-components"
-
-import Help from "components/dum_reader/Help"
-import Header from "components/dum_reader/Header"
-import Main from "components/dum_reader/Main"
-import Footer from "components/dum_reader/Footer"
-
-import KeyMappings from "shared/dum_reader/KeyMappings"
+import React from 'react'
+import styled from 'styled-components'
+import Help from '../Help'
+import Header from '../Header'
+import Main from '../Main'
+import Footer from '../Footer'
+import KeyMappings from '../../../shared/dum_reader/KeyMappings'
 
 const Wrapper = styled.div`
   font-family: Arial;
@@ -21,8 +19,8 @@ class App extends React.Component {
     this.state = {
       entries: this.props.reader.entries,
       fade: false,
-      help: "hidden",
-      notice: null
+      help: 'hidden',
+      notice: null,
     }
 
     this.keyMappings = new KeyMappings({ app: this, reader: this.props.reader })
@@ -38,12 +36,12 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    window.addEventListener("webkitTransitionEnd", this.handleTransitionEnd)
+    window.addEventListener('webkitTransitionEnd', this.handleTransitionEnd)
     this.keyMappings.start()
   }
 
   componentWillUnmount() {
-    window.removeEventListener("webkitTransitionEnd", this.handleTransitionEnd)
+    window.removeEventListener('webkitTransitionEnd', this.handleTransitionEnd)
     this.keyMappings.stop()
   }
 
@@ -58,13 +56,13 @@ class App extends React.Component {
   }
 
   firstSelected() {
-    return document.getElementsByClassName("selected")[0]
+    return document.getElementsByClassName('selected')[0]
   }
 
   openSelected() {
     if (this.firstSelected()) {
       this.firstSelected()
-        .getElementsByTagName("a")[0]
+        .getElementsByTagName('a')[0]
         .click()
     }
   }
@@ -73,30 +71,30 @@ class App extends React.Component {
     return {
       helpProps: {
         visibility: this.state.help,
-        closeHelp: this.closeHelp
+        closeHelp: this.closeHelp,
       },
       headerProps: {
-        openHelp: this.openHelp
+        openHelp: this.openHelp,
       },
       mainProps: {
-        entries: this.state.entries
+        entries: this.state.entries,
       },
       footerProps: {
         count: this.state.entries.length,
         type: this.props.reader.type,
         notice: this.state.notice,
         fade: this.state.fade,
-        timestamp: this.props.reader.timestamp
-      }
+        timestamp: this.props.reader.timestamp,
+      },
     }
   }
 
   closeHelp = () => {
-    this.setState({ help: "hidden" })
+    this.setState({ help: 'hidden' })
   }
 
   openHelp = () => {
-    this.setState({ help: "visible" })
+    this.setState({ help: 'visible' })
   }
 
   render() {
@@ -104,7 +102,7 @@ class App extends React.Component {
       helpProps,
       headerProps,
       mainProps,
-      footerProps
+      footerProps,
     } = this.computeProps()
 
     return (

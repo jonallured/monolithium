@@ -4,12 +4,20 @@ Rails.application.load_tasks
 if %w[development test].include? Rails.env
   require 'rubocop/rake_task'
   desc 'Run RuboCop'
-  RuboCop::RakeTask.new(:rubocop)
+  RuboCop::RakeTask.new(:rubocop) do |task|
+    task.requires << 'rubocop-rails'
+  end
 
-  desc 'run prettier diff'
-  task prettier_diff: :environment do
-    system 'yarn run prettier-diff'
-    abort 'prettier-diff failed' unless $CHILD_STATUS.exitstatus.zero?
+  desc 'run prettier check'
+  task prettier_check: :environment do
+    system 'yarn prettier-check'
+    abort 'prettier-check failed' unless $CHILD_STATUS.exitstatus.zero?
+  end
+
+  desc 'run typescript check'
+  task typescript_check: :environment do
+    system 'yarn type-check'
+    abort 'typescript checks failed' unless $CHILD_STATUS.exitstatus.zero?
   end
 
   desc 'run jest tests'
@@ -19,5 +27,5 @@ if %w[development test].include? Rails.env
   end
 
   Rake::Task[:default].clear
-  task default: %i[rubocop spec prettier_diff jest]
+  task default: %i[prettier_check typescript_check jest rubocop spec]
 end

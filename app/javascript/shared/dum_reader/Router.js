@@ -1,17 +1,17 @@
 class Router {
-  sendRequest = (url, method = "GET", body = null) => {
-    const clientToken = document.querySelector("#client_token").dataset
+  sendRequest = (url, method = 'GET', body = null) => {
+    const clientToken = document.querySelector('#client_token').dataset
       .clientToken
 
     const headers = {
-      "Content-Type": "application/json",
-      "X-CLIENT-TOKEN": clientToken
+      'Content-Type': 'application/json',
+      'X-CLIENT-TOKEN': clientToken,
     }
 
     const options = {
-      credentials: "same-origin",
+      credentials: 'same-origin',
       headers,
-      method
+      method,
     }
 
     if (body) {
@@ -22,26 +22,26 @@ class Router {
   }
 
   getEntries(callback) {
-    const url = "/api/v1/entries.json"
+    const url = '/api/v1/entries.json'
     this.sendRequest(url).then(json => callback(json.payload))
   }
 
   updateState(state, ids) {
     const body = JSON.stringify({ state: state, ids: ids })
-    const clientToken = document.querySelector("#client_token").dataset
+    const clientToken = document.querySelector('#client_token').dataset
       .clientToken
     const headers = {
-      "Content-Type": "application/json",
-      "X-CLIENT-TOKEN": clientToken
+      'Content-Type': 'application/json',
+      'X-CLIENT-TOKEN': clientToken,
     }
     const options = {
       body: body,
-      credentials: "same-origin",
+      credentials: 'same-origin',
       headers: headers,
-      method: "POST"
+      method: 'POST',
     }
 
-    fetch("/api/v1/entries.json", options)
+    fetch('/api/v1/entries.json', options)
       .then(function(response) {
         console.log(response)
       })
@@ -51,15 +51,15 @@ class Router {
   }
 
   archive(ids) {
-    this.updateState("archived", ids)
+    this.updateState('archived', ids)
   }
 
   save(ids) {
-    this.updateState("saved", ids)
+    this.updateState('saved', ids)
   }
 
   markUnread(ids) {
-    this.updateState("unread", ids)
+    this.updateState('unread', ids)
   }
 }
 

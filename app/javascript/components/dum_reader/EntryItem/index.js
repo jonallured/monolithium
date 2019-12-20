@@ -1,7 +1,6 @@
-import React from "react"
-import styled from "styled-components"
-
-import colors from "shared/dum_reader/colors"
+import React from 'react'
+import styled from 'styled-components'
+import colors from '../../../shared/dum_reader/colors'
 
 const EntryRow = styled.dl`
   background-color: ${props =>
@@ -39,7 +38,7 @@ const EntryDate = styled.dd`
 const statusColorMap = {
   archived: colors.darkGray,
   saved: colors.red,
-  unread: colors.black
+  unread: colors.black,
 }
 
 const EntryItem = ({ date, feedTitle, selected, status, title, url }) => {
@@ -49,7 +48,7 @@ const EntryItem = ({ date, feedTitle, selected, status, title, url }) => {
     <EntryRow
       selected={selected}
       color={color}
-      className={selected ? "selected" : ""}
+      className={selected ? 'selected' : ''}
     >
       <a href={url} target="_blank">
         <FeedName>{feedTitle}</FeedName>

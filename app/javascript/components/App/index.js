@@ -1,7 +1,7 @@
-import React from "react"
+import React from 'react'
 
-import ProjectActions from "../ProjectActions"
-import ProjectList from "../ProjectList"
+import ProjectActions from '../ProjectActions'
+import ProjectList from '../ProjectList'
 
 class App extends React.Component {
   constructor(props) {
@@ -35,7 +35,7 @@ class App extends React.Component {
   render() {
     const projectActionsProps = {
       createProject: this.createProject,
-      errorMessage: this.state.errorMessage
+      errorMessage: this.state.errorMessage,
     }
 
     return (

@@ -1,7 +1,6 @@
-import React from "react"
-import styled from "styled-components"
-
-import EntryList from "components/dum_reader/EntryList"
+import React from 'react'
+import styled from 'styled-components'
+import EntryList from '../EntryList'
 
 const Wrapper = styled.main`
   bottom: 49px;

@@ -1,6 +1,5 @@
-import React from "react"
-
-import EntryItem from "components/dum_reader/EntryItem"
+import React from 'react'
+import EntryItem from '../EntryItem'
 
 const EntryList = ({ entries }) => {
   const entryItems = entries.map(entry => <EntryItem {...entry} />)

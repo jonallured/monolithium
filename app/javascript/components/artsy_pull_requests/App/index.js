@@ -1,5 +1,5 @@
-import React from "react"
-import styled from "styled-components"
+import React from 'react'
+import styled from 'styled-components'
 
 const PRList = styled.ul`
   font-size: 40px;
@@ -26,14 +26,14 @@ export class App extends React.Component {
   state = { pullRequests: [] }
 
   componentDidMount() {
-    const root = document.getElementById("root")
-    root.addEventListener("NewPullRequest", this.handleNewPullRequest)
+    const root = document.getElementById('root')
+    root.addEventListener('NewPullRequest', this.handleNewPullRequest)
   }
 
   handleNewPullRequest = e => {
     const newPullRequest = e.detail
     this.setState({
-      pullRequests: [newPullRequest, ...this.state.pullRequests]
+      pullRequests: [newPullRequest, ...this.state.pullRequests],
     })
   }
 

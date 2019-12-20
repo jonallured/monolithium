@@ -1,9 +1,8 @@
-import React from "react"
-import styled from "styled-components"
-
-import colors from "shared/dum_reader/colors"
-import NormalModeHelp from "components/dum_reader/NormalModeHelp"
-import VisualModeHelp from "components/dum_reader/VisualModeHelp"
+import React from 'react'
+import styled from 'styled-components'
+import colors from '../../../shared/dum_reader/colors'
+import NormalModeHelp from '../NormalModeHelp'
+import VisualModeHelp from '../VisualModeHelp'
 
 const Wrapper = styled.div`
   position: absolute;
@@ -66,7 +65,7 @@ class Help extends React.Component {
     super()
 
     this.state = {
-      normal: true
+      normal: true,
     }
   }
 
@@ -98,7 +97,7 @@ class Help extends React.Component {
             <a
               href="#"
               onClick={this.showNormal}
-              className={this.state.normal ? "picked" : ""}
+              className={this.state.normal ? 'picked' : ''}
             >
               Normal Mode
             </a>
@@ -106,7 +105,7 @@ class Help extends React.Component {
             <a
               href="#"
               onClick={this.showVisual}
-              className={this.state.normal ? "" : "picked"}
+              className={this.state.normal ? '' : 'picked'}
             >
               Visual Mode
             </a>

@@ -1,7 +1,7 @@
-import React from "react"
-import styled from "styled-components"
+import React from 'react'
+import styled from 'styled-components'
 
-import ProjectItem from "../ProjectItem"
+import ProjectItem from '../ProjectItem'
 
 const UnorderedList = styled.ul`
   margin: 0;
@@ -15,7 +15,7 @@ const ProjectList = ({ projects, touchProject }) => {
     const props = {
       key: project.id,
       project: project,
-      touchProject: touchProject
+      touchProject: touchProject,
     }
 
     return <ProjectItem {...props} />

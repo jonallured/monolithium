@@ -1,7 +1,7 @@
-import React from "react"
-import styled from "styled-components"
+import React from 'react'
+import styled from 'styled-components'
 
-import colors from "shared/colors"
+import colors from 'shared/colors'
 
 const ListItem = styled.li`
   background-color: ${colors.background};
@@ -35,7 +35,7 @@ const ProjectItem = ({ project, touchProject }) => {
   const handleClick = () => touchProject(project)
 
   return (
-    <ListItem onClick={handleClick} className={project.isTouched && "touched"}>
+    <ListItem onClick={handleClick} className={project.isTouched && 'touched'}>
       <span className="name">{project.name}</span>
       <span className="touched_at">{project.touched_at}</span>
     </ListItem>

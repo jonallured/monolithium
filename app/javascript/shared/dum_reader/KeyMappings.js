@@ -3,22 +3,22 @@ class KeyMappings {
     this.app = app
     this.reader = reader
 
-    this.mode = "normal"
+    this.mode = 'normal'
     this.modifier = null
   }
 
   start() {
-    window.addEventListener("keydown", this.handleKeyUp)
+    window.addEventListener('keydown', this.handleKeyUp)
   }
 
   stop() {
-    window.removeEventListener("keydown", this.handleKeyUp)
+    window.removeEventListener('keydown', this.handleKeyUp)
   }
 
   handleKeyUp = e => {
     const keyCode = e.keyCode
 
-    if (this.mode === "visual") {
+    if (this.mode === 'visual') {
       this.visual(keyCode)
     } else if (this.modifier) {
       this.handleModified(keyCode)
@@ -30,10 +30,10 @@ class KeyMappings {
 
   handleModified(keyCode) {
     switch (this.modifier) {
-      case "g":
+      case 'g':
         this.geeModified(keyCode)
         break
-      case "shift":
+      case 'shift':
         this.shiftModified(keyCode)
         break
     }
@@ -45,13 +45,13 @@ class KeyMappings {
         this.app.openSelected()
         break
       case 16: // shift
-        this.modifier = "shift"
+        this.modifier = 'shift'
         break
       case 17: // control
-        this.modifier = "control"
+        this.modifier = 'control'
         break
       case 18: // option
-        this.modifier = "option"
+        this.modifier = 'option'
         break
       case 27: // esc
         this.app.closeHelp()
@@ -61,7 +61,7 @@ class KeyMappings {
         this.app.reloadEntries()
         break
       case 71: // g
-        this.modifier = "g"
+        this.modifier = 'g'
         break
       case 74: // j
         this.reader.moveSelectionDown()
@@ -72,10 +72,10 @@ class KeyMappings {
         this.app.reloadEntries()
         break
       case 76: // l
-        this.modifier = "l"
+        this.modifier = 'l'
         break
       case 82: // r
-        this.app.updateNotice("refreshing...", true)
+        this.app.updateNotice('refreshing...', true)
         this.reader.refresh(this.app.reloadEntries)
         break
       case 83: // s
@@ -87,11 +87,11 @@ class KeyMappings {
         this.app.reloadEntries()
         break
       case 86: // v
-        this.mode = "visual"
-        this.app.updateNotice("visual mode", false)
+        this.mode = 'visual'
+        this.app.updateNotice('visual mode', false)
         break
       case 91: // command
-        this.modifier = "command"
+        this.modifier = 'command'
         break
       default:
         break
@@ -128,16 +128,16 @@ class KeyMappings {
   }
 
   exitVisual() {
-    this.mode = "normal"
+    this.mode = 'normal'
     this.reader.shrinkSelection()
-    this.app.updateNotice("normal mode", true)
+    this.app.updateNotice('normal mode', true)
     this.app.reloadEntries()
   }
 
   geeModified(keyCode) {
     switch (keyCode) {
       case 65: // g + a
-        this.reader.updateEntries("archived")
+        this.reader.updateEntries('archived')
         this.app.reloadEntries()
         break
       case 71: // g + g
@@ -145,11 +145,11 @@ class KeyMappings {
         this.app.reloadEntries()
         break
       case 83: // g + s
-        this.reader.updateEntries("saved")
+        this.reader.updateEntries('saved')
         this.app.reloadEntries()
         break
       case 85: // g + u
-        this.reader.updateEntries("unread")
+        this.reader.updateEntries('unread')
         this.app.reloadEntries()
         break
     }

@@ -1,7 +1,7 @@
-import React from "react"
-import styled from "styled-components"
+import React from 'react'
+import styled from 'styled-components'
 
-import colors from "shared/colors"
+import colors from 'shared/colors'
 
 const Menu = styled.menu`
   display: flex;
@@ -60,7 +60,7 @@ const Section = styled.section`
 class NewProject extends React.Component {
   handleClick = () => {
     const newProject = {
-      name: this.nameInput.value
+      name: this.nameInput.value,
     }
 
     this.props.createProject(newProject)
