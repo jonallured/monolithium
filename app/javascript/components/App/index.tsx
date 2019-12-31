@@ -7,7 +7,7 @@ interface AppRouter {
   updateProject: (projectId) => void
 }
 
-interface Project {
+export interface Project {
   isTouched: boolean
 }
 
