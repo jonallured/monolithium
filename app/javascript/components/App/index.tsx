@@ -1,23 +1,40 @@
 import React from 'react'
-
 import ProjectActions from '../ProjectActions'
 import ProjectList from '../ProjectList'
 
-class App extends React.Component {
+interface AppRouter {
+  createProject: (project) => Promise<Project[]>
+  updateProject: (projectId) => void
+}
+
+interface Project {
+  isTouched: boolean
+}
+
+interface AppProps {
+  router: AppRouter
+}
+
+interface AppState {
+  errorMessage: string
+  projects: Project[]
+}
+
+export class App extends React.Component<AppProps, AppState> {
   constructor(props) {
     super(props)
-    this.state = { projects: props.projects }
+    this.state = { errorMessage: '', projects: props.projects }
   }
 
-  get projects() {
+  get projects(): Project[] {
     return this.state.projects
   }
 
-  get router() {
+  get router(): AppRouter {
     return this.props.router
   }
 
-  touchProject = project => {
+  touchProject = (project): void => {
     if (!project.touched) {
       this.router.updateProject(project.id)
       project.isTouched = true
@@ -25,14 +42,14 @@ class App extends React.Component {
     }
   }
 
-  createProject = newProject => {
+  createProject = (newProject): void => {
     this.router
       .createProject(newProject)
       .then(projects => this.setState({ projects }))
       .catch(errorMessage => this.setState({ errorMessage }))
   }
 
-  render() {
+  render(): React.ReactNode {
     const projectActionsProps = {
       createProject: this.createProject,
       errorMessage: this.state.errorMessage,
@@ -53,5 +70,3 @@ class App extends React.Component {
     )
   }
 }
-
-export default App
