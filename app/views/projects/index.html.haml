@@ -5,7 +5,7 @@
   %h3 Today is a great day to make some updates!
 
   :javascript
-    const projects = #{projects.to_json.html_safe}
+    window.projects = #{projects.to_json.html_safe}
 
   %main#root= javascript_pack_tag 'application'
 
