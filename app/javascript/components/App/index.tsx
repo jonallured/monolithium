@@ -1,6 +1,6 @@
 import React from "react"
-import ProjectActions from "../ProjectActions"
-import ProjectList from "../ProjectList"
+import { ProjectActions } from "../ProjectActions"
+import { ProjectList } from "../ProjectList"
 
 interface AppRouter {
   createProject: (project) => Promise<Project[]>
@@ -8,7 +8,10 @@ interface AppRouter {
 }
 
 export interface Project {
+  id: string
   isTouched: boolean
+  name: string
+  touched_at: string
 }
 
 interface AppProps {
