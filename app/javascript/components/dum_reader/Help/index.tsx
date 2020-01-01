@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import colors from '../../../shared/dum_reader/colors'
+import { colors } from '../../../shared/dum_reader/colors'
 import { NormalModeHelp } from '../NormalModeHelp'
 import { VisualModeHelp } from '../VisualModeHelp'
 

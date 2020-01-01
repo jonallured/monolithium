@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import colors from '../../../shared/dum_reader/colors'
+import { colors } from '../../../shared/dum_reader/colors'
 import { Entry } from '../../../shared/dum_reader/Entry'
 
 const EntryRow = styled.dl`
