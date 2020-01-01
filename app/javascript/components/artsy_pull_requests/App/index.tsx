@@ -25,29 +25,29 @@ const PRList = styled.ul`
 export class App extends React.Component {
   state = { pullRequests: [] }
 
-  componentDidMount() {
+  componentDidMount(): void {
     const root = document.getElementById("root")
     root.addEventListener("NewPullRequest", this.handleNewPullRequest)
   }
 
-  handleNewPullRequest = e => {
+  handleNewPullRequest = (e): void => {
     const newPullRequest = e.detail
     this.setState({
       pullRequests: [newPullRequest, ...this.state.pullRequests]
     })
   }
 
-  computePullRequestTags = () => {
+  computePullRequestTags = (): React.ReactNode => {
     return this.state.pullRequests.map(pullRequest => (
       <li key={pullRequest.id} style={{ backgroundColor: pullRequest.color }}>
-        <a href={pullRequest.url} target="_blank">
+        <a href={pullRequest.url} target="_blank" rel="noopener noreferrer">
           {pullRequest.title} by @{pullRequest.username} on {pullRequest.repo}
         </a>
       </li>
     ))
   }
 
-  render() {
+  render(): React.ReactNode {
     const pullRequestTags = this.computePullRequestTags()
 
     return <PRList>{pullRequestTags}</PRList>
