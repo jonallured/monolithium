@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import colors from 'shared/colors'
+import colors from '../../shared/colors'
 
 const Menu = styled.menu`
   display: flex;
@@ -57,41 +57,54 @@ const Section = styled.section`
   }
 `
 
-class NewProject extends React.Component {
-  handleClick = () => {
+interface NewProjectProps {
+  createProject: (project) => void
+}
+
+class NewProject extends React.Component<NewProjectProps> {
+  handleClick = (): void => {
+    const inputTag = document.querySelector(
+      'input[name=name]'
+    ) as HTMLInputElement
+
     const newProject = {
-      name: this.nameInput.value,
+      name: inputTag.value,
     }
 
     this.props.createProject(newProject)
   }
 
-  render() {
+  render(): React.ReactNode {
     return (
       <Section>
-        <input
-          type="text"
-          name="name"
-          placeholder="name"
-          ref={input => {
-            this.nameInput = input
-          }}
-        />
+        <input name="name" placeholder="name" type="text" />
         <button onClick={this.handleClick}>Create</button>
       </Section>
     )
   }
 }
 
-class ProjectActions extends React.Component {
+interface ProjectActionsProps {
+  createProject: (newProject) => void
+  errorMessage: string
+}
+
+interface ProjectActionsState {
+  showNewProject: boolean
+}
+
+export class ProjectActions extends React.Component<
+  ProjectActionsProps,
+  ProjectActionsState
+> {
   state = { showNewProject: false }
 
-  toggleNewProject = e => {
+  toggleNewProject = (e): void => {
     e.preventDefault()
     this.setState({ showNewProject: !this.state.showNewProject })
   }
 
-  render() {
+  render(): React.ReactNode {
     const newProjectProps = { createProject: this.props.createProject }
     return (
       <aside>
@@ -108,5 +121,3 @@ class ProjectActions extends React.Component {
     )
   }
 }
-
-export default ProjectActions

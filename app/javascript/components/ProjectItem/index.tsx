@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-
-import colors from 'shared/colors'
+import colors from '../../shared/colors'
+import { Project } from '../App'
 
 const ListItem = styled.li`
   background-color: ${colors.background};
@@ -31,8 +31,14 @@ const ListItem = styled.li`
   }
 `
 
-const ProjectItem = ({ project, touchProject }) => {
-  const handleClick = () => touchProject(project)
+interface ProjectItemProps {
+  project: Project
+  touchProject: (project) => void
+}
+
+export const ProjectItem: React.FC<ProjectItemProps> = props => {
+  const { project, touchProject } = props
+  const handleClick = (): void => touchProject(project)
 
   return (
     <ListItem onClick={handleClick} className={project.isTouched && 'touched'}>
@@ -41,5 +47,3 @@ const ProjectItem = ({ project, touchProject }) => {
     </ListItem>
   )
 }
-
-export default ProjectItem
