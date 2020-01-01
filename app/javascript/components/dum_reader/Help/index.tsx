@@ -1,14 +1,13 @@
 import React from "react"
 import styled from "styled-components"
-
-import colors from "shared/dum_reader/colors"
-import NormalModeHelp from "components/dum_reader/NormalModeHelp"
-import VisualModeHelp from "components/dum_reader/VisualModeHelp"
+import colors from "../../../shared/dum_reader/colors"
+import { NormalModeHelp } from "../NormalModeHelp"
+import { VisualModeHelp } from "../VisualModeHelp"
 
 const Wrapper = styled.div`
   position: absolute;
   top: 150px;
-  visibility: ${props => props.visibility};
+  visibility: ${(props): string => props.visibility};
   width: 960px;
   z-index: 1000;
 `
@@ -61,31 +60,37 @@ const Nav = styled.h3`
   }
 `
 
-class Help extends React.Component {
-  constructor() {
-    super()
+interface HelpProps {
+  closeHelp: () => void
+  visibility: string
+}
 
-    this.state = {
-      normal: true
-    }
+interface HelpState {
+  normal: boolean
+}
+
+export class Help extends React.Component<HelpProps, HelpState> {
+  state = {
+    normal: true
   }
 
-  close = e => {
+  close = (e): void => {
     e.preventDefault()
     this.props.closeHelp()
   }
 
-  showNormal = e => {
+  showNormal = (e): void => {
     e.preventDefault()
     this.setState({ normal: true })
   }
 
-  showVisual = e => {
+  showVisual = (e): void => {
     e.preventDefault()
     this.setState({ normal: false })
   }
 
-  render() {
+  render(): React.ReactNode {
+    const ModeHelp = this.state.normal ? NormalModeHelp : VisualModeHelp
     return (
       <Wrapper visibility={this.props.visibility}>
         <Modal>
@@ -93,7 +98,7 @@ class Help extends React.Component {
             [X]
           </CloseLink>
           <Header>Keyboard Shortcuts</Header>
-          {this.state.normal ? <NormalModeHelp /> : <VisualModeHelp />}
+          <ModeHelp />
           <Nav>
             <a
               href="#"
@@ -116,5 +121,3 @@ class Help extends React.Component {
     )
   }
 }
-
-export default Help

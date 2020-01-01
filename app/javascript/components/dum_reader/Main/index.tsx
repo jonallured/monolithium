@@ -1,7 +1,7 @@
 import React from "react"
 import styled from "styled-components"
-
-import EntryList from "components/dum_reader/EntryList"
+import { EntryList } from "../EntryList"
+import { Entry } from "../../../shared/dum_reader/Entry"
 
 const Wrapper = styled.main`
   bottom: 49px;
@@ -11,12 +11,14 @@ const Wrapper = styled.main`
   width: 960px;
 `
 
-const Main = props => {
+interface MainProps {
+  entries: Entry[]
+}
+
+export const Main: React.FC<MainProps> = props => {
   return (
     <Wrapper>
       <EntryList {...props} />
     </Wrapper>
   )
 }
-
-export default Main

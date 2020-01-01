@@ -1,21 +1,26 @@
-class KeyMappings {
+import { App } from "../../components/dum_reader/App"
+import { Reader } from "./Reader"
+
+export class KeyMappings {
+  app: App
+  reader: Reader
+  mode = "normal"
+  modifier = ""
+
   constructor({ app, reader }) {
     this.app = app
     this.reader = reader
-
-    this.mode = "normal"
-    this.modifier = null
   }
 
-  start() {
+  start = (): void => {
     window.addEventListener("keydown", this.handleKeyUp)
   }
 
-  stop() {
+  stop = (): void => {
     window.removeEventListener("keydown", this.handleKeyUp)
   }
 
-  handleKeyUp = e => {
+  handleKeyUp = (e): void => {
     const keyCode = e.keyCode
 
     if (this.mode === "visual") {
@@ -28,7 +33,7 @@ class KeyMappings {
     }
   }
 
-  handleModified(keyCode) {
+  handleModified = (keyCode): void => {
     switch (this.modifier) {
       case "g":
         this.geeModified(keyCode)
@@ -39,7 +44,7 @@ class KeyMappings {
     }
   }
 
-  unmodified(keyCode) {
+  unmodified = (keyCode): void => {
     switch (keyCode) {
       case 13: // return
         this.app.openSelected()
@@ -98,7 +103,7 @@ class KeyMappings {
     }
   }
 
-  visual(keyCode) {
+  visual = (keyCode): void => {
     switch (keyCode) {
       case 27: // esc
       case 86: // v
@@ -127,14 +132,14 @@ class KeyMappings {
     }
   }
 
-  exitVisual() {
+  exitVisual = (): void => {
     this.mode = "normal"
     this.reader.shrinkSelection()
     this.app.updateNotice("normal mode", true)
     this.app.reloadEntries()
   }
 
-  geeModified(keyCode) {
+  geeModified = (keyCode): void => {
     switch (keyCode) {
       case 65: // g + a
         this.reader.updateEntries("archived")
@@ -155,7 +160,7 @@ class KeyMappings {
     }
   }
 
-  shiftModified(keyCode) {
+  shiftModified = (keyCode): void => {
     switch (keyCode) {
       case 71: // G
         this.reader.jumpDown()
@@ -167,5 +172,3 @@ class KeyMappings {
     }
   }
 }
-
-export default KeyMappings

@@ -23,10 +23,14 @@ const ShortcutLink = styled.p`
   float: right;
 `
 
-const Header = ({ openHelp }) => {
-  const handler = e => {
+interface HeaderProps {
+  openHelp: () => void
+}
+
+export const Header: React.FC<HeaderProps> = props => {
+  const handler = (e): void => {
     e.preventDefault()
-    openHelp()
+    props.openHelp()
   }
 
   return (
@@ -40,5 +44,3 @@ const Header = ({ openHelp }) => {
     </Wrapper>
   )
 }
-
-export default Header

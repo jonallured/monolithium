@@ -29,12 +29,12 @@ class Entry
 
   def as_json(_options)
     {
-      id: id,
-      title: title,
+      date: date,
       feed_title: feed_title,
-      url: url,
+      id: id,
       status: status,
-      date: date
+      title: title,
+      url: url
     }
   end
 end

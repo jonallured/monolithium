@@ -1,4 +1,12 @@
-class Entry {
+export class Entry {
+  date: string
+  feedTitle: string
+  id: string
+  selected: boolean
+  status: string
+  title: string
+  url: string
+
   constructor(data) {
     this.id = data.id
     this.title = data.title
@@ -10,21 +18,19 @@ class Entry {
     this.selected = false
   }
 
-  get key() {
+  get key(): string {
     return this.id.toString()
   }
 
-  archive() {
+  archive(): void {
     this.status = "archived"
   }
 
-  save() {
+  save(): void {
     this.status = "saved"
   }
 
-  markUnread() {
+  markUnread(): void {
     this.status = "unread"
   }
 }
-
-export default Entry
