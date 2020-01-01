@@ -1,8 +1,7 @@
 import React from "react"
 import ReactDOM from "react-dom"
-
-import { App } from "../components/artsy_pull_requests/App"
+import { ArtsyPullRequests } from "../apps/ArtsyPullRequests"
 
 document.addEventListener("DOMContentLoaded", () => {
-  ReactDOM.render(<App />, document.getElementById("root"))
+  ReactDOM.render(<ArtsyPullRequests />, document.getElementById("root"))
 })

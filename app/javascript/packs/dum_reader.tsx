@@ -1,7 +1,7 @@
 import React from "react"
 import ReactDOM from "react-dom"
-import { Reader } from "../shared/dum_reader/Reader"
-import { App } from "../components/dum_reader/App"
+import { Reader } from "../apps/DumReader/shared/Reader"
+import { DumReader } from "../apps/DumReader"
 
 declare global {
   interface Window {
@@ -13,5 +13,5 @@ document.addEventListener("DOMContentLoaded", () => {
   const root = document.getElementById("root")
   const reader = new Reader()
   window.reader = reader
-  ReactDOM.render(<App reader={reader} />, root)
+  ReactDOM.render(<DumReader reader={reader} />, root)
 })
