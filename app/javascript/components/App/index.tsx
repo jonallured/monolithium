@@ -1,11 +1,7 @@
 import React from 'react'
 import { ProjectActions } from '../ProjectActions'
 import { ProjectList } from '../ProjectList'
-
-interface AppRouter {
-  createProject: (project) => Promise<Project[]>
-  updateProject: (projectId) => void
-}
+import { Router } from '../../shared/Router'
 
 export interface Project {
   id: string
@@ -15,13 +11,16 @@ export interface Project {
 }
 
 interface AppProps {
-  router: AppRouter
+  projects: Project[]
+  router: Router
 }
 
 interface AppState {
   errorMessage: string
   projects: Project[]
 }
+
+const errorMessage = 'Something went wrong - project not created!'
 
 export class App extends React.Component<AppProps, AppState> {
   constructor(props) {
@@ -33,7 +32,7 @@ export class App extends React.Component<AppProps, AppState> {
     return this.state.projects
   }
 
-  get router(): AppRouter {
+  get router(): Router {
     return this.props.router
   }
 
@@ -48,8 +47,8 @@ export class App extends React.Component<AppProps, AppState> {
   createProject = (newProject): void => {
     this.router
       .createProject(newProject)
-      .then(projects => this.setState({ projects }))
-      .catch(errorMessage => this.setState({ errorMessage }))
+      .then(json => this.setState({ projects: json as Project[] }))
+      .catch(() => this.setState({ errorMessage }))
   }
 
   render(): React.ReactNode {

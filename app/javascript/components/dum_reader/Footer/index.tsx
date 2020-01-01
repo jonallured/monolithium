@@ -35,7 +35,7 @@ const Notice = styled.span`
   color: ${colors.black};
   margin: 6px 0 0;
   padding: 4px 8px;
-  visibility: ${props => (props.notice ? 'visible' : 'hidden')};
+  visibility: ${(props): string => (props.notice ? 'visible' : 'hidden')};
 
   &.fade {
     opacity: 0;
@@ -43,20 +43,30 @@ const Notice = styled.span`
   }
 `
 
-const Footer = ({ count, fade, notice, timestamp, type }) => (
-  <Wrapper>
-    <ByLine>
-      lovingly built by <a href="http://jonallured.com">Jon Allured</a>
-    </ByLine>
-    <EntryCount>
-      {count} {type} as of {timestamp}
-    </EntryCount>
-    <p>
-      <Notice notice={notice} className={fade ? 'fade' : ''}>
-        {notice}
-      </Notice>
-    </p>
-  </Wrapper>
-)
+interface FooterProps {
+  count: number
+  fade: boolean
+  notice: string
+  timestamp: string
+  type: string
+}
 
-export default Footer
+export const Footer: React.FC<FooterProps> = props => {
+  const { count, fade, notice, timestamp, type } = props
+
+  return (
+    <Wrapper>
+      <ByLine>
+        lovingly built by <a href="http://jonallured.com">Jon Allured</a>
+      </ByLine>
+      <EntryCount>
+        {count} {type} as of {timestamp}
+      </EntryCount>
+      <p>
+        <Notice notice={notice} className={fade ? 'fade' : ''}>
+          {notice}
+        </Notice>
+      </p>
+    </Wrapper>
+  )
+}

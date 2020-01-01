@@ -1,7 +1,7 @@
-import Entry from 'shared/dum_reader/Entry'
-import Router from 'shared/dum_reader/Router'
+import { Entry } from './Entry'
+import { Router } from './Router'
 
-const sortByDate = (lhsEntry, rhsEntry) => {
+const sortByDate = (lhsEntry, rhsEntry): number => {
   if (lhsEntry.date < rhsEntry.date) {
     return -1
   } else if (lhsEntry.date > rhsEntry.date) {
@@ -11,16 +11,28 @@ const sortByDate = (lhsEntry, rhsEntry) => {
   }
 }
 
-class Reader {
-  constructor() {
-    this.router = new Router()
-    this.refreshCallback = null
+export class Reader {
+  archivedEntries = []
+  entries = []
+  refreshCallback?: () => void
+  router: Router
+  savedEntries = []
+  timestamp = ''
+  type = 'unread'
+  unreadEntries = []
 
-    this.type = 'unread'
+  constructor() {
+    const token = 'HAHAHA'
+    this.router = new Router(token)
     this.resetState([], [], [], '')
   }
 
-  resetState(archivedEntries, savedEntries, unreadEntries, timestamp) {
+  resetState = (
+    archivedEntries,
+    savedEntries,
+    unreadEntries,
+    timestamp
+  ): void => {
     this.archivedEntries = archivedEntries
     this.savedEntries = savedEntries
     this.unreadEntries = unreadEntries
@@ -33,7 +45,7 @@ class Reader {
     }
   }
 
-  updateEntries(type) {
+  updateEntries = (type): void => {
     this.type = type
 
     switch (type) {
@@ -49,63 +61,65 @@ class Reader {
     }
   }
 
-  selectedEntries() {
+  selectedEntries = (): Entry[] => {
     return this.entries.filter(entry => entry.selected)
   }
 
-  refresh(callback) {
+  refresh = (callback): void => {
     this.refreshCallback = callback
-    this.router.getEntries(this.handleRefresh)
+    this.router.getEntries().then(json => {
+      this.handleRefresh(json['payload'])
+    })
   }
 
-  handleRefresh = ({
-    archived_entries, // eslint-disable-line camelcase
-    saved_entries, // eslint-disable-line camelcase
-    unread_entries, // eslint-disable-line camelcase
-    timestamp,
-  }) => {
-    const archivedEntries = archived_entries
+  handleRefresh = (payload): void => {
+    const archivedEntries = payload.archived_entries
       .map(data => new Entry(data))
       .sort(sortByDate)
-    const savedEntries = saved_entries
+    const savedEntries = payload.saved_entries
       .map(data => new Entry(data))
       .sort(sortByDate)
-    const unreadEntries = unread_entries
+    const unreadEntries = payload.unread_entries
       .map(data => new Entry(data))
       .sort(sortByDate)
 
-    this.resetState(archivedEntries, savedEntries, unreadEntries, timestamp)
+    this.resetState(
+      archivedEntries,
+      savedEntries,
+      unreadEntries,
+      payload.timestamp
+    )
     this.refreshCallback()
   }
 
-  clearSelected() {
+  clearSelected = (): void => {
     this.entries.forEach(entry => (entry.selected = false))
   }
 
-  nextEntry() {
+  nextEntry = (): Entry => {
     const lastIndex = this.selectedEntries().length - 1
     const lastSelected = this.selectedEntries()[lastIndex]
     const index = this.entries.indexOf(lastSelected)
     return this.entries[index + 1]
   }
 
-  prevEntry() {
+  prevEntry = (): Entry => {
     const firstSelected = this.selectedEntries()[0]
     const index = this.entries.indexOf(firstSelected)
     return this.entries[index - 1]
   }
 
-  jumpUp() {
+  jumpUp = (): void => {
     this.clearSelected()
     this.entries[0].selected = true
   }
 
-  jumpDown() {
+  jumpDown = (): void => {
     this.clearSelected()
     this.entries[this.entries.length - 1].selected = true
   }
 
-  moveSelectionDown() {
+  moveSelectionDown = (): void => {
     const next = this.nextEntry()
     if (next) {
       this.clearSelected()
@@ -113,7 +127,7 @@ class Reader {
     }
   }
 
-  moveSelectionUp() {
+  moveSelectionUp = (): void => {
     const prev = this.prevEntry()
     if (prev) {
       this.clearSelected()
@@ -121,44 +135,42 @@ class Reader {
     }
   }
 
-  growSelectionDown() {
+  growSelectionDown = (): void => {
     if (this.nextEntry()) {
       this.nextEntry().selected = true
     }
   }
 
-  growSelectionUp() {
+  growSelectionUp = (): void => {
     if (this.prevEntry()) {
       this.prevEntry().selected = true
     }
   }
 
-  shrinkSelection() {
+  shrinkSelection = (): void => {
     const firstSelected = this.selectedEntries()[0]
     this.clearSelected()
     firstSelected.selected = true
   }
 
-  archiveSelected() {
+  archiveSelected = (): void => {
     const selectedIds = this.selectedEntries().map(entry => entry.id)
     this.selectedEntries().forEach(entry => entry.archive())
     this.router.archive(selectedIds)
     this.shrinkSelection()
   }
 
-  saveSelected() {
+  saveSelected = (): void => {
     const selectedIds = this.selectedEntries().map(entry => entry.id)
     this.selectedEntries().forEach(entry => entry.save())
     this.router.save(selectedIds)
     this.shrinkSelection()
   }
 
-  markSelectedUnread() {
+  markSelectedUnread = (): void => {
     const selectedIds = this.selectedEntries().map(entry => entry.id)
     this.selectedEntries().forEach(entry => entry.markUnread())
     this.router.markUnread(selectedIds)
     this.shrinkSelection()
   }
 }
-
-export default Reader
