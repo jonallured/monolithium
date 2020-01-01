@@ -1,8 +1,7 @@
 import React from "react"
 import ReactDOM from "react-dom"
-
 import { App, Project } from "../components/App"
-import Router from "../shared/Router"
+import { Router } from "../shared/Router"
 
 declare global {
   interface Window {
@@ -18,10 +17,5 @@ document.addEventListener("DOMContentLoaded", () => {
   const router = new Router(token)
   const projects = window.projects
 
-  const props = {
-    projects,
-    router
-  }
-
-  ReactDOM.render(<App {...props} />, rootTag)
+  ReactDOM.render(<App projects={projects} router={router} />, rootTag)
 })

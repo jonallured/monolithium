@@ -13,7 +13,7 @@ const Wrapper = styled.table`
   }
 `
 
-const VisualModeHelp = () => (
+export const VisualModeHelp: React.FC = () => (
   <Wrapper>
     <tbody>
       <tr>
@@ -51,5 +51,3 @@ const VisualModeHelp = () => (
     </tbody>
   </Wrapper>
 )
-
-export default VisualModeHelp
