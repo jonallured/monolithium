@@ -1,5 +1,8 @@
 {
-  "env": { "browser": true },
+  "env": {
+    "browser": true,
+    "jest": true
+  },
   "parser": "@typescript-eslint/parser",
   "plugins": ["@typescript-eslint"],
   "rules": {

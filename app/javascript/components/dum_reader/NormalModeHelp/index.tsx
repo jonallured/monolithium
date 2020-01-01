@@ -13,7 +13,7 @@ const Wrapper = styled.table`
   }
 `
 
-const NormalModeHelp = () => (
+export const NormalModeHelp: React.FC = () => (
   <Wrapper>
     <tbody>
       <tr>
@@ -91,5 +91,3 @@ const NormalModeHelp = () => (
     </tbody>
   </Wrapper>
 )
-
-export default NormalModeHelp

@@ -1,15 +1,16 @@
 import React from 'react'
 import styled from 'styled-components'
 import colors from '../../../shared/dum_reader/colors'
+import { Entry } from '../../../shared/dum_reader/Entry'
 
 const EntryRow = styled.dl`
-  background-color: ${props =>
+  background-color: ${(props): string =>
     props.selected ? colors.highlight : colors.white};
   border-bottom: 1px solid ${colors.lightGray};
   margin: 0;
 
   a {
-    color: ${props => props.color};
+    color: ${(props): void => props.color};
     display: block;
     padding: 10px;
     text-decoration: none;
@@ -41,16 +42,21 @@ const statusColorMap = {
   unread: colors.black,
 }
 
-const EntryItem = ({ date, feedTitle, selected, status, title, url }) => {
+interface EntryItemProps {
+  entry: Entry
+}
+
+export const EntryItem: React.FC<EntryItemProps> = props => {
+  const { date, feedTitle, selected, status, title, url } = props.entry
   const color = statusColorMap[status]
 
   return (
     <EntryRow
-      selected={selected}
-      color={color}
       className={selected ? 'selected' : ''}
+      color={color}
+      selected={selected}
     >
-      <a href={url} target="_blank">
+      <a href={url} target="_blank" rel="noopener noreferrer">
         <FeedName>{feedTitle}</FeedName>
         <EntryDate>{date}</EntryDate>
         <dt>{title}</dt>
@@ -58,5 +64,3 @@ const EntryItem = ({ date, feedTitle, selected, status, title, url }) => {
     </EntryRow>
   )
 }
-
-export default EntryItem
