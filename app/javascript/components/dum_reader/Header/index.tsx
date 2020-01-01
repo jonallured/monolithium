@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import colors from '../../../shared/dum_reader/colors'
+import { colors } from '../../../shared/dum_reader/colors'
 
 const Wrapper = styled.header`
   border-bottom: 2px solid ${colors.darkGray};

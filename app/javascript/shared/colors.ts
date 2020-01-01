@@ -1,4 +1,4 @@
-const colors = {
+export const colors = {
   background: '#800080',
   backgroundHover: '#670067',
   backgroundDisabled: '#4d004d',
@@ -6,5 +6,3 @@ const colors = {
   pageBackground: '#111',
   text: '#eee',
 }
-
-export default colors

@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import colors from '../../../shared/dum_reader/colors'
+import { colors } from '../../../shared/dum_reader/colors'
 
 const Wrapper = styled.footer`
   border-top: 2px solid ${colors.darkGray};
