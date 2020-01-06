@@ -1,6 +1,8 @@
 export type RequestBody = object | object[]
 export type ResponseJson = Promise<object | object[]>
 
+const jsonContentType = "application/json"
+
 export class BaseFetcher {
   token: string
 
@@ -14,7 +16,7 @@ export class BaseFetcher {
     body?: RequestBody
   ): ResponseJson => {
     const headers = {
-      Accept: "application/json",
+      Accept: jsonContentType,
       "Content-Type": "application/json",
       "X-CSRF-TOKEN": this.token
     }
@@ -29,10 +31,14 @@ export class BaseFetcher {
     }
 
     return fetch(url, options).then(response => {
-      if (response.status === 200) {
+      if (!response.ok) throw new Error("non 200 response")
+
+      const contentType = response.headers.get("Content-Type")
+
+      if (contentType && contentType.match(jsonContentType)) {
         return response.json()
       } else {
-        throw new Error("non 200 response")
+        return response.text()
       }
     })
   }
