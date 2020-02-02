@@ -17,9 +17,13 @@
     "typescript": "^3.7.5"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.18.0",
+    "@typescript-eslint/parser": "^2.18.0",
     "babel-jest": "^25.1.0",
     "enzyme": "^3.6.0",
     "enzyme-adapter-react-16": "^1.5.0",
+    "eslint": "^6.8.0",
+    "eslint-plugin-react": "^7.18.2",
     "jest": "^25.1.0",
     "prettier": "1.19.1",
     "webpack-cli": "^3.1.0",
@@ -32,14 +36,18 @@
     "transform": {
       "^.+\\.(ts|tsx|js|jsx)$": "babel-jest"
     },
+    "setupFilesAfterEnv": [
+      "<rootDir>/app/javascript/testing/setup.ts"
+    ],
     "moduleDirectories": [
       "node_modules",
       "<rootDir>/app/javascript"
     ]
   },
   "scripts": {
-    "prettier": "prettier --write 'app/javascript/**/*.js'",
-    "prettier-check": "prettier --check 'app/javascript/**/*.js'",
+    "lint": "eslint 'app/javascript/**/*.{js,jsx,ts,tsx}'",
+    "prettier": "prettier --write 'app/javascript/**/*.{js,jsx,ts,tsx}'",
+    "prettier-check": "prettier --check 'app/javascript/**/*.{js,jsx,ts,tsx}'",
     "test": "jest",
     "type-check": "tsc --pretty --noEmit"
   }
