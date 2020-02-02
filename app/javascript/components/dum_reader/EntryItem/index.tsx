@@ -3,14 +3,18 @@ import styled from "styled-components"
 import colors from "../../../shared/dum_reader/colors"
 import { Entry } from "../../../shared/dum_reader/Entry"
 
-const EntryRow = styled.dl`
+interface EntryRowProps {
+  selected: boolean
+}
+
+const EntryRow = styled.dl<EntryRowProps>`
   background-color: ${(props): string =>
     props.selected ? colors.highlight : colors.white};
   border-bottom: 1px solid ${colors.lightGray};
   margin: 0;
 
   a {
-    color: ${(props): void => props.color};
+    color: ${(props): string => props.color};
     display: block;
     padding: 10px;
     text-decoration: none;
