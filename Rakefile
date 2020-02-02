@@ -6,10 +6,10 @@ if %w[development test].include? Rails.env
   desc 'Run RuboCop'
   RuboCop::RakeTask.new(:rubocop)
 
-  desc 'run prettier diff'
-  task prettier_diff: :environment do
-    system 'yarn run prettier-diff'
-    abort 'prettier-diff failed' unless $CHILD_STATUS.exitstatus.zero?
+  desc 'run prettier check'
+  task prettier_check: :environment do
+    system 'yarn run prettier-check'
+    abort 'prettier-check failed' unless $CHILD_STATUS.exitstatus.zero?
   end
 
   desc 'run jest tests'
@@ -19,5 +19,5 @@ if %w[development test].include? Rails.env
   end
 
   Rake::Task[:default].clear
-  task default: %i[rubocop spec prettier_diff jest]
+  task default: %i[prettier_check jest rubocop spec]
 end
