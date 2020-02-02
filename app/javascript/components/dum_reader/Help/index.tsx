@@ -4,7 +4,11 @@ import colors from "../../../shared/dum_reader/colors"
 import { NormalModeHelp } from "../NormalModeHelp"
 import { VisualModeHelp } from "../VisualModeHelp"
 
-const Wrapper = styled.div`
+interface WrapperProps {
+  visibility: string
+}
+
+const Wrapper = styled.div<WrapperProps>`
   position: absolute;
   top: 150px;
   visibility: ${(props): string => props.visibility};
