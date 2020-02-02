@@ -6,11 +6,15 @@
     "@babel/preset-env": "^7.8.4",
     "@babel/preset-react": "^7.8.3",
     "@rails/webpacker": "^4.2.2",
+    "@types/react": "^16.9.19",
+    "@types/react-dom": "^16.9.5",
     "babel-plugin-module-resolver": "^4.0.0",
     "prop-types": "^15.6.2",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
-    "styled-components": "^3.4.9"
+    "styled-components": "^3.4.9",
+    "ts-loader": "^6.2.1",
+    "typescript": "^3.7.5"
   },
   "devDependencies": {
     "babel-jest": "^25.1.0",
@@ -36,6 +40,7 @@
   "scripts": {
     "prettier": "prettier --write 'app/javascript/**/*.js'",
     "prettier-check": "prettier --check 'app/javascript/**/*.js'",
-    "test": "jest"
+    "test": "jest",
+    "type-check": "tsc --pretty --noEmit"
   }
 }
