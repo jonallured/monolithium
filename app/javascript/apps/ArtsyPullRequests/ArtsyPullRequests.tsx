@@ -1,26 +1,6 @@
 import React, { useEffect, useState } from "react"
-import styled from "styled-components"
-
-const PRList = styled.ul`
-  font-size: 40px;
-  line-height: 1.6em;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-
-  li {
-    padding: 10px 20px;
-  }
-
-  a {
-    color: black;
-    text-decoration: none;
-
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-`
+import { PullList } from "./components/PullList"
+import { PullItem } from "./components/PullItem"
 
 export const ArtsyPullRequests: React.FC = () => {
   const [pullRequests, setPullRequests] = useState([])
@@ -43,15 +23,9 @@ export const ArtsyPullRequests: React.FC = () => {
     }
   }, [])
 
-  const pullRequestTags = pullRequests.map(pullRequest => {
-    return (
-      <li key={pullRequest.id} style={{ backgroundColor: pullRequest.color }}>
-        <a href={pullRequest.url} target="_blank" rel="noopener noreferrer">
-          {pullRequest.title} by @{pullRequest.username} on {pullRequest.repo}
-        </a>
-      </li>
-    )
+  const pullItems = pullRequests.map((pullRequest, i) => {
+    return <PullItem key={i} pullRequest={pullRequest} />
   })
 
-  return <PRList>{pullRequestTags}</PRList>
+  return <PullList>{pullItems}</PullList>
 }
