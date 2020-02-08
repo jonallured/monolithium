@@ -5,6 +5,7 @@ abort('Rails is running in production mode!') if Rails.env.production?
 require 'rspec/rails'
 require 'webmock/rspec'
 # Add additional requires below this line. Rails is not loaded until this point!
+require 'webdrivers/chromedriver'
 
 Dir[Rails.root.join('spec/support/**/*.rb')].sort.each { |f| require f }
 
@@ -22,3 +23,29 @@ RSpec.configure do |config|
 end
 
 WebMock.disable_net_connect!(allow_localhost: true)
+
+Capybara.register_driver :headless_chrome do |app|
+  caps = Selenium::WebDriver::Remote::Capabilities.chrome(
+    loggingPrefs: { browser: 'ALL' }
+  )
+  opts = Selenium::WebDriver::Chrome::Options.new(options: { 'w3c' => false })
+
+  opts.add_argument('--headless')
+  opts.add_argument('--no-sandbox')
+  opts.add_argument('--window-size=1440,900')
+
+  args = {
+    browser: :chrome,
+    options: opts,
+    desired_capabilities: caps,
+    timeout: http_client_read_timout
+  }
+
+  prepare_chromedriver(args)
+
+  Capybara::Selenium::Driver.new(app, args)
+end
+
+Capybara.configure do |config|
+  config.javascript_driver = :headless_chrome
+end
