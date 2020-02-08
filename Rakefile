@@ -20,7 +20,7 @@ if %w[development test].include? Rails.env
 
   desc 'run eslint'
   task eslint: :environment do
-    # system 'yarn run lint'
+    system 'yarn run lint'
     abort 'eslint failed' unless $CHILD_STATUS.exitstatus.zero?
   end
 
