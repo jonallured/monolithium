@@ -1,7 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 
-import colors from "../../shared/colors"
+import { colors } from "../../shared/colors"
 
 const Menu = styled.menu`
   display: flex;
