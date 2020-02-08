@@ -1,1 +1,1 @@
-export * from './ArtsyPullRequests'
+export * from "./ArtsyPullRequests"
