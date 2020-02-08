@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import styled from "styled-components"
 
 const PRList = styled.ul`
@@ -22,34 +22,36 @@ const PRList = styled.ul`
   }
 `
 
-export class ArtsyPullRequests extends React.Component {
-  state = { pullRequests: [] }
+export const ArtsyPullRequests: React.FC = () => {
+  const [pullRequests, setPullRequests] = useState([])
 
-  componentDidMount(): void {
-    const root = document.getElementById("root")
-    root.addEventListener("NewPullRequest", this.handleNewPullRequest)
-  }
-
-  handleNewPullRequest = (e): void => {
+  const handleNewPullRequest = (e): void => {
     const newPullRequest = e.detail
-    this.setState({
-      pullRequests: [newPullRequest, ...this.state.pullRequests]
-    })
+
+    setPullRequests(currentPullRequests => [
+      newPullRequest,
+      ...currentPullRequests
+    ])
   }
 
-  computePullRequestTags = (): React.ReactNode => {
-    return this.state.pullRequests.map(pullRequest => (
+  useEffect(() => {
+    const root = document.getElementById("root")
+    root.addEventListener("NewPullRequest", handleNewPullRequest)
+
+    return (): void => {
+      root.removeEventListener("NewPullRequest", handleNewPullRequest)
+    }
+  }, [])
+
+  const pullRequestTags = pullRequests.map(pullRequest => {
+    return (
       <li key={pullRequest.id} style={{ backgroundColor: pullRequest.color }}>
         <a href={pullRequest.url} target="_blank" rel="noopener noreferrer">
           {pullRequest.title} by @{pullRequest.username} on {pullRequest.repo}
         </a>
       </li>
-    ))
-  }
+    )
+  })
 
-  render(): React.ReactNode {
-    const pullRequestTags = this.computePullRequestTags()
-
-    return <PRList>{pullRequestTags}</PRList>
-  }
+  return <PRList>{pullRequestTags}</PRList>
 }
