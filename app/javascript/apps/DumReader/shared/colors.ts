@@ -1,11 +1,8 @@
-const colors = {
-  highlight: "#ffa",
-  red: "#180",
-
-  white: "#fff",
-  lightGray: "#ddd",
+export const colors = {
+  black: "#222",
   darkGray: "#888",
-  black: "#222"
+  highlight: "#ffa",
+  lightGray: "#ddd",
+  red: "#180",
+  white: "#fff"
 }
-
-export default colors
