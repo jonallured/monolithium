@@ -8,19 +8,6 @@ const List = styled.ul`
   list-style: none;
   margin: 0;
   padding: 0;
-
-  li {
-    padding: 10px 20px;
-  }
-
-  a {
-    color: black;
-    text-decoration: none;
-
-    &:hover {
-      text-decoration: underline;
-    }
-  }
 `
 
 interface PullListProps {
