@@ -1,6 +1,7 @@
 import React from "react"
 import styled from "styled-components"
-import { PullItem, PullRequest } from "../PullItem"
+import { PullRequest } from "../../ArtsyPullRequests"
+import { PullItem } from "../PullItem"
 
 const List = styled.ul`
   font-size: 40px;
