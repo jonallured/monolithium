@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from "react"
 import { PullList } from "./components/PullList"
-import { PullItem } from "./components/PullItem"
 
-export const ArtsyPullRequests: React.FC = () => {
+export interface ArtsyPullRequestsProps {
+  startListening: (handler) => void
+  stopListening: (handler) => void
+}
+
+export const ArtsyPullRequests: React.FC<ArtsyPullRequestsProps> = props => {
+  const { startListening, stopListening } = props
   const [pullRequests, setPullRequests] = useState([])
 
   const handleNewPullRequest = (e): void => {
@@ -15,17 +20,12 @@ export const ArtsyPullRequests: React.FC = () => {
   }
 
   useEffect(() => {
-    const root = document.getElementById("root")
-    root.addEventListener("NewPullRequest", handleNewPullRequest)
+    startListening(handleNewPullRequest)
 
     return (): void => {
-      root.removeEventListener("NewPullRequest", handleNewPullRequest)
+      stopListening(handleNewPullRequest)
     }
   }, [])
 
-  const pullItems = pullRequests.map((pullRequest, i) => {
-    return <PullItem key={i} pullRequest={pullRequest} />
-  })
-
-  return <PullList>{pullItems}</PullList>
+  return <PullList pullRequests={pullRequests} />
 }

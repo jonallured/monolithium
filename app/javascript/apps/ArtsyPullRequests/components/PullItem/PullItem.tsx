@@ -1,6 +1,6 @@
 import React from "react"
 
-interface PullRequest {
+export interface PullRequest {
   color: string
   id: string
   repo: string
