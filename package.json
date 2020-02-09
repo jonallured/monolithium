@@ -52,6 +52,7 @@
     "prettier": "prettier --write 'app/javascript/**/*.{js,jsx,ts,tsx}'",
     "prettier-check": "prettier --check 'app/javascript/**/*.{js,jsx,ts,tsx}'",
     "test": "jest",
+    "test:watch": "jest --watch",
     "type-check": "tsc --pretty --noEmit"
   }
 }
