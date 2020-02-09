@@ -12,11 +12,12 @@
     "jsx": "react"
   },
   "exclude": [
-    "**/*.spec.{ts|tsx}",
+    "**/*.spec.ts",
+    "**/*.spec.tsx",
     "app/javascript/testing/setup.ts",
     "node_modules",
-    "vendor",
-    "public"
+    "public",
+    "vendor"
   ],
   "compileOnSave": false
 }
