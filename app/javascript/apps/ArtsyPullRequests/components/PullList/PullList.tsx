@@ -1,6 +1,8 @@
+import React from "react"
 import styled from "styled-components"
+import { PullItem, PullRequest } from "../PullItem"
 
-export const PullList = styled.ul`
+const List = styled.ul`
   font-size: 40px;
   line-height: 1.6em;
   list-style: none;
@@ -20,3 +22,17 @@ export const PullList = styled.ul`
     }
   }
 `
+
+interface PullListProps {
+  pullRequests: PullRequest[]
+}
+
+export const PullList: React.FC<PullListProps> = props => {
+  const { pullRequests } = props
+
+  const items = pullRequests.map((pullRequest, i) => {
+    return <PullItem key={i} pullRequest={pullRequest} />
+  })
+
+  return <List>{items}</List>
+}

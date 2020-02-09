@@ -1,7 +1,27 @@
 import React from "react"
 import ReactDOM from "react-dom"
-import { ArtsyPullRequests } from "../apps/ArtsyPullRequests"
+import {
+  ArtsyPullRequests,
+  ArtsyPullRequestsProps
+} from "../apps/ArtsyPullRequests"
+
+const eventName = "NewPullRequest"
 
 document.addEventListener("DOMContentLoaded", () => {
-  ReactDOM.render(<ArtsyPullRequests />, document.getElementById("root"))
+  const root = document.getElementById("root")
+
+  const startListening = (handler): void => {
+    root.addEventListener(eventName, handler)
+  }
+
+  const stopListening = (handler): void => {
+    root.removeEventListener(eventName, handler)
+  }
+
+  const props: ArtsyPullRequestsProps = {
+    startListening,
+    stopListening
+  }
+
+  ReactDOM.render(<ArtsyPullRequests {...props} />, root)
 })
