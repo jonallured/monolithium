@@ -1,5 +1,6 @@
 import React from "react"
 import styled from "styled-components"
+import { PullRequest } from "../../ArtsyPullRequests"
 
 interface ItemProps {
   backgroundColor: string
@@ -18,15 +19,6 @@ const Item = styled.li<ItemProps>`
     }
   }
 `
-
-export interface PullRequest {
-  color: string
-  id: string
-  repo: string
-  title: string
-  url: string
-  username: string
-}
 
 interface PullItemProps {
   pullRequest: PullRequest

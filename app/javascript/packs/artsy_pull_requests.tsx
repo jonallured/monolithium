@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   const props: ArtsyPullRequestsProps = {
+    pullRequests: [],
     startListening,
     stopListening
   }
