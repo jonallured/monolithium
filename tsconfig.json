@@ -12,7 +12,8 @@
     "jsx": "react"
   },
   "exclude": [
-    "**/*.spec.ts",
+    "**/*.spec.{ts|tsx}",
+    "app/javascript/testing/setup.ts",
     "node_modules",
     "vendor",
     "public"
