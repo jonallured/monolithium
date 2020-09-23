@@ -4,7 +4,7 @@ jobs:
   build-and-test:
     working_directory: ~/monolithium
     docker:
-      - image: circleci/ruby:2.6.5-node-browsers
+      - image: circleci/ruby:2.7.1-node-browsers
         environment:
           RAILS_ENV: test
       - image: circleci/postgres:10.1-alpine
