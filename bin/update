@@ -1,0 +1,34 @@
+#!/bin/bash
+
+set -e
+
+git ensure-main
+
+labels="automerge,dependencies"
+message=$(cat <<"END"
+Dependency Updates
+
+This commit updates project dependencies like this:
+
+```
+$ bundle update
+$ yarn upgrade --latest
+```
+
+It was automatically created with this script:
+
+```
+$ ./bin/update
+```
+END
+)
+
+git fetch --all --quiet
+git checkout -b updates
+bundle update
+yarn upgrade --latest
+bundle exec rake
+git add .
+git commit --message "$message"
+git push origin updates
+gh pr create --fill --label "$labels"
