@@ -68,7 +68,7 @@ class NewProject extends React.Component<NewProjectProps> {
     ) as HTMLInputElement
 
     const newProject = {
-      name: inputTag.value
+      name: inputTag.value,
     }
 
     this.props.createProject(newProject)
@@ -99,8 +99,8 @@ export class ProjectActions extends React.Component<
 > {
   state = { showNewProject: false }
 
-  toggleNewProject = (e): void => {
-    e.preventDefault()
+  toggleNewProject = (event: React.MouseEvent<HTMLElement>): void => {
+    event.preventDefault()
     this.setState({ showNewProject: !this.state.showNewProject })
   }
 

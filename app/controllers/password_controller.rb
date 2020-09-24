@@ -1,17 +1,13 @@
 class PasswordController < ApplicationController
   skip_before_action :ensure_admin
+  before_action :check_password, only: :create
 
   def create
-    if password_matches?
-      path = session.fetch(:redirect_to, root_path)
-      session.clear
-      session[:admin_password] = params[:admin_password]
-      flash[:notice] = 'Password saved to session'
-      redirect_to path
-    else
-      flash[:error] = 'Password did not match'
-      redirect_to sign_in_path
-    end
+    path = session.fetch(:redirect_to, root_path)
+    session.clear
+    session[:admin_password] = params[:admin_password]
+    flash[:notice] = 'Password saved to session'
+    redirect_to path
   end
 
   def clear
@@ -24,5 +20,12 @@ class PasswordController < ApplicationController
 
   def password_matches?
     Rails.application.secrets[:admin_password] == params[:admin_password]
+  end
+
+  def check_password
+    return if password_matches?
+
+    flash[:error] = 'Password did not match'
+    redirect_to sign_in_path
   end
 end

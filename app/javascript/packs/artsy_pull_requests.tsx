@@ -2,7 +2,7 @@ import React from "react"
 import ReactDOM from "react-dom"
 import {
   ArtsyPullRequests,
-  ArtsyPullRequestsProps
+  ArtsyPullRequestsProps,
 } from "../apps/ArtsyPullRequests"
 
 const eventName = "NewPullRequest"
@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const props: ArtsyPullRequestsProps = {
     pullRequests: [],
     startListening,
-    stopListening
+    stopListening,
   }
 
   ReactDOM.render(<ArtsyPullRequests {...props} />, root)

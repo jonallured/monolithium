@@ -11,20 +11,20 @@ const pullRequest = {
   repo: "monolithium",
   title: "Initial commit",
   url: "https://github.com/jonallured/monolithium",
-  username: "jonallured"
+  username: "jonallured",
 }
 
 const defaultProps: ArtsyPullRequestsProps = {
   pullRequests: [],
   startListening: jest.fn(),
-  stopListening: jest.fn()
+  stopListening: jest.fn(),
 }
 
 describe("rendering", () => {
   it("renders no items with there are no pull requests", () => {
     const props: ArtsyPullRequestsProps = {
       ...defaultProps,
-      pullRequests: []
+      pullRequests: [],
     }
 
     const wrapper = mount(<ArtsyPullRequests {...props} />)
@@ -36,7 +36,7 @@ describe("rendering", () => {
   it("renders 1 item with there is 1 pull request", () => {
     const props: ArtsyPullRequestsProps = {
       ...defaultProps,
-      pullRequests: [pullRequest]
+      pullRequests: [pullRequest],
     }
 
     const wrapper = mount(<ArtsyPullRequests {...props} />)
@@ -54,7 +54,7 @@ describe("rendering", () => {
     const props: ArtsyPullRequestsProps = {
       ...defaultProps,
       pullRequests: [],
-      startListening: mockStartListening
+      startListening: mockStartListening,
     }
 
     const wrapper = mount(<ArtsyPullRequests {...props} />)
@@ -63,7 +63,7 @@ describe("rendering", () => {
 
     act(() => {
       const event = {
-        detail: pullRequest
+        detail: pullRequest,
       }
       handleNewPullRequest(event)
     })

@@ -15,7 +15,7 @@ interface PullListProps {
   pullRequests: PullRequest[]
 }
 
-export const PullList: React.FC<PullListProps> = props => {
+export const PullList: React.FC<PullListProps> = (props) => {
   const { pullRequests } = props
 
   const items = pullRequests.map((pullRequest, i) => {
