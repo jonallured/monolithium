@@ -43,7 +43,7 @@ class HooksController < ApplicationController
       Rails.application.secrets.hub_signature,
       payload_body
     )
-    'sha1=' + sha1
+    "sha1=#{sha1}"
   end
 
   def payload_body
