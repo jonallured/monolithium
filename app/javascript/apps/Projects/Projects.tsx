@@ -23,7 +23,7 @@ interface ProjectsState {
 const errorMessage = "Something went wrong - project not created!"
 
 export class Projects extends React.Component<ProjectsProps, ProjectsState> {
-  constructor(props) {
+  constructor(props: ProjectsProps) {
     super(props)
     this.state = { errorMessage: "", projects: props.projects }
   }
@@ -36,25 +36,27 @@ export class Projects extends React.Component<ProjectsProps, ProjectsState> {
     return this.props.router
   }
 
-  touchProject = (project): void => {
-    if (!project.touched) {
+  touchProject = (project: Project): void => {
+    if (!project.isTouched) {
       this.router.updateProject(project.id)
       project.isTouched = true
       this.setState({ projects: this.projects })
     }
   }
 
-  createProject = (newProject): void => {
+  createProject = (newProject: Project): void => {
     this.router
       .createProject(newProject)
-      .then(json => this.setState({ projects: json as Project[] }))
+      .then((json) =>
+        this.setState({ projects: (json as unknown) as Project[] })
+      )
       .catch(() => this.setState({ errorMessage }))
   }
 
   render(): React.ReactNode {
     const projectActionsProps = {
       createProject: this.createProject,
-      errorMessage: this.state.errorMessage
+      errorMessage: this.state.errorMessage,
     }
 
     return (

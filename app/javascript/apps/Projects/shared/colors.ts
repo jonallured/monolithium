@@ -4,5 +4,5 @@ export const colors = {
   backgroundHover: "#670067",
   error: "#ffff00",
   pageBackground: "#111",
-  text: "#eee"
+  text: "#eee",
 }

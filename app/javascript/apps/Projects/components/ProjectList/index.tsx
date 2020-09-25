@@ -15,10 +15,10 @@ interface ProjectListProps {
   touchProject: (project) => void
 }
 
-export const ProjectList: React.FC<ProjectListProps> = props => {
+export const ProjectList: React.FC<ProjectListProps> = (props) => {
   const { projects, touchProject } = props
 
-  const projectItems = projects.map(project => {
+  const projectItems = projects.map((project) => {
     return (
       <ProjectItem
         key={project.id}

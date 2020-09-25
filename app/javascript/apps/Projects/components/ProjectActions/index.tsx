@@ -68,7 +68,7 @@ class NewProject extends React.Component<NewProjectProps> {
     ) as HTMLInputElement
 
     const newProject = {
-      name: inputTag.value
+      name: inputTag.value,
     }
 
     this.props.createProject(newProject)

@@ -24,7 +24,7 @@ interface PullItemProps {
   pullRequest: PullRequest
 }
 
-export const PullItem: React.FC<PullItemProps> = props => {
+export const PullItem: React.FC<PullItemProps> = (props) => {
   const { pullRequest } = props
   const content = `${pullRequest.title} by @${pullRequest.username} on ${pullRequest.repo}`
 
