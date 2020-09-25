@@ -16,16 +16,16 @@ export interface ArtsyPullRequestsProps {
   stopListening: (handler) => void
 }
 
-export const ArtsyPullRequests: React.FC<ArtsyPullRequestsProps> = props => {
+export const ArtsyPullRequests: React.FC<ArtsyPullRequestsProps> = (props) => {
   const { startListening, stopListening } = props
   const [pullRequests, setPullRequests] = useState(props.pullRequests)
 
   const handleNewPullRequest = (e): void => {
     const newPullRequest = e.detail
 
-    setPullRequests(currentPullRequests => [
+    setPullRequests((currentPullRequests) => [
       newPullRequest,
-      ...currentPullRequests
+      ...currentPullRequests,
     ])
   }
 

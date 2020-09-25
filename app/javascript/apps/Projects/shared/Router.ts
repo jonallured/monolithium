@@ -10,7 +10,7 @@ export class Router extends BaseFetcher {
   createProject = (newProject: Project): ResponseJson => {
     const url = "/projects.json"
     const body = {
-      project: newProject
+      project: newProject,
     }
 
     return this.sendRequest(url, "POST", body)

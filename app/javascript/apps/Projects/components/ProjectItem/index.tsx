@@ -36,7 +36,7 @@ interface ProjectItemProps {
   touchProject: (project) => void
 }
 
-export const ProjectItem: React.FC<ProjectItemProps> = props => {
+export const ProjectItem: React.FC<ProjectItemProps> = (props) => {
   const { project, touchProject } = props
   const handleClick = (): void => touchProject(project)
 
