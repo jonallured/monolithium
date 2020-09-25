@@ -52,7 +52,7 @@
     ]
   },
   "scripts": {
-    "lint": "eslint 'app/javascript/**/*.{js,jsx,ts,tsx}'",
+    "lint": "eslint --max-warnings 0 'app/javascript/**/*.{js,jsx,ts,tsx}'",
     "prettier": "prettier --write 'app/javascript/**/*.{js,jsx,ts,tsx}'",
     "prettier-check": "prettier --check 'app/javascript/**/*.{js,jsx,ts,tsx}'",
     "test": "jest",
