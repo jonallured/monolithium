@@ -33,7 +33,6 @@
     "eslint-plugin-react": "^7.21.4",
     "jest": "^26.5.3",
     "prettier": "2.1.2",
-    "webpack-cli": "^4.0.0",
     "webpack-dev-server": "^3.11.0"
   },
   "jest": {
