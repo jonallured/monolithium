@@ -7,5 +7,5 @@
   - if flash[:error]
     %h2= flash[:error]
 
-  = password_field_tag :admin_password
+  = password_field_tag :admin_password, '', autofocus: true
   = f.submit 'Sign In'
