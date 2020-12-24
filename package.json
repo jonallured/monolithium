@@ -1,6 +1,6 @@
 {
   "engines": {
-    "node": "^12.18.3"
+    "node": "^12.20.2"
   },
   "name": "monolithium",
   "private": true,
