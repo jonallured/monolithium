@@ -41,7 +41,7 @@ describe("rendering", () => {
     expect(screen.queryByRole("link")).toHaveTextContent(pullRequest.title)
   })
 
-  it("renders new pull requests", async () => {
+  it("renders new pull requests", () => {
     let handleNewPullRequest
 
     const mockStartListening = (handler): void => {
