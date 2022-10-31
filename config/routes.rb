@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :projects, only: %i[create index update]
 
+  get 'artsy-viewer', to: 'artsy_viewer#show'
   get 'faring_direball', to: 'faring_direball#index'
 
   get :hooks, to: 'hooks#index'
