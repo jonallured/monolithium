@@ -1,0 +1,2 @@
+class ArtsyViewerController < ApplicationController
+end

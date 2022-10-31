@@ -1,0 +1,47 @@
+body
+  background-color: gray
+  margin: 0
+  padding: 0
+
+  main
+    height: 100vh
+
+    section
+      height: 100vh
+      margin: 0 auto
+      opacity: 1
+      transition: opacity 250ms linear
+
+      &.back
+        opacity: 0
+
+      img
+        bottom: 0
+        height: 100vh
+        left: 50%
+        position: fixed
+        transform: translate(-50%, 0%)
+
+
+      footer
+        background-color: black
+        bottom: 0
+        left: 50%
+        margin: 0
+        opacity: 1
+        padding: 0
+        position: fixed
+        transform: translate(-50%, 0%)
+        transition: opacity 250ms linear
+
+        &.hide
+          opacity: 0
+
+        p
+          background-color: black
+          color: white
+          font-family: verdana
+          font-size: 20px
+          line-height: 1.8em
+          margin: 0
+          padding: 20px
