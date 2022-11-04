@@ -1,5 +1,5 @@
 class OneDayJob < ApplicationJob
   def perform
-    # noop
+    Hook.destroy_all
   end
 end
