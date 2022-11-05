@@ -101,6 +101,10 @@ GEM
     ffi (1.14.2)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
+    graphql (2.0.15)
+    graphql-client (0.18.0)
+      activesupport (>= 3.0)
+      graphql
     haml (5.2.1)
       temple (>= 0.8.0)
       tilt
@@ -280,6 +284,7 @@ DEPENDENCIES
   dotenv-rails
   factory_bot_rails
   faraday
+  graphql-client
   haml
   jbuilder
   pg
