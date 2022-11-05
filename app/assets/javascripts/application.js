@@ -19,12 +19,6 @@ const params = new URLSearchParams(window.location.search)
 const ArtsyViewer = {
   artworks: [],
   currentIndex: 0,
-  feedUrls: [
-    "https://artsy-public.s3.amazonaws.com/artworks-of-the-day/2022-10-26.json",
-    "https://artsy-public.s3.amazonaws.com/artworks-of-the-day/2022-10-27.json",
-    "https://artsy-public.s3.amazonaws.com/artworks-of-the-day/2022-10-28.json",
-    "https://artsy-public.s3.amazonaws.com/artworks-of-the-day/2022-10-29.json",
-  ],
   tags: {},
   viewTime: params.get("viewTime") || tenMinutesInMS,
 }
@@ -109,14 +103,13 @@ const setupArtsyViewer = () => {
   sendLastToBack()
 }
 
-const getFeeds = () => {
-  const promises = ArtsyViewer.feedUrls.map(feedUrl => {
-    return fetch(feedUrl)
-      .then((response) => response.json())
-      .then((data) => ArtsyViewer.artworks = ArtsyViewer.artworks.concat(data))
+const createSub = () => {
+  App.cable.subscriptions.create('ArtsyViewerChannel', {
+    received: (data) => {
+      ArtsyViewer.artworks = data
+      setupArtsyViewer()
+    }
   })
-
-  Promise.all(promises).then(setupArtsyViewer)
 }
 
-window.onload = getFeeds
+window.onload = createSub
