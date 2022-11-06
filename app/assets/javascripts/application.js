@@ -36,18 +36,17 @@ const getNextArtwork = () => {
 
 const updateSection = (section) => {
   const artwork = getNextArtwork()
+  const { blurb, image} = artwork.payload
 
-  const image = artwork.images[0]
-  const imageUrl = image.image_urls.normalized
   const widthValue = ArtsyViewer.heightValue * image.aspect_ratio
   const widthProperty = `${widthValue}px`
 
-  section.imageTag.src = imageUrl
+  section.imageTag.src = image.url
   section.imageTag.style.width = widthProperty
 
   section.sectionTag.style.width = widthProperty
   section.footerTag.style.width = widthProperty
-  section.parTag.textContent = artwork.display
+  section.parTag.textContent = blurb
 }
 
 const hideFirstFooter = () => {
