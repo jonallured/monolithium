@@ -46,4 +46,32 @@ class Metaphysics
   def self.client
     @client ||= GraphQL::Client.new(schema: schema, execute: raw_http_client)
   end
+
+  def self.marketing_collection(slug)
+    variables = { 'slug' => slug }
+    context = {}
+    result = Metaphysics.client.query(MarketingCollectionQuery, variables: variables, context: context)
+    result.data
+  end
 end
+
+MarketingCollectionQuery = Metaphysics.client.parse <<-'GRAPHQL'
+  query($slug: String!) {
+    marketingCollection(slug: $slug) {
+      artworksConnection(first: 100, sort: "-published_at") {
+        edges {
+          node {
+            blurb:formattedMetadata
+            gravity_id:internalID
+            href
+            image {
+              aspect_ratio:aspectRatio
+              position
+              url(version: ["normalized", "larger"])
+            }
+          }
+        }
+      }
+    }
+  }
+GRAPHQL
