@@ -12,5 +12,6 @@ namespace :every do
   desc 'Task to run every one day.'
   task one_day: :environment do
     OneDayJob.perform_later
+    LoadArtworksJob.perform_later
   end
 end
