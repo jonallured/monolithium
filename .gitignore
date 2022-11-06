@@ -12,4 +12,5 @@
 /tmp/*
 /yarn-error.log
 db/structure.sql
+introspection_token.txt
 yarn-debug.log*
