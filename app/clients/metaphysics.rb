@@ -18,25 +18,25 @@ class Metaphysics
     system commands
   end
 
-  def self.generate_raw_client
-    fetch_auth_token unless File.exist?(Rails.root.join(TOKEN_FILENAME))
+  def self.generate_authenticated_client
+    fetch_auth_token unless File.exist?(Rails.root.join(TOKEN_FILENAME).to_s)
 
     GraphQL::Client::HTTP.new(ENDPOINT_URL) do
       def headers(_context) # rubocop:disable Lint/NestedMethodDefinition
-        introspection_token = File.read(Rails.root.join(TOKEN_FILENAME)).chomp
+        introspection_token = File.read(Rails.root.join(TOKEN_FILENAME).to_s).chomp
         { 'Authorization' => "Bearer #{introspection_token}" }
       end
     end
   end
 
   def self.raw_http_client
-    @raw_http_client ||= generate_raw_client
+    @raw_http_client ||= GraphQL::Client::HTTP.new(ENDPOINT_URL)
   end
 
   def self.generate_schema
-    schema_path = Rails.root.join(SCHEMA_FILENAME)
+    schema_path = Rails.root.join(SCHEMA_FILENAME).to_s
 
-    GraphQL::Client.dump_schema(raw_http_client, schema_path) unless File.exist?(schema_path)
+    GraphQL::Client.dump_schema(generate_authenticated_client, schema_path) unless File.exist?(schema_path)
 
     GraphQL::Client.load_schema(schema_path)
   end
