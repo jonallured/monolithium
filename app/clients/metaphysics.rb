@@ -3,6 +3,8 @@ require 'graphql/client/http'
 
 class Metaphysics
   ENDPOINT_URL = 'https://metaphysics-production.artsy.net/v2'.freeze
+  TOKEN_FILENAME = 'introspection_token.txt'.freeze
+  SCHEMA_FILENAME = 'mp_schema.json'.freeze
 
   def self.fetch_auth_token
     commands = <<-BASH
@@ -17,11 +19,11 @@ class Metaphysics
   end
 
   def self.generate_raw_client
-    fetch_auth_token unless File.exist?('introspection_token.txt')
+    fetch_auth_token unless File.exist?(Rails.root.join(TOKEN_FILENAME))
 
     GraphQL::Client::HTTP.new(ENDPOINT_URL) do
       def headers(_context) # rubocop:disable Lint/NestedMethodDefinition
-        introspection_token = File.read('introspection_token.txt').chomp
+        introspection_token = File.read(Rails.root.join(TOKEN_FILENAME)).chomp
         { 'Authorization' => "Bearer #{introspection_token}" }
       end
     end
@@ -32,9 +34,7 @@ class Metaphysics
   end
 
   def self.generate_schema
-    local_schema_path = 'mp_schema.json'
-
-    GraphQL::Client.dump_schema(raw_http_client, local_schema_path) unless File.exist?(local_schema_path)
+    GraphQL::Client.dump_schema(raw_http_client, local_schema_path) unless File.exist?(Rails.root.join(SCHEMA_FILENAME))
 
     GraphQL::Client.load_schema(local_schema_path)
   end
