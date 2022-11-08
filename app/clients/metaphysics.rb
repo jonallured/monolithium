@@ -34,9 +34,11 @@ class Metaphysics
   end
 
   def self.generate_schema
-    GraphQL::Client.dump_schema(raw_http_client, local_schema_path) unless File.exist?(Rails.root.join(SCHEMA_FILENAME))
+    schema_path = Rails.root.join(SCHEMA_FILENAME)
 
-    GraphQL::Client.load_schema(local_schema_path)
+    GraphQL::Client.dump_schema(raw_http_client, schema_path) unless File.exist?(schema_path)
+
+    GraphQL::Client.load_schema(schema_path)
   end
 
   def self.schema
