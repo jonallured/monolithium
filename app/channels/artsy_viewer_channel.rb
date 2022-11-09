@@ -8,6 +8,6 @@ class ArtsyViewerChannel < ApplicationCable::Channel
   private
 
   def initial_payload
-    Artwork.all.sample(10)
+    Lineup.current.artworks
   end
 end
