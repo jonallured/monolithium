@@ -12,6 +12,13 @@ class Lineup < ApplicationRecord
     find_by(current_on: Time.zone.today)
   end
 
+  def as_of(time)
+    lineup_artworks
+      .where('position <= ?', time.hour)
+      .order(position: :asc)
+      .map(&:artwork)
+  end
+
   private
 
   def choose_artworks

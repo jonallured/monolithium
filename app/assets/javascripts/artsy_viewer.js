@@ -1,99 +1,83 @@
 window.onload = () => {
-  App.cable.subscriptions.create('ArtsyViewerChannel', {
-    received: (data) => {
-      App.ArtsyViewer.artworks = data
-      setupArtsyViewer()
-    }
-  })
-
-  const tenMinutesInMS = 600000
-  const params = new URLSearchParams(window.location.search)
+  const mainElement = document.querySelector('main')
+  const mainStyles = window.getComputedStyle(mainElement)
+  const heightProperty = mainStyles.getPropertyValue('height')
+  const heightValue = heightProperty.split("px")[0] - 1
 
   const ArtsyViewer = {
     artworks: [],
-    currentIndex: 0,
-    tags: {},
-    viewTime: params.get("viewTime") || tenMinutesInMS,
+    elements: {
+      main: mainElement
+    },
+    heightValue,
   }
 
   App.ArtsyViewer = ArtsyViewer
 
-  const getNextArtwork = () => {
-    if (ArtsyViewer.currentIndex === ArtsyViewer.artworks.length) {
-      ArtsyViewer.currentIndex = 0
+  App.cable.subscriptions.create('ArtsyViewerChannel', {
+    received: (data) => {
+      App.ArtsyViewer.artworks = data
+
+      ArtsyViewer.elements.main.replaceChildren()
+
+      const [first, ...rest] = ArtsyViewer.artworks
+
+      rest.forEach(artwork => {
+        const { blurb, image } = artwork.payload
+
+        const blurbNode = document.createTextNode(blurb)
+        const parElement = document.createElement("p")
+        parElement.appendChild(blurbNode)
+
+        const footerElement = document.createElement("footer")
+        footerElement.appendChild(parElement)
+
+        const imageElement = document.createElement("img")
+        const widthValue = (ArtsyViewer.heightValue - 70) * image.aspect_ratio
+        const widthProperty = `${widthValue}px`
+
+        imageElement.src = image.url
+        imageElement.style.width = widthProperty
+
+        const sectionElement = document.createElement("section")
+        sectionElement.appendChild(imageElement)
+        sectionElement.appendChild(footerElement)
+
+        ArtsyViewer.elements.main.appendChild(sectionElement)
+      })
+
+      const { blurb, image } = first.payload
+
+      const blurbNode = document.createTextNode(blurb)
+      const parElement = document.createElement("p")
+      parElement.appendChild(blurbNode)
+
+      const footerElement = document.createElement("footer")
+      footerElement.appendChild(parElement)
+
+      const imageElement = document.createElement("img")
+      const imageHeight = ArtsyViewer.heightValue - 70
+      const widthValue = imageHeight * image.aspect_ratio
+      const widthProperty = `${widthValue}px`
+
+      imageElement.src = image.url
+      imageElement.style.height = `${imageHeight}px`
+      imageElement.style.width = widthProperty
+      imageElement.classList.add("collapsed")
+      imageElement.classList.add("hidden")
+
+      const sectionElement = document.createElement("section")
+      sectionElement.appendChild(imageElement)
+      sectionElement.appendChild(footerElement)
+
+      ArtsyViewer.elements.main.prepend(sectionElement)
+
+      setTimeout(() => {
+        imageElement.classList.remove("collapsed")
+        setTimeout(() => {
+          imageElement.classList.remove("hidden")
+        }, 500)
+      }, 500)
     }
-
-    const nextArtwork = ArtsyViewer.artworks[ArtsyViewer.currentIndex]
-    ArtsyViewer.currentIndex += 1
-
-    return nextArtwork
-  }
-
-  const updateSection = (section) => {
-    const artwork = getNextArtwork()
-    const { blurb, image} = artwork.payload
-
-    const widthValue = ArtsyViewer.heightValue * image.aspect_ratio
-    const widthProperty = `${widthValue}px`
-
-    section.imageTag.src = image.url
-    section.imageTag.style.width = widthProperty
-
-    section.sectionTag.style.width = widthProperty
-    section.footerTag.style.width = widthProperty
-    section.parTag.textContent = blurb
-  }
-
-  const hideFirstFooter = () => {
-    ArtsyViewer.tags.firstSection.footerTag.classList.add('hide')
-    ArtsyViewer.tags.lastSection.footerTag.classList.remove('hide')
-
-    updateSection(ArtsyViewer.tags.lastSection)
-  }
-
-  const hideSecondFooter = () => {
-    ArtsyViewer.tags.lastSection.footerTag.classList.add('hide')
-    ArtsyViewer.tags.firstSection.footerTag.classList.remove('hide')
-
-    updateSection(ArtsyViewer.tags.firstSection)
-  }
-
-  const sendFirstToBack = () => {
-    ArtsyViewer.tags.firstSection.sectionTag.classList.add("back")
-    ArtsyViewer.tags.lastSection.sectionTag.classList.remove("back")
-
-    setTimeout(hideSecondFooter, ArtsyViewer.viewTime / 2)
-    setTimeout(sendLastToBack, ArtsyViewer.viewTime)
-  }
-
-  const sendLastToBack = () => {
-    ArtsyViewer.tags.firstSection.sectionTag.classList.remove("back")
-    ArtsyViewer.tags.lastSection.sectionTag.classList.add("back")
-
-    setTimeout(hideFirstFooter, ArtsyViewer.viewTime / 2)
-    setTimeout(sendFirstToBack, ArtsyViewer.viewTime)
-  }
-
-  const getSection = (sectionTag) => {
-    return {
-      footerTag: sectionTag.querySelector('footer'),
-      imageTag: sectionTag.querySelector('img'),
-      parTag: sectionTag.querySelector('p'),
-      sectionTag: sectionTag,
-    }
-  }
-
-  const setupArtsyViewer = () => {
-    ArtsyViewer.tags.main = document.querySelector('main')
-    const [firstSection, lastSection] = document.getElementsByTagName('section')
-    ArtsyViewer.tags.firstSection = getSection(firstSection)
-    ArtsyViewer.tags.lastSection = getSection(lastSection)
-    const mainStyles = window.getComputedStyle(ArtsyViewer.tags.main)
-    const heightProperty = mainStyles.getPropertyValue('height')
-    const heightValue = heightProperty.split("px")[0] - 1
-    ArtsyViewer.heightValue = heightValue
-
-    hideSecondFooter()
-    sendLastToBack()
-  }
+  })
 }

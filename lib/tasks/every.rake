@@ -6,7 +6,12 @@ namespace :every do
 
   desc 'Task to run every one hour.'
   task one_hour: :environment do
-    OneHourJob.perform_later
+    job_klasses = [
+      OneHourJob,
+      PushCurrentLineupJob
+    ]
+
+    job_klasses.each(&:perform_later)
   end
 
   desc 'Task to run every one day.'
