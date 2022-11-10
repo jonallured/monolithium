@@ -16,6 +16,8 @@ window.onload = () => {
 
   App.cable.subscriptions.create('ArtsyViewerChannel', {
     received: (data) => {
+      if (App.ArtsyViewer.artworks.length === data.length) return
+
       App.ArtsyViewer.artworks = data
 
       ArtsyViewer.elements.main.replaceChildren()
