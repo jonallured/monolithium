@@ -15,28 +15,31 @@ body
       display: flex
       flex-direction: column
 
-      img
-        transition: width 300ms ease-in-out, opacity 200ms ease-in-out
+      a
+        text-decoration: none
 
-        &.hidden
-          opacity: 0
+        img
+          transition: width 300ms ease-in-out, opacity 200ms ease-in-out
 
-        &.collapsed
-          width: 0 !important
+          &.hidden
+            opacity: 0
 
-      footer
-        background-color: white
-        margin: 0
-        padding: 0
+          &.collapsed
+            width: 0 !important
 
-        p
-          -webkit-box-orient: vertical
-          -webkit-line-clamp: 1
-          color: black
-          display: -webkit-box
-          font-family: verdana
-          font-size: 20px
-          line-height: 1.8em
-          margin: 10px 0 20px
-          overflow: hidden
+        footer
+          background-color: white
+          margin: 0
           padding: 0
+
+          p
+            -webkit-box-orient: vertical
+            -webkit-line-clamp: 1
+            color: black
+            display: -webkit-box
+            font-family: verdana
+            font-size: 20px
+            line-height: 1.8em
+            margin: 10px 0 20px
+            overflow: hidden
+            padding: 0
