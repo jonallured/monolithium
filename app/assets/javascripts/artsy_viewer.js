@@ -6,10 +6,10 @@ window.onload = () => {
 
   const ArtsyViewer = {
     artworks: [],
-    elements: {
-      main: mainElement
-    },
+    elements: { main: mainElement },
     heightValue,
+    notificationPermission: Notification.permission,
+    notifications: []
   }
 
   App.ArtsyViewer = ArtsyViewer
@@ -62,6 +62,15 @@ window.onload = () => {
   App.cable.subscriptions.create('ArtsyViewerChannel', {
     received: (data) => {
       if (ArtsyViewer.artworks.length === data.length) return
+
+      if (ArtsyViewer.notificationPermission === 'granted') {
+        ArtsyViewer.notifications.forEach(staleNotification => {
+          staleNotification.close()
+        })
+
+        const newNotification = new Notification('new artwork!')
+        ArtsyViewer.notifications.push(newNotification)
+      }
 
       ArtsyViewer.elements.main.replaceChildren()
       ArtsyViewer.artworks = data
