@@ -59,6 +59,40 @@ window.onload = () => {
     ArtsyViewer.elements.main.appendChild(sectionElement)
   }
 
+  const createLink = () => {
+    const textNode = document.createTextNode("turn on")
+    const aElement = document.createElement("a")
+    aElement.href = "#"
+    aElement.addEventListener("click", (event) => {
+      event.preventDefault()
+      Notification.requestPermission()
+    })
+    aElement.appendChild(textNode)
+
+    const parElement = document.createElement("p")
+    parElement.appendChild(aElement)
+
+    return parElement
+  }
+
+  const drawPanel = () => {
+    const isGranted = ArtsyViewer.notificationPermission === 'granted'
+    const message = isGranted ? 'Notify: yes' : 'Notify: no'
+    const textNode = document.createTextNode(message)
+    const parElement = document.createElement("p")
+    parElement.appendChild(textNode)
+
+    const asideElement = document.createElement("aside")
+    asideElement.appendChild(parElement)
+
+    if (!isGranted) {
+      const linkParElement = createLink()
+      asideElement.appendChild(linkParElement)
+    }
+
+    ArtsyViewer.elements.main.appendChild(asideElement)
+  }
+
   App.cable.subscriptions.create('ArtsyViewerChannel', {
     received: (data) => {
       if (ArtsyViewer.artworks.length === data.length) return
@@ -75,6 +109,7 @@ window.onload = () => {
       ArtsyViewer.elements.main.replaceChildren()
       ArtsyViewer.artworks = data
       ArtsyViewer.artworks.forEach(drawSection)
+      drawPanel()
     }
   })
 }
