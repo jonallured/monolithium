@@ -25,7 +25,7 @@ window.onload = () => {
       const [first, ...rest] = ArtsyViewer.artworks
 
       rest.forEach(artwork => {
-        const { blurb, image } = artwork.payload
+        const { blurb, href, image } = artwork.payload
 
         const blurbNode = document.createTextNode(blurb)
         const parElement = document.createElement("p")
@@ -41,14 +41,21 @@ window.onload = () => {
         imageElement.src = image.url
         imageElement.style.width = widthProperty
 
+        const aElement = document.createElement("a")
+        const url = `https://www.artsy.net${href}`
+
+        aElement.href = url
+
+        aElement.appendChild(imageElement)
+        aElement.appendChild(footerElement)
+
         const sectionElement = document.createElement("section")
-        sectionElement.appendChild(imageElement)
-        sectionElement.appendChild(footerElement)
+        sectionElement.appendChild(aElement)
 
         ArtsyViewer.elements.main.appendChild(sectionElement)
       })
 
-      const { blurb, image } = first.payload
+      const { blurb, href, image } = first.payload
 
       const blurbNode = document.createTextNode(blurb)
       const parElement = document.createElement("p")
@@ -68,9 +75,16 @@ window.onload = () => {
       imageElement.classList.add("collapsed")
       imageElement.classList.add("hidden")
 
+      const aElement = document.createElement("a")
+      const url = `https://www.artsy.net${href}`
+
+      aElement.href = url
+
+      aElement.appendChild(imageElement)
+      aElement.appendChild(footerElement)
+
       const sectionElement = document.createElement("section")
-      sectionElement.appendChild(imageElement)
-      sectionElement.appendChild(footerElement)
+      sectionElement.appendChild(aElement)
 
       ArtsyViewer.elements.main.prepend(sectionElement)
 
