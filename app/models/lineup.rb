@@ -5,7 +5,8 @@ class Lineup < ApplicationRecord
   after_create :choose_artworks
 
   def self.create_next
-    create(current_on: current.current_on + 1.day)
+    next_current_on = order(current_on: :desc).first.current_on + 1.day
+    create(current_on: next_current_on)
   end
 
   def self.current
