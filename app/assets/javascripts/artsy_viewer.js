@@ -1,4 +1,5 @@
 window.onload = () => {
+  const Notification = window.Notification || {}
   const mainElement = document.querySelector('main')
   const mainStyles = window.getComputedStyle(mainElement)
   const heightProperty = mainStyles.getPropertyValue('height')
@@ -85,7 +86,7 @@ window.onload = () => {
     const asideElement = document.createElement("aside")
     asideElement.appendChild(parElement)
 
-    if (!isGranted) {
+    if (Notification.requestPermission && !isGranted) {
       const linkParElement = createLink()
       asideElement.appendChild(linkParElement)
     }
