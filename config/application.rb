@@ -17,5 +17,7 @@ module Monolithium
     config.active_record.schema_format = :sql
     config.generators.system_tests = nil
     config.load_defaults 5.1
+
+    config.action_cable.disable_request_forgery_protection = true
   end
 end
