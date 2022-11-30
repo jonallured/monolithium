@@ -1,6 +1,7 @@
 class MarketingCollections
   SLUGS = %w[
     artists-on-the-rise
+    artsy-vanguard-artists
     contemporary-now
     finds-under-1000-dollars
     iconic-prints
