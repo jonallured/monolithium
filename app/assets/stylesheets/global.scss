@@ -44,3 +44,34 @@ h3 {
   text-align: center;
   font-weight: normal;
 }
+
+table {
+  border-collapse: collapse;
+  font-size: 20px;
+  width: 100%;
+
+  tr {
+    td {
+      padding: 10px 0;
+    }
+    td:last-of-type {
+      text-align: right;
+    }
+  }
+
+  td:nth-child(1) {
+    width: 80%;
+  }
+
+  td:nth-child(2) {
+    width: 10%;
+  }
+
+  td:nth-child(3) {
+    width: 10%;
+  }
+
+  a {
+    color: $background;
+  }
+}
