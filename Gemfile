@@ -9,6 +9,7 @@ gem 'puma'
 
 gem 'decent_exposure'
 gem 'faraday'
+gem 'faraday-follow_redirects'
 gem 'graphql-client'
 gem 'haml'
 gem 'jbuilder'
