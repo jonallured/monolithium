@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   post :hooks, to: 'hooks#create'
   get :artsy_pull_requests, to: 'artsy_pull_requests#index'
 
-  get 'book-list/:year', to: 'books#index'
+  get 'book-list/:year', to: 'book_list#index'
 
   get 'sign_in', to: 'password#new', as: :sign_in
   post 'sign_in', to: 'password#create'
