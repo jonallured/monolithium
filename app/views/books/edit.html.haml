@@ -1,0 +1,16 @@
+%h1 Book #{book.id}
+
+%dl
+  %dt ISBN
+  %dd= book.isbn
+
+  %dt Finished On
+  %dd= book.finished_on
+
+  %dt Title
+  %dd= book.title
+
+  %dt Pages
+  %dd= book.pages
+
+= render "form", book: book

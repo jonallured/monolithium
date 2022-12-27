@@ -1,0 +1,10 @@
+- if flash.any?
+  %ul
+    - flash.each do |type, messages|
+      - messages.each do |message|
+        %li{ class: type }= message
+
+= form_for book do |f|
+  = f.text_field :isbn
+  = f.date_field :finished_on
+  = f.submit
