@@ -9,6 +9,6 @@
     %tbody
       - books.each do |book|
         %tr
-          %td= book.title
+          %td= link_to book.title, edit_book_path(book)
           %td= book.finished_on&.strftime("%m/%d")
           %td= number_with_delimiter book.pages
