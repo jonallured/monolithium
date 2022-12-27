@@ -1,4 +1,7 @@
 class Book < ApplicationRecord
+  validates :isbn, presence: true
+  validates :finished_on, presence: true
+
   after_create :enqueue_enhance
 
   def enhance!
