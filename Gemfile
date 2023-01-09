@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby File.read('.tool-versions').split.last
 
-gem 'rails', '6.1.3'
+gem 'rails', '6.1.7'
 
 gem 'pg'
 gem 'puma'
