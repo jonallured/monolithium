@@ -12,8 +12,8 @@ describe 'User views project list', js: true do
     end
 
     scenario 'with a few projects' do
-      FactoryBot.create :project, name: '1st', touched_at: Time.zone.now + 1.day
-      FactoryBot.create :project, name: '2nd', touched_at: Time.zone.now - 1.day
+      FactoryBot.create :project, name: '1st', touched_at: 1.day.from_now
+      FactoryBot.create :project, name: '2nd', touched_at: 1.day.ago
       FactoryBot.create :project, name: '3rd', touched_at: Time.zone.now
 
       visit '/projects'
