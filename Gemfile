@@ -16,7 +16,6 @@ gem 'jbuilder'
 gem 'redcarpet'
 gem 'sass-rails'
 gem 'sidekiq'
-gem 'webdrivers'
 gem 'webpacker'
 
 group :development do
@@ -28,6 +27,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'rspec-rails'
   gem 'rubocop-rails'
+  gem 'webdrivers', require: false
 end
 
 group :test do
