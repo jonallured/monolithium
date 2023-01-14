@@ -47,9 +47,7 @@ export class Projects extends React.Component<ProjectsProps, ProjectsState> {
   createProject = (newProject: Project): void => {
     this.router
       .createProject(newProject)
-      .then((json) =>
-        this.setState({ projects: (json as unknown) as Project[] })
-      )
+      .then((json) => this.setState({ projects: json as any }))
       .catch(() => this.setState({ errorMessage }))
   }
 
