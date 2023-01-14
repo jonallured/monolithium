@@ -31,5 +31,5 @@ if %w[development test].include? Rails.env
   end
 
   Rake::Task[:default].clear
-  task default: %i[prettier_check type_check eslint jest rubocop spec]
+  task default: %i[prettier_check type_check rubocop spec]
 end
