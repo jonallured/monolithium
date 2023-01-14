@@ -1,6 +1,8 @@
 require_relative 'config/application'
 Rails.application.load_tasks
 
+Rake::Task[:default].clear
+
 if %w[development test].include? Rails.env
   require 'rubocop/rake_task'
   require 'webdrivers'
