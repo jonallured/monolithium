@@ -3,6 +3,9 @@ Rails.application.load_tasks
 
 if %w[development test].include? Rails.env
   require 'rubocop/rake_task'
+  require 'webdrivers'
+  load 'webdrivers/Rakefile'
+
   desc 'Run RuboCop'
   RuboCop::RakeTask.new(:rubocop)
 
