@@ -7,7 +7,6 @@ Rails.application.routes.draw do
 
   get :hooks, to: 'hooks#index'
   post :hooks, to: 'hooks#create'
-  get :artsy_pull_requests, to: 'artsy_pull_requests#index'
 
   get 'book-list/:year', to: 'book_list#index'
 

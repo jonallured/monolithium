@@ -1,12 +1,32 @@
 - content_for :head do
   = stylesheet_link_tag 'application', media: 'all'
+  = javascript_include_tag 'application'
 
-#wrapper
+- if flash.any?
+  %ul
+    - flash.each do |type, messages|
+      - Array(messages).each do |message|
+        %li{ class: type }= message
+
+#wrapper.projects
   %h3 Today is a great day to make some updates!
 
-  :javascript
-    window.projects = #{projects.to_json.html_safe}
-
-  %main#root= javascript_pack_tag 'projects'
+  %main#root
+    %div
+      %aside
+        %menu
+          %a(href="#") Create Project
+        %section
+          = form_for project do |f|
+            = f.text_field :name
+            = f.button "Create"
+      - if projects.any?
+        %ul
+          - projects.each do |project|
+            %li{"data-project-id" => project.id}
+              %span.name= project.name
+              %span.touched_at= project.touched_at
+      - else
+        %p No projects - create one!
 
   %h3 Try hard and believe in yourself!

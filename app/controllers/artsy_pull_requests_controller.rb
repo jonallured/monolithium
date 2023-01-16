@@ -1,2 +1,0 @@
-class ArtsyPullRequestsController < ApplicationController
-end

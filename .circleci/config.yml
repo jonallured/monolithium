@@ -45,10 +45,6 @@ jobs:
           command: mv config/database{.circle,}.yml && bundle exec rake db:create db:migrate
 
       - run:
-          name: Compile webpacker
-          command: bundle exec rake webpacker:compile
-
-      - run:
           name: Update Chrome
           command: bundle exec rake webdrivers:chromedriver:update
 

@@ -9,7 +9,6 @@ Rails.application.configure do
   config.cache_classes = false
   config.consider_all_requests_local = true
   config.eager_load = false
-  config.webpacker.check_yarn_integrity = true
 
   if Rails.root.join('tmp/caching-dev.txt').exist?
     config.action_controller.perform_caching = true

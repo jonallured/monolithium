@@ -1,8 +1,8 @@
 window.onload = () => {
   const Notification = window.Notification || {}
-  const mainElement = document.querySelector('main')
+  const mainElement = document.querySelector("main")
   const mainStyles = window.getComputedStyle(mainElement)
-  const heightProperty = mainStyles.getPropertyValue('height')
+  const heightProperty = mainStyles.getPropertyValue("height")
   const heightValue = heightProperty.split("px")[0] - 1
 
   const ArtsyViewer = {
@@ -10,7 +10,7 @@ window.onload = () => {
     elements: { main: mainElement },
     heightValue,
     notificationPermission: Notification.permission,
-    notifications: []
+    notifications: [],
   }
 
   App.ArtsyViewer = ArtsyViewer
@@ -77,8 +77,8 @@ window.onload = () => {
   }
 
   const drawPanel = () => {
-    const isGranted = ArtsyViewer.notificationPermission === 'granted'
-    const message = isGranted ? 'Notify: yes' : 'Notify: no'
+    const isGranted = ArtsyViewer.notificationPermission === "granted"
+    const message = isGranted ? "Notify: yes" : "Notify: no"
     const textNode = document.createTextNode(message)
     const parElement = document.createElement("p")
     parElement.appendChild(textNode)
@@ -94,16 +94,16 @@ window.onload = () => {
     ArtsyViewer.elements.main.appendChild(asideElement)
   }
 
-  App.cable.subscriptions.create('ArtsyViewerChannel', {
+  App.cable.subscriptions.create("ArtsyViewerChannel", {
     received: (data) => {
       if (ArtsyViewer.artworks.length === data.length) return
 
-      if (ArtsyViewer.notificationPermission === 'granted') {
-        ArtsyViewer.notifications.forEach(staleNotification => {
+      if (ArtsyViewer.notificationPermission === "granted") {
+        ArtsyViewer.notifications.forEach((staleNotification) => {
           staleNotification.close()
         })
 
-        const newNotification = new Notification('new artwork!')
+        const newNotification = new Notification("new artwork!")
         ArtsyViewer.notifications.push(newNotification)
       }
 
@@ -111,6 +111,6 @@ window.onload = () => {
       ArtsyViewer.artworks = data
       ArtsyViewer.artworks.forEach(drawSection)
       drawPanel()
-    }
+    },
   })
 }

@@ -4,9 +4,10 @@ class ProjectsController < ApplicationController
 
   def create
     if project.save
-      render json: projects
+      redirect_to projects_path
     else
-      head :bad_request
+      flash[:error] = 'Something went wrong - project not created!'
+      render :index
     end
   end
 
