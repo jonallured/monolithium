@@ -16,7 +16,6 @@ gem 'jbuilder'
 gem 'redcarpet'
 gem 'sass-rails'
 gem 'sidekiq'
-gem 'webpacker'
 
 group :development do
   gem 'dotenv-rails'

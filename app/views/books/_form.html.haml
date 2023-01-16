@@ -1,7 +1,7 @@
 - if flash.any?
   %ul
     - flash.each do |type, messages|
-      - messages.each do |message|
+      - Array(messages).each do |message|
         %li{ class: type }= message
 
 = form_for book do |f|

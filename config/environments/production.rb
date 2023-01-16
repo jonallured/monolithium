@@ -15,7 +15,6 @@ Rails.application.configure do
   config.log_tags = [:request_id]
   config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
   config.read_encrypted_secrets = true
-  config.webpacker.check_yarn_integrity = false
 
   if ENV['RAILS_LOG_TO_STDOUT'].present?
     logger           = ActiveSupport::Logger.new($stdout)

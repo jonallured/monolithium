@@ -7,7 +7,7 @@ describe 'User creates new project', js: true do
     scenario 'creating first project' do
       visit '/projects'
       click_on 'Create Project'
-      fill_in 'name', with: 'First Project'
+      fill_in 'project_name', with: 'First Project'
       click_on 'Create'
 
       expect(page).to_not have_content 'No projects - create one!'
@@ -20,7 +20,7 @@ describe 'User creates new project', js: true do
 
       visit '/projects'
       click_on 'Create Project'
-      fill_in 'name', with: project.name
+      fill_in 'project_name', with: project.name
       click_on 'Create'
 
       expect(page).to have_content 'Something went wrong - project not created!'
