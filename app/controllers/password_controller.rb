@@ -6,13 +6,13 @@ class PasswordController < ApplicationController
     path = session.fetch(:redirect_to, root_path)
     session.clear
     session[:admin_password] = params[:admin_password]
-    flash[:notice] = 'Password saved to session'
+    flash[:notice] = t('password.saved')
     redirect_to path
   end
 
   def clear
     session.clear
-    flash[:notice] = 'Password removed from session'
+    flash[:notice] = t('password.clear')
     redirect_to root_path
   end
 
@@ -21,7 +21,7 @@ class PasswordController < ApplicationController
   def verify_password
     return if password_matches?
 
-    flash[:error] = 'Password did not match'
+    flash[:error] = t('password.mismatch')
     redirect_to sign_in_path
   end
 

@@ -6,7 +6,7 @@ class ProjectsController < ApplicationController
     if project.save
       redirect_to projects_path
     else
-      flash[:error] = 'Something went wrong - project not created!'
+      flash[:error] = t('projects.create_error')
       render :index
     end
   end
