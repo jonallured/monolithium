@@ -14,10 +14,9 @@ Bundler.require(*Rails.groups)
 
 module Monolithium
   class Application < Rails::Application
+    config.action_cable.disable_request_forgery_protection = true
+    config.active_record.legacy_connection_handling = false
     config.active_record.schema_format = :sql
     config.generators.system_tests = nil
-    config.load_defaults 5.1
-
-    config.action_cable.disable_request_forgery_protection = true
   end
 end
