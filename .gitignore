@@ -14,3 +14,6 @@
 db/structure.sql
 introspection_token.txt
 yarn-debug.log*
+
+/app/assets/builds/*
+!/app/assets/builds/.keep

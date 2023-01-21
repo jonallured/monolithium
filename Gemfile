@@ -16,6 +16,7 @@ gem 'jbuilder'
 gem 'redcarpet'
 gem 'sass-rails'
 gem 'sidekiq'
+gem 'tailwindcss-rails'
 
 group :development do
   gem 'dotenv-rails'
