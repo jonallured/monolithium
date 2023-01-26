@@ -8,7 +8,6 @@ class HooksController < ApplicationController
 
   def create
     if hook.save
-      ParseHookJob.perform_later hook.id
       head :created
     else
       head :bad_request
