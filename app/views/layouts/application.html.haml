@@ -5,4 +5,14 @@
     = csrf_meta_tags
     = stylesheet_link_tag 'tailwind'
     = yield :head
-  %body= yield
+  %body.bg-off-black.text-off-white.selection:bg-pink.m-auto(class="max-w-[800px]")
+    %header.mb-12= yield :header
+    %main
+      - unless flash[:alert].nil?
+        .border.px-6.mb-8.text-sm.bg-purple.text-off-white.border-pink
+          %p= flash[:alert]
+      - unless flash[:notice].nil?
+        .border.px-6.mb-8.text-sm.bg-dark-gray.text-off-white.border-purple
+          %p= flash[:notice]
+      = yield
+    %footer= yield :footer

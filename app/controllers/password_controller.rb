@@ -21,7 +21,7 @@ class PasswordController < ApplicationController
   def verify_password
     return if password_matches?
 
-    flash[:error] = t('password.mismatch')
+    flash[:alert] = t('password.mismatch')
     redirect_to sign_in_path
   end
 

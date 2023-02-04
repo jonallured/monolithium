@@ -1,16 +1,16 @@
 %h1 Book #{book.id}
 
-%dl
-  %dt ISBN
-  %dd= book.isbn
+%dl.flex.flex-wrap
+  %dt(class="basis-1/2") ISBN
+  %dd.text-right(class="basis-1/2")= book.isbn
 
-  %dt Finished On
-  %dd= book.finished_on
+  %dt(class="basis-1/2") Finished On
+  %dd.text-right(class="basis-1/2")= book.finished_on
 
-  %dt Title
-  %dd= book.title
+  %dt(class="basis-1/2") Title
+  %dd.text-right(class="basis-1/2")= book.title
 
-  %dt Pages
-  %dd= book.pages
+  %dt(class="basis-1/2") Pages
+  %dd.text-right(class="basis-1/2")= book.pages
 
-= render "form", book: book
+= render "form", book: book, button_label: "update"

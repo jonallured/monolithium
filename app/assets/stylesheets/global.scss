@@ -1,77 +1,77 @@
-$text: #eee;
+// $text: #eee;
 
-$pageBackground: #111;
+// $pageBackground: #111;
 
-$background: #800080;
-$highlight: lighten($background, 25%);
+// $background: #800080;
+// $highlight: lighten($background, 25%);
 
-$font: verdana;
+// $font: verdana;
 
-body {
-  background-color: $pageBackground;
-  color: $text;
-  font-family: $font;
-  margin: 0;
-  padding: 0;
+// body {
+//   background-color: $pageBackground;
+//   color: $text;
+//   font-family: $font;
+//   margin: 0;
+//   padding: 0;
 
-  ::selection {
-    background: $highlight;
-  }
+//   ::selection {
+//     background: $highlight;
+//   }
 
-  :focus {
-    outline: none;
-  }
+//   :focus {
+//     outline: none;
+//   }
 
-  input:focus {
-    border-bottom: 8px solid $highlight;
-  }
+//   input:focus {
+//     border-bottom: 8px solid $highlight;
+//   }
 
-  button:focus {
-    background-color: $highlight;
-  }
+//   button:focus {
+//     background-color: $highlight;
+//   }
 
-  input, button {
-    font-family: $font;
-  }
-}
+//   input, button {
+//     font-family: $font;
+//   }
+// }
 
-#wrapper {
-  width: 700px;
-  margin: 0 auto;
-}
+// #wrapper {
+//   width: 700px;
+//   margin: 0 auto;
+// }
 
-h3 {
-  text-align: center;
-  font-weight: normal;
-}
+// h3 {
+//   text-align: center;
+//   font-weight: normal;
+// }
 
-table {
-  border-collapse: collapse;
-  font-size: 20px;
-  width: 100%;
+// table {
+//   border-collapse: collapse;
+//   font-size: 20px;
+//   width: 100%;
 
-  tr {
-    td {
-      padding: 10px 0;
-    }
-    td:last-of-type {
-      text-align: right;
-    }
-  }
+//   tr {
+//     td {
+//       padding: 10px 0;
+//     }
+//     td:last-of-type {
+//       text-align: right;
+//     }
+//   }
 
-  td:nth-child(1) {
-    width: 80%;
-  }
+//   td:nth-child(1) {
+//     width: 80%;
+//   }
 
-  td:nth-child(2) {
-    width: 10%;
-  }
+//   td:nth-child(2) {
+//     width: 10%;
+//   }
 
-  td:nth-child(3) {
-    width: 10%;
-  }
+//   td:nth-child(3) {
+//     width: 10%;
+//   }
 
-  a {
-    color: $background;
-  }
-}
+//   a {
+//     color: $background;
+//   }
+// }

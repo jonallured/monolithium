@@ -6,7 +6,7 @@ class ProjectsController < ApplicationController
     if project.save
       redirect_to projects_path
     else
-      flash[:error] = t('projects.create_error')
+      flash[:alert] = t('projects.create_error')
       render :index
     end
   end
