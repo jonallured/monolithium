@@ -2,12 +2,67 @@
 @tailwind components;
 @tailwind utilities;
 
-/*
+@layer base {
+  body {
+    @apply prose;
+    @apply prose-off-white;
+    @apply prose-lg;
+  }
 
-@layer components {
-  .btn-primary {
-    @apply py-2 px-4 bg-blue-200;
+  table {
+    @apply text-lg;
+  }
+
+  a {
+    @apply text-purple;
+    @apply underline;
+  }
+
+  a:hover {
+    @apply text-pink;
+  }
+
+  input[type='date'],
+  input[type='password'],
+  input[type='text'] {
+    @apply bg-off-black;
+    @apply block;
+    @apply border-0;
+    @apply border-b-8;
+    @apply border-purple;
+    @apply my-4;
+    @apply placeholder:text-dark-gray;
+    @apply px-0;
+    @apply text-off-white;
+  }
+
+  input:focus[type='date'],
+  input:focus[type='password'],
+  input:focus[type='text'],
+  input:hover[type='date'],
+  input:hover[type='password'],
+  input:hover[type='text'] {
+    @apply border-pink;
+    @apply ring-0;
+  }
+
+  button,
+  button[type='reset'],
+  button[type='submit'] {
+    @apply bg-purple;
+    @apply mt-4;
+    @apply px-8;
+    @apply py-2;
+    @apply text-off-black;
+  }
+
+  button:hover,
+  button:hover[type='reset'],
+  button:hover[type='submit'],
+  button:focus,
+  button:focus[type='reset'],
+  button:focus[type='submit'] {
+    @apply bg-pink;
+    @apply outline-none;
   }
 }
-
-*/

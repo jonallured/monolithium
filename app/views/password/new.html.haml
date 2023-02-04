@@ -1,11 +1,5 @@
-- content_for :head do
-  = stylesheet_link_tag 'static', media: 'all'
+%h1 Admin Password
 
-= form_for :admin_password do |f|
-  %h1 Admin Password
-
-  - if flash[:error]
-    %h2= flash[:error]
-
-  = password_field_tag :admin_password, '', autofocus: true
-  = f.submit 'Sign In'
+= form_with do |form|
+  = form.password_field :admin_password, autofocus: true
+  = form.button 'sign in'

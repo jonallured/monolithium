@@ -1,0 +1,12 @@
+!!!
+%html
+  %head
+    %title Artsy Viewer
+    = csrf_meta_tags
+    %meta(name="apple-mobile-web-app-capable" content="yes")
+    %link(type="text/css" rel="stylesheet" href="https://webfonts.artsy.net/all-webfonts.css")
+    = stylesheet_link_tag 'tailwind'
+    = javascript_include_tag 'application'
+    = javascript_include_tag 'artsy_viewer'
+  %body
+    %main=yield

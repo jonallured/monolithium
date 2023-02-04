@@ -1,0 +1,24 @@
+- content_for :header do
+  = render 'static/shared/style_nav'
+
+%h1 Table
+
+%table.w-full
+  %thead
+    %tr
+      %th Column One
+      %th Column Two
+      %th.text-right Column Three
+  %tbody
+    %tr
+      %td Row One
+      %td Row One
+      %td.text-right Row One
+    %tr
+      %td Row Two
+      %td Row Two
+      %td.text-right Row Two
+    %tr
+      %td Row Three
+      %td Row Three
+      %td.text-right Row Three

@@ -2,12 +2,6 @@
   = stylesheet_link_tag 'application', media: 'all'
   = javascript_include_tag 'application'
 
-- if flash.any?
-  %ul
-    - flash.each do |type, messages|
-      - Array(messages).each do |message|
-        %li{ class: type }= message
-
 #wrapper.projects
   %h3 Today is a great day to make some updates!
 
