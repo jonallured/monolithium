@@ -17,7 +17,19 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       get :ping, to: 'ping#show'
+
+      namespace :word_rot do
+        get :killswitch, to: 'killswitch#show'
+      end
     end
+  end
+
+  scope :style do
+    get :article, to: 'static#article', as: 'article_styles'
+    get :color, to: 'static#color', as: 'color_styles'
+    get :flashes, to: 'static#flashes', as: 'flashes_styles'
+    get :form, to: 'static#form', as: 'form_styles'
+    get :table, to: 'static#table', as: 'table_styles'
   end
 
   root to: 'static#root'
