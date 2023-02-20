@@ -26,23 +26,13 @@ jobs:
           paths:
             - vendor/bundle
 
-      - restore_cache:
-          name: Restore yarn cache
-          key: yarn-{{ checksum "yarn.lock" }}
-
-      - run:
-          name: Yarn install
-          command: yarn install
-
-      - save_cache:
-          name: Save yarn cache
-          key: yarn-{{ checksum "yarn.lock" }}
-          paths:
-            - node_modules/
-
       - run:
           name: Setup database
           command: mv config/database{.circle,}.yml && bundle exec rake db:create db:migrate
+
+      - run:
+          name: Compile assets
+          command: bundle exec rake assets:precompile
 
       - run:
           name: Update Chrome
