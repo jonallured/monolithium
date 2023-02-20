@@ -14,8 +14,8 @@ gem 'graphql-client'
 gem 'haml'
 gem 'jbuilder'
 gem 'redcarpet'
-gem 'sass-rails'
 gem 'sidekiq'
+gem 'sprockets-rails'
 gem 'tailwindcss-rails'
 
 group :development do
