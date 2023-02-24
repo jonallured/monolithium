@@ -1,5 +1,5 @@
 class ArtsyViewerChannel < ApplicationCable::Channel
-  CHANNEL_ID = 'artsy_viewer'.freeze
+  CHANNEL_ID = "artsy_viewer".freeze
 
   def self.broadcast(payload)
     ActionCable.server.broadcast(

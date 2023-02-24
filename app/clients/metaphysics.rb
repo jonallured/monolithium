@@ -1,10 +1,10 @@
-require 'graphql/client'
-require 'graphql/client/http'
+require "graphql/client"
+require "graphql/client/http"
 
 class Metaphysics
-  ENDPOINT_URL = 'https://metaphysics-production.artsy.net/v2'.freeze
-  TOKEN_FILENAME = 'introspection_token.txt'.freeze
-  SCHEMA_FILENAME = 'mp_schema.json'.freeze
+  ENDPOINT_URL = "https://metaphysics-production.artsy.net/v2".freeze
+  TOKEN_FILENAME = "introspection_token.txt".freeze
+  SCHEMA_FILENAME = "mp_schema.json".freeze
 
   def self.fetch_auth_token
     commands = <<-BASH
@@ -24,7 +24,7 @@ class Metaphysics
     GraphQL::Client::HTTP.new(ENDPOINT_URL) do
       def headers(_context) # rubocop:disable Lint/NestedMethodDefinition
         introspection_token = File.read(Rails.root.join(TOKEN_FILENAME).to_s).chomp
-        { 'Authorization' => "Bearer #{introspection_token}" }
+        {"Authorization" => "Bearer #{introspection_token}"}
       end
     end
   end
@@ -50,7 +50,7 @@ class Metaphysics
   end
 
   def self.marketing_collection(slug)
-    variables = { 'slug' => slug }
+    variables = {"slug" => slug}
     context = {}
     result = Metaphysics.client.query(MarketingCollectionQuery, variables: variables, context: context)
     result.data

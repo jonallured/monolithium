@@ -1,10 +1,10 @@
 class OpenLibrary
-  ENDPOINT_URL = 'https://openlibrary.org'.freeze
+  ENDPOINT_URL = "https://openlibrary.org".freeze
 
   def self.generate_client
     Faraday.new(
       url: ENDPOINT_URL,
-      headers: { 'Content-Type' => 'application/json' }
+      headers: {"Content-Type" => "application/json"}
     ) do |f|
       f.adapter Faraday.default_adapter
       f.response :follow_redirects
