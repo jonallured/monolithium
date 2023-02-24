@@ -57,7 +57,7 @@ class Metaphysics
   end
 end
 
-MarketingCollectionQuery = Metaphysics.client.parse <<-'GRAPHQL'
+MarketingCollectionQuery = Metaphysics.client.parse <<-GRAPHQL
   query($slug: String!) {
     marketingCollection(slug: $slug) {
       artworksConnection(first: 100, sort: "-published_at") {

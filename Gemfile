@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby File.read('.tool-versions').split.last
 
-gem 'rails', '7.0.4'
+gem 'rails', '7.0.4.2'
 
 gem 'pg'
 gem 'puma'
@@ -14,7 +14,7 @@ gem 'graphql-client'
 gem 'haml'
 gem 'jbuilder'
 gem 'redcarpet'
-gem 'sidekiq'
+gem 'sidekiq', '<7'
 gem 'sprockets-rails'
 gem 'tailwindcss-rails'
 
