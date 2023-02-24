@@ -15,7 +15,7 @@ class Lineup < ApplicationRecord
 
   def as_of(time)
     lineup_artworks
-      .where('position <= ?', time.hour + 1)
+      .where("position <= ?", time.hour + 1)
       .order(position: :desc)
       .map(&:artwork)
   end

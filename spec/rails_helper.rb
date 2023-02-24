@@ -1,12 +1,12 @@
-ENV['RAILS_ENV'] ||= 'test'
-require File.expand_path('../config/environment', __dir__)
+ENV["RAILS_ENV"] ||= "test"
+require File.expand_path("../config/environment", __dir__)
 # Prevent database truncation if the environment is production
-abort('Rails is running in production mode!') if Rails.env.production?
-require 'rspec/rails'
-require 'webmock/rspec'
+abort("Rails is running in production mode!") if Rails.env.production?
+require "rspec/rails"
+require "webmock/rspec"
 # Add additional requires below this line. Rails is not loaded until this point!
 
-Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
+Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
 ActiveRecord::Migration.maintain_test_schema!
 
@@ -16,7 +16,7 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = true
 
   config.before(:each, type: :system) do
-    Capybara.server = :puma, { Silent: true }
+    Capybara.server = :puma, {Silent: true}
     driven_by :selenium_chrome_headless
   end
 end

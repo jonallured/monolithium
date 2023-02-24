@@ -7,9 +7,9 @@ class Book < ApplicationRecord
   def enhance!
     open_data = OpenLibrary.get_book(isbn)
     open_attrs = {
-      isbn: open_data['isbn_13'].first,
-      pages: open_data['number_of_pages'],
-      title: open_data['title']
+      isbn: open_data["isbn_13"].first,
+      pages: open_data["number_of_pages"],
+      title: open_data["title"]
     }
     update!(open_attrs)
   end

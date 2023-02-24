@@ -1,8 +1,8 @@
-require 'rails_helper'
+require "rails_helper"
 
 describe Lineup do
-  describe '#as_of' do
-    it 'returns the right artworks' do
+  describe "#as_of" do
+    it "returns the right artworks" do
       FactoryBot.create_list(:artwork, 24)
       lineup = FactoryBot.create(:lineup)
 

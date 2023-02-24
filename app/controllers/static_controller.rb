@@ -1,10 +1,10 @@
 class StaticController < ApplicationController
-  ALERT_MESSAGE = 'This is a sample alert!'.freeze
-  NOTICE_MESSAGE = 'This is a sample notice.'.freeze
+  ALERT_MESSAGE = "This is a sample alert!".freeze
+  NOTICE_MESSAGE = "This is a sample notice.".freeze
 
   skip_before_action :ensure_admin
 
-  layout 'root', only: :root
+  layout "root", only: :root
 
   def flashes
     {

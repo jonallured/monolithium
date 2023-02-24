@@ -18,7 +18,7 @@ class HooksController < ApplicationController
 
   def hook_params
     payload = JSON.parse payload_body
-    { payload: payload }
+    {payload: payload}
   end
 
   def verify_signature
@@ -33,12 +33,12 @@ class HooksController < ApplicationController
   end
 
   def hub_signature
-    request.headers['X-Hub-Signature']
+    request.headers["X-Hub-Signature"]
   end
 
   def compute_signature
     sha1 = OpenSSL::HMAC.hexdigest(
-      OpenSSL::Digest.new('sha1'),
+      OpenSSL::Digest.new("sha1"),
       Rails.application.secrets.hub_signature,
       payload_body
     )
