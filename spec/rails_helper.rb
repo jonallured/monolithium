@@ -16,8 +16,9 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = true
 
   config.before(:each, type: :system) do
+    Selenium::WebDriver.logger.ignore(:deprecations)
     Capybara.server = :puma, {Silent: true}
-    driven_by :selenium_chrome_headless
+    driven_by :selenium, using: :headless_chrome
   end
 end
 
