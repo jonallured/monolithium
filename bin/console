@@ -1,1 +1,1 @@
-dotenv bundle exec rails console
+heroku local:run bundle exec rails console
