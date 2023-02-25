@@ -2,8 +2,8 @@ class Feedbin
   def self.connection
     @connection ||= Faraday.new(url: Endpoint::BASE) do |faraday|
       faraday.basic_auth(
-        Rails.application.secrets.feedbin_username,
-        Rails.application.secrets.feedbin_password
+        Monolithium.config.feedbin_username,
+        Monolithium.config.feedbin_password
       )
       # might not really need this?
       faraday.headers["Content-Type"] = "application/json; charset=utf-8"
