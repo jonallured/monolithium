@@ -15,6 +15,12 @@ $ ./bin/start
 $ ./bin/console
 ```
 
+### Run all the tests
+
+```
+$ bundle exec rake
+```
+
 ## Projects
 
 Because this is a monolith I'm free to bolt on whatever random functionality I
