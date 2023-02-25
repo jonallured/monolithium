@@ -15,9 +15,11 @@ gem "haml"
 gem "importmap-rails"
 gem "jbuilder"
 gem "redcarpet"
+gem "redis"
 gem "sidekiq"
 gem "sprockets-rails"
 gem "tailwindcss-rails"
+gem "turbo-rails"
 
 group :development do
   gem "dotenv-rails"
