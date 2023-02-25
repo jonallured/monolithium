@@ -18,6 +18,7 @@ gem "redcarpet"
 gem "redis"
 gem "sidekiq"
 gem "sprockets-rails"
+gem "stimulus-rails"
 gem "tailwindcss-rails"
 gem "turbo-rails"
 
