@@ -14,7 +14,7 @@ gem "graphql-client"
 gem "haml"
 gem "jbuilder"
 gem "redcarpet"
-gem "sidekiq", "<7"
+gem "sidekiq"
 gem "sprockets-rails"
 gem "tailwindcss-rails"
 
