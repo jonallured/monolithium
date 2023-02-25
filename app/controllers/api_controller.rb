@@ -7,7 +7,7 @@ class ApiController < ActionController::Base
 
   def client_token_valid?
     client_token = request.headers["X-CLIENT-TOKEN"]
-    Rails.application.secrets.client_token == client_token
+    Monolithium.config.client_token == client_token
   end
 
   def validate_client_token

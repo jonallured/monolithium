@@ -26,6 +26,6 @@ class PasswordController < ApplicationController
   end
 
   def password_matches?
-    Rails.application.secrets[:admin_password] == params[:admin_password]
+    Monolithium.config.admin_password == params[:admin_password]
   end
 end
