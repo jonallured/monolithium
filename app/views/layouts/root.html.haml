@@ -4,3 +4,9 @@
     %title Monolithium
     = stylesheet_link_tag 'tailwind'
   %body.bg-monolith.bg-cover.bg-no-repeat.bg-fixed.bg-center
+    - unless flash[:alert].nil?
+      .border.px-6.mb-8.text-sm.bg-purple.text-off-white.border-pink
+        %p= flash[:alert]
+    - unless flash[:notice].nil?
+      .border.px-6.mb-8.text-sm.bg-dark-gray.text-off-white.border-purple
+        %p= flash[:notice]
