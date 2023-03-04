@@ -6,7 +6,6 @@
     %meta(name="apple-mobile-web-app-capable" content="yes")
     %link(type="text/css" rel="stylesheet" href="https://webfonts.artsy.net/all-webfonts.css")
     = stylesheet_link_tag 'tailwind'
-    = javascript_include_tag 'application'
-    = javascript_include_tag 'artsy_viewer'
+    = javascript_importmap_tags
   %body
-    %main=yield
+    %main(data-controller="artsy-viewer")=yield
