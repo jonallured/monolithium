@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   get :hooks, to: "hooks#index"
   post :hooks, to: "hooks#create"
 
-  get "book-list/:year", to: "book_list#index"
+  get "book-list/:year", to: "book_list#index", as: "book_list"
 
   get "sign_in", to: "password#new", as: :sign_in
   post "sign_in", to: "password#create"
