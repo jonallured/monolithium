@@ -7,7 +7,7 @@ class ProjectsController < ApplicationController
       redirect_to projects_path
     else
       flash[:alert] = t("projects.create_error")
-      render :index
+      render :index, status: :unprocessable_entity
     end
   end
 
