@@ -13,6 +13,7 @@ describe "Admin Password" do
     visit "/projects"
     fill_in "admin_password", with: "shhh"
     click_on "sign in"
+    expect(page).to have_content "Password saved to session"
     expect(current_path).to eq "/projects"
   end
 

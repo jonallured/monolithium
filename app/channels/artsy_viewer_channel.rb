@@ -9,13 +9,13 @@ class ArtsyViewerChannel < ApplicationCable::Channel
   end
 
   def subscribed
-    transmit initial_payload
+    transmit initial_payload if initial_payload
     stream_from CHANNEL_ID
   end
 
   private
 
   def initial_payload
-    Lineup.current.as_of(Time.zone.now)
+    Lineup.current&.as_of(Time.zone.now)
   end
 end

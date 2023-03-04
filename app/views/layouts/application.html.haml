@@ -4,6 +4,7 @@
     %title Monolithium
     = csrf_meta_tags
     = stylesheet_link_tag 'tailwind'
+    = javascript_importmap_tags
     = yield :head
   %body.bg-off-black.text-off-white.selection:bg-pink.m-auto(class="max-w-[800px]")
     %header.mb-12= yield :header

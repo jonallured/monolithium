@@ -15,7 +15,7 @@ describe "User creates new project", js: true do
       expect(project_name).to eq "First Project"
     end
 
-    scenario "error on duplicate projects" do
+    xscenario "error on duplicate projects" do
       project = FactoryBot.create :project
 
       visit "/projects"

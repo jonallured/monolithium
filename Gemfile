@@ -23,11 +23,11 @@ gem "tailwindcss-rails"
 gem "turbo-rails"
 
 group :development do
-  gem "dotenv-rails"
   gem "rails-erd"
 end
 
 group :development, :test do
+  gem "dotenv-rails"
   gem "pry-rails"
   gem "rspec-rails"
   gem "standard"
