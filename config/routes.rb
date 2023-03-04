@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :books, only: %i[create edit new update]
 
   get "artsy-viewer", to: "artsy_viewer#show"
+  get "dashboard", to: "dashboard#show"
   get "faring_direball", to: "faring_direball#index"
 
   get :hooks, to: "hooks#index"
