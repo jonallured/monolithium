@@ -3,7 +3,7 @@ class PasswordController < ApplicationController
   before_action :verify_password, only: :create
 
   def create
-    path = session.fetch(:redirect_to, root_path)
+    path = session.fetch(:redirect_to, dashboard_path)
     session.clear
     session[:admin_password] = params[:admin_password]
     flash[:notice] = t("password.saved")
