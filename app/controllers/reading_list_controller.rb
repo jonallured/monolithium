@@ -1,4 +1,4 @@
-class BookListController < ApplicationController
+class ReadingListController < ApplicationController
   expose(:year) { params[:year] }
   expose(:books) { Book.all.order(finished_on: :asc, pages: :desc) }
   expose(:total_pages) { books.pluck(:pages).compact.sum }

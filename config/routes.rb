@@ -1,15 +1,12 @@
 Rails.application.routes.draw do
-  resources :projects, only: %i[create index update]
   resources :books, only: %i[create edit new update]
+  resources :hooks, only: %i[create index]
+  resources :projects, only: %i[create index update]
 
   get "artsy-viewer", to: "artsy_viewer#show"
   get "dashboard", to: "dashboard#show"
   get "faring_direball", to: "faring_direball#index"
-
-  get :hooks, to: "hooks#index"
-  post :hooks, to: "hooks#create"
-
-  get "book-list/:year", to: "book_list#index", as: "book_list"
+  get "reading-list/:year", to: "reading_list#index", as: "reading_list"
 
   get "sign_in", to: "password#new", as: :sign_in
   post "sign_in", to: "password#create"
