@@ -1,6 +1,6 @@
-%h1= year
+%h1= reading_list.year
 
-%p #{books.count} books for #{number_with_delimiter total_pages} pages at a pace of #{pace} pages/day.
+%p #{reading_list.books.count} books for #{number_with_delimiter reading_list.total_pages} pages at a pace of #{reading_list.pace} pages/day.
 
 %table.w-full
   %thead
@@ -9,7 +9,7 @@
       %th.text-right Finished
       %th.text-right Pages
   %tbody
-    - books.each do |book|
+    - reading_list.books.each do |book|
       %tr
         %td= link_to book.title, edit_book_path(book)
         %td.text-right= book.finished_on&.strftime("%m/%d")
