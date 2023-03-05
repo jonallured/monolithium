@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
   resources :books, only: %i[create edit new update]
-  resources :hooks, only: %i[create index]
+  resources :hooks, only: %i[create edit index]
   resources :projects, only: %i[create index update]
 
   get "artsy-viewer", to: "artsy_viewer#show"
+  get "cybertail", to: "cybertail#index"
   get "dashboard", to: "dashboard#show"
   get "faring_direball", to: "faring_direball#index"
   get "reading-list/:year", to: "reading_list#index", as: "reading_list"

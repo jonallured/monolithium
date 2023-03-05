@@ -1,6 +1,4 @@
 %h1 Hooks
 
 %ul
-  - for hook in hooks
-    %li
-      %code= hook.payload
+  = render partial: "hooks/hook", collection: hooks
