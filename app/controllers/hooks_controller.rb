@@ -4,7 +4,13 @@ class HooksController < ApplicationController
   before_action :verify_signature, only: :create
 
   expose(:hooks) { Hook.order(id: :desc).limit(20) }
-  expose(:hook) { Hook.new(hook_params) }
+  expose(:hook) do
+    if params[:id]
+      Hook.find(params[:id])
+    else
+      Hook.new(hook_params)
+    end
+  end
 
   def create
     if hook.save
