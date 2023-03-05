@@ -1,4 +1,6 @@
 class ReadingList
+  attr_reader :year
+
   def initialize(year = Time.now.year)
     @year = year
   end
