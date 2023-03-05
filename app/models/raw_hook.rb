@@ -1,0 +1,2 @@
+class RawHook < ApplicationRecord
+end
