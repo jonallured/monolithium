@@ -4,9 +4,9 @@ describe "Admin creates new project", js: true do
   include_context "admin password matches"
 
   scenario "creating first project" do
-    visit "/projects"
+    visit "/admin/projects"
     click_on "Create Project"
-    fill_in "project_name", with: "First Project"
+    fill_in "project[name]", with: "First Project"
     click_on "Create"
 
     expect(page).to_not have_content "No projects - create one!"
@@ -17,9 +17,9 @@ describe "Admin creates new project", js: true do
   scenario "error on duplicate projects" do
     project = FactoryBot.create :project
 
-    visit "/projects"
+    visit "/admin/projects"
     click_on "Create Project"
-    fill_in "project_name", with: project.name
+    fill_in "project[name]", with: project.name
     click_on "Create"
 
     expect(page).to have_content "Something went wrong - project not created!"

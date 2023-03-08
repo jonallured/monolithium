@@ -1,8 +1,4 @@
 Rails.application.routes.draw do
-  resources :books, only: %i[create edit new update]
-  resources :hooks, only: %i[create edit index]
-  resources :projects, only: %i[create index update]
-
   get "artsy-viewer", to: "artsy_viewer#show"
   get "cybertail", to: "cybertail#index"
   get "dashboard", to: "dashboard#show"
@@ -22,6 +18,12 @@ Rails.application.routes.draw do
         get :killswitch, to: "killswitch#show"
       end
     end
+  end
+
+  namespace :admin do
+    resources :books, only: %i[create edit new update]
+    resources :hooks, only: %i[create edit index]
+    resources :projects, only: %i[create index update]
   end
 
   scope :style do
