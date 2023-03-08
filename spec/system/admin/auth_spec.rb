@@ -10,11 +10,11 @@ describe "Authentication" do
   end
 
   scenario "signing in with redirect_to works" do
-    visit "/projects"
+    visit "/admin/projects"
     fill_in "admin_password", with: "shhh"
     click_on "sign in"
     expect(page).to have_content "Password saved to session"
-    expect(current_path).to eq "/projects"
+    expect(current_path).to eq "/admin/projects"
   end
 
   scenario "signing out clears session" do

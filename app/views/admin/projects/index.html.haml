@@ -5,7 +5,7 @@
     %menu
       %a(href="#") Create Project
     %section
-      = form_for project do |f|
+      = form_with model: [:admin, project] do |f|
         = f.text_field :name
         = f.button "Create"
   - if projects.any?
