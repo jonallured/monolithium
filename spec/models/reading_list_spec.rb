@@ -1,9 +1,7 @@
 require "rails_helper"
 
 describe ReadingList do
-  before do
-    allow(OpenLibrary).to receive(:get_book).and_return(nil)
-  end
+  include_context "skip book enhances"
 
   describe "#books" do
     context "with no books" do
