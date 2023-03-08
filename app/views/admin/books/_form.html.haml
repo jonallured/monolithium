@@ -4,7 +4,7 @@
       - Array(messages).each do |message|
         %li{ class: type }= message
 
-= form_with model: book do |form|
+= form_with model: [:admin, book] do |form|
   = form.text_field :isbn
   = form.date_field :finished_on
   = form.button button_label

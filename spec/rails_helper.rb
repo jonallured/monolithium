@@ -6,7 +6,7 @@ require "rspec/rails"
 require "webmock/rspec"
 # Add additional requires below this line. Rails is not loaded until this point!
 
-Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
+require File.expand_path("support/shared", __dir__)
 
 ActiveRecord::Migration.maintain_test_schema!
 

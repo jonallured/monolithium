@@ -1,0 +1,20 @@
+%h1 Book #{book.id}
+
+%dl
+  .flex.flex-wrap
+    %dt(class="basis-1/2") ISBN
+    %dd.text-right(class="basis-1/2")= book.isbn
+
+  .flex.flex-wrap
+    %dt(class="basis-1/2") Finished On
+    %dd.text-right(class="basis-1/2")= book.finished_on
+
+  .flex.flex-wrap
+    %dt(class="basis-1/2") Title
+    %dd.text-right(class="basis-1/2")= book.title
+
+  .flex.flex-wrap
+    %dt(class="basis-1/2") Pages
+    %dd.text-right(class="basis-1/2")= book.pages
+
+= render "form", book: book, button_label: "update"
