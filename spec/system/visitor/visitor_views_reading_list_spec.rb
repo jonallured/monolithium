@@ -1,8 +1,6 @@
 require "rails_helper"
 
-describe "User views reading list" do
-  include_context "session password matches"
-
+describe "Visitor views reading list" do
   before do
     allow(OpenLibrary).to receive(:get_book).and_return(nil)
   end

@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe "Admin Password" do
+describe "Authentication" do
   scenario "signing in without redirect_to lands on dashboard" do
     visit "/sign_in"
     fill_in "admin_password", with: "shhh"
