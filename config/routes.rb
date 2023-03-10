@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :books, only: %i[create edit new update]
     resources :hooks, only: %i[create edit index]
+    resources :raw_hooks, only: %i[show]
     resources :projects, only: %i[create index update]
   end
 

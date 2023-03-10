@@ -1,0 +1,16 @@
+%h1 Raw Hook #{raw_hook.id}
+
+%p Headers
+
+%pre.text-off-black
+  %code= JSON.pretty_generate(raw_hook.headers)
+
+%p Params
+
+%pre.text-off-black
+  %code= JSON.pretty_generate(raw_hook.params)
+
+%p Body
+
+%pre.text-off-black
+  %code= raw_hook.body
