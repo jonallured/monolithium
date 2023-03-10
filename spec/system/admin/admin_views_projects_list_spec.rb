@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe "User views project list", js: true do
+describe "Admin views project list", js: true do
   include_context "admin password matches"
 
   scenario "with no projects" do
