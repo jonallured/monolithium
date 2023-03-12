@@ -3,6 +3,12 @@ class ParseRawHookJob < ApplicationJob
     raw_hook = RawHook.find(raw_hook_id)
     return unless raw_hook
 
-    HerokuParser.check_and_maybe_parse(raw_hook)
+    klasses = [
+      CircleciParser,
+      GithubParser,
+      HerokuParser
+    ]
+
+    klasses.each { |klass| klass.check_and_maybe_parse(raw_hook) }
   end
 end
