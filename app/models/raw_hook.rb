@@ -1,5 +1,5 @@
 class RawHook < ApplicationRecord
-  has_one :hook
+  has_one :hook, dependent: :destroy
 
   after_create_commit :created
 

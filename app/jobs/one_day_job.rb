@@ -1,5 +1,5 @@
 class OneDayJob < ApplicationJob
   def perform
-    Hook.destroy_all
+    RawHook.destroy_all
   end
 end
