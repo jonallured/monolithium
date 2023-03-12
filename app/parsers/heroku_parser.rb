@@ -2,6 +2,10 @@ class HerokuParser
   HMAC_HEADER_KEY = "HTTP_HEROKU_WEBHOOK_HMAC_SHA256"
   KNOWN_VERSION = "application/vnd.heroku+json; version=3"
 
+  def self.check_and_maybe_parse(raw_hook)
+    parse(raw_hook) if valid_for?(raw_hook) && can_parse?(raw_hook)
+  end
+
   def self.valid_for?(raw_hook)
     actual_hmac = raw_hook.headers[HMAC_HEADER_KEY]
     return false unless actual_hmac.present?
