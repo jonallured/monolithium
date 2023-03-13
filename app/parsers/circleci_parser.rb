@@ -33,6 +33,7 @@ class CircleciParser
 
   def self.parse(raw_hook)
     parsed = JSON.parse(raw_hook.body)
+
     message = [
       parsed["project"]["name"],
       parsed["type"],
@@ -40,6 +41,10 @@ class CircleciParser
       parsed.dig("job", "status"),
       parsed["pipeline"]["vcs"]["commit"]["subject"]
     ].compact.join(" ")
-    raw_hook.create_hook(message: message)
+
+    raw_hook.create_hook(
+      message: message,
+      webhook_sender: WebhookSender.circle
+    )
   end
 end

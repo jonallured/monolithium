@@ -3,12 +3,6 @@ class ParseRawHookJob < ApplicationJob
     raw_hook = RawHook.find(raw_hook_id)
     return unless raw_hook
 
-    klasses = [
-      CircleciParser,
-      GithubParser,
-      HerokuParser
-    ]
-
-    klasses.each { |klass| klass.check_and_maybe_parse(raw_hook) }
+    WebhookSender.all.each { |sender| sender.handle(raw_hook) }
   end
 end
