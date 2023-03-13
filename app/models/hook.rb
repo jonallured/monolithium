@@ -1,5 +1,6 @@
 class Hook < ApplicationRecord
   belongs_to :raw_hook
+  belongs_to :webhook_sender
 
   after_create_commit :created
 

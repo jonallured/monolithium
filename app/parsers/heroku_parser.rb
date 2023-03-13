@@ -28,6 +28,7 @@ class HerokuParser
 
   def self.parse(raw_hook)
     parsed = JSON.parse(raw_hook.body)
+
     message = [
       parsed["data"]["app"]["name"],
       parsed["action"],
@@ -35,6 +36,10 @@ class HerokuParser
       parsed["data"]["command"],
       parsed["data"]["state"]
     ].join(" ")
-    raw_hook.create_hook(message: message)
+
+    raw_hook.create_hook(
+      message: message,
+      webhook_sender: WebhookSender.heroku
+    )
   end
 end

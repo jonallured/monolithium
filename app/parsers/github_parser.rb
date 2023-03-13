@@ -33,11 +33,16 @@ class GithubParser
 
   def self.parse(raw_hook)
     parsed = JSON.parse(raw_hook.body)
+
     message = [
       parsed["repository"]["name"],
       raw_hook.headers[EVENT_TYPE_KEY],
       parsed["action"]
     ].compact.join(" ")
-    raw_hook.create_hook(message: message)
+
+    raw_hook.create_hook(
+      message: message,
+      webhook_sender: WebhookSender.github
+    )
   end
 end
