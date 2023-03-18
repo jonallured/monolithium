@@ -1,0 +1,16 @@
+%h1 Post Bin Request #{post_bin_request.id}
+
+%p Headers
+
+%pre.text-off-black
+  %code= JSON.pretty_generate(post_bin_request.headers)
+
+%p Params
+
+%pre.text-off-black
+  %code= JSON.pretty_generate(post_bin_request.params)
+
+%p Body
+
+%pre.text-off-black
+  %code= post_bin_request.body

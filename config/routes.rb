@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       get :ping, to: "ping#show"
+      post :post_bin, to: "post_bin#create"
       post :raw_hooks, to: "raw_hooks#create"
 
       namespace :word_rot do
@@ -23,8 +24,9 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :books, only: %i[create edit new update]
     resources :hooks, only: %i[create edit index]
-    resources :raw_hooks, only: %i[show]
     resources :projects, only: %i[create index update]
+    resources :post_bin_requests, only: %i[index show]
+    resources :raw_hooks, only: %i[show]
   end
 
   scope :style do
