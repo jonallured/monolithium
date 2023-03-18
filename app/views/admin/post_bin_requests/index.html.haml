@@ -1,0 +1,4 @@
+%h1 Post Bin Requests
+
+= turbo_stream_from(PostBinRequest::CHANNEL_NAME)
+%ul#post_bin_requests= render partial: "post_bin_requests/post_bin_request", collection: post_bin_requests
