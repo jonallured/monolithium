@@ -1,0 +1,7 @@
+%h1 Gift Ideas
+
+%p= link_to "new gift idea", new_admin_gift_idea_path
+
+%ul
+  - gift_ideas.each do |gift_idea|
+    %li= link_to gift_idea.title, admin_gift_idea_path(gift_idea)

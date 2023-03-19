@@ -1,0 +1,5 @@
+= form_with model: [:admin, gift_idea] do |form|
+  = form.text_field :title, placeholder: "title"
+  = form.text_field :website_url, placeholder: "website"
+  = form.text_area :note, placeholder: "note"
+  = form.button button_label

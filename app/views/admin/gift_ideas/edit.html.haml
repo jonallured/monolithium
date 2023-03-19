@@ -1,0 +1,4 @@
+%h1 Gift Idea #{gift_idea.id}
+%p= link_to "show", admin_gift_idea_path(gift_idea)
+%p= link_to "delete", admin_gift_idea_path(gift_idea), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }
+= render "form", gift_idea: gift_idea, button_label: "update"
