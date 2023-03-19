@@ -22,9 +22,14 @@
     @apply text-pink;
   }
 
+  textarea {
+    @apply h-20;
+  }
+
   input[type='date'],
   input[type='password'],
-  input[type='text'] {
+  input[type='text'],
+  textarea {
     @apply bg-off-black;
     @apply block;
     @apply border-0;
@@ -34,14 +39,17 @@
     @apply placeholder:text-dark-gray;
     @apply px-0;
     @apply text-off-white;
+    @apply w-80;
   }
 
   input:focus[type='date'],
   input:focus[type='password'],
   input:focus[type='text'],
+  textarea:focus,
   input:hover[type='date'],
   input:hover[type='password'],
-  input:hover[type='text'] {
+  input:hover[type='text'],
+  textarea:hover {
     @apply border-pink;
     @apply ring-0;
   }
