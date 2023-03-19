@@ -1,9 +1,3 @@
-- if flash.any?
-  %ul
-    - flash.each do |type, messages|
-      - Array(messages).each do |message|
-        %li{ class: type }= message
-
 = form_with model: [:admin, book] do |form|
   = form.text_field :isbn
   = form.date_field :finished_on
