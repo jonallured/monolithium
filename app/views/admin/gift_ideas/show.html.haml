@@ -1,0 +1,18 @@
+%h1 Gift Idea #{gift_idea.id}
+
+%p= link_to "gift ideas", admin_gift_ideas_path
+
+%p= link_to "edit", edit_admin_gift_idea_path(gift_idea)
+
+%dl
+  .flex.flex-wrap
+    %dt(class="basis-1/2") Title
+    %dd.text-right(class="basis-1/2")= gift_idea.title
+
+  .flex.flex-wrap
+    %dt(class="basis-1/2") Website URL
+    %dd.text-right(class="basis-1/2")= gift_idea.website_url
+
+  .flex.flex-wrap
+    %dt(class="basis-1/2") Note
+    %dd.text-right(class="basis-1/2")= gift_idea.note

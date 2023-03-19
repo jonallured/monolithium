@@ -1,0 +1,2 @@
+class GiftIdea < ApplicationRecord
+end
