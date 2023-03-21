@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get "dashboard", to: "dashboard#show"
   get "faring_direball", to: "faring_direball#index"
   get "reading-list/:year", to: "reading_list#index", as: "reading_list"
+  get "wishlist", to: "wishlist#index"
 
   get "sign_in", to: "password#new", as: :sign_in
   post "sign_in", to: "password#create"
