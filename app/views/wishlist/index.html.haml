@@ -1,0 +1,34 @@
+%h1 Wishlist
+
+- if available_gift_ideas.any?
+  %h2 available
+
+  %ul.m-0.p-0
+    - available_gift_ideas.each do |gift_idea|
+      %li.flex.p-0.justify-between.items-center
+        %p.flex.flex-col.m-0
+          %span= link_to gift_idea.title, gift_idea.website_url
+          %span= gift_idea.note
+        %button.m-0= admin? ? "receive" : "claim"
+
+- if claimed_gift_ideas.any?
+  %h2 claimed
+
+  %ul.m-0.p-0
+    - claimed_gift_ideas.each do |gift_idea|
+      %li.flex.p-0.justify-between.items-center
+        %p.flex.flex-col.m-0
+          %span= link_to gift_idea.title, gift_idea.website_url
+          %span= gift_idea.note
+        %button.m-0 undo
+
+- if received_gift_ideas.any?
+  %h2 received
+
+  %ul.m-0.p-0
+    - received_gift_ideas.each do |gift_idea|
+      %li.flex.p-0.justify-between.items-center
+        %p.flex.flex-col.m-0
+          %span= link_to gift_idea.title, gift_idea.website_url
+          %span= gift_idea.note
+        %button.m-0 undo

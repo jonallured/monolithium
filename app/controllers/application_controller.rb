@@ -3,6 +3,11 @@ class ApplicationController < ActionController::Base
 
   before_action :ensure_admin
 
+  def admin?
+    @admin ||= session_password_matches?
+  end
+  helper_method :admin?
+
   private
 
   def session_password_matches?
