@@ -1,4 +1,4 @@
-class OpenLibrary
+class OpenLibraryApi
   def self.generate_client
     endpoint_url = Monolithium.config.open_library_endpoint_url
     return unless endpoint_url

@@ -1,10 +1,6 @@
 require "rails_helper"
 
 describe "Visitor views reading list" do
-  before do
-    allow(OpenLibrary).to receive(:get_book).and_return(nil)
-  end
-
   scenario "with no books" do
     visit "/reading-list/#{Time.now.year}"
     book_rows = page.all("tbody tr")
