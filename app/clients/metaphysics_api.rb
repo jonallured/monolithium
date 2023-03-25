@@ -1,8 +1,7 @@
 require "graphql/client"
 require "graphql/client/http"
 
-class Metaphysics
-  ENDPOINT_URL = "https://metaphysics-production.artsy.net/v2".freeze
+class MetaphysicsApi
   TOKEN_FILENAME = "introspection_token.txt".freeze
   SCHEMA_FILENAME = "mp_schema.json".freeze
 
@@ -19,9 +18,12 @@ class Metaphysics
   end
 
   def self.generate_authenticated_client
+    endpoint_url = Monolithium.config.metaphysics_endpoint_url
+    return unless endpoint_url
+
     fetch_auth_token unless File.exist?(Rails.root.join(TOKEN_FILENAME).to_s)
 
-    GraphQL::Client::HTTP.new(ENDPOINT_URL) do
+    GraphQL::Client::HTTP.new(endpoint_url) do
       def headers(_context) # rubocop:disable Lint/NestedMethodDefinition
         introspection_token = File.read(Rails.root.join(TOKEN_FILENAME).to_s).chomp
         {"Authorization" => "Bearer #{introspection_token}"}
@@ -30,7 +32,10 @@ class Metaphysics
   end
 
   def self.raw_http_client
-    @raw_http_client ||= GraphQL::Client::HTTP.new(ENDPOINT_URL)
+    endpoint_url = Monolithium.config.metaphysics_endpoint_url
+    return unless endpoint_url
+
+    GraphQL::Client::HTTP.new(endpoint_url)
   end
 
   def self.generate_schema
@@ -45,35 +50,24 @@ class Metaphysics
     @schema ||= generate_schema
   end
 
+  def self.generate_client
+    return unless raw_http_client
+
+    GraphQL::Client.new(schema: schema, execute: raw_http_client)
+  end
+
   def self.client
-    @client ||= GraphQL::Client.new(schema: schema, execute: raw_http_client)
+    @client ||= generate_client
   end
 
   def self.marketing_collection(slug)
+    return unless client
+    query = MetaphysicsOperations::MARKETING_COLLECTION_QUERY
+    return unless query
+
     variables = {"slug" => slug}
     context = {}
-    result = Metaphysics.client.query(MarketingCollectionQuery, variables: variables, context: context)
+    result = MetaphysicsApi.client.query(query, variables: variables, context: context)
     result.data
   end
 end
-
-MarketingCollectionQuery = Metaphysics.client.parse <<-GRAPHQL
-  query($slug: String!) {
-    marketingCollection(slug: $slug) {
-      artworksConnection(first: 100, sort: "-published_at") {
-        edges {
-          node {
-            blurb:formattedMetadata
-            gravity_id:internalID
-            href
-            image {
-              aspect_ratio:aspectRatio
-              position
-              url(version: ["normalized", "larger"])
-            }
-          }
-        }
-      }
-    }
-  }
-GRAPHQL
