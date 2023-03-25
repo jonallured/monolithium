@@ -5,7 +5,7 @@ class Book < ApplicationRecord
   after_create :enqueue_enhance
 
   def enhance!
-    open_data = OpenLibrary.get_book(isbn)
+    open_data = OpenLibraryApi.get_book(isbn)
     return unless open_data
 
     open_attrs = {
