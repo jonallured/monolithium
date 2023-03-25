@@ -12,7 +12,6 @@ This commit updates project dependencies like this:
 
 ```
 $ bundle update
-$ yarn upgrade --latest
 ```
 
 It was automatically created with this script:
@@ -26,7 +25,6 @@ END
 git fetch --all --quiet
 git checkout -b updates
 bundle update
-yarn upgrade --latest
 bundle exec rake
 git add .
 git commit --message "$message"
