@@ -1,8 +1,6 @@
 require "rails_helper"
 
 describe ReadingList do
-  include_context "skip book enhances"
-
   describe "#books" do
     context "with no books" do
       it "returns an empty array" do

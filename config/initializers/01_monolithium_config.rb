@@ -27,7 +27,8 @@ module Monolithium
       feedbin_password: group[:feedbin_password],
       feedbin_username: group[:feedbin_username],
       heroku_secret: group[:heroku_secret],
-      hub_signature: group[:hub_signature]
+      hub_signature: group[:hub_signature],
+      open_library_endpoint_url: group[:open_library_endpoint_url]
     }
   end
 end

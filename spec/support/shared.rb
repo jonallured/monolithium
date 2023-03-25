@@ -4,9 +4,3 @@ shared_context "admin password matches" do
       .to receive(:session_password_matches?).and_return(true)
   end
 end
-
-shared_context "skip book enhances" do
-  before do
-    allow(OpenLibrary).to receive(:get_book).and_return(nil)
-  end
-end
