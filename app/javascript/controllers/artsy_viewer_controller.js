@@ -41,7 +41,7 @@ export default class extends Controller {
 
     this.element.replaceChildren()
     this.ArtsyViewer.artworks = data
-    this.ArtsyViewer.artworks.slice(0, 2).forEach(this.drawSection.bind(this))
+    this.ArtsyViewer.artworks.forEach(this.drawSection.bind(this))
     this.drawPanel()
   }
 
