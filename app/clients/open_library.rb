@@ -1,9 +1,10 @@
 class OpenLibrary
-  ENDPOINT_URL = "https://openlibrary.org".freeze
-
   def self.generate_client
+    endpoint_url = Monolithium.config.open_library_endpoint_url
+    return unless endpoint_url
+
     Faraday.new(
-      url: ENDPOINT_URL,
+      url: endpoint_url,
       headers: {"Content-Type" => "application/json"}
     ) do |f|
       f.adapter Faraday.default_adapter
@@ -17,6 +18,8 @@ class OpenLibrary
   end
 
   def self.get_book(isbn)
+    return unless client
+
     url = "/isbn/#{isbn}.json"
     response = client.get(url)
     response.body

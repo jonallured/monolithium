@@ -2,7 +2,6 @@ require "rails_helper"
 
 describe "Admin creates book" do
   include_context "admin password matches"
-  include_context "skip book enhances"
 
   scenario "creating first book" do
     visit "/admin/books/new"
