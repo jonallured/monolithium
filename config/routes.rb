@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   get "reading-list/:year", to: "reading_list#index", as: "reading_list"
   get "wishlist", to: "wishlist#index"
 
+  resources :gift_ideas, only: %i[update]
+
   get "sign_in", to: "password#new", as: :sign_in
   post "sign_in", to: "password#create"
   get "sign_out", to: "password#clear", as: :sign_out
