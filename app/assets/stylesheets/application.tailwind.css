@@ -35,7 +35,6 @@
     @apply border-0;
     @apply border-b-8;
     @apply border-purple;
-    @apply my-4;
     @apply placeholder:text-dark-gray;
     @apply px-0;
     @apply text-off-white;
@@ -58,10 +57,10 @@
   button[type='reset'],
   button[type='submit'] {
     @apply bg-purple;
-    @apply mt-4;
     @apply px-8;
     @apply py-2;
     @apply text-off-black;
+    @apply self-start;
   }
 
   button:hover,
@@ -72,5 +71,12 @@
   button:focus[type='submit'] {
     @apply bg-pink;
     @apply outline-none;
+  }
+
+  form {
+    @apply flex;
+    @apply flex-col;
+    @apply gap-4;
+    @apply justify-between;
   }
 }
