@@ -4,12 +4,17 @@
   %h2 available
 
   %ul.m-0.p-0
+    - hidden_field_name = admin? ? :received_at : :claimed_at
+    - button_label = admin? ? "receive" : "claim"
+
     - available_gift_ideas.each do |gift_idea|
       %li.flex.p-0.justify-between.items-center
         %p.flex.flex-col.m-0
           %span= link_to gift_idea.title, gift_idea.website_url
           %span= gift_idea.note
-        %button.m-0= admin? ? "receive" : "claim"
+        = form_with model: gift_idea do |form|
+          = form.hidden_field hidden_field_name, value: DateTime.now
+          = form.button button_label
 
 - if claimed_gift_ideas.any?
   %h2 claimed
@@ -20,7 +25,9 @@
         %p.flex.flex-col.m-0
           %span= link_to gift_idea.title, gift_idea.website_url
           %span= gift_idea.note
-        %button.m-0 undo
+        = form_with model: gift_idea do |form|
+          = form.hidden_field :claimed_at, value: ""
+          = form.button "undo"
 
 - if received_gift_ideas.any?
   %h2 received
@@ -31,4 +38,6 @@
         %p.flex.flex-col.m-0
           %span= link_to gift_idea.title, gift_idea.website_url
           %span= gift_idea.note
-        %button.m-0 undo
+        = form_with model: gift_idea do |form|
+          = form.hidden_field :received_at, value: ""
+          = form.button "undo"
