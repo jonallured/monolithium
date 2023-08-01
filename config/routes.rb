@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    get "model_counts", to: "model_counts#index"
+    get "model_counts", to: "model_counts#index", as: :model_counts
 
     resources :books, only: %i[create edit new update]
     resources :gift_ideas
