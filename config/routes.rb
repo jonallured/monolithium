@@ -25,11 +25,13 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
+    get "model_counts", to: "model_counts#index"
+
     resources :books, only: %i[create edit new update]
     resources :gift_ideas
     resources :hooks, only: %i[create edit index]
-    resources :projects, only: %i[create index update]
     resources :post_bin_requests, only: %i[index show]
+    resources :projects, only: %i[create index update]
     resources :raw_hooks, only: %i[show]
   end
 

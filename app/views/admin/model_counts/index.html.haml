@@ -1,0 +1,16 @@
+%h1 Model Counts
+
+- if model_counts.nil?
+  %p No models - create one!
+
+- else
+  %table.w-full
+    %thead
+      %tr
+        %th Model
+        %th.text-right Count
+    %tbody
+      - model_counts.each do |(klass, count)|
+        %tr
+          %td= klass
+          %td.text-right= number_with_delimiter count
