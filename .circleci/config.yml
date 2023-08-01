@@ -35,10 +35,6 @@ jobs:
           command: bundle exec rake assets:precompile
 
       - run:
-          name: Update Chrome
-          command: bundle exec rake webdrivers:chromedriver:update
-
-      - run:
           name: Run tests
           command: bundle exec rake
 
