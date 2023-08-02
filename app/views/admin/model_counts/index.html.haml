@@ -14,3 +14,8 @@
         %tr
           %td= klass
           %td.text-right= number_with_delimiter count
+    %tfoot
+      %tr
+        %td Total
+        %td.text-right= number_with_delimiter model_counts.values.sum
+

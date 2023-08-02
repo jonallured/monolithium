@@ -65,5 +65,7 @@ describe "Admin views model counts" do
     ]
 
     expect(actual_rows).to match_array(expected_rows)
+
+    expect(page.find("tfoot tr").text).to eq "Total 11"
   end
 end
