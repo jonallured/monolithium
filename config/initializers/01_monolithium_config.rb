@@ -16,20 +16,7 @@ module Monolithium
 
     raise "CREDS_GROUP '#{name}' not found" unless group
 
-    map_config(group)
-  end
-
-  private_class_method def self.map_config(group)
-    {
-      admin_password: group[:admin_password],
-      circleci_secret: group[:circleci_secret],
-      client_token: group[:client_token],
-      feedbin_password: group[:feedbin_password],
-      feedbin_username: group[:feedbin_username],
-      heroku_secret: group[:heroku_secret],
-      hub_signature: group[:hub_signature],
-      open_library_endpoint_url: group[:open_library_endpoint_url]
-    }
+    group
   end
 end
 
