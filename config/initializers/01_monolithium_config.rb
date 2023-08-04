@@ -11,12 +11,8 @@ module Monolithium
 
   private_class_method def self.load_config
     credentials = Rails.application.credentials
-    name = ENV.fetch("CREDS_GROUP", "invalid").to_sym
-    group = credentials[name]
-
-    raise "CREDS_GROUP '#{name}' not found" unless group
-
-    group
+    name = Rails.env.to_sym
+    credentials[name]
   end
 end
 
