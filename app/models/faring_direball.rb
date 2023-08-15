@@ -9,8 +9,13 @@ class FaringDireball
     data = JSON.parse(response.body)
     items = data["items"]
 
-    modified_items = items.map do |item|
-      item.slice "title", "date_published", "id", "url", "author"
+    filtered_items = items.reject do |item|
+      item["title"].starts_with?("[Sponsor]") ||
+        (item["content_html"] || "").first(20).include?("My thanks")
+    end
+
+    modified_items = filtered_items.map do |item|
+      item.slice "title", "date_published", "id", "url"
     end
 
     data["feed_url"] = FEED_URL
