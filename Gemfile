@@ -14,6 +14,7 @@ gem "graphql-client"
 gem "haml"
 gem "importmap-rails"
 gem "jbuilder"
+gem "pry-rails"
 gem "redcarpet"
 gem "redis"
 gem "sidekiq"
@@ -28,7 +29,6 @@ end
 
 group :development, :test do
   gem "dotenv-rails"
-  gem "pry-rails"
   gem "rspec-rails"
   gem "standard"
 end
