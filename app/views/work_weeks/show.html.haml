@@ -1,0 +1,15 @@
+%h1 0:00
+%p -24:00
+%p= work_week.date_span
+%p= link_to "<", last_week_path(work_week)
+%p= link_to "this week", this_week_path
+%p= link_to ">", next_week_path(work_week)
+
+- work_week.work_days.each do |work_day|
+  %h2= work_day.day_of_week
+  %p= work_day.id
+  %input{type: "text", placeholder: "in", value: work_day.in_minutes}
+  %input{type: "text", placeholder: "out", value: work_day.out_minutes}
+  %input{type: "text", placeholder: "pto", value: work_day.pto_minutes}
+  %input{type: "text", placeholder: "adjust", value: work_day.adjust_minutes}
+  %p 0:00
