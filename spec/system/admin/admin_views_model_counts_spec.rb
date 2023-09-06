@@ -19,7 +19,8 @@ describe "Admin views model counts" do
       "PostBinRequest 0",
       "Project 0",
       "RawHook 0",
-      "WebhookSender 0"
+      "WebhookSender 0",
+      "WorkDay 0"
     ]
 
     expect(actual_rows).to match_array(expected_rows)
@@ -46,6 +47,8 @@ describe "Admin views model counts" do
       webhook_sender: FactoryBot.create(:webhook_sender)
     )
 
+    FactoryBot.create(:work_day)
+
     visit "/admin/model_counts"
 
     actual_rows = page.all("tbody tr").map(&:text)
@@ -61,11 +64,12 @@ describe "Admin views model counts" do
       "PostBinRequest 1",
       "Project 1",
       "RawHook 1",
-      "WebhookSender 1"
+      "WebhookSender 1",
+      "WorkDay 1"
     ]
 
     expect(actual_rows).to match_array(expected_rows)
 
-    expect(page.find("tfoot tr").text).to eq "Total 11"
+    expect(page.find("tfoot tr").text).to eq "Total 12"
   end
 end
