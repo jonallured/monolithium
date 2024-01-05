@@ -21,7 +21,7 @@ class HookRequest
   private
 
   def request_body
-    @request_body ||= request.body.read
+    @request_body ||= request.body&.read
   end
 
   def headers_hash
