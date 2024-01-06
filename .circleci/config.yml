@@ -4,10 +4,10 @@ jobs:
   test:
     working_directory: ~/monolithium
     docker:
-      - image: cimg/ruby:3.2.2-browsers
+      - image: cimg/ruby:3.3.0-browsers
         environment:
           RAILS_ENV: test
-      - image: cimg/postgres:14.7
+      - image: cimg/postgres:14.10
 
     steps:
       - checkout

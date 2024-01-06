@@ -9,7 +9,6 @@ describe "POST /api/v1/raw_hooks" do
       HTTP_ACCEPT
       HTTP_COOKIE
       HTTP_HOST
-      HTTP_VERSION
       ORIGINAL_FULLPATH
       ORIGINAL_SCRIPT_NAME
       PATH_INFO
