@@ -64,5 +64,14 @@ describe HookRequest do
         expect(attrs[:params][:unsafe]).to eq "don't ignore me!"
       end
     end
+
+    context "with a client token param" do
+      let(:parameters) { {ApiController::CLIENT_TOKEN_PARAM => "shhh"} }
+
+      it "redacts that header value" do
+        attrs = HookRequest.to_attrs(request, params)
+        expect(attrs[:params][ApiController::CLIENT_TOKEN_PARAM]).to eq "REDACTED"
+      end
+    end
   end
 end

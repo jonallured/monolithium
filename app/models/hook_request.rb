@@ -3,6 +3,10 @@ class HookRequest
     ApiController::CLIENT_TOKEN_HEADER
   ]
 
+  SECRET_HEADER_PARAMS = [
+    ApiController::CLIENT_TOKEN_PARAM
+  ]
+
   def self.to_attrs(request, params)
     new(request, params).to_attrs
   end
@@ -45,6 +49,12 @@ class HookRequest
   end
 
   def computed_params
-    params.to_unsafe_hash
+    unsafe_params = params.to_unsafe_hash
+
+    SECRET_HEADER_PARAMS.each do |secret_param|
+      unsafe_params[secret_param] = "REDACTED" if unsafe_params.key? secret_param
+    end
+
+    unsafe_params
   end
 end
