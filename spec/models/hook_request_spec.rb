@@ -47,6 +47,15 @@ describe HookRequest do
       end
     end
 
+    context "with a client token header" do
+      let(:env) { {ApiController::CLIENT_TOKEN_HEADER => "shhh"} }
+
+      it "redacts that header value" do
+        attrs = HookRequest.to_attrs(request, params)
+        expect(attrs[:headers][ApiController::CLIENT_TOKEN_HEADER]).to eq "REDACTED"
+      end
+    end
+
     context "with a param that has not been permitted" do
       let(:parameters) { {unsafe: "don't ignore me!"} }
 
