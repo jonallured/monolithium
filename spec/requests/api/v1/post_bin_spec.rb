@@ -8,17 +8,17 @@ describe "POST /api/v1/post_bin" do
     end
   end
 
-  context "with an invalid client token" do
+  context "with an invalid client token header" do
     it "returns an empty 404" do
-      headers = {"X-Client-Token" => "invalid"}
+      headers = {ApiController::CLIENT_TOKEN_HEADER => "invalid"}
       post "/api/v1/post_bin", headers: headers
       expect(response.status).to eq 404
     end
   end
 
-  context "with a valid client token" do
+  context "with a valid client token header" do
     it "returns an empty 201 and creates a PostBin record" do
-      headers = {"X-Client-Token" => Monolithium.config.client_token}
+      headers = {ApiController::CLIENT_TOKEN_HEADER => Monolithium.config.client_token}
       post "/api/v1/post_bin", headers: headers
       expect(response.status).to eq 201
       expect(PostBinRequest.count).to eq 1
