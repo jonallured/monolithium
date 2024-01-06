@@ -3,6 +3,7 @@ class Admin::BooksController < ApplicationController
 
   def create
     if book.save
+      EnhanceBookJob.perform_later(book.id)
       redirect_to edit_admin_book_path(book)
     else
       flash.alert = book.errors.full_messages

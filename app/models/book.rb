@@ -2,8 +2,6 @@ class Book < ApplicationRecord
   validates :isbn, presence: true
   validates :finished_on, presence: true
 
-  after_create :enqueue_enhance
-
   def enhance!
     open_data = OpenLibraryApi.get_book(isbn)
     return unless open_data
@@ -14,11 +12,5 @@ class Book < ApplicationRecord
       title: open_data["title"]
     }
     update!(open_attrs)
-  end
-
-  private
-
-  def enqueue_enhance
-    EnhanceBookJob.perform_later(id)
   end
 end
