@@ -294,6 +294,8 @@ GEM
       connection_pool (>= 2.3.0)
       rack (>= 2.2.4)
       redis-client (>= 0.14.0)
+    skylight (6.0.1)
+      activesupport (>= 5.2.0)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -366,6 +368,7 @@ DEPENDENCIES
   rspec-rails
   selenium-webdriver
   sidekiq
+  skylight
   sprockets-rails
   standard
   stimulus-rails
