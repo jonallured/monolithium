@@ -1,3 +1,12 @@
+GIT
+  remote: https://github.com/rmosolgo/graphql-client.git
+  revision: 27ef61fd5d68055401d5d023e5a0f36a766c2664
+  ref: 27ef61f
+  specs:
+    graphql-client (0.18.0)
+      activesupport (>= 3.0)
+      graphql
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -124,9 +133,6 @@ GEM
       activesupport (>= 6.1)
     graphql (2.2.4)
       racc (~> 1.4)
-    graphql-client (0.18.0)
-      activesupport (>= 3.0)
-      graphql
     haml (6.3.0)
       temple (>= 0.8.2)
       thor
@@ -354,7 +360,7 @@ DEPENDENCIES
   factory_bot_rails
   faraday
   faraday-follow_redirects
-  graphql-client
+  graphql-client!
   haml
   importmap-rails
   jbuilder
