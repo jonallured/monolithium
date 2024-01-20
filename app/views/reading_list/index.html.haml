@@ -1,4 +1,8 @@
-%h1= reading_list.year
+- content_for :header do
+  %nav.flex.justify-between.items-center.py-6.border-b-8.border-dark-gray
+    %p.m-0= link_to "prev", reading_list_path(reading_list.prev_year)
+    %h1.m-0= reading_list.year
+    %p.m-0= link_to "next", reading_list_path(reading_list.next_year)
 
 %p #{reading_list.books.count} books for #{number_with_delimiter reading_list.total_pages} pages at a pace of #{reading_list.pace} pages/day.
 
