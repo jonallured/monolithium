@@ -5,6 +5,14 @@ class ReadingList
     @year = year
   end
 
+  def prev_year
+    @year - 1
+  end
+
+  def next_year
+    @year + 1
+  end
+
   def books
     @books ||= select_books
   end
