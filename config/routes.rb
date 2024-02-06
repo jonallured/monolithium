@@ -3,10 +3,10 @@ Rails.application.routes.draw do
   get "cybertail", to: "cybertail#index"
   get "dashboard", to: "dashboard#show"
   get "faring_direball", to: "faring_direball#index"
-  get "reading-list/:year", to: "reading_list#index", as: "reading_list"
+  get "reading-list/:year", to: "reading_list#index", as: :reading_list
+  get "today", to: "today#show"
   get "wishlist", to: "wishlist#index"
   get "work_weeks/:target", to: "work_weeks#show", as: :work_week
-  get :today, to: "today#show"
 
   resources :gift_ideas, only: %i[update]
 
