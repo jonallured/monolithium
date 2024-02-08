@@ -7,6 +7,7 @@ gem "rails", "7.1.2"
 gem "pg"
 gem "puma"
 
+gem "aws-sdk-s3"
 gem "decent_exposure"
 gem "faraday"
 gem "faraday-follow_redirects"
