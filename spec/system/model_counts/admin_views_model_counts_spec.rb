@@ -11,6 +11,9 @@ describe "Admin views model counts" do
     expected_rows = [
       "Artwork 0",
       "Book 0",
+      "FinancialAccount 0",
+      "FinancialStatement 0",
+      "FinancialTransaction 0",
       "GiftIdea 0",
       "Hook 0",
       "Killswitch 0",
@@ -32,14 +35,11 @@ describe "Admin views model counts" do
     FactoryBot.create(:killswitch)
     FactoryBot.create(:post_bin_request)
     FactoryBot.create(:project)
+    FactoryBot.create(:work_day)
 
-    lineup = FactoryBot.create(:lineup)
-
-    FactoryBot.create(
-      :lineup_artwork,
-      artwork: FactoryBot.create(:artwork),
-      lineup: lineup
-    )
+    financial_account = FactoryBot.create(:financial_account)
+    FactoryBot.create(:financial_statement, financial_account: financial_account)
+    FactoryBot.create(:financial_transaction, financial_account: financial_account)
 
     FactoryBot.create(
       :hook,
@@ -47,7 +47,12 @@ describe "Admin views model counts" do
       webhook_sender: FactoryBot.create(:webhook_sender)
     )
 
-    FactoryBot.create(:work_day)
+    lineup = FactoryBot.create(:lineup)
+    FactoryBot.create(
+      :lineup_artwork,
+      artwork: FactoryBot.create(:artwork),
+      lineup: lineup
+    )
 
     visit "/admin/model_counts"
 
@@ -56,6 +61,9 @@ describe "Admin views model counts" do
     expected_rows = [
       "Artwork 1",
       "Book 1",
+      "FinancialAccount 1",
+      "FinancialStatement 1",
+      "FinancialTransaction 1",
       "GiftIdea 1",
       "Hook 1",
       "Killswitch 1",
@@ -70,6 +78,6 @@ describe "Admin views model counts" do
 
     expect(actual_rows).to match_array(expected_rows)
 
-    expect(page.find("tfoot tr").text).to eq "Total 12"
+    expect(page.find("tfoot tr").text).to eq "Total 15"
   end
 end
