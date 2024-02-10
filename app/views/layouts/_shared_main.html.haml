@@ -1,0 +1,10 @@
+%header.md:mb-12= yield :header
+%main
+  - unless flash[:alert].nil?
+    .border.px-6.mb-8.text-sm.bg-purple.text-off-white.border-pink
+      %p= flash[:alert]
+  - unless flash[:notice].nil?
+    .border.px-6.mb-8.text-sm.bg-dark-gray.text-off-white.border-purple
+      %p= flash[:notice]
+  = yield
+%footer= yield :footer
