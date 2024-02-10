@@ -1,0 +1,7 @@
+!!!
+%html
+  %head
+    = render partial: "layouts/shared_head"
+    = yield :head
+  %body.bg-off-black.text-off-white.selection:bg-pink.p-4.md:p-0.mx-8
+    = render partial: "layouts/shared_main"

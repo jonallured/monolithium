@@ -1,0 +1,66 @@
+- content_for :header do
+  %nav.flex.justify-between.items-center.py-6.border-b-8.border-dark-gray
+    %p.m-0= link_to "prev", financial_report_path(financial_report.prev_year)
+    %h1.m-0= financial_report.year
+    %p.m-0= link_to "next", financial_report_path(financial_report.next_year)
+
+- checking_data = financial_report.checking_data
+- savings_data = financial_report.savings_data
+
+%h2 Checking
+
+%table.text-sm.table-fixed
+  %thead
+    %tr
+      %th.text-left(class="w-[70px]") Month
+      %th.text-right(class="w-[120px]") Jan
+      %th.text-right(class="w-[120px]") Feb
+      %th.text-right(class="w-[120px]") Mar
+      %th.text-right(class="w-[120px]") Apr
+      %th.text-right(class="w-[120px]") May
+      %th.text-right(class="w-[120px]") Jun
+      %th.text-right(class="w-[120px]") Jul
+      %th.text-right(class="w-[120px]") Aug
+      %th.text-right(class="w-[120px]") Sep
+      %th.text-right(class="w-[120px]") Oct
+      %th.text-right(class="w-[120px]") Nov
+      %th.text-right(class="w-[120px]") Dec
+  %tbody
+    %tr
+      %td.text-left Starting
+      = render partial: "amount_cents", collection: checking_data.starting_amounts
+    %tr
+      %td.text-left Ending
+      = render partial: "amount_cents", collection: checking_data.ending_amounts
+    %tr
+      %td.text-left Net
+      = render partial: "amount_cents", collection: checking_data.net_amounts
+
+%h2 Savings
+
+%table.text-sm.table-fixed
+  %thead
+    %tr
+      %th.text-left(class="w-[70px]") Month
+      %th.text-right(class="w-[120px]") Jan
+      %th.text-right(class="w-[120px]") Feb
+      %th.text-right(class="w-[120px]") Mar
+      %th.text-right(class="w-[120px]") Apr
+      %th.text-right(class="w-[120px]") May
+      %th.text-right(class="w-[120px]") Jun
+      %th.text-right(class="w-[120px]") Jul
+      %th.text-right(class="w-[120px]") Aug
+      %th.text-right(class="w-[120px]") Sep
+      %th.text-right(class="w-[120px]") Oct
+      %th.text-right(class="w-[120px]") Nov
+      %th.text-right(class="w-[120px]") Dec
+  %tbody
+    %tr
+      %td.text-left Starting
+      = render partial: "amount_cents", collection: savings_data.starting_amounts
+    %tr
+      %td.text-left Ending
+      = render partial: "amount_cents", collection: savings_data.ending_amounts
+    %tr
+      %td.text-left Net
+      = render partial: "amount_cents", collection: savings_data.net_amounts
