@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get "cybertail", to: "cybertail#index"
   get "dashboard", to: "dashboard#show"
   get "faring_direball", to: "faring_direball#index"
+  get "financial_reports/:year", to: "financial_reports#show", as: :financial_report
   get "reading-list/:year", to: "reading_list#index", as: :reading_list
   get "today", to: "today#show"
   get "wishlist", to: "wishlist#index"

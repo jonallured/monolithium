@@ -1,0 +1,5 @@
+- if amount_cents
+  %td.text-right{class: "#{amount_cents < 0 && 'text-purple'}"}
+    = number_to_currency(amount_cents / 100.0, negative_format: "(%u%n)")
+- else
+  %td.text-right -
