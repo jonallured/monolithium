@@ -125,4 +125,36 @@ describe "Admin views financial reports" do
       expect(net_tds.map(&:text).uniq).to eq ["$935.89"]
     end
   end
+
+  scenario "with two statements on two accounts for the same period" do
+    FactoryBot.create(
+      :financial_statement,
+      financial_account: FinancialAccount.usb_checking,
+      period_start_on: Date.parse("#{last_year.year}-05-01"),
+      starting_amount_cents: 100_00,
+      ending_amount_cents: 50_00
+    )
+
+    FactoryBot.create(
+      :financial_statement,
+      financial_account: FinancialAccount.wf_checking,
+      period_start_on: Date.parse("#{last_year.year}-05-01"),
+      starting_amount_cents: 70_00,
+      ending_amount_cents: 20_00
+    )
+
+    visit "/financial_reports/#{last_year}"
+
+    checking_table = page.all("table").to_a.first
+    _month_tr, starting_tr, ending_tr, net_tr = checking_table.all("tr").to_a
+
+    may_starting_td = starting_tr.all("td").to_a[5]
+    expect(may_starting_td.text).to eq "$170.00"
+
+    may_ending_td = ending_tr.all("td").to_a[5]
+    expect(may_ending_td.text).to eq "$70.00"
+
+    may_net_td = net_tr.all("td").to_a[5]
+    expect(may_net_td.text).to eq "($100.00)"
+  end
 end
