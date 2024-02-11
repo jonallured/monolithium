@@ -20,43 +20,67 @@ class FinancialReport
   end
 
   def checking_data
-    AccountData.new(FinancialAccount.wf_checking, @year)
+    accounts = [
+      FinancialAccount.usb_checking,
+      FinancialAccount.wf_checking
+    ]
+    AccountData.new(accounts, @year)
   end
 
   def savings_data
-    AccountData.new(FinancialAccount.wf_savings, @year)
+    accounts = [
+      FinancialAccount.wf_savings
+    ]
+    AccountData.new(accounts, @year)
   end
 
   class AccountData
-    def initialize(account, year)
-      @account = account
+    def initialize(accounts, year)
+      @accounts = accounts
       @year = year
+      grouped_statements
     end
 
     def starting_amounts
-      statements.map(&:starting_amount_cents)
+      grouped_statements.map do |statements|
+        amounts = statements.map(&:starting_amount_cents).compact
+        next if amounts.empty?
+
+        amounts.sum
+      end
     end
 
     def ending_amounts
-      statements.map(&:ending_amount_cents)
+      grouped_statements.map do |statements|
+        amounts = statements.map(&:ending_amount_cents).compact
+        next if amounts.empty?
+
+        amounts.sum
+      end
     end
 
     def net_amounts
-      statements.map(&:net_amount_cents)
+      grouped_statements.map do |statements|
+        amounts = statements.map(&:net_amount_cents).compact
+        next if amounts.empty?
+
+        amounts.sum
+      end
     end
 
     private
 
-    def compute_statements
-      account_statements = @account.financial_statements.for_year(@year)
+    def compute_grouped_statements
+      account_statements = @accounts.map { |account| account.financial_statements.for_year(@year) }.flatten
       FinancialReport.months_for_year(@year).map do |date|
-        statement_for_period = account_statements.find { |statement| statement.period_start_on == date }
-        statement_for_period || NullStatement.instance
+        statements_for_period = account_statements.select { |statement| statement.period_start_on == date }
+        statements_for_period << NullStatement.instance if statements_for_period.empty?
+        statements_for_period
       end
     end
 
-    def statements
-      @statements ||= compute_statements
+    def grouped_statements
+      @grouped_statements ||= compute_grouped_statements
     end
   end
 end
