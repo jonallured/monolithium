@@ -4,7 +4,7 @@ describe "Admin views model counts" do
   include_context "admin password matches"
 
   scenario "with no models" do
-    visit "/admin/model_counts"
+    visit "/model_counts"
 
     actual_rows = page.all("tbody tr").map(&:text)
 
@@ -54,7 +54,7 @@ describe "Admin views model counts" do
       lineup: lineup
     )
 
-    visit "/admin/model_counts"
+    visit "/model_counts"
 
     actual_rows = page.all("tbody tr").map(&:text)
 
