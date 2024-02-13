@@ -26,7 +26,20 @@
     @apply h-20;
   }
 
+  input[type='file'] {
+    @apply py-2;
+    @apply text-base;
+  }
+
+  input[type='file']::file-selector-button {
+    @apply border-0;
+    @apply m-0;
+    @apply p-0;
+    @apply w-0;
+  }
+
   input[type='date'],
+  input[type='file'],
   input[type='password'],
   input[type='text'],
   textarea {
@@ -41,11 +54,17 @@
     @apply w-80;
   }
 
+  input[type='file']:invalid {
+    @apply text-dark-gray;
+  }
+
   input:focus[type='date'],
+  input:focus[type='file'],
   input:focus[type='password'],
   input:focus[type='text'],
   textarea:focus,
   input:hover[type='date'],
+  input:hover[type='file'],
   input:hover[type='password'],
   input:hover[type='text'],
   textarea:hover {
