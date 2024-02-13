@@ -50,6 +50,32 @@ class FinancialReport
       end
     end
 
+    def income_amounts
+      grouped_transactions.map do |transactions|
+        amounts = transactions.map do |transaction|
+          next unless transaction.amount_cents&.positive?
+
+          transaction.amount_cents
+        end.compact
+        next if amounts.empty?
+
+        amounts.sum
+      end
+    end
+
+    def expenses_amounts
+      grouped_transactions.map do |transactions|
+        amounts = transactions.map do |transaction|
+          next unless transaction.amount_cents&.negative?
+
+          transaction.amount_cents
+        end.compact
+        next if amounts.empty?
+
+        amounts.sum
+      end
+    end
+
     def ending_amounts
       grouped_statements.map do |statements|
         amounts = statements.map(&:ending_amount_cents).compact
@@ -81,6 +107,19 @@ class FinancialReport
 
     def grouped_statements
       @grouped_statements ||= compute_grouped_statements
+    end
+
+    def compute_grouped_transactions
+      account_transactions = @accounts.map { |account| account.financial_transactions.for_year(@year) }.flatten
+      FinancialReport.months_for_year(@year).map do |date|
+        transactions_for_period = account_transactions.select { |transaction| transaction.posted_on.month == date.month }
+        transactions_for_period << NullTransaction.instance if transactions_for_period.empty?
+        transactions_for_period
+      end
+    end
+
+    def grouped_transactions
+      @grouped_transactions ||= compute_grouped_transactions
     end
   end
 end
