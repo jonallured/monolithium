@@ -10,6 +10,11 @@
   %textarea(placeholder="write a note")
   %input(type="password" placeholder="password")
   %input(required="true" type="file")
+  %select(required="true")
+    %option(value="" disabled="true" selected hidden) pick parser
+    %option first
+    %option second
+    %option third
   %button(type="submit") submit
 
 %h2 Another Form
