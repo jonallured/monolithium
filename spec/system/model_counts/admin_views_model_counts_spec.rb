@@ -11,6 +11,7 @@ describe "Admin views model counts" do
     expected_rows = [
       "Artwork 0",
       "Book 0",
+      "CsvUpload 0",
       "FinancialAccount 0",
       "FinancialStatement 0",
       "FinancialTransaction 0",
@@ -31,6 +32,7 @@ describe "Admin views model counts" do
 
   scenario "with some models" do
     FactoryBot.create(:book)
+    FactoryBot.create(:csv_upload)
     FactoryBot.create(:gift_idea)
     FactoryBot.create(:killswitch)
     FactoryBot.create(:post_bin_request)
@@ -61,6 +63,7 @@ describe "Admin views model counts" do
     expected_rows = [
       "Artwork 1",
       "Book 1",
+      "CsvUpload 1",
       "FinancialAccount 1",
       "FinancialStatement 1",
       "FinancialTransaction 1",
@@ -78,6 +81,6 @@ describe "Admin views model counts" do
 
     expect(actual_rows).to match_array(expected_rows)
 
-    expect(page.find("tfoot tr").text).to eq "Total 15"
+    expect(page.find("tfoot tr").text).to eq "Total 16"
   end
 end
