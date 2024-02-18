@@ -24,6 +24,11 @@ class Admin::FinancialAccountsController < ApplicationController
     end
   end
 
+  def destroy
+    financial_account.destroy
+    redirect_to admin_financial_accounts_path
+  end
+
   private
 
   def financial_account_params
