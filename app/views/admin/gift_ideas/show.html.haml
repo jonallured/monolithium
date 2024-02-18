@@ -4,15 +4,14 @@
 
 %p= link_to "edit", edit_admin_gift_idea_path(gift_idea)
 
-%dl
-  .flex.flex-wrap
-    %dt(class="basis-1/2") Title
-    %dd.text-right(class="basis-1/2")= gift_idea.title
-
-  .flex.flex-wrap
-    %dt(class="basis-1/2") Website URL
-    %dd.text-right(class="basis-1/2")= gift_idea.website_url
-
-  .flex.flex-wrap
-    %dt(class="basis-1/2") Note
-    %dd.text-right(class="basis-1/2")= gift_idea.note
+%table.w-full
+  %tbody
+    %tr
+      %td Title
+      %td.text-right= gift_idea.title
+    %tr
+      %td Website URL
+      %td.text-right= gift_idea.website_url
+    %tr
+      %td Note
+      %td.text-right= gift_idea.note

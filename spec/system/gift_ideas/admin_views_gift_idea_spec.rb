@@ -13,8 +13,8 @@ describe "Admin views gift idea" do
 
     visit "/admin/gift_ideas/#{gift_idea.id}"
 
-    actual_values = page.all("dl div").map do |div|
-      [div.find("dt").text, div.find("dd").text]
+    actual_values = page.all("tr").map do |table_row|
+      table_row.all("td").map(&:text)
     end
 
     expect(actual_values).to eq(
