@@ -1,0 +1,7 @@
+%h1 New Financial Account
+
+%p= link_to "Financial Account List", admin_financial_accounts_path
+
+= form_with model: [:admin, financial_account] do |form|
+  = form.text_field :name, placeholder: "name"
+  = form.button "create"
