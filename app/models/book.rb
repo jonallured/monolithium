@@ -13,4 +13,13 @@ class Book < ApplicationRecord
     }
     update!(open_attrs)
   end
+
+  def table_attrs
+    [
+      ["ISBN", isbn],
+      ["Finished On", finished_on],
+      ["Title", title],
+      ["Pages", pages]
+    ]
+  end
 end
