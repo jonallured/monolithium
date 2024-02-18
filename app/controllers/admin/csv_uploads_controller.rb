@@ -1,5 +1,6 @@
 class Admin::CsvUploadsController < ApplicationController
   expose(:csv_upload)
+  expose(:csv_uploads) { CsvUpload.order(created_at: :desc).page params[:page] }
 
   def create
     if csv_upload.save

@@ -1,5 +1,7 @@
 %h1 CSV Upload #{csv_upload.id}
 
+%p= link_to "CSV Upload List", admin_csv_uploads_path
+
 = render partial: "attrs_table", locals: { attrs: csv_upload.table_attrs }
 
 %h2 Data
