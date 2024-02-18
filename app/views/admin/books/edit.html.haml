@@ -1,18 +1,5 @@
 %h1 Book #{book.id}
 
-%table.w-full
-  %tbody
-    %tr
-      %td ISBN
-      %td.text-right= book.isbn
-    %tr
-      %td Finished On
-      %td.text-right= book.finished_on
-    %tr
-      %td Title
-      %td.text-right= book.title
-    %tr
-      %td Pages
-      %td.text-right= book.pages
+= render partial: "attrs_table", locals: { attrs: book.table_attrs }
 
 = render "form", book: book, button_label: "update"

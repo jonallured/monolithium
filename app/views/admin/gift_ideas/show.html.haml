@@ -4,14 +4,4 @@
 
 %p= link_to "edit", edit_admin_gift_idea_path(gift_idea)
 
-%table.w-full
-  %tbody
-    %tr
-      %td Title
-      %td.text-right= gift_idea.title
-    %tr
-      %td Website URL
-      %td.text-right= gift_idea.website_url
-    %tr
-      %td Note
-      %td.text-right= gift_idea.note
+= render partial: "attrs_table", locals: { attrs: gift_idea.table_attrs }
