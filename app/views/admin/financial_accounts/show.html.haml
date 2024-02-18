@@ -2,4 +2,6 @@
 
 %p= link_to "Financial Account List", admin_financial_accounts_path
 
+%p= link_to "Edit Financial Account", edit_admin_financial_account_path(financial_account)
+
 = render partial: "attrs_table", locals: { attrs: financial_account.table_attrs }
