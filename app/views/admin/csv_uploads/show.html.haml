@@ -1,1 +1,8 @@
 %h1 CSV Upload #{csv_upload.id}
+
+= render partial: "attrs_table", locals: { attrs: csv_upload.table_attrs }
+
+%h2 Data
+
+%pre.text-off-black.h-72
+  %code= csv_upload.data
