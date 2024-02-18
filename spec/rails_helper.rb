@@ -16,6 +16,10 @@ RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
   config.use_transactional_fixtures = true
 
+  config.before do
+    ActiveJob::Base.queue_adapter = :test
+  end
+
   config.before(:each, type: :system) do
     Selenium::WebDriver.logger.ignore(:deprecations)
     Capybara.server = :puma, {Silent: true}

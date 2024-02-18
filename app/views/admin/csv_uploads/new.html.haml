@@ -1,0 +1,8 @@
+%h1 New CSV Upload
+
+= form_with model: [:admin, csv_upload], multipart: true do |form|
+  %select#csv_upload_parser_class_name(name="csv_upload[parser_class_name]" required="true")
+    %option(value="" disabled="true" selected hidden) pick parser
+    %option(value="WellsFargoParser") WellsFargoParser
+  %input#file_picker(required="true" type="file" name="file")
+  = form.button "create"

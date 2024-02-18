@@ -21,4 +21,24 @@ describe CsvUpload do
       end
     end
   end
+
+  describe "#parsed_data" do
+    let(:csv_upload) { FactoryBot.create(:csv_upload, data: data) }
+
+    context "with data that fails to parse" do
+      let(:data) { '"invalid' }
+
+      it "returns nil" do
+        expect(csv_upload.parsed_data).to eq nil
+      end
+    end
+
+    context "with data that parses" do
+      let(:data) { "abc,123,true" }
+
+      it "returns that parsed data" do
+        expect(csv_upload.parsed_data).to eq [["abc", "123", "true"]]
+      end
+    end
+  end
 end
