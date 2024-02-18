@@ -16,4 +16,12 @@ class FinancialAccount < ApplicationRecord
   def self.wf_savings
     find_by(name: "Wells Fargo Savings")
   end
+
+  def table_attrs
+    [
+      ["Name", name],
+      ["Created At", created_at.to_formatted_s(:long)],
+      ["Updated At", updated_at.to_formatted_s(:long)]
+    ]
+  end
 end

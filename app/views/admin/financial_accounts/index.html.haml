@@ -9,7 +9,7 @@
   %tbody
     - financial_accounts.each do |financial_account|
       %tr
-        %td= financial_account.id
+        %td= link_to financial_account.id, admin_financial_account_path(financial_account)
         %td= financial_account.name
         %td.text-right= financial_account.created_at.to_formatted_s(:long)
 
