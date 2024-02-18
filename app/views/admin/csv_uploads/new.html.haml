@@ -1,5 +1,7 @@
 %h1 New CSV Upload
 
+%p= link_to "CSV Upload List", admin_csv_uploads_path
+
 = form_with model: [:admin, csv_upload], multipart: true do |form|
   %select#csv_upload_parser_class_name(name="csv_upload[parser_class_name]" required="true")
     %option(value="" disabled="true" selected hidden) pick parser
