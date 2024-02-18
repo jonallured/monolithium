@@ -4,4 +4,6 @@
 
 %p= link_to "Edit Financial Account", edit_admin_financial_account_path(financial_account)
 
+%p= link_to "Delete Financial Account", admin_financial_account_path(action: :delete, id: financial_account.id), data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'}
+
 = render partial: "attrs_table", locals: { attrs: financial_account.table_attrs }
