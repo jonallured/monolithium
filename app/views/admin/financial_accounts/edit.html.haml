@@ -1,0 +1,7 @@
+%h1 Edit Financial Account #{financial_account.id}
+
+%p= link_to "Show Financial Account", admin_financial_account_path(financial_account)
+
+= form_with model: [:admin, financial_account] do |form|
+  = form.text_field :name, placeholder: "name"
+  = form.button "update"
