@@ -1,0 +1,16 @@
+%h1 Financial Accounts
+
+%table
+  %thead
+    %tr
+      %th ID
+      %th Name
+      %th.text-right Created At
+  %tbody
+    - financial_accounts.each do |financial_account|
+      %tr
+        %td= financial_account.id
+        %td= financial_account.name
+        %td.text-right= financial_account.created_at.to_formatted_s(:long)
+
+= paginate financial_accounts

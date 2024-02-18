@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :books, only: %i[create edit new update]
     resources :csv_uploads, only: %i[create index new show]
+    resources :financial_accounts, only: %i[index]
     resources :gift_ideas
     resources :hooks, only: %i[create edit index]
     resources :post_bin_requests, only: %i[index show]
