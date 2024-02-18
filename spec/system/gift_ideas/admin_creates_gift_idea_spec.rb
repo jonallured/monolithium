@@ -10,8 +10,8 @@ describe "Admin creates gift idea" do
     fill_in "note", with: "Please get me the actual physical game, thanks!"
     click_on "create"
 
-    actual_values = page.all("dl div").map do |div|
-      [div.find("dt").text, div.find("dd").text]
+    actual_values = page.all("tr").map do |table_row|
+      table_row.all("td").map(&:text)
     end
 
     expect(actual_values).to eq(
