@@ -18,6 +18,7 @@ RSpec.configure do |config|
 
   config.before do
     ActiveJob::Base.queue_adapter = :test
+    Kaminari.config.default_per_page = 3
   end
 
   config.before(:each, type: :system) do
