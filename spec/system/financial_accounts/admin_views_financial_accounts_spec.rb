@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe "Admin views FinancialAccount records" do
+describe "Admin views financial accounts" do
   include_context "admin password matches"
 
   scenario "from dashboard" do

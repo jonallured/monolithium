@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe "Admin views FinancialAccount" do
+describe "Admin views financial account" do
   include_context "admin password matches"
 
   scenario "from list page" do
@@ -12,7 +12,7 @@ describe "Admin views FinancialAccount" do
     expect(current_path).to eq admin_financial_account_path(financial_account)
   end
 
-  scenario "viewing FinancialAccount" do
+  scenario "viewing a record" do
     financial_account = FactoryBot.create(
       :financial_account,
       name: "Slush fund"

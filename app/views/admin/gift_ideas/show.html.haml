@@ -1,7 +1,9 @@
 %h1 Gift Idea #{gift_idea.id}
 
-%p= link_to "gift ideas", admin_gift_ideas_path
+%p= link_to "Gift Idea List", admin_gift_ideas_path
 
-%p= link_to "edit", edit_admin_gift_idea_path(gift_idea)
+%p= link_to "Edit Gift Idea", edit_admin_gift_idea_path(gift_idea)
+
+%p= link_to "Delete Gift Idea", admin_gift_idea_path(gift_idea), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }
 
 = render partial: "attrs_table", locals: { attrs: gift_idea.table_attrs }

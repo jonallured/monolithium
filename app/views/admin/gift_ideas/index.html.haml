@@ -1,7 +1,18 @@
 %h1 Gift Ideas
 
-%p= link_to "new gift idea", new_admin_gift_idea_path
+%p= link_to "New Gift Idea", new_admin_gift_idea_path
 
-%ul
-  - gift_ideas.each do |gift_idea|
-    %li= link_to gift_idea.title, admin_gift_idea_path(gift_idea)
+%table
+  %thead
+    %tr
+      %th ID
+      %th Title
+      %th.text-right Created At
+  %tbody
+    - gift_ideas.each do |gift_idea|
+      %tr
+        %td= link_to gift_idea.id, admin_gift_idea_path(gift_idea)
+        %td= gift_idea.title
+        %td.text-right= gift_idea.created_at.to_formatted_s(:long)
+
+= paginate gift_ideas

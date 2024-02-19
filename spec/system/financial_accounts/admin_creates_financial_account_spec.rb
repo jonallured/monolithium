@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe "Admin creates FinancialAccount" do
+describe "Admin creates financial account" do
   include_context "admin password matches"
 
   scenario "from list page" do
@@ -14,16 +14,30 @@ describe "Admin creates FinancialAccount" do
   scenario "create with errors" do
     visit "/admin/financial_accounts/new"
     click_on "create"
-    expect(page).to have_css ".border-pink p", text: "Name can't be blank"
+    expect(page).to have_css ".alert", text: "Name can't be blank"
+    expect(current_path).to eq new_admin_financial_account_path
   end
 
   scenario "create successfully" do
     visit "/admin/financial_accounts/new"
     fill_in "name", with: "Brand new account"
     click_on "create"
-    expect(page).to have_css ".border-purple p", text: "Financial Account successfully created"
-    expect(FinancialAccount.count).to eq 1
+
+    expect(page).to have_css ".notice", text: "Financial Account created"
+
     financial_account = FinancialAccount.last
-    expect(financial_account.name).to eq "Brand new account"
+    expect(current_path).to eq admin_financial_account_path(financial_account)
+
+    actual_values = page.all("tr").map do |table_row|
+      table_row.all("td").map(&:text)
+    end
+
+    expect(actual_values).to eq(
+      [
+        ["Name", "Brand new account"],
+        ["Created At", financial_account.created_at.to_formatted_s(:long)],
+        ["Updated At", financial_account.updated_at.to_formatted_s(:long)]
+      ]
+    )
   end
 end

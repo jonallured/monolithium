@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe "Admin edits FinancialAccount" do
+describe "Admin edits financial account" do
   include_context "admin password matches"
 
   scenario "from show page" do
@@ -12,15 +12,15 @@ describe "Admin edits FinancialAccount" do
     expect(current_path).to eq edit_admin_financial_account_path(financial_account)
   end
 
-  scenario "update with errors" do
+  scenario "edit with errors" do
     financial_account = FactoryBot.create(:financial_account)
     visit "/admin/financial_accounts/#{financial_account.id}/edit"
     fill_in "name", with: ""
     click_on "update"
-    expect(page).to have_css ".border-pink p", text: "Name can't be blank"
+    expect(page).to have_css ".alert", text: "Name can't be blank"
   end
 
-  scenario "update successfully" do
+  scenario "edit successfully" do
     financial_account = FactoryBot.create(
       :financial_account,
       name: "Band new account"
@@ -28,8 +28,9 @@ describe "Admin edits FinancialAccount" do
     visit "/admin/financial_accounts/#{financial_account.id}/edit"
     fill_in "name", with: "Brand new account"
     click_on "update"
-    expect(page).to have_css ".border-purple p", text: "Financial Account successfully updated"
-    financial_account.reload
-    expect(financial_account.name).to eq "Brand new account"
+
+    expect(page).to have_css ".notice", text: "Financial Account updated"
+    expect(current_path).to eq admin_financial_account_path(financial_account)
+    expect(page).to have_css "td", text: "Brand new account"
   end
 end

@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe "Admin deletes FinancialAccount" do
+describe "Admin deletes financial account" do
   include_context "admin password matches"
 
   let(:financial_account) { FactoryBot.create(:financial_account) }
@@ -19,7 +19,7 @@ describe "Admin deletes FinancialAccount" do
 
     accept_confirm { click_on "Delete Financial Account" }
 
-    expect(page).to have_css "h1", text: "Financial Accounts"
+    expect(page).to have_css ".notice", text: "Financial Account deleted"
 
     expect(FinancialAccount.count).to eq 0
     expect(current_path).to eq admin_financial_accounts_path
