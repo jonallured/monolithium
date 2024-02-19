@@ -9,6 +9,14 @@
     @apply prose-lg;
   }
 
+  .flash {
+    @apply border;
+    @apply px-6;
+    @apply mb-8;
+    @apply text-sm;
+    @apply text-off-white;
+  }
+
   table {
     @apply text-lg;
   }
