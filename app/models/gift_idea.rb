@@ -10,7 +10,9 @@ class GiftIdea < ApplicationRecord
     [
       ["Title", title],
       ["Website URL", website_url],
-      ["Note", note]
+      ["Note", note],
+      ["Created At", created_at.to_formatted_s(:long)],
+      ["Updated At", updated_at.to_formatted_s(:long)]
     ]
   end
 end
