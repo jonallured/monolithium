@@ -5,12 +5,12 @@ class GiftIdeasController < ApplicationController
 
   def update
     if gift_idea.update(gift_idea_params)
-      flash.notice = "gift idea updated!"
-      redirect_to wishlist_path
+      flash.notice = "Gift Idea updated"
     else
-      flash.alert = gift_idea.errors.full_messages
-      render :edit
+      flash.alert = gift_idea.errors.full_messages.to_sentence
     end
+
+    redirect_to wishlist_path
   end
 
   private
