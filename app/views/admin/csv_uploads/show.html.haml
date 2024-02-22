@@ -2,6 +2,8 @@
 
 %p= link_to "CSV Upload List", admin_csv_uploads_path
 
+%p= link_to "Delete CSV Upload", admin_csv_upload_path(csv_upload), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }
+
 = render partial: "attrs_table", locals: { attrs: csv_upload.table_attrs }
 
 %h2 Data
