@@ -15,6 +15,12 @@ class Admin::CsvUploadsController < ApplicationController
     end
   end
 
+  def destroy
+    csv_upload.destroy
+    flash.notice = "CSV Upload deleted"
+    redirect_to admin_csv_uploads_path
+  end
+
   private
 
   def csv_upload_params
