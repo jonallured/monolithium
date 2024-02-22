@@ -15,6 +15,16 @@ class Admin::CsvUploadsController < ApplicationController
     end
   end
 
+  def update
+    if csv_upload.update(csv_upload_params)
+      flash.notice = "CSV Upload updated"
+      redirect_to admin_csv_upload_path(csv_upload)
+    else
+      flash.alert = csv_upload.errors.full_messages.to_sentence
+      redirect_to edit_admin_csv_upload_path(csv_upload)
+    end
+  end
+
   def destroy
     csv_upload.destroy
     flash.notice = "CSV Upload deleted"
@@ -24,9 +34,13 @@ class Admin::CsvUploadsController < ApplicationController
   private
 
   def csv_upload_params
-    safe_params = params.require(:csv_upload).permit(:parser_class_name)
-    safe_params[:original_filename] = params[:file].original_filename
-    safe_params[:data] = params[:file].read
+    safe_params = params.require(:csv_upload).permit(:original_filename, :parser_class_name)
+
+    if params[:file]
+      safe_params[:original_filename] = params[:file].original_filename
+      safe_params[:data] = params[:file].read
+    end
+
     safe_params
   end
 end
