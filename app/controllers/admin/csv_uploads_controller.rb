@@ -1,14 +1,16 @@
 class Admin::CsvUploadsController < ApplicationController
   expose(:csv_upload)
-  expose(:csv_uploads) { CsvUpload.order(created_at: :desc).page params[:page] }
+  expose(:csv_uploads) do
+    CsvUpload.order(created_at: :desc).page(params[:page])
+  end
 
   def create
     if csv_upload.save
       ParseCsvUploadJob.perform_later(csv_upload.id)
-      flash.notice = "CSV Upload successfully created"
+      flash.notice = "CSV Upload created"
       redirect_to admin_csv_upload_path(csv_upload)
     else
-      flash.alert = csv_upload.errors.full_messages.join(",")
+      flash.alert = csv_upload.errors.full_messages.to_sentence
       redirect_to new_admin_csv_upload_path
     end
   end
