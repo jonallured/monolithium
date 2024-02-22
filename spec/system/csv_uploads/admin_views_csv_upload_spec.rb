@@ -1,7 +1,16 @@
 require "rails_helper"
 
-describe "Admin views CsvUpload" do
+describe "Admin views csv upload" do
   include_context "admin password matches"
+
+  scenario "from list page" do
+    csv_upload = FactoryBot.create(:csv_upload)
+    visit "/admin/csv_uploads"
+    click_on csv_upload.id.to_s
+    expect(page).to have_css "h1", text: "CSV Upload #{csv_upload.id}"
+    expect(page).to have_css "a", text: "CSV Upload List"
+    expect(current_path).to eq admin_csv_upload_path(csv_upload)
+  end
 
   scenario "views CsvUpload" do
     csv_upload = FactoryBot.create(
@@ -12,8 +21,6 @@ describe "Admin views CsvUpload" do
     )
 
     visit "/admin/csv_uploads/#{csv_upload.id}"
-
-    expect(page).to have_content "CSV Upload #{csv_upload.id}"
 
     actual_values = page.all("tr").map do |table_row|
       table_row.all("td").map(&:text)

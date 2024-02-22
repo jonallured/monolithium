@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe "Admin creates GiftIdea" do
+describe "Admin creates gift idea" do
   include_context "admin password matches"
 
   scenario "from list page" do
