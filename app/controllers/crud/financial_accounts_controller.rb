@@ -4,6 +4,10 @@ class Crud::FinancialAccountsController < ApplicationController
     FinancialAccount.order(created_at: :desc).page(params[:page])
   end
 
+  def show
+    redirect_to crud_financial_account_path(FinancialAccount.random) if params[:id] == "random"
+  end
+
   def create
     if financial_account.save
       flash.notice = "Financial Account created"

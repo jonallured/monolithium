@@ -36,4 +36,15 @@ describe "Admin views gift idea" do
       ]
     )
   end
+
+  scenario "views random record" do
+    gift_idea = FactoryBot.create(:gift_idea)
+    expect(GiftIdea).to receive(:random).and_return(gift_idea)
+
+    visit "/crud/gift_ideas"
+    click_on "Random Gift Idea"
+
+    expect(page).to have_css "h1", text: "Gift Idea #{gift_idea.id}"
+    expect(page).to have_current_path crud_gift_idea_path(gift_idea)
+  end
 end
