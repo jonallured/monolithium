@@ -12,7 +12,7 @@ describe "Admin views csv upload" do
     expect(page).to have_current_path crud_csv_upload_path(csv_upload)
   end
 
-  scenario "views CsvUpload" do
+  scenario "viewing a record" do
     csv_upload = FactoryBot.create(
       :csv_upload,
       data: "foo,bar,baz",
@@ -38,7 +38,7 @@ describe "Admin views csv upload" do
     expect(page.find("code").text).to eq csv_upload.data
   end
 
-  scenario "views random CsvUpload" do
+  scenario "views random record" do
     csv_upload = FactoryBot.create(:csv_upload)
     expect(CsvUpload).to receive(:random).and_return(csv_upload)
 

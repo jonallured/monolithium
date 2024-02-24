@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe "Admin views CsvUploads" do
+describe "Admin views csv uploads" do
   include_context "admin password matches"
 
   scenario "from dashboard" do
