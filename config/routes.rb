@@ -24,7 +24,7 @@ Rails.application.routes.draw do
 
   resources :gift_ideas, only: %i[update]
 
-  namespace :admin do
+  namespace :crud do
     resources :books, only: %i[create edit new update]
     resources :csv_uploads
     resources :financial_accounts
