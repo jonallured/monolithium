@@ -35,7 +35,9 @@ Rails.application.routes.draw do
   namespace :crud do
     resources :books
     resources :csv_uploads
-    resources :financial_accounts
+    resources :financial_accounts do
+      resources :financial_statements
+    end
     resources :gift_ideas
     resources :hooks, only: %i[create edit index]
     resources :post_bin_requests, only: %i[index show]

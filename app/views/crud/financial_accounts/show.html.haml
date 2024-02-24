@@ -6,4 +6,6 @@
 
 %p= link_to "Delete Financial Account", crud_financial_account_path(financial_account), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }
 
+%p= link_to "Financial Statement List", crud_financial_account_financial_statements_path(financial_account)
+
 = render partial: "attrs_table", locals: { attrs: financial_account.table_attrs }
