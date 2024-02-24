@@ -4,6 +4,10 @@ class Crud::GiftIdeasController < ApplicationController
     GiftIdea.order(created_at: :desc).page(params[:page])
   end
 
+  def show
+    redirect_to crud_gift_idea_path(GiftIdea.random) if params[:id] == "random"
+  end
+
   def create
     if gift_idea.save
       flash.notice = "Gift Idea created"

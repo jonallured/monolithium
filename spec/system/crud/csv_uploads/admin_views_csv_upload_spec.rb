@@ -37,4 +37,15 @@ describe "Admin views csv upload" do
 
     expect(page.find("code").text).to eq csv_upload.data
   end
+
+  scenario "views random CsvUpload" do
+    csv_upload = FactoryBot.create(:csv_upload)
+    expect(CsvUpload).to receive(:random).and_return(csv_upload)
+
+    visit "/crud/csv_uploads"
+    click_on "Random CSV Upload"
+
+    expect(page).to have_css "h1", text: "CSV Upload #{csv_upload.id}"
+    expect(page).to have_current_path crud_csv_upload_path(csv_upload)
+  end
 end

@@ -32,4 +32,15 @@ describe "Admin views financial account" do
       ]
     )
   end
+
+  scenario "views random record" do
+    financial_account = FactoryBot.create(:financial_account)
+    expect(FinancialAccount).to receive(:random).and_return(financial_account)
+
+    visit "/crud/financial_accounts"
+    click_on "Random Financial Account"
+
+    expect(page).to have_css "h1", text: "Financial Account #{financial_account.id}"
+    expect(page).to have_current_path crud_financial_account_path(financial_account)
+  end
 end

@@ -4,6 +4,10 @@ class Crud::CsvUploadsController < ApplicationController
     CsvUpload.order(created_at: :desc).page(params[:page])
   end
 
+  def show
+    redirect_to crud_csv_upload_path(CsvUpload.random) if params[:id] == "random"
+  end
+
   def create
     if csv_upload.save
       ParseCsvUploadJob.perform_later(csv_upload.id)
