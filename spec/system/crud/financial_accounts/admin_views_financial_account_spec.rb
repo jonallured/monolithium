@@ -9,7 +9,7 @@ describe "Admin views financial account" do
     click_on financial_account.id.to_s
     expect(page).to have_css "h1", text: "Financial Account #{financial_account.id}"
     expect(page).to have_css "a", text: "Financial Account List"
-    expect(current_path).to eq crud_financial_account_path(financial_account)
+    expect(page).to have_current_path crud_financial_account_path(financial_account)
   end
 
   scenario "viewing a record" do

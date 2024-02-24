@@ -7,7 +7,7 @@ describe "Admin views financial accounts" do
     visit "/dashboard"
     click_on "Financial Accounts"
     expect(page).to have_css "h1", text: "Financial Accounts"
-    expect(current_path).to eq crud_financial_accounts_path
+    expect(page).to have_current_path crud_financial_accounts_path
   end
 
   scenario "with no records" do

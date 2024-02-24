@@ -11,7 +11,7 @@ describe "Admin deletes financial account" do
     dismiss_confirm { click_on "Delete Financial Account" }
 
     expect(FinancialAccount.count).to eq 1
-    expect(current_path).to eq crud_financial_account_path(financial_account)
+    expect(page).to have_current_path crud_financial_account_path(financial_account)
   end
 
   scenario "confirms delete" do
@@ -22,6 +22,6 @@ describe "Admin deletes financial account" do
     expect(page).to have_css ".notice", text: "Financial Account deleted"
 
     expect(FinancialAccount.count).to eq 0
-    expect(current_path).to eq crud_financial_accounts_path
+    expect(page).to have_current_path crud_financial_accounts_path
   end
 end

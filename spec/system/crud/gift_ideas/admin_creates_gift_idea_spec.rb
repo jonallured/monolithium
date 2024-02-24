@@ -8,14 +8,14 @@ describe "Admin creates gift idea" do
     click_on "New Gift Idea"
     expect(page).to have_css "h1", text: "New Gift Idea"
     expect(page).to have_css "a", text: "Gift Idea List"
-    expect(current_path).to eq new_crud_gift_idea_path
+    expect(page).to have_current_path new_crud_gift_idea_path
   end
 
   scenario "create with errors" do
     visit "/crud/gift_ideas/new"
     click_on "create"
     expect(page).to have_css ".alert", text: "Title can't be blank and Website url can't be blank"
-    expect(current_path).to eq new_crud_gift_idea_path
+    expect(page).to have_current_path new_crud_gift_idea_path
   end
 
   scenario "create successfully" do
@@ -28,7 +28,7 @@ describe "Admin creates gift idea" do
     expect(page).to have_css ".notice", text: "Gift Idea created"
 
     gift_idea = GiftIdea.last
-    expect(current_path).to eq crud_gift_idea_path(gift_idea)
+    expect(page).to have_current_path crud_gift_idea_path(gift_idea)
 
     actual_values = page.all("tr").map do |table_row|
       table_row.all("td").map(&:text)

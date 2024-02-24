@@ -7,7 +7,7 @@ describe "Admin views gift ideas" do
     visit "/dashboard"
     click_on "Gift Ideas"
     expect(page).to have_css "h1", text: "Gift Ideas"
-    expect(current_path).to eq crud_gift_ideas_path
+    expect(page).to have_current_path crud_gift_ideas_path
   end
 
   scenario "with no records" do

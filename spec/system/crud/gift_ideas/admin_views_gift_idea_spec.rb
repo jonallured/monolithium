@@ -9,7 +9,7 @@ describe "Admin views gift idea" do
     click_on gift_idea.id.to_s
     expect(page).to have_css "h1", text: "Gift Idea #{gift_idea.id}"
     expect(page).to have_css "a", text: "Gift Idea List"
-    expect(current_path).to eq crud_gift_idea_path(gift_idea)
+    expect(page).to have_current_path crud_gift_idea_path(gift_idea)
   end
 
   scenario "viewing a record" do

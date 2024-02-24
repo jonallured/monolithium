@@ -9,7 +9,7 @@ describe "Admin views csv upload" do
     click_on csv_upload.id.to_s
     expect(page).to have_css "h1", text: "CSV Upload #{csv_upload.id}"
     expect(page).to have_css "a", text: "CSV Upload List"
-    expect(current_path).to eq crud_csv_upload_path(csv_upload)
+    expect(page).to have_current_path crud_csv_upload_path(csv_upload)
   end
 
   scenario "views CsvUpload" do
