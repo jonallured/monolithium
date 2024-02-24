@@ -2,7 +2,7 @@ source "https://rubygems.org"
 
 ruby File.read(".tool-versions").split.last
 
-gem "rails", "7.1.2"
+gem "rails", "7.1.3.2"
 
 gem "pg"
 gem "puma"
@@ -11,7 +11,7 @@ gem "aws-sdk-s3"
 gem "decent_exposure"
 gem "faraday"
 gem "faraday-follow_redirects"
-gem "graphql-client", github: "rmosolgo/graphql-client", ref: "27ef61f"
+gem "graphql-client"
 gem "haml"
 gem "importmap-rails"
 gem "jbuilder"
