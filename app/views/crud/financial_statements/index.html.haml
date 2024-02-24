@@ -1,0 +1,16 @@
+%h1 Financial Statements for #{financial_account.name}
+
+%table
+  %thead
+    %tr
+      %th ID
+      %th Period
+      %th.text-right Created At
+  %tbody
+    - financial_statements.each do |financial_statement|
+      %tr
+        %td= financial_statement.id
+        %td= financial_statement.period_start_on.to_fs
+        %td.text-right= financial_statement.created_at.to_fs
+
+= paginate financial_statements
