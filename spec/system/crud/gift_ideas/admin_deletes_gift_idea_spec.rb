@@ -11,7 +11,7 @@ describe "Admin deletes gift idea" do
     dismiss_confirm { click_on "Delete Gift Idea" }
 
     expect(GiftIdea.count).to eq 1
-    expect(current_path).to eq crud_gift_idea_path(gift_idea)
+    expect(page).to have_current_path crud_gift_idea_path(gift_idea)
   end
 
   scenario "confirms delete" do
@@ -22,6 +22,6 @@ describe "Admin deletes gift idea" do
     expect(page).to have_css ".notice", text: "Gift Idea deleted"
 
     expect(GiftIdea.count).to eq 0
-    expect(current_path).to eq crud_gift_ideas_path
+    expect(page).to have_current_path crud_gift_ideas_path
   end
 end

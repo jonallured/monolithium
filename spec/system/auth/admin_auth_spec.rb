@@ -6,7 +6,7 @@ describe "Authentication" do
     fill_in "admin_password", with: "shhh"
     click_on "sign in"
     expect(page).to have_content "Password saved to session"
-    expect(current_path).to eq dashboard_path
+    expect(page).to have_current_path dashboard_path
   end
 
   scenario "signing in with redirect_to works" do
@@ -14,7 +14,7 @@ describe "Authentication" do
     fill_in "admin_password", with: "shhh"
     click_on "sign in"
     expect(page).to have_content "Password saved to session"
-    expect(current_path).to eq "/crud/projects"
+    expect(page).to have_current_path crud_projects_path
   end
 
   scenario "signing out clears session" do
@@ -25,6 +25,6 @@ describe "Authentication" do
     visit "/sign_out"
     expect(page).to have_content "Password removed from session"
     visit "/dashboard"
-    expect(current_path).to eq sign_in_path
+    expect(page).to have_current_path sign_in_path
   end
 end

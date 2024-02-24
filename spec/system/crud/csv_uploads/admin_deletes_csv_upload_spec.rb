@@ -11,7 +11,7 @@ describe "Admin deletes csv upload" do
     dismiss_confirm { click_on "Delete CSV Upload" }
 
     expect(CsvUpload.count).to eq 1
-    expect(current_path).to eq crud_csv_upload_path(csv_upload)
+    expect(page).to have_current_path crud_csv_upload_path(csv_upload)
   end
 
   scenario "confirms delete" do
@@ -22,6 +22,6 @@ describe "Admin deletes csv upload" do
     expect(page).to have_css ".notice", text: "CSV Upload deleted"
 
     expect(CsvUpload.count).to eq 0
-    expect(current_path).to eq crud_csv_uploads_path
+    expect(page).to have_current_path crud_csv_uploads_path
   end
 end

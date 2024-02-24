@@ -9,7 +9,7 @@ describe "Admin edits csv upload" do
     click_on "Edit CSV Upload"
     expect(page).to have_css "h1", text: "Edit CSV Upload #{csv_upload.id}"
     expect(page).to have_css "a", text: "Show CSV Upload"
-    expect(current_path).to eq edit_crud_csv_upload_path(csv_upload)
+    expect(page).to have_current_path edit_crud_csv_upload_path(csv_upload)
   end
 
   scenario "edit with errors" do
@@ -30,7 +30,7 @@ describe "Admin edits csv upload" do
     click_on "update"
 
     expect(page).to have_css ".notice", text: "CSV Upload updated"
-    expect(current_path).to eq crud_csv_upload_path(csv_upload)
+    expect(page).to have_current_path crud_csv_upload_path(csv_upload)
     expect(page).to have_css "td", text: "some-great-data.csv"
   end
 end

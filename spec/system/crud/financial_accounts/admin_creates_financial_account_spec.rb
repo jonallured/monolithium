@@ -8,14 +8,14 @@ describe "Admin creates financial account" do
     click_on "New Financial Account"
     expect(page).to have_css "h1", text: "New Financial Account"
     expect(page).to have_css "a", text: "Financial Account List"
-    expect(current_path).to eq new_crud_financial_account_path
+    expect(page).to have_current_path new_crud_financial_account_path
   end
 
   scenario "create with errors" do
     visit "/crud/financial_accounts/new"
     click_on "create"
     expect(page).to have_css ".alert", text: "Name can't be blank"
-    expect(current_path).to eq new_crud_financial_account_path
+    expect(page).to have_current_path new_crud_financial_account_path
   end
 
   scenario "create successfully" do
@@ -26,7 +26,7 @@ describe "Admin creates financial account" do
     expect(page).to have_css ".notice", text: "Financial Account created"
 
     financial_account = FinancialAccount.last
-    expect(current_path).to eq crud_financial_account_path(financial_account)
+    expect(page).to have_current_path crud_financial_account_path(financial_account)
 
     actual_values = page.all("tr").map do |table_row|
       table_row.all("td").map(&:text)

@@ -8,7 +8,7 @@ describe "Admin creates csv upload" do
     click_on "New CSV Upload"
     expect(page).to have_css "h1", text: "New CSV Upload"
     expect(page).to have_css "a", text: "CSV Upload List"
-    expect(current_path).to eq new_crud_csv_upload_path
+    expect(page).to have_current_path new_crud_csv_upload_path
   end
 
   scenario "create with parser error" do
@@ -35,7 +35,7 @@ describe "Admin creates csv upload" do
     click_on "create"
     expect(page).to have_content "Data can't be blank"
     expect(page).to have_css ".alert", text: "Data can't be blank"
-    expect(current_path).to eq new_crud_csv_upload_path
+    expect(page).to have_current_path new_crud_csv_upload_path
   end
 
   scenario "create successfully" do
@@ -48,7 +48,7 @@ describe "Admin creates csv upload" do
     expect(ParseCsvUploadJob).to have_been_enqueued
 
     csv_upload = CsvUpload.last
-    expect(current_path).to eq crud_csv_upload_path(csv_upload)
+    expect(page).to have_current_path crud_csv_upload_path(csv_upload)
 
     actual_values = page.all("tr").map do |table_row|
       table_row.all("td").map(&:text)

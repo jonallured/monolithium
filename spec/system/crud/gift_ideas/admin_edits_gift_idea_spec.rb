@@ -9,7 +9,7 @@ describe "Admin edits gift idea" do
     click_on "Edit Gift Idea"
     expect(page).to have_css "h1", text: "Edit Gift Idea #{gift_idea.id}"
     expect(page).to have_css "a", text: "Show Gift Idea"
-    expect(current_path).to eq edit_crud_gift_idea_path(gift_idea)
+    expect(page).to have_current_path edit_crud_gift_idea_path(gift_idea)
   end
 
   scenario "edit with errors" do
@@ -30,7 +30,7 @@ describe "Admin edits gift idea" do
     click_on "update"
 
     expect(page).to have_css ".notice", text: "Gift Idea updated"
-    expect(current_path).to eq crud_gift_idea_path(gift_idea)
+    expect(page).to have_current_path crud_gift_idea_path(gift_idea)
     expect(page).to have_css "td", text: "New Mario Game"
   end
 end

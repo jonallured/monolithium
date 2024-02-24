@@ -9,7 +9,7 @@ describe "Admin edits financial account" do
     click_on "Edit Financial Account"
     expect(page).to have_css "h1", text: "Edit Financial Account #{financial_account.id}"
     expect(page).to have_css "a", text: "Show Financial Account"
-    expect(current_path).to eq edit_crud_financial_account_path(financial_account)
+    expect(page).to have_current_path edit_crud_financial_account_path(financial_account)
   end
 
   scenario "edit with errors" do
@@ -30,7 +30,7 @@ describe "Admin edits financial account" do
     click_on "update"
 
     expect(page).to have_css ".notice", text: "Financial Account updated"
-    expect(current_path).to eq crud_financial_account_path(financial_account)
+    expect(page).to have_current_path crud_financial_account_path(financial_account)
     expect(page).to have_css "td", text: "Brand new account"
   end
 end
