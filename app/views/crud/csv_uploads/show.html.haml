@@ -1,0 +1,14 @@
+%h1 CSV Upload #{csv_upload.id}
+
+%p= link_to "CSV Upload List", crud_csv_uploads_path
+
+%p= link_to "Edit CSV Upload", edit_crud_csv_upload_path(csv_upload)
+
+%p= link_to "Delete CSV Upload", crud_csv_upload_path(csv_upload), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }
+
+= render partial: "attrs_table", locals: { attrs: csv_upload.table_attrs }
+
+%h2 Data
+
+%pre.text-off-black.h-72
+  %code= csv_upload.data

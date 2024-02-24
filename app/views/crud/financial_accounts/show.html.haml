@@ -1,0 +1,9 @@
+%h1 Financial Account #{financial_account.id}
+
+%p= link_to "Financial Account List", crud_financial_accounts_path
+
+%p= link_to "Edit Financial Account", edit_crud_financial_account_path(financial_account)
+
+%p= link_to "Delete Financial Account", crud_financial_account_path(financial_account), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }
+
+= render partial: "attrs_table", locals: { attrs: financial_account.table_attrs }

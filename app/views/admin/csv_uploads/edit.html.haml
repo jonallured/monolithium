@@ -1,7 +1,0 @@
-%h1 Edit CSV Upload #{csv_upload.id}
-
-%p= link_to "Show CSV Upload", admin_csv_upload_path(csv_upload)
-
-= form_with model: [:admin, csv_upload] do |form|
-  = form.text_field :original_filename, placeholder: "original filename"
-  = form.button "update"

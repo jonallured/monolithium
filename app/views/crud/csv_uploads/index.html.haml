@@ -1,0 +1,20 @@
+%h1 CSV Uploads
+
+%p= link_to "New CSV Upload", new_crud_csv_upload_path
+
+%table
+  %thead
+    %tr
+      %th ID
+      %th Parser Class Name
+      %th Original Filename
+      %th.text-right Created At
+  %tbody
+    - csv_uploads.each do |csv_upload|
+      %tr
+        %td= link_to csv_upload.id, crud_csv_upload_path(csv_upload.id)
+        %td= csv_upload.parser_class_name
+        %td= csv_upload.original_filename
+        %td.text-right= csv_upload.created_at.to_formatted_s(:long)
+
+= paginate csv_uploads
