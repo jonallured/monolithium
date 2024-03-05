@@ -24,6 +24,8 @@ Rails.application.routes.draw do
 
   resources :gift_ideas, only: %i[update]
 
+  resources :crank_users, only: %i[create new show], param: :code
+
   namespace :crud do
     resources :books, only: %i[create edit new update]
     resources :csv_uploads
