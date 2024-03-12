@@ -14,8 +14,8 @@ class Crud::BooksController < ApplicationController
       flash.notice = "Book created"
       redirect_to crud_book_path(book)
     else
-      flash.alert = book.errors.full_messages
-      render :new
+      flash.alert = book.errors.full_messages.to_sentence
+      redirect_to new_crud_book_path
     end
   end
 
