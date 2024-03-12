@@ -4,7 +4,7 @@ set -e
 
 git ensure-main
 
-labels="automerge,dependencies"
+label="dependencies"
 message=$(cat <<"END"
 Dependency Updates
 
@@ -29,4 +29,4 @@ bundle exec rake
 git add .
 git commit --message "$message"
 git push origin updates
-gh pr create --fill --label "$labels"
+gh pr create --fill --label "$label"
