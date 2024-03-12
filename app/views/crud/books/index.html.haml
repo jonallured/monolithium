@@ -1,0 +1,16 @@
+%h1 Books
+
+%table
+  %thead
+    %tr
+      %th ID
+      %th Title
+      %th.text-right Created At
+  %tbody
+    - books.each do |book|
+      %tr
+        %td= book.id
+        %td= book.title
+        %td.text-right= book.created_at.to_formatted_s(:long)
+
+= paginate books

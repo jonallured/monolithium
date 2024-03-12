@@ -1,5 +1,8 @@
 class Crud::BooksController < ApplicationController
   expose(:book)
+  expose(:books) do
+    Book.order(created_at: :desc).page(params[:page])
+  end
 
   def create
     if book.save
