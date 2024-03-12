@@ -1,0 +1,5 @@
+%h1 Book #{book.id}
+
+%p= link_to "Book List", crud_books_path
+
+= render partial: "attrs_table", locals: { attrs: book.table_attrs }
