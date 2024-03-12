@@ -4,4 +4,6 @@
 
 %p= link_to "Edit Book", edit_crud_book_path(book)
 
+%p= link_to "Delete Book", crud_book_path(book), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }
+
 = render partial: "attrs_table", locals: { attrs: book.table_attrs }

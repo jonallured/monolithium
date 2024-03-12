@@ -29,6 +29,12 @@ class Crud::BooksController < ApplicationController
     end
   end
 
+  def destroy
+    book.destroy
+    flash.notice = "Book deleted"
+    redirect_to crud_books_path
+  end
+
   private
 
   def book_params
