@@ -1,5 +1,7 @@
 %h1 Books
 
+%p= link_to "Random Book", crud_book_path("random")
+
 %table
   %thead
     %tr
@@ -9,7 +11,7 @@
   %tbody
     - books.each do |book|
       %tr
-        %td= book.id
+        %td= link_to book.id, crud_book_path(book)
         %td= book.title
         %td.text-right= book.created_at.to_formatted_s(:long)
 

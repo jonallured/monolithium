@@ -17,9 +17,11 @@ class Book < ApplicationRecord
   def table_attrs
     [
       ["ISBN", isbn],
-      ["Finished On", finished_on],
       ["Title", title],
-      ["Pages", pages]
+      ["Pages", pages],
+      ["Finished On", finished_on.to_formatted_s(:long)],
+      ["Created At", created_at.to_formatted_s(:long)],
+      ["Updated At", updated_at.to_formatted_s(:long)]
     ]
   end
 end

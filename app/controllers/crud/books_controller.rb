@@ -4,10 +4,15 @@ class Crud::BooksController < ApplicationController
     Book.order(created_at: :desc).page(params[:page])
   end
 
+  def show
+    redirect_to crud_book_path(Book.random) if params[:id] == "random"
+  end
+
   def create
     if book.save
       EnhanceBookJob.perform_later(book.id)
-      redirect_to edit_crud_book_path(book)
+      flash.notice = "Book created"
+      redirect_to crud_book_path(book)
     else
       flash.alert = book.errors.full_messages
       render :new
