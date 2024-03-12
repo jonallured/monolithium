@@ -1,4 +1,5 @@
 class CrankUser < ApplicationRecord
+  has_many :crank_counts
   validates :code, presence: true, uniqueness: true
 
   def self.generate_codes

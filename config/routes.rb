@@ -24,7 +24,9 @@ Rails.application.routes.draw do
 
   resources :gift_ideas, only: %i[update]
 
-  resources :crank_users, only: %i[create new show], param: :code
+  resources :crank_users, only: %i[create new show], param: :code do
+    resources :crank_counts, only: %i[create new show]
+  end
 
   namespace :crud do
     resources :books, only: %i[create edit new update]

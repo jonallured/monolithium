@@ -1,0 +1,7 @@
+%h1 Create Crank Count for Crank User #{crank_user.code}
+
+%p Had enough for today? Go ahead and click create to log #{params[:ticks]} ticks!
+
+= form_with model: [crank_user, crank_count] do |f|
+  = f.hidden_field :ticks, value: params[:ticks]
+  = f.button "create"
