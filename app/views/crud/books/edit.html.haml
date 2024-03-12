@@ -1,5 +1,10 @@
-%h1 Book #{book.id}
+%h1 Edit Book #{book.id}
 
-= render partial: "attrs_table", locals: { attrs: book.table_attrs }
+%p= link_to "Show Book", crud_book_path(book)
 
-= render "form", book: book, button_label: "update"
+= form_with model: [:crud, book] do |form|
+  = form.text_field :isbn, placeholder: "isbn"
+  = form.text_field :title, placeholder: "title"
+  = form.text_field :pages, placeholder: "pages"
+  = form.date_field :finished_on, placeholder: "finished on"
+  = form.button "update"

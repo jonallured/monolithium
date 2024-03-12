@@ -21,16 +21,17 @@ class Crud::BooksController < ApplicationController
 
   def update
     if book.update(book_params)
-      redirect_to edit_crud_book_path(book)
+      flash.notice = "Book updated"
+      redirect_to crud_book_path(book)
     else
-      flash.alert = book.errors.full_messages
-      render :edit
+      flash.alert = book.errors.full_messages.to_sentence
+      redirect_to edit_crud_book_path(book)
     end
   end
 
   private
 
   def book_params
-    params.require(:book).permit(:finished_on, :isbn)
+    params.require(:book).permit(:finished_on, :isbn, :pages, :title)
   end
 end
