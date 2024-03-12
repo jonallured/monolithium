@@ -2,4 +2,7 @@
 
 %p= link_to "Book List", crud_books_path
 
-= render "form", book: book, button_label: "create"
+= form_with model: [:crud, book] do |form|
+  = form.text_field :isbn, placeholder: "isbn"
+  = form.date_field :finished_on, placeholder: "finished on"
+  = form.button "create"
