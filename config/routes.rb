@@ -29,7 +29,7 @@ Rails.application.routes.draw do
   end
 
   namespace :crud do
-    resources :books, only: %i[create edit index new show update]
+    resources :books
     resources :csv_uploads
     resources :financial_accounts
     resources :gift_ideas
