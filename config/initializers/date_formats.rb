@@ -1,4 +1,6 @@
-Date::DATE_FORMATS[:standard] = "%m/%d/%Y"
+Date::DATE_FORMATS[:default] = "%m/%d/%Y"
+
+Time::DATE_FORMATS[:default] = "%m/%d/%Y %I:%M:%S%P"
 
 Range::RANGE_FORMATS[:date_span] = proc do |start, stop|
   same_year = start.year == stop.year
