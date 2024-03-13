@@ -1,0 +1,9 @@
+%h1 Project #{project.id}
+
+%p= link_to "Project List", crud_projects_path
+
+%p= link_to "Edit Project", edit_crud_project_path(project)
+
+%p= link_to "Delete Project", crud_project_path(project), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }
+
+= render partial: "attrs_table", locals: { attrs: project.table_attrs }
