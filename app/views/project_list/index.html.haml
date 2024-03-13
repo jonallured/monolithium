@@ -1,13 +1,6 @@
 %h3 Today is a great day to make some updates!
 
 %div
-  %aside
-    %menu
-      %a(href="#") Create Project
-    %section
-      = form_with model: [:crud, project] do |f|
-        = f.text_field :name
-        = f.button "Create"
   - if projects.any?
     %ul(data-controller="projects")
       - projects.each do |project|

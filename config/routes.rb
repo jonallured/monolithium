@@ -10,6 +10,9 @@ Rails.application.routes.draw do
   get "wishlist", to: "wishlist#index"
   get "work_weeks/:target", to: "work_weeks#show", as: :work_week
 
+  get "project_list", to: "project_list#index", as: :project_list
+  patch "project_list/:id", to: "project_list#update"
+
   scope :style do
     get :article, to: "static#article", as: "article_styles"
     get :color, to: "static#color", as: "color_styles"
@@ -35,7 +38,6 @@ Rails.application.routes.draw do
     resources :gift_ideas
     resources :hooks, only: %i[create edit index]
     resources :post_bin_requests, only: %i[index show]
-    resources :projects, only: %i[create index update]
     resources :raw_hooks, only: %i[show]
   end
 

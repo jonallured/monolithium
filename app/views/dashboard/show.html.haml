@@ -12,6 +12,7 @@
 %p= link_to "Cybertail", cybertail_path
 %p= link_to "Financial Report", financial_report_path(year: Time.now.year)
 %p= link_to "Model Counts", model_counts_path
+%p= link_to "Project List", project_list_path
 %p= link_to "Today", today_path
 
 %h2 CRUD Pages
@@ -20,7 +21,6 @@
 %p= link_to "Financial Accounts", crud_financial_accounts_path
 %p= link_to "Gift Ideas", crud_gift_ideas_path
 %p= link_to "Post Bin", crud_post_bin_requests_path
-%p= link_to "Project List", crud_projects_path
 
 %h2 Api Routes
 %p= link_to "Ping", api_v1_ping_path
