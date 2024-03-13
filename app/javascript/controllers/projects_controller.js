@@ -21,7 +21,7 @@ export default class extends Controller {
         event.preventDefault()
         projectItem.classList.add("touched")
         const id = projectItem.dataset.projectId
-        const url = `/crud/projects/${id}.json`
+        const url = `/project_list/${id}.json`
         fetch(url, options)
       })
     })

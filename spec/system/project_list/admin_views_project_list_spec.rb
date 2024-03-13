@@ -4,7 +4,7 @@ describe "Admin views project list", js: true do
   include_context "admin password matches"
 
   scenario "with no projects" do
-    visit "/crud/projects"
+    visit "/project_list"
     expect(page).to have_content "No projects - create one!"
   end
 
@@ -13,7 +13,7 @@ describe "Admin views project list", js: true do
     FactoryBot.create :project, name: "2nd", touched_at: 1.day.ago
     FactoryBot.create :project, name: "3rd", touched_at: Time.zone.now
 
-    visit "/crud/projects"
+    visit "/project_list"
 
     project_names = page.all("li .name").map(&:text)
     expect(project_names).to eq %w[2nd 3rd 1st]

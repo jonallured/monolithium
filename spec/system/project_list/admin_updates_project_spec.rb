@@ -8,7 +8,7 @@ describe "Admin updates project", js: true do
     project = FactoryBot.create :project
     FactoryBot.create :project, name: "Newer"
 
-    visit "/crud/projects"
+    visit "/project_list"
     project_item = page.find("li", text: project.name)
     project_item.click
 
