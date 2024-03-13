@@ -58,8 +58,8 @@ describe "Admin creates csv upload" do
       [
         ["Parser Class Name", "WellsFargoParser"],
         ["Original Filename", "one_wf_transaction.csv"],
-        ["Created At", csv_upload.created_at.to_formatted_s(:long)],
-        ["Updated At", csv_upload.updated_at.to_formatted_s(:long)]
+        ["Created At", csv_upload.created_at.to_fs],
+        ["Updated At", csv_upload.updated_at.to_fs]
       ]
     )
   end

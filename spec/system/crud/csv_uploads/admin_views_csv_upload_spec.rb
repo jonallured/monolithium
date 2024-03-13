@@ -30,8 +30,8 @@ describe "Admin views csv upload" do
       [
         ["Parser Class Name", "DummyParser"],
         ["Original Filename", "dummy-data.csv"],
-        ["Created At", csv_upload.created_at.to_formatted_s(:long)],
-        ["Updated At", csv_upload.updated_at.to_formatted_s(:long)]
+        ["Created At", csv_upload.created_at.to_fs],
+        ["Updated At", csv_upload.updated_at.to_fs]
       ]
     )
 

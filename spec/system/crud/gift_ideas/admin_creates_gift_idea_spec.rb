@@ -39,8 +39,8 @@ describe "Admin creates gift idea" do
         ["Title", "New Mario Game"],
         ["Website URL", "https://www.nintendo.com/new-mario-game"],
         ["Note", "Please get me the actual physical game, thanks!"],
-        ["Created At", gift_idea.created_at.to_formatted_s(:long)],
-        ["Updated At", gift_idea.updated_at.to_formatted_s(:long)]
+        ["Created At", gift_idea.created_at.to_fs],
+        ["Updated At", gift_idea.updated_at.to_fs]
       ]
     )
   end

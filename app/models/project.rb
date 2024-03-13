@@ -4,9 +4,9 @@ class Project < ApplicationRecord
   def table_attrs
     [
       ["Name", name],
-      ["Touched At", touched_at&.to_formatted_s(:long)],
-      ["Created At", created_at.to_formatted_s(:long)],
-      ["Updated At", updated_at.to_formatted_s(:long)]
+      ["Touched At", touched_at&.to_fs],
+      ["Created At", created_at.to_fs],
+      ["Updated At", updated_at.to_fs]
     ]
   end
 

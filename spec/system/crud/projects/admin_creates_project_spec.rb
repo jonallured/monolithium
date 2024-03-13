@@ -36,8 +36,8 @@ describe "Admin creates project" do
       [
         ["Name", "Yet Another Ruby Gem"],
         ["Touched At", ""],
-        ["Created At", project.created_at.to_formatted_s(:long)],
-        ["Updated At", project.updated_at.to_formatted_s(:long)]
+        ["Created At", project.created_at.to_fs],
+        ["Updated At", project.updated_at.to_fs]
       ]
     )
   end
