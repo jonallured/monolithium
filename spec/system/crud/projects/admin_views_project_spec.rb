@@ -28,9 +28,9 @@ describe "Admin views project" do
     expect(actual_values).to eq(
       [
         ["Name", "Yet Another Ruby Gem"],
-        ["Touched At", project.touched_at.to_formatted_s(:long)],
-        ["Created At", project.created_at.to_formatted_s(:long)],
-        ["Updated At", project.updated_at.to_formatted_s(:long)]
+        ["Touched At", project.touched_at.to_fs],
+        ["Created At", project.created_at.to_fs],
+        ["Updated At", project.updated_at.to_fs]
       ]
     )
   end

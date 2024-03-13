@@ -40,9 +40,9 @@ describe "Admin creates book" do
         ["ISBN", "abc-123"],
         ["Title", ""],
         ["Pages", ""],
-        ["Finished On", "January 01, 2000"],
-        ["Created At", book.created_at.to_formatted_s(:long)],
-        ["Updated At", book.updated_at.to_formatted_s(:long)]
+        ["Finished On", "01/01/2000"],
+        ["Created At", book.created_at.to_fs],
+        ["Updated At", book.updated_at.to_fs]
       ]
     )
   end

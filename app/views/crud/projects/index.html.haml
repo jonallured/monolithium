@@ -15,6 +15,6 @@
       %tr
         %td= link_to project.id, crud_project_path(project)
         %td= project.name
-        %td.text-right= project.created_at.to_formatted_s(:long)
+        %td.text-right= project.created_at.to_fs
 
 = paginate projects

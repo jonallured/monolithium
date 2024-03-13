@@ -15,6 +15,6 @@
       %tr
         %td= link_to financial_account.id, crud_financial_account_path(financial_account)
         %td= financial_account.name
-        %td.text-right= financial_account.created_at.to_formatted_s(:long)
+        %td.text-right= financial_account.created_at.to_fs
 
 = paginate financial_accounts

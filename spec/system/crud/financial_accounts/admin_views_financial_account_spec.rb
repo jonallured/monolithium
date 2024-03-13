@@ -27,8 +27,8 @@ describe "Admin views financial account" do
     expect(actual_values).to eq(
       [
         ["Name", "Slush fund"],
-        ["Created At", financial_account.created_at.to_formatted_s(:long)],
-        ["Updated At", financial_account.updated_at.to_formatted_s(:long)]
+        ["Created At", financial_account.created_at.to_fs],
+        ["Updated At", financial_account.updated_at.to_fs]
       ]
     )
   end

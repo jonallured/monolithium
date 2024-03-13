@@ -15,6 +15,6 @@
       %tr
         %td= link_to book.id, crud_book_path(book)
         %td= book.title
-        %td.text-right= book.created_at.to_formatted_s(:long)
+        %td.text-right= book.created_at.to_fs
 
 = paginate books

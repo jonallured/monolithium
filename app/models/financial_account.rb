@@ -20,8 +20,8 @@ class FinancialAccount < ApplicationRecord
   def table_attrs
     [
       ["Name", name],
-      ["Created At", created_at.to_formatted_s(:long)],
-      ["Updated At", updated_at.to_formatted_s(:long)]
+      ["Created At", created_at.to_fs],
+      ["Updated At", updated_at.to_fs]
     ]
   end
 end

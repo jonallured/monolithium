@@ -32,9 +32,9 @@ describe "Admin views book" do
         ["ISBN", "abc-123"],
         ["Title", "Whittling And You"],
         ["Pages", "777"],
-        ["Finished On", book.finished_on.to_formatted_s(:long)],
-        ["Created At", book.created_at.to_formatted_s(:long)],
-        ["Updated At", book.updated_at.to_formatted_s(:long)]
+        ["Finished On", book.finished_on.to_fs],
+        ["Created At", book.created_at.to_fs],
+        ["Updated At", book.updated_at.to_fs]
       ]
     )
   end

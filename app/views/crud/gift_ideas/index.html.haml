@@ -15,6 +15,6 @@
       %tr
         %td= link_to gift_idea.id, crud_gift_idea_path(gift_idea)
         %td= gift_idea.title
-        %td.text-right= gift_idea.created_at.to_formatted_s(:long)
+        %td.text-right= gift_idea.created_at.to_fs
 
 = paginate gift_ideas
