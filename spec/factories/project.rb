@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :project do
-    name { "Foo Project" }
+    sequence(:name) { |n| "Foo Project #{n}" }
     touched_at { Time.zone.now }
   end
 end

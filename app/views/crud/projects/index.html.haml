@@ -1,0 +1,20 @@
+%h1 Projects
+
+%p= link_to "New Project", new_crud_project_path
+
+%p= link_to "Random Project", crud_project_path("random")
+
+%table
+  %thead
+    %tr
+      %th ID
+      %th Name
+      %th.text-right Created At
+  %tbody
+    - projects.each do |project|
+      %tr
+        %td= link_to project.id, crud_project_path(project)
+        %td= project.name
+        %td.text-right= project.created_at.to_formatted_s(:long)
+
+= paginate projects

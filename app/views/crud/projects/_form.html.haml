@@ -1,0 +1,4 @@
+= form_with model: [:crud, project] do |form|
+  = form.text_field :name, placeholder: "name"
+  = form.datetime_local_field :touched_at, placeholder: "touched at"
+  = form.button button_label
