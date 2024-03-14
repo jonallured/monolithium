@@ -1,0 +1,20 @@
+%h1 Warm Fuzzies
+
+%p= link_to "New Warm Fuzzy", new_crud_warm_fuzzy_path
+
+%p= link_to "Random Warm Fuzzy", crud_warm_fuzzy_path("random")
+
+%table
+  %thead
+    %tr
+      %th ID
+      %th Title
+      %th.text-right Created At
+  %tbody
+    - warm_fuzzies.each do |warm_fuzzy|
+      %tr
+        %td= link_to warm_fuzzy.id, crud_warm_fuzzy_path(warm_fuzzy)
+        %td= warm_fuzzy.title
+        %td.text-right= warm_fuzzy.created_at.to_fs
+
+= paginate warm_fuzzies

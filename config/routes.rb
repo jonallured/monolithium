@@ -40,6 +40,7 @@ Rails.application.routes.draw do
     resources :post_bin_requests, only: %i[index show]
     resources :projects
     resources :raw_hooks, only: %i[show]
+    resources :warm_fuzzies
   end
 
   namespace :api do
