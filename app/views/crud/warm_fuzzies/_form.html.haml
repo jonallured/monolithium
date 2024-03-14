@@ -1,0 +1,6 @@
+= form_with model: [:crud, warm_fuzzy] do |form|
+  = form.text_field :title, placeholder: "title"
+  = form.text_field :author, placeholder: "author"
+  = form.text_area :body, placeholder: "body"
+  = form.datetime_local_field :received_at, placeholder: "received at"
+  = form.button button_label

@@ -1,0 +1,9 @@
+%h1 Warm Fuzzy #{warm_fuzzy.id}
+
+%p= link_to "Warm Fuzzy List", crud_warm_fuzzies_path
+
+%p= link_to "Edit Warm Fuzzy", edit_crud_warm_fuzzy_path(warm_fuzzy)
+
+%p= link_to "Delete Warm Fuzzy", crud_warm_fuzzy_path(warm_fuzzy), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }
+
+= render partial: "attrs_table", locals: { attrs: warm_fuzzy.table_attrs }

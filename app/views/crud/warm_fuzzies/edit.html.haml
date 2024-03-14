@@ -1,0 +1,5 @@
+%h1 Edit Warm Fuzzy #{warm_fuzzy.id}
+
+%p= link_to "Show Warm Fuzzy", crud_warm_fuzzy_path(warm_fuzzy)
+
+= render "form", warm_fuzzy: warm_fuzzy, button_label: "update"
