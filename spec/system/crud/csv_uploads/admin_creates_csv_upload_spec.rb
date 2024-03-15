@@ -31,7 +31,7 @@ describe "Admin creates csv upload" do
   scenario "create with empty file error" do
     visit "/crud/csv_uploads/new"
     select "WellsFargoParser", from: "csv_upload_parser_class_name"
-    attach_file "file", "spec/csv_files/empty.csv"
+    attach_file "file", "spec/testing_files/empty.csv"
     click_on "create"
     expect(page).to have_content "Data can't be blank"
     expect(page).to have_css ".alert", text: "Data can't be blank"
@@ -41,7 +41,7 @@ describe "Admin creates csv upload" do
   scenario "create successfully" do
     visit "/crud/csv_uploads/new"
     select "WellsFargoParser", from: "csv_upload_parser_class_name"
-    attach_file "file", "spec/csv_files/one_wf_transaction.csv"
+    attach_file "file", "spec/testing_files/one_wf_transaction.csv"
     click_on "create"
 
     expect(page).to have_css ".notice", text: "CSV Upload created"
