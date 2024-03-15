@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get "dashboard", to: "dashboard#show"
   get "faring_direball", to: "faring_direball#index"
   get "financial_reports/:year", to: "financial_reports#show", as: :financial_report
+  get "fuzzies", to: "fuzzies#index", as: :fuzzies
   get "model_counts", to: "model_counts#index", as: :model_counts
   get "reading-list/:year", to: "reading_list#index", as: :reading_list
   get "today", to: "today#show", as: :today
