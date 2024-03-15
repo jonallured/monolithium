@@ -3,6 +3,7 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
   config.active_job.queue_adapter = :sidekiq
   config.active_record.dump_schema_after_migration = false
+  config.active_storage.service = :amazon
   config.active_support.deprecation = :notify
   config.assets.compile = false
   config.cache_classes = true
