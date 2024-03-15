@@ -7,3 +7,7 @@
 %p= link_to "Delete Warm Fuzzy", crud_warm_fuzzy_path(warm_fuzzy), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }
 
 = render partial: "attrs_table", locals: { attrs: warm_fuzzy.table_attrs }
+
+- if warm_fuzzy.screenshot.representable?
+  %h2 Screenshot
+  = image_tag warm_fuzzy.screenshot
