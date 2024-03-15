@@ -1,0 +1,11 @@
+%h1 Fuzzies
+
+- fuzzies.each do |fuzzy|
+  %h2.mb-0= fuzzy.title
+  %p from #{fuzzy.author} on #{fuzzy.received_at.to_fs}
+  - if fuzzy.body
+    %blockquote
+      :markdown
+        #{fuzzy.body}
+  - if fuzzy.screenshot.representable?
+    = image_tag fuzzy.screenshot
