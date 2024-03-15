@@ -1,4 +1,6 @@
 class WarmFuzzy < ApplicationRecord
+  has_one_attached :screenshot
+
   validates :author, presence: true
   validates :received_at, presence: true
   validates :title, presence: true

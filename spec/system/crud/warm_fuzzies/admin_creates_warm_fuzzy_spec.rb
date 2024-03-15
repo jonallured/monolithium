@@ -46,4 +46,17 @@ describe "Admin creates warm fuzzy" do
       ]
     )
   end
+
+  scenario "create successfully with screenshot" do
+    visit "/crud/warm_fuzzies/new"
+    fill_in "title", with: "Very Nice Code"
+    fill_in "author", with: "Secret Admirer"
+    attach_file "screenshot", "spec/testing_files/pizza.png"
+    fill_in "received at", with: "01/01/2000\t01:01am"
+    click_on "create"
+
+    expect(page).to have_css ".notice", text: "Warm Fuzzy created"
+    expect(page).to have_css "h2", text: "Screenshot"
+    expect(page.all("main img").count).to eq 1
+  end
 end
