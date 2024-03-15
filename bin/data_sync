@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set -ex
+
+dropdb monolithium_development --if-exists
+heroku pg:pull DATABASE monolithium_development --app monolithium
+bundle exec rake db:environment:set RAILS_ENV=development
