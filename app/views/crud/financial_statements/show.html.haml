@@ -1,0 +1,5 @@
+%h1 Financial Statement #{financial_statement.id} for #{financial_account.name}
+
+%p= link_to "Financial Statement List", crud_financial_account_financial_statements_path(financial_account)
+
+= render partial: "attrs_table", locals: { attrs: financial_statement.table_attrs }
