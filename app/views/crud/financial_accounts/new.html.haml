@@ -2,6 +2,4 @@
 
 %p= link_to "Financial Account List", crud_financial_accounts_path
 
-= form_with model: [:crud, financial_account] do |form|
-  = form.text_field :name, placeholder: "name"
-  = form.button "create"
+= render "form", financial_account: financial_account, button_label: "create"
