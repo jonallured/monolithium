@@ -9,4 +9,14 @@ class FinancialStatement < ApplicationRecord
   def net_amount_cents
     ending_amount_cents - starting_amount_cents
   end
+
+  def table_attrs
+    [
+      ["Period Start On", period_start_on.to_fs],
+      ["Starting Amount Cents", starting_amount_cents],
+      ["Ending Amount Cents", ending_amount_cents],
+      ["Created At", created_at.to_fs],
+      ["Updated At", updated_at.to_fs]
+    ]
+  end
 end

@@ -1,5 +1,9 @@
 %h1 Financial Statements for #{financial_account.name}
 
+%p= link_to "Financial Account", crud_financial_account_path(financial_account)
+
+%p= link_to "Random Financial Statement", crud_financial_account_financial_statement_path(financial_account, "random")
+
 %table
   %thead
     %tr
@@ -9,7 +13,7 @@
   %tbody
     - financial_statements.each do |financial_statement|
       %tr
-        %td= financial_statement.id
+        %td= link_to financial_statement.id, crud_financial_account_financial_statement_path(financial_account, financial_statement)
         %td= financial_statement.period_start_on.to_fs
         %td.text-right= financial_statement.created_at.to_fs
 

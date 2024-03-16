@@ -12,6 +12,14 @@ describe "Admin views financial account" do
     expect(page).to have_current_path crud_financial_account_path(financial_account)
   end
 
+  scenario "from financial statements page" do
+    financial_account = FactoryBot.create(:financial_account)
+    visit "/crud/financial_accounts/#{financial_account.id}/financial_statements"
+    click_on "Financial Account"
+    expect(page).to have_css "h1", text: "Financial Account #{financial_account.id}"
+    expect(page).to have_current_path crud_financial_account_path(financial_account)
+  end
+
   scenario "viewing a record" do
     financial_account = FactoryBot.create(
       :financial_account,
