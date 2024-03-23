@@ -5,7 +5,7 @@ describe "Admin views project list", js: true do
 
   scenario "with no projects" do
     visit "/project_list"
-    expect(page).to have_content "No projects - create one!"
+    expect(page).to have_css "p", text: "No projects - create one!"
   end
 
   scenario "with a few projects" do

@@ -8,9 +8,9 @@ describe "Visitor views wishlist" do
 
     visit "/wishlist"
 
-    expect(page).to have_content "available"
-    expect(page).to_not have_content "claimed"
-    expect(page).to_not have_content "receved"
+    expect(page).to have_css "h2", text: "available"
+    expect(page).to_not have_css "h2", text: "claimed"
+    expect(page).to_not have_css "h2", text: "receved"
 
     actual_values = page.all("li").map do |li|
       [li.find("span a").text, li.find("button").text]
@@ -32,9 +32,9 @@ describe "Visitor views wishlist" do
 
     visit "/wishlist"
 
-    expect(page).to_not have_content "available"
-    expect(page).to have_content "claimed"
-    expect(page).to_not have_content "receved"
+    expect(page).to_not have_css "h2", text: "available"
+    expect(page).to have_css "h2", text: "claimed"
+    expect(page).to_not have_css "h2", text: "receved"
 
     actual_values = page.all("li").map do |li|
       [li.find("span a").text, li.find("button").text]
@@ -54,9 +54,9 @@ describe "Visitor views wishlist" do
 
     visit "/wishlist"
 
-    expect(page).to_not have_content "available"
-    expect(page).to_not have_content "claimed"
-    expect(page).to_not have_content "received"
+    expect(page).to_not have_css "h2", text: "available"
+    expect(page).to_not have_css "h2", text: "claimed"
+    expect(page).to_not have_css "h2", text: "received"
 
     expect(page.all("li").count).to eq 0
   end

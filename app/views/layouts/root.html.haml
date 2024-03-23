@@ -5,8 +5,8 @@
     = stylesheet_link_tag 'tailwind'
   %body.bg-monolith.bg-cover.bg-no-repeat.bg-fixed.bg-center
     - unless flash[:alert].nil?
-      .border.px-6.mb-8.text-sm.bg-purple.text-off-white.border-pink
-        %p= flash[:alert]
+      .flash.bg-purple.border-pink
+        %p.alert= flash[:alert]
     - unless flash[:notice].nil?
-      .border.px-6.mb-8.text-sm.bg-dark-gray.text-off-white.border-purple
-        %p= flash[:notice]
+      .flash.bg-dark-gray.border-purple
+        %p.notice= flash[:notice]
