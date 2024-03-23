@@ -2,8 +2,4 @@
 
 %p= link_to "Financial Statement List", crud_financial_account_financial_statements_path(financial_account)
 
-= form_with model: [:crud, financial_account, financial_statement] do |form|
-  = form.date_field :period_start_on, placeholder: "period start on"
-  = form.text_field :starting_amount_cents, placeholder: "starting amount cents"
-  = form.text_field :ending_amount_cents, placeholder: "ending amount cents"
-  = form.button "create"
+= render "form", financial_account: financial_account, financial_statement: financial_statement, button_label: "create"
