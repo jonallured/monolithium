@@ -28,4 +28,9 @@ RSpec.configure do |config|
   end
 end
 
+Capybara.configure do |config|
+  config.default_set_options = {clear: :backspace}
+  config.exact_text = true
+end
+
 WebMock.disable_net_connect!(allow_localhost: true)

@@ -5,7 +5,7 @@ describe "Authentication" do
     visit "/sign_in"
     fill_in "admin_password", with: "shhh"
     click_on "sign in"
-    expect(page).to have_content "Password saved to session"
+    expect(page).to have_css ".notice", text: "Password saved to session"
     expect(page).to have_current_path dashboard_path
   end
 
@@ -13,7 +13,7 @@ describe "Authentication" do
     visit "/model_counts"
     fill_in "admin_password", with: "shhh"
     click_on "sign in"
-    expect(page).to have_content "Password saved to session"
+    expect(page).to have_css ".notice", text: "Password saved to session"
     expect(page).to have_current_path model_counts_path
   end
 
@@ -21,9 +21,9 @@ describe "Authentication" do
     visit "/sign_in"
     fill_in "admin_password", with: "shhh"
     click_on "sign in"
-    expect(page).to have_content "Password saved to session"
+    expect(page).to have_css ".notice", text: "Password saved to session"
     visit "/sign_out"
-    expect(page).to have_content "Password removed from session"
+    expect(page).to have_css ".notice", text: "Password removed from session"
     visit "/dashboard"
     expect(page).to have_current_path sign_in_path
   end

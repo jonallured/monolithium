@@ -33,7 +33,6 @@ describe "Admin creates csv upload" do
     select "WellsFargoParser", from: "csv_upload_parser_class_name"
     attach_file "file", "spec/testing_files/empty.csv"
     click_on "create"
-    expect(page).to have_content "Data can't be blank"
     expect(page).to have_css ".alert", text: "Data can't be blank"
     expect(page).to have_current_path new_crud_csv_upload_path
   end

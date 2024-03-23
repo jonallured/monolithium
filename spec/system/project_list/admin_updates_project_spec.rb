@@ -9,8 +9,8 @@ describe "Admin updates project", js: true do
     FactoryBot.create :project, name: "Newer"
 
     visit "/project_list"
-    project_item = page.find("li", text: project.name)
-    project_item.click
+    project_name_span = page.find("span", text: project.name)
+    project_name_span.click
 
     touched_projects = page.all(".touched")
     expect(touched_projects.count).to eq 1

@@ -15,8 +15,8 @@ describe "Admin views fuzzies" do
     visit "/fuzzies"
     warm_fuzzies.each do |warm_fuzzy|
       expect(page).to have_css "h2", text: warm_fuzzy.title
-      expect(page).to have_content warm_fuzzy.author
-      expect(page).to have_content warm_fuzzy.received_at.to_fs
+      expected_subhead = "from #{warm_fuzzy.author} on #{warm_fuzzy.received_at.to_fs}"
+      expect(page).to have_css "p", text: expected_subhead
       expect(page).to have_css "blockquote", text: warm_fuzzy.body
     end
   end
