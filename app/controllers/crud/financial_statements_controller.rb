@@ -30,6 +30,12 @@ class Crud::FinancialStatementsController < ApplicationController
     end
   end
 
+  def destroy
+    financial_statement.destroy
+    flash.notice = "Financial Statement deleted"
+    redirect_to crud_financial_account_financial_statements_path(financial_account)
+  end
+
   private
 
   def financial_statement_params

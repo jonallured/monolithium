@@ -4,4 +4,6 @@
 
 %p= link_to "Edit Financial Statement", edit_crud_financial_account_financial_statement_path(financial_account, financial_statement)
 
+%p= link_to "Delete Financial Statement", crud_financial_account_financial_statement_path(financial_account, financial_statement), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }
+
 = render partial: "attrs_table", locals: { attrs: financial_statement.table_attrs }
