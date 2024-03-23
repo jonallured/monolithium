@@ -1,0 +1,5 @@
+%h1 Edit Financial Statement #{financial_statement.id}
+
+%p= link_to "Show Financial Statement", crud_financial_account_financial_statement_path(financial_account, financial_statement)
+
+= render "form", financial_account: financial_account, financial_statement: financial_statement, button_label: "update"

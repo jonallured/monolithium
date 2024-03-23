@@ -1,0 +1,5 @@
+= form_with model: [:crud, financial_account, financial_statement] do |form|
+  = form.date_field :period_start_on, placeholder: "period start on"
+  = form.text_field :starting_amount_cents, placeholder: "starting amount cents"
+  = form.text_field :ending_amount_cents, placeholder: "ending amount cents"
+  = form.button button_label
