@@ -35,6 +35,7 @@ describe "Admin views financial account" do
     expect(actual_values).to eq(
       [
         ["Name", "Slush fund"],
+        ["Category", "checking"],
         ["Created At", financial_account.created_at.to_fs],
         ["Updated At", financial_account.updated_at.to_fs]
       ]

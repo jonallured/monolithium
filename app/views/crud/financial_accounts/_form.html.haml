@@ -1,3 +1,7 @@
 = form_with model: [:crud, financial_account] do |form|
+  %select#financial_account_category(name="financial_account[category]" required="true")
+    %option{value: "", disabled: "true", selected: financial_account.category == nil, hidden: "true"} pick category
+    %option{value: "checking", selected: financial_account.category == "checking"} checking
+    %option{value: "savings", selected: financial_account.category == "savings"} savings
   = form.text_field :name, placeholder: "name"
   = form.button button_label

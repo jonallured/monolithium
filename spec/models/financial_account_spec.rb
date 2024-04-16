@@ -11,7 +11,7 @@ describe FinancialAccount do
 
     context "with required attrs" do
       it "is valid" do
-        financial_account = FinancialAccount.new(name: "Boat Money")
+        financial_account = FinancialAccount.new(name: "Boat Money", category: "checking")
         expect(financial_account).to be_valid
       end
     end

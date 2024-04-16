@@ -11,8 +11,17 @@ describe "Admin creates financial account" do
     expect(page).to have_current_path new_crud_financial_account_path
   end
 
-  scenario "create with errors" do
+  scenario "create with category error" do
     visit "/crud/financial_accounts/new"
+    click_on "create"
+    select = page.find("#financial_account_category")
+    error_message = select.native.attribute("validationMessage")
+    expect(error_message).to eq "Please select an item in the list."
+  end
+
+  scenario "create with name error" do
+    visit "/crud/financial_accounts/new"
+    select "checking", from: "financial_account_category"
     click_on "create"
     expect(page).to have_css ".alert", text: "Name can't be blank"
     expect(page).to have_current_path new_crud_financial_account_path
@@ -20,6 +29,7 @@ describe "Admin creates financial account" do
 
   scenario "create successfully" do
     visit "/crud/financial_accounts/new"
+    select "checking", from: "financial_account_category"
     fill_in "name", with: "Brand new account"
     click_on "create"
 
@@ -35,6 +45,7 @@ describe "Admin creates financial account" do
     expect(actual_values).to eq(
       [
         ["Name", "Brand new account"],
+        ["Category", "checking"],
         ["Created At", financial_account.created_at.to_fs],
         ["Updated At", financial_account.updated_at.to_fs]
       ]
