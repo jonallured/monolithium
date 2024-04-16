@@ -4,6 +4,7 @@ class FinancialAccount < ApplicationRecord
 
   validates_presence_of :name
   validates_uniqueness_of :name
+  validates_inclusion_of :category, in: %w[checking savings]
 
   def self.usb_checking
     find_by(name: "US Bank Checking")
@@ -20,6 +21,7 @@ class FinancialAccount < ApplicationRecord
   def table_attrs
     [
       ["Name", name],
+      ["Category", category],
       ["Created At", created_at.to_fs],
       ["Updated At", updated_at.to_fs]
     ]

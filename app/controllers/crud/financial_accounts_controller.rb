@@ -37,6 +37,6 @@ class Crud::FinancialAccountsController < ApplicationController
   private
 
   def financial_account_params
-    params.require(:financial_account).permit(:name)
+    params.require(:financial_account).permit(:category, :name)
   end
 end
