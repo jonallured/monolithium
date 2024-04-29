@@ -5,7 +5,7 @@
     %p.m-0= link_to "next", financial_report_path(financial_report.next_year)
 
 - financial_report.category_data.each do |(category_name, account_data)|
-  %h2= category_name.to_s.titleize
+  %h2= category_name.titleize
 
   %table.text-sm.table-fixed
     %thead
@@ -27,7 +27,7 @@
       %tr
         %td.text-left Starting
         = render partial: "amount_cents", collection: account_data.starting_amounts
-      - if category_name == :checking
+      - if category_name == "checking"
         %tr
           %td.text-left Income
           = render partial: "amount_cents", collection: account_data.income_amounts
