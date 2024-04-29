@@ -20,20 +20,11 @@ class FinancialReport
   end
 
   def category_data
-    {
-      checking: checking_data,
-      savings: savings_data
-    }
-  end
-
-  def checking_data
-    accounts = FinancialAccount.checking
-    AccountData.new(accounts, @year)
-  end
-
-  def savings_data
-    accounts = FinancialAccount.savings
-    AccountData.new(accounts, @year)
+    FinancialAccount::CATEGORIES.map do |category|
+      accounts = FinancialAccount.where(category: category)
+      account_data = AccountData.new(accounts, @year)
+      [category, account_data]
+    end
   end
 
   class AccountData
