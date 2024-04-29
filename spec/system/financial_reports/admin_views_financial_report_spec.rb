@@ -3,13 +3,11 @@ require "rails_helper"
 describe "Admin views financial reports" do
   include_context "admin password matches"
 
-  before do
-    FactoryBot.create(:usb_checking)
-    FactoryBot.create(:wf_checking)
-    FactoryBot.create(:wf_savings)
-  end
-
   let!(:last_year) { Date.today - 1.year }
+
+  let!(:usb_checking) { FactoryBot.create(:usb_checking) }
+  let!(:wf_checking) { FactoryBot.create(:wf_checking) }
+  let!(:wf_savings) { FactoryBot.create(:wf_savings) }
 
   scenario "with no statements for that year" do
     visit "/financial_reports/#{last_year}"
@@ -86,7 +84,7 @@ describe "Admin views financial reports" do
   scenario "with one statement in the middle of that year" do
     FactoryBot.create(
       :financial_statement,
-      financial_account: FinancialAccount.wf_checking,
+      financial_account: wf_checking,
       period_start_on: Date.parse("#{last_year.year}-05-01"),
       starting_amount_cents: 1_034_89,
       ending_amount_cents: 99_00
@@ -123,7 +121,7 @@ describe "Admin views financial reports" do
     FinancialReport.months_for_year(last_year.year).each do |date|
       FactoryBot.create(
         :financial_statement,
-        financial_account: FinancialAccount.wf_checking,
+        financial_account: wf_checking,
         period_start_on: date,
         starting_amount_cents: 1_034_89,
         ending_amount_cents: 99_00
@@ -131,7 +129,7 @@ describe "Admin views financial reports" do
 
       FactoryBot.create(
         :financial_statement,
-        financial_account: FinancialAccount.wf_savings,
+        financial_account: wf_savings,
         period_start_on: date,
         starting_amount_cents: 99_00,
         ending_amount_cents: 1_034_89
@@ -182,7 +180,7 @@ describe "Admin views financial reports" do
   scenario "with two statements on two accounts for the same period" do
     FactoryBot.create(
       :financial_statement,
-      financial_account: FinancialAccount.usb_checking,
+      financial_account: usb_checking,
       period_start_on: Date.parse("#{last_year.year}-05-01"),
       starting_amount_cents: 100_00,
       ending_amount_cents: 50_00
@@ -190,7 +188,7 @@ describe "Admin views financial reports" do
 
     FactoryBot.create(
       :financial_statement,
-      financial_account: FinancialAccount.wf_checking,
+      financial_account: wf_checking,
       period_start_on: Date.parse("#{last_year.year}-05-01"),
       starting_amount_cents: 70_00,
       ending_amount_cents: 20_00
@@ -218,7 +216,7 @@ describe "Admin views financial reports" do
   scenario "with one statement in the middle of that year" do
     FactoryBot.create(
       :financial_statement,
-      financial_account: FinancialAccount.wf_checking,
+      financial_account: wf_checking,
       period_start_on: Date.parse("#{last_year.year}-05-01"),
       starting_amount_cents: 1_034_89,
       ending_amount_cents: 99_00
@@ -226,14 +224,14 @@ describe "Admin views financial reports" do
 
     FactoryBot.create(
       :financial_transaction,
-      financial_account: FinancialAccount.wf_checking,
+      financial_account: wf_checking,
       posted_on: Date.parse("#{last_year.year}-05-01"),
       amount_cents: 900_00
     )
 
     FactoryBot.create(
       :financial_transaction,
-      financial_account: FinancialAccount.wf_checking,
+      financial_account: wf_checking,
       posted_on: Date.parse("#{last_year.year}-05-01"),
       amount_cents: -1_835_89
     )

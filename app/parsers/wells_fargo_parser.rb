@@ -3,7 +3,8 @@ class WellsFargoParser
     table = csv_upload.parsed_data
     return unless table
 
-    wf_checking = FinancialAccount.wf_checking
+    wf_checking = FinancialAccount.find_by(name: "Wells Fargo Checking")
+    return unless wf_checking
 
     table.each do |row|
       amount_cents = (row[1].to_r * 100).to_i

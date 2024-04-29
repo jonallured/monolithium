@@ -6,17 +6,8 @@ class FinancialAccount < ApplicationRecord
   validates_uniqueness_of :name
   validates_inclusion_of :category, in: %w[checking savings]
 
-  def self.usb_checking
-    find_by(name: "US Bank Checking")
-  end
-
-  def self.wf_checking
-    find_by(name: "Wells Fargo Checking")
-  end
-
-  def self.wf_savings
-    find_by(name: "Wells Fargo Savings")
-  end
+  scope :checking, -> { where(category: "checking") }
+  scope :savings, -> { where(category: "savings") }
 
   def table_attrs
     [

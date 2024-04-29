@@ -27,17 +27,12 @@ class FinancialReport
   end
 
   def checking_data
-    accounts = [
-      FinancialAccount.usb_checking,
-      FinancialAccount.wf_checking
-    ]
+    accounts = FinancialAccount.checking
     AccountData.new(accounts, @year)
   end
 
   def savings_data
-    accounts = [
-      FinancialAccount.wf_savings
-    ]
+    accounts = FinancialAccount.savings
     AccountData.new(accounts, @year)
   end
 
