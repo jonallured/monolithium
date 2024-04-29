@@ -7,7 +7,7 @@ jobs:
       - image: cimg/ruby:3.3.1-browsers
         environment:
           RAILS_ENV: test
-      - image: cimg/postgres:14.10
+      - image: cimg/postgres:15.6
 
     steps:
       - checkout
