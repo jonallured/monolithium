@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-ruby File.read(".tool-versions").split.last
+ruby file: ".tool-versions"
 
 gem "rails", "7.1.3.2"
 
