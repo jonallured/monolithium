@@ -19,6 +19,13 @@ class FinancialReport
     @year + 1
   end
 
+  def category_data
+    {
+      checking: checking_data,
+      savings: savings_data
+    }
+  end
+
   def checking_data
     accounts = [
       FinancialAccount.usb_checking,
