@@ -7,7 +7,14 @@ class Crud::FinancialStatementsController < ApplicationController
   end
 
   def show
-    redirect_to crud_financial_account_financial_statement_path(financial_account, FinancialStatement.random) if params[:id] == "random"
+    if params[:id] == "random"
+      if random_financial_statement
+        redirect_to crud_financial_account_financial_statement_path(financial_account, random_financial_statement)
+      else
+        flash.alert = "No records found!"
+        redirect_to crud_financial_account_financial_statements_path(financial_account)
+      end
+    end
   end
 
   def create
@@ -40,5 +47,9 @@ class Crud::FinancialStatementsController < ApplicationController
 
   def financial_statement_params
     params.require(:financial_statement).permit(:ending_amount_cents, :period_start_on, :starting_amount_cents)
+  end
+
+  def random_financial_statement
+    @random_financial_statement ||= FinancialStatement.random
   end
 end

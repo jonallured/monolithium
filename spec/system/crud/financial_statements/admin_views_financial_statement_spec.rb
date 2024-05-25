@@ -50,4 +50,11 @@ describe "Admin views financial statement" do
     expect(page).to have_css "h1", text: "Financial Statement #{financial_statement.id} for #{financial_account.name}"
     expect(page).to have_current_path crud_financial_account_financial_statement_path(financial_account, financial_statement)
   end
+
+  scenario "views random record with no records" do
+    visit "/crud/financial_accounts/#{financial_account.id}/financial_statements"
+    click_on "Random Financial Statement"
+    expect(page).to have_css ".alert", text: "No records found!"
+    expect(page).to have_current_path crud_financial_account_financial_statements_path(financial_account)
+  end
 end
