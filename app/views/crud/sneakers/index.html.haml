@@ -1,0 +1,20 @@
+%h1 Sneakers
+
+%p= link_to "New Sneaker", new_crud_sneaker_path
+
+%p= link_to "Random Sneaker", crud_sneaker_path("random")
+
+%table
+  %thead
+    %tr
+      %th ID
+      %th Name
+      %th.text-right Created At
+  %tbody
+    - sneakers.each do |sneaker|
+      %tr
+        %td= link_to sneaker.id, crud_sneaker_path(sneaker)
+        %td= sneaker.name
+        %td.text-right= sneaker.created_at.to_fs
+
+= paginate sneakers
