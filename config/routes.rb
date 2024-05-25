@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get "fuzzies", to: "fuzzies#index", as: :fuzzies
   get "model_counts", to: "model_counts#index", as: :model_counts
   get "reading-list/:year", to: "reading_list#index", as: :reading_list
+  get "sneakers", to: "sneakers#index", as: :sneakers
   get "today", to: "today#show", as: :today
   get "wishlist", to: "wishlist#index"
   get "work_weeks/:target", to: "work_weeks#show", as: :work_week
