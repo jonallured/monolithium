@@ -9,7 +9,7 @@ describe "Admin views financial statements" do
     visit "/crud/financial_accounts/#{financial_account.id}"
     click_on "Financial Statement List"
     expect(page).to have_css "h1", text: "Financial Statements for #{financial_account.name}"
-    expect(current_path).to eq crud_financial_account_financial_statements_path(financial_account)
+    expect(page).to have_current_path crud_financial_account_financial_statements_path(financial_account)
   end
 
   scenario "with no records" do

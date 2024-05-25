@@ -11,7 +11,7 @@ describe "Admin views financial statement" do
     click_on financial_statement.id.to_s
     expect(page).to have_css "h1", text: "Financial Statement #{financial_statement.id} for #{financial_account.name}"
     expect(page).to have_css "a", text: "Financial Statement List"
-    expect(current_path).to eq crud_financial_account_financial_statement_path(financial_account, financial_statement)
+    expect(page).to have_current_path crud_financial_account_financial_statement_path(financial_account, financial_statement)
   end
 
   scenario "viewing a record" do
