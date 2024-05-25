@@ -1,0 +1,13 @@
+%h1 Sneaker #{sneaker.id}
+
+%p= link_to "Sneaker List", crud_sneakers_path
+
+%p= link_to "Edit Sneaker", edit_crud_sneaker_path(sneaker)
+
+%p= link_to "Delete Sneaker", crud_sneaker_path(sneaker), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }
+
+= render partial: "attrs_table", locals: { attrs: sneaker.table_attrs }
+
+- if sneaker.image.representable?
+  %h2 Image
+  = image_tag sneaker.image

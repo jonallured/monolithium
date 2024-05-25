@@ -25,6 +25,7 @@ describe "Admin views model counts" do
       "PostBinRequest 0",
       "Project 0",
       "RawHook 0",
+      "Sneaker 0",
       "WarmFuzzy 0",
       "WebhookSender 0",
       "WorkDay 0"
@@ -40,6 +41,7 @@ describe "Admin views model counts" do
     FactoryBot.create(:killswitch)
     FactoryBot.create(:post_bin_request)
     FactoryBot.create(:project)
+    FactoryBot.create(:sneaker)
     FactoryBot.create(:warm_fuzzy)
     FactoryBot.create(:work_day)
 
@@ -86,6 +88,7 @@ describe "Admin views model counts" do
       "PostBinRequest 1",
       "Project 1",
       "RawHook 1",
+      "Sneaker 1",
       "WarmFuzzy 1",
       "WebhookSender 1",
       "WorkDay 1"
@@ -93,6 +96,6 @@ describe "Admin views model counts" do
 
     expect(actual_rows).to match_array(expected_rows)
 
-    expect(page.find("tfoot tr").text).to eq "Total 19"
+    expect(page.find("tfoot tr").text).to eq "Total 20"
   end
 end

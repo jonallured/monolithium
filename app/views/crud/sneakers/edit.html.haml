@@ -1,0 +1,5 @@
+%h1 Edit Sneaker #{sneaker.id}
+
+%p= link_to "Show Sneaker", crud_sneaker_path(sneaker)
+
+= render "form", sneaker: sneaker, button_label: "update"
