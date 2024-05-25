@@ -1,13 +1,15 @@
 %h1 Sneakers
 
 - sneakers.each do |sneaker|
-  %section.flex.mb-12
+  %section.md:flex.mb-12.last-of-type:m-0
     - if sneaker.image.representable?
       = image_tag sneaker.image, class: "h-[200px] w-[200px] m-0 mr-6"
     %aside.grow
-      %h2.m-0= sneaker.name
+      %h2.m-0.mt-6.md:mt-0= sneaker.name
       %p
         price: #{number_to_currency(sneaker.amount_cents / 100.0)}
         %br
         ordered on: #{sneaker.ordered_on.to_fs}
-      %p= sneaker.details
+        %br
+        = sneaker.details
+  %hr.border-dark-gray.last:border-0.last:m-0
