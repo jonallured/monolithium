@@ -46,6 +46,7 @@ Rails.application.routes.draw do
     resources :raw_hooks, only: %i[show]
     resources :sneakers
     resources :warm_fuzzies
+    resources :webhook_senders
   end
 
   namespace :api do

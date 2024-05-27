@@ -1,0 +1,20 @@
+%h1 Webhook Senders
+
+%p= link_to "New Webhook Sender", new_crud_webhook_sender_path
+
+%p= link_to "Random Webhook Sender", crud_webhook_sender_path("random")
+
+%table
+  %thead
+    %tr
+      %th ID
+      %th Name
+      %th.text-right Created At
+  %tbody
+    - webhook_senders.each do |webhook_sender|
+      %tr
+        %td= link_to webhook_sender.id, crud_webhook_sender_path(webhook_sender)
+        %td= webhook_sender.name
+        %td.text-right= webhook_sender.created_at.to_fs
+
+= paginate webhook_senders

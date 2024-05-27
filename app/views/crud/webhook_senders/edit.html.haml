@@ -1,0 +1,5 @@
+%h1 Edit Webhook Sender #{webhook_sender.id}
+
+%p= link_to "Show Webhook Sender", crud_webhook_sender_path(webhook_sender)
+
+= render "form", webhook_sender: webhook_sender, button_label: "update"
