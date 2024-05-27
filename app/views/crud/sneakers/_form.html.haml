@@ -1,7 +1,7 @@
 = form_with model: [:crud, sneaker] do |form|
   = form.text_field :name, placeholder: "name"
   = form.text_area :details, placeholder: "details"
-  = form.text_area :amount_cents, placeholder: "amount cents"
+  = form.text_field :amount_cents, placeholder: "amount cents"
   = form.file_field :image, placeholder: "image"
   = form.date_field :ordered_on, placeholder: "ordered on"
   = form.button button_label
