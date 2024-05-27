@@ -1,0 +1,4 @@
+= form_with model: [:crud, webhook_sender] do |form|
+  = form.text_field :name, placeholder: "name"
+  = form.text_field :parser, placeholder: "parser"
+  = form.button button_label

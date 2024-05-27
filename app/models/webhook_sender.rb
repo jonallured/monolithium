@@ -23,4 +23,13 @@ class WebhookSender < ApplicationRecord
   def logo_name
     "logos/#{name.delete(" ").downcase}-logo@2x.png"
   end
+
+  def table_attrs
+    [
+      ["Name", name],
+      ["Parser", parser],
+      ["Created At", created_at.to_fs],
+      ["Updated At", updated_at.to_fs]
+    ]
+  end
 end

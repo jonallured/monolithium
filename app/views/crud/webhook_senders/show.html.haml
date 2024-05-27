@@ -1,0 +1,9 @@
+%h1 Webhook Sender #{webhook_sender.id}
+
+%p= link_to "Webhook Sender List", crud_webhook_senders_path
+
+%p= link_to "Edit Webhook Sender", edit_crud_webhook_sender_path(webhook_sender)
+
+%p= link_to "Delete Webhook Sender", crud_webhook_sender_path(webhook_sender), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }
+
+= render partial: "attrs_table", locals: { attrs: webhook_sender.table_attrs }
