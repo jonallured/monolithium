@@ -1,0 +1,5 @@
+%h1 Edit Raw Hook #{raw_hook.id}
+
+%p= link_to "Show Raw Hook", crud_raw_hook_path(raw_hook)
+
+= render "form", raw_hook: raw_hook, button_label: "update"

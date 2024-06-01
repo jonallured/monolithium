@@ -1,7 +1,16 @@
 class RawHook < ApplicationRecord
+  validates_presence_of :body, :headers, :params
+
   has_one :hook, dependent: :destroy
 
   after_create_commit :created
+
+  def table_attrs
+    [
+      ["Created At", created_at.to_fs],
+      ["Updated At", updated_at.to_fs]
+    ]
+  end
 
   private
 

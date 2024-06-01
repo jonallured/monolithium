@@ -1,0 +1,20 @@
+%h1 Raw Hooks
+
+%p= link_to "New Raw Hook", new_crud_raw_hook_path
+
+%p= link_to "Random Raw Hook", crud_raw_hook_path("random")
+
+%table
+  %thead
+    %tr
+      %th ID
+      %th Body Snippet
+      %th.text-right Created At
+  %tbody
+    - raw_hooks.each do |raw_hook|
+      %tr
+        %td= link_to raw_hook.id, crud_raw_hook_path(raw_hook)
+        %td= raw_hook.body.first(100)
+        %td.text-right= raw_hook.created_at.to_fs
+
+= paginate raw_hooks

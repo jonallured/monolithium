@@ -16,6 +16,7 @@ describe "POST /api/v1/raw_hooks" do
       REMOTE_ADDR
       REQUEST_METHOD
       REQUEST_URI
+      RAW_POST_DATA
       SCRIPT_NAME
       SERVER_NAME
       SERVER_PORT
@@ -26,7 +27,8 @@ describe "POST /api/v1/raw_hooks" do
   let(:default_params) do
     {
       "action" => "create",
-      "controller" => "api/v1/raw_hooks"
+      "controller" => "api/v1/raw_hooks",
+      "raw_hook" => {}
     }
   end
 
@@ -34,13 +36,14 @@ describe "POST /api/v1/raw_hooks" do
     let(:headers) { {} }
     let(:params) { {} }
 
-    it "stores default params and headers" do
-      post "/api/v1/raw_hooks", params: params, headers: headers
+    it "stores empty object for body and defaults for params and headers" do
+      post "/api/v1/raw_hooks", params: params, headers: headers, as: :json
 
-      expect(response.status).to be 201
+      expect(response.status).to eq 201
       expect(RawHook.count).to eq 1
 
       raw_hook = RawHook.first
+      expect(raw_hook.body).to eq "{}"
       expect(default_header_keys).to match_array(raw_hook.headers.keys)
       expect(raw_hook.params).to eq default_params
     end
@@ -51,18 +54,20 @@ describe "POST /api/v1/raw_hooks" do
     let(:params) { {string_param: "password", integer_param: 11} }
 
     it "stores those too" do
-      post "/api/v1/raw_hooks", params: params, headers: headers
+      post "/api/v1/raw_hooks", params: params, headers: headers, as: :json
 
-      expect(response.status).to be 201
+      expect(response.status).to eq 201
       expect(RawHook.count).to eq 1
 
       raw_hook = RawHook.first
+
+      expect(raw_hook.body).to eq '{"string_param":"password","integer_param":11}'
 
       expect(raw_hook.headers["HTTP_X_STRING_HEADER"]).to eq "token"
       expect(raw_hook.headers["HTTP_X_INTEGER_HEADER"]).to eq 7
 
       expect(raw_hook.params["string_param"]).to eq "password"
-      expect(raw_hook.params["integer_param"]).to eq "11"
+      expect(raw_hook.params["integer_param"]).to eq 11
     end
   end
 end

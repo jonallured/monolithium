@@ -43,7 +43,7 @@ Rails.application.routes.draw do
     resources :hooks, only: %i[create edit index]
     resources :post_bin_requests, only: %i[index show]
     resources :projects
-    resources :raw_hooks, only: %i[show]
+    resources :raw_hooks
     resources :sneakers
     resources :warm_fuzzies
     resources :webhook_senders
