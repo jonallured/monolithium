@@ -1,16 +1,24 @@
 %h1 Raw Hook #{raw_hook.id}
 
-%p Headers
+%p= link_to "Raw Hook List", crud_raw_hooks_path
+
+%p= link_to "Edit Raw Hook", edit_crud_raw_hook_path(raw_hook)
+
+%p= link_to "Delete Raw Hook", crud_raw_hook_path(raw_hook), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }
+
+= render partial: "attrs_table", locals: { attrs: raw_hook.table_attrs }
+
+%h2 Headers
 
 %pre.text-off-black
   %code= JSON.pretty_generate(raw_hook.headers)
 
-%p Params
+%h2 Params
 
 %pre.text-off-black
   %code= JSON.pretty_generate(raw_hook.params)
 
-%p Body
+%h2 Body
 
 %pre.text-off-black
   %code= raw_hook.body
