@@ -7,6 +7,6 @@ class Hook < ApplicationRecord
   private
 
   def created
-    broadcast_prepend_later_to "hooks"
+    broadcast_prepend_later_to "hooks", template: "cybertail/_hook"
   end
 end
