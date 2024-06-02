@@ -1,0 +1,5 @@
+%h1 Edit Post Bin Request #{post_bin_request.id}
+
+%p= link_to "Show Post Bin Request", crud_post_bin_request_path(post_bin_request)
+
+= render "form", post_bin_request: post_bin_request, button_label: "update"

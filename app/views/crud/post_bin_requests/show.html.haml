@@ -1,16 +1,24 @@
 %h1 Post Bin Request #{post_bin_request.id}
 
-%p Headers
+%p= link_to "Post Bin Request List", crud_post_bin_requests_path
 
-%pre.text-off-black.h-72
+%p= link_to "Edit Post Bin Request", edit_crud_post_bin_request_path(post_bin_request)
+
+%p= link_to "Delete Post Bin Request", crud_post_bin_request_path(post_bin_request), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }
+
+= render partial: "attrs_table", locals: { attrs: post_bin_request.table_attrs }
+
+%h2 Headers
+
+%pre.text-off-black
   %code= JSON.pretty_generate(post_bin_request.headers)
 
-%p Params
+%h2 Params
 
-%pre.text-off-black.h-72
+%pre.text-off-black
   %code= JSON.pretty_generate(post_bin_request.params)
 
-%p Body
+%h2 Body
 
-%pre.text-off-black.h-72
+%pre.text-off-black
   %code= post_bin_request.body
