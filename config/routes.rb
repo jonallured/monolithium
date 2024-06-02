@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get "financial_reports/:year", to: "financial_reports#show", as: :financial_report
   get "fuzzies", to: "fuzzies#index", as: :fuzzies
   get "model_counts", to: "model_counts#index", as: :model_counts
+  get "post_bin", to: "post_bin#index"
   get "reading-list/:year", to: "reading_list#index", as: :reading_list
   get "sneakers", to: "sneakers#index", as: :sneakers
   get "today", to: "today#show", as: :today
@@ -40,7 +41,7 @@ Rails.application.routes.draw do
       resources :financial_statements
     end
     resources :gift_ideas
-    resources :post_bin_requests, only: %i[index show]
+    resources :post_bin_requests, only: :show
     resources :projects
     resources :raw_hooks
     resources :sneakers
