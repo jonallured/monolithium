@@ -6,6 +6,6 @@ class PostBinRequest < ApplicationRecord
   private
 
   def created
-    broadcast_prepend_later_to CHANNEL_NAME
+    broadcast_prepend_later_to CHANNEL_NAME, template: "post_bin/_post_bin_request"
   end
 end
