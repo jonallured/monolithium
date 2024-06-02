@@ -41,7 +41,7 @@ Rails.application.routes.draw do
       resources :financial_statements
     end
     resources :gift_ideas
-    resources :post_bin_requests, only: :show
+    resources :post_bin_requests
     resources :projects
     resources :raw_hooks
     resources :sneakers

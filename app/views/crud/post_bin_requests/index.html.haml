@@ -1,0 +1,20 @@
+%h1 Post Bin Requests
+
+%p= link_to "New Post Bin Request", new_crud_post_bin_request_path
+
+%p= link_to "Random Post Bin Request", crud_post_bin_request_path("random")
+
+%table
+  %thead
+    %tr
+      %th ID
+      %th Body Snippet
+      %th.text-right Created At
+  %tbody
+    - post_bin_requests.each do |post_bin_request|
+      %tr
+        %td= link_to post_bin_request.id, crud_post_bin_request_path(post_bin_request)
+        %td= post_bin_request.body.first(100)
+        %td.text-right= post_bin_request.created_at.to_fs
+
+= paginate post_bin_requests

@@ -3,6 +3,13 @@ class PostBinRequest < ApplicationRecord
 
   after_create_commit :created
 
+  def table_attrs
+    [
+      ["Created At", created_at.to_fs],
+      ["Updated At", updated_at.to_fs]
+    ]
+  end
+
   private
 
   def created
