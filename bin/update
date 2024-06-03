@@ -30,3 +30,4 @@ git add .
 git commit --message "$message"
 git push origin updates
 gh pr create --fill --label "$label"
+gh pr merge updates --auto --rebase
