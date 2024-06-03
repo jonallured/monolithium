@@ -47,7 +47,7 @@ describe "Admin creates sneaker" do
     )
   end
 
-  scenario "create successfully with screenshot" do
+  scenario "create successfully with image" do
     visit "/crud/sneakers/new"
     fill_in "name", with: "Air Jordan 1"
     fill_in "details", with: "Style abc123"
