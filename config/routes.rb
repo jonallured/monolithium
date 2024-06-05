@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   get "artsy-viewer", to: "artsy_viewer#show"
+  get "crank-champ/leaderboard", to: "crank_champ/leaderboard#index"
   get "cybertail", to: "cybertail#index"
   get "dashboard", to: "dashboard#show"
   get "faring_direball", to: "faring_direball#index"

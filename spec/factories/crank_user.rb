@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :crank_user do
-    code { "abcd1234" }
+    sequence(:code) { |n| "abc_#{n}" }
   end
 end
