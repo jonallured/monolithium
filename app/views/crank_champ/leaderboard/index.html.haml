@@ -1,0 +1,15 @@
+%h1 Crank Champ Leaderboard
+
+- if crank_counts.none?
+  %p no crank counts yet!
+- else
+  %table.w-full
+    %thead
+      %tr
+        %th User Code
+        %th Ticks
+    %tbody
+      - crank_counts.each do |crank_count|
+        %tr
+          %td= crank_count.crank_user.code
+          %td= crank_count.ticks
