@@ -114,6 +114,7 @@ GEM
       bigdecimal
       rexml
     crass (1.0.6)
+    csv (3.3.0)
     date (3.3.4)
     decent_exposure (3.0.4)
       activesupport (>= 4.0)
@@ -387,6 +388,7 @@ PLATFORMS
 DEPENDENCIES
   aws-sdk-s3
   capybara
+  csv
   decent_exposure
   dotenv-rails
   factory_bot_rails

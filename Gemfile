@@ -8,6 +8,7 @@ gem "pg"
 gem "puma"
 
 gem "aws-sdk-s3"
+gem "csv"
 gem "decent_exposure"
 gem "faraday"
 gem "faraday-follow_redirects"
