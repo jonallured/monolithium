@@ -4,7 +4,7 @@ jobs:
   test:
     working_directory: ~/monolithium
     docker:
-      - image: cimg/ruby:3.3.1-browsers
+      - image: cimg/ruby:3.3.4-browsers
         environment:
           RAILS_ENV: test
       - image: cimg/postgres:15.6
@@ -18,7 +18,7 @@ jobs:
 
       - run:
           name: Bundle install
-          command: bundle install --jobs=4 --retry=3 --path vendor/bundle
+          command: bundle install --jobs=4 --retry=3
 
       - save_cache:
           name: Save bundler cache
