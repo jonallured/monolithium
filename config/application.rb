@@ -19,5 +19,6 @@ module Monolithium
     config.active_record.schema_format = :sql
     config.generators.system_tests = nil
     config.load_defaults 7.1
+    config.skylight.probes << "active_job"
   end
 end
