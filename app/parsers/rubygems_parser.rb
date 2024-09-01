@@ -1,4 +1,4 @@
-class RubygemsParser
+class RubygemsParser < BaseParser
   SIGNATURE_HEADER_KEY = "HTTP_AUTHORIZATION"
 
   def self.valid_for?(raw_hook)

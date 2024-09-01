@@ -1,14 +1,10 @@
-class CircleciParser
+class CircleciParser < BaseParser
   EVENT_TYPE_KEY = "HTTP_CIRCLECI_EVENT_TYPE"
   SIGNATURE_HEADER_KEY = "HTTP_CIRCLECI_SIGNATURE"
   USER_AGENT_KEY = "HTTP_USER_AGENT"
 
   KNOWN_EVENT_TYPES = %w[job-completed workflow-completed]
   KNOWN_USER_AGENT = "CircleCI-Webhook/1.0"
-
-  def self.check_and_maybe_parse(raw_hook)
-    parse(raw_hook) if valid_for?(raw_hook) && can_parse?(raw_hook)
-  end
 
   def self.valid_for?(raw_hook)
     signature = raw_hook.headers[SIGNATURE_HEADER_KEY] || ""
