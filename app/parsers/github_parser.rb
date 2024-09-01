@@ -1,14 +1,10 @@
-class GithubParser
+class GithubParser < BaseParser
   EVENT_TYPE_KEY = "HTTP_X_GITHUB_EVENT"
   SIGNATURE_HEADER_KEY = "HTTP_X_HUB_SIGNATURE_256"
   USER_AGENT_KEY = "HTTP_USER_AGENT"
 
   KNOWN_EVENT_TYPES = %w[pull_request]
   KNOWN_USER_AGENT = "GitHub-Hookshot"
-
-  def self.check_and_maybe_parse(raw_hook)
-    parse(raw_hook) if valid_for?(raw_hook) && can_parse?(raw_hook)
-  end
 
   def self.valid_for?(raw_hook)
     signature = raw_hook.headers[SIGNATURE_HEADER_KEY] || ""
