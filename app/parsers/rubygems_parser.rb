@@ -3,6 +3,8 @@ class RubygemsParser < BaseParser
 
   def self.valid_for?(raw_hook)
     signature = raw_hook.headers[SIGNATURE_HEADER_KEY]
+    return false unless signature
+
     gem_name = raw_hook.params["name"]
     gem_version = raw_hook.params["version"]
 
