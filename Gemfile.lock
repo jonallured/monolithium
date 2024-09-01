@@ -149,6 +149,7 @@ GEM
       thor
       tilt
     hashdiff (1.1.0)
+    honeybadger (5.15.6)
     i18n (1.14.5)
       concurrent-ruby (~> 1.0)
     importmap-rails (2.0.1)
@@ -396,6 +397,7 @@ DEPENDENCIES
   faraday-follow_redirects
   graphql-client
   haml
+  honeybadger
   importmap-rails
   jbuilder
   kaminari
