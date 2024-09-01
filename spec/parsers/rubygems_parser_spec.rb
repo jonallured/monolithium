@@ -53,6 +53,14 @@ describe RubygemsParser do
       allow(Monolithium.config).to receive(:rubygems_api_key).and_return("shhh")
     end
 
+    context "without a signature" do
+      let(:auth_header) { nil }
+
+      it "returns false" do
+        expect(RubygemsParser.valid_for?(raw_hook)).to eq false
+      end
+    end
+
     context "with an invalid signature" do
       let(:auth_header) { "invalid" }
 
