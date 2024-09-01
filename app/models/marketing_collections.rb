@@ -13,7 +13,7 @@ class MarketingCollections
 
   def self.load_artworks
     SLUGS.each do |slug|
-      data = Metaphysics.marketing_collection(slug)
+      data = MetaphysicsApi.marketing_collection(slug)
       nodes = data.marketing_collection.artworks_connection.edges.map(&:node)
       new_nodes = nodes.reject { |node| Artwork.exists?(gravity_id: node.gravity_id) }
       new_nodes.each do |node|
