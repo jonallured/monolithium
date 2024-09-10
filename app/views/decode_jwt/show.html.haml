@@ -1,0 +1,7 @@
+%h1 Decode JWT
+
+%section(data-controller="decode-jwt")
+  %textarea(placeholder="paste token here" data-action="decode-jwt#decode" data-decode-jwt-target="token" autofocus="true")
+  %pre.text-off-black
+    %code(data-decode-jwt-target="results")
+      results go here
