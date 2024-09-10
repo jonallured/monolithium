@@ -52,6 +52,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
+      get :decode_jwt, to: "decode_jwt#show"
       get :ping, to: "ping#show"
       post :post_bin, to: "post_bin#create"
       post :raw_hooks, to: "raw_hooks#create"
