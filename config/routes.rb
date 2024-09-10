@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get "crank-champ/leaderboard", to: "crank_champ/leaderboard#index"
   get "cybertail", to: "cybertail#index"
   get "dashboard", to: "dashboard#show"
+  get "decode-jwt", to: "decode_jwt#show"
   get "faring_direball", to: "faring_direball#index"
   get "financial_reports/:year", to: "financial_reports#show", as: :financial_report
   get "fuzzies", to: "fuzzies#index", as: :fuzzies
