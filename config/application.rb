@@ -18,7 +18,7 @@ module Monolithium
     config.action_cable.disable_request_forgery_protection = true
     config.active_record.schema_format = :sql
     config.generators.system_tests = nil
-    config.load_defaults 7.1
+    config.load_defaults 7.2
     config.skylight.probes << "active_job"
   end
 end
