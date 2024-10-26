@@ -8,6 +8,10 @@ class DailyPacketView
     build
   end
 
+  def pdf_data
+    document.render
+  end
+
   private
 
   def build
