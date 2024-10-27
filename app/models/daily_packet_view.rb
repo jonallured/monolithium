@@ -16,9 +16,11 @@ class DailyPacketView
 
   def build
     stroke_color "000000"
-
     define_grid(columns: 6, rows: 12, gutter: 12)
+    draw_front_page
+  end
 
+  def draw_front_page
     grid([0, 0], [0, 2]).bounding_box do
       text "Daily Packet", style: :bold_italic, size: 42, valign: :center
     end
