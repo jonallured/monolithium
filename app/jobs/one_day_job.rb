@@ -1,6 +1,7 @@
 class OneDayJob < ApplicationJob
   def perform
-    RawHook.destroy_all
+    Hook.delete_all
+    RawHook.delete_all
     DailyPacket.produce_for(Date.today)
   end
 end
