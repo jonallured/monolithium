@@ -18,6 +18,8 @@ class DailyPacketView
     stroke_color "000000"
     define_grid(columns: 6, rows: 12, gutter: 12)
     draw_front_page
+    start_new_page
+    draw_top_three_page
   end
 
   def draw_front_page
@@ -51,6 +53,42 @@ class DailyPacketView
         text "Reading Pace", style: :bold
         text "#{@reading_list.pace} pages/day"
       end
+    end
+  end
+
+  def draw_top_three_page
+    text "TOP THREE", align: :center, size: 40
+
+    stroke do
+      horizontal_rule
+    end
+
+    move_down 30
+
+    text "Personal", size: 30
+
+    move_down 10
+
+    font_size(20) do
+      text "1. #{"_" * 40}"
+      move_down 10
+      text "2. #{"_" * 40}"
+      move_down 10
+      text "3. #{"_" * 40}"
+    end
+
+    move_down 30
+
+    text "Work", size: 30
+
+    move_down 10
+
+    font_size(20) do
+      text "1. #{"_" * 40}"
+      move_down 10
+      text "2. #{"_" * 40}"
+      move_down 10
+      text "3. #{"_" * 40}"
     end
   end
 end
