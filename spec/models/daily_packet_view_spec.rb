@@ -6,9 +6,9 @@ describe DailyPacketView do
     view = DailyPacketView.new(built_on)
     inspector = PDF::Inspector::Page.analyze(view.pdf_data)
 
-    expect(inspector.pages.size).to eq 2
+    expect(inspector.pages.size).to eq 3
 
-    page_one_strings, page_two_strings = inspector.pages.map { |page| page[:strings] }
+    page_one_strings, page_two_strings, page_three_strings = inspector.pages.map { |page| page[:strings] }
 
     expect(page_one_strings).to eq([
       "Daily Packet",
@@ -19,7 +19,7 @@ describe DailyPacketView do
     ])
 
     expect(page_two_strings).to eq([
-      "TOP THREE",
+      "Top Three",
       "Personal",
       "1. #{"_" * 40}",
       "2. #{"_" * 40}",
@@ -28,6 +28,19 @@ describe DailyPacketView do
       "1. #{"_" * 40}",
       "2. #{"_" * 40}",
       "3. #{"_" * 40}"
+    ])
+
+    expect(page_three_strings).to eq([
+      "Chore List",
+      "unload dishwasher",
+      "collect laundry",
+      "defrost meat",
+      "poop patrol",
+      "mow front",
+      "mow back",
+      "mow way back",
+      "put out garbage cans",
+      "run dishwasher"
     ])
   end
 end

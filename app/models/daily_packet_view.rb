@@ -20,6 +20,8 @@ class DailyPacketView
     draw_front_page
     start_new_page
     draw_top_three_page
+    start_new_page
+    draw_chore_list_page
   end
 
   def draw_front_page
@@ -57,7 +59,7 @@ class DailyPacketView
   end
 
   def draw_top_three_page
-    text "TOP THREE", align: :center, size: 40
+    text "Top Three", size: 40
 
     stroke do
       horizontal_rule
@@ -89,6 +91,28 @@ class DailyPacketView
       text "2. #{"_" * 40}"
       move_down 10
       text "3. #{"_" * 40}"
+    end
+  end
+
+  def draw_chore_list_page
+    text "Chore List", size: 40
+
+    stroke do
+      horizontal_rule
+    end
+
+    move_down 30
+
+    font_size(20) do
+      text "unload dishwasher"
+      text "collect laundry"
+      text "defrost meat"
+      text "poop patrol"
+      text "mow front"
+      text "mow back"
+      text "mow way back"
+      text "put out garbage cans"
+      text "run dishwasher"
     end
   end
 end
