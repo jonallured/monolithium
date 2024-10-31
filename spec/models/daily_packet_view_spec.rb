@@ -40,6 +40,7 @@ describe DailyPacketView do
       "mow back",
       "mow way back",
       "put out garbage cans",
+      "wipe off kitchen table",
       "run dishwasher"
     ])
   end

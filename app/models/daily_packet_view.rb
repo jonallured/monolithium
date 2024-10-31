@@ -112,6 +112,7 @@ class DailyPacketView
       text "mow back"
       text "mow way back"
       text "put out garbage cans"
+      text "wipe off kitchen table"
       text "run dishwasher"
     end
   end
