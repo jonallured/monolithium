@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe DailyPacket do
-  describe ".produce_for" do
+  describe ".save_to_s3" do
     it "renders and writes the pdf data to s3" do
       mock_view = double(:mock_view, pdf_data: "PDF GOES HERE")
       expect(DailyPacketView).to receive(:new).and_return(mock_view)
@@ -12,7 +12,7 @@ describe DailyPacket do
       )
 
       date = Date.parse("2001-02-03")
-      DailyPacket.produce_for(date)
+      DailyPacket.save_to_s3(date)
     end
   end
 end
