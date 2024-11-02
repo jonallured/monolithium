@@ -2,9 +2,10 @@ class DailyPacketView
   include Prawn::View
 
   def initialize(built_on)
-    @built_on = built_on
+    @built_on_phrase = "#{built_on.to_fs}, week #{built_on.cweek}"
     @warm_fuzzy = WarmFuzzy.random
-    @reading_list = ReadingList.new
+    reading_list = ReadingList.new
+    @reading_list_phrase = "#{reading_list.pace} pages/day"
     build
   end
 
@@ -28,7 +29,7 @@ class DailyPacketView
 
     move_up 34
 
-    text "#{@built_on.to_fs}, week #{@built_on.cweek}", align: :right, size: 18
+    text @built_on_phrase, align: :right, size: 18
 
     stroke do
       horizontal_rule
@@ -49,7 +50,7 @@ class DailyPacketView
 
       font_size(20) do
         text "Reading Pace", style: :bold
-        text "#{@reading_list.pace} pages/day"
+        text @reading_list_phrase
       end
     end
   end
