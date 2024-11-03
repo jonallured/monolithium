@@ -7,6 +7,7 @@ gem "rails", "7.2.1"
 gem "pg"
 gem "puma"
 
+gem "active_record-associated_object"
 gem "aws-sdk-s3"
 gem "csv"
 gem "decent_exposure"
