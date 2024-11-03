@@ -1,4 +1,4 @@
-class DailyPacketView
+class DailyPacketPdfView
   include Prawn::View
 
   def initialize(daily_packet)
