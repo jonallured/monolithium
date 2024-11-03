@@ -3,7 +3,8 @@ class DailyPacket < ApplicationRecord
 
   has_object :pdf_view
 
-  delegate :pdf_data, to: :pdf_view
+  has_object :producer
+  delegate :save_to_disk, :save_to_s3, to: :producer
 
   validates :built_on, presence: true
   validates :reading_list_pace, presence: true
@@ -14,17 +15,5 @@ class DailyPacket < ApplicationRecord
 
   def reading_list_phrase
     "#{reading_list_pace} pages/day"
-  end
-
-  def local_path
-    "tmp/daily_packet.pdf"
-  end
-
-  def s3_key
-    "daily-packets/#{built_on.strftime("%Y-%m-%d")}.pdf"
-  end
-
-  def save_locally
-    pdf_view.save_as(local_path)
   end
 end
