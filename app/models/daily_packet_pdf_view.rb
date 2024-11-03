@@ -2,7 +2,7 @@ class DailyPacketPdfView
   include Prawn::View
 
   def initialize(daily_packet)
-    @built_on_phrase = "#{daily_packet.built_on.to_fs}, week #{daily_packet.built_on.cweek}"
+    @daily_packet = daily_packet
     @warm_fuzzy = WarmFuzzy.random
     reading_list = ReadingList.new
     @reading_list_phrase = "#{reading_list.pace} pages/day"
@@ -29,7 +29,7 @@ class DailyPacketPdfView
 
     move_up 34
 
-    text @built_on_phrase, align: :right, size: 18
+    text @daily_packet.built_on_phrase, align: :right, size: 18
 
     stroke do
       horizontal_rule
