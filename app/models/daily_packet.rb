@@ -1,6 +1,10 @@
 class DailyPacket < ApplicationRecord
   belongs_to :warm_fuzzy
 
+  has_object :pdf_view
+
+  delegate :pdf_data, to: :pdf_view
+
   validates :built_on, presence: true
   validates :reading_list_pace, presence: true
 
@@ -18,5 +22,9 @@ class DailyPacket < ApplicationRecord
 
   def s3_key
     "daily-packets/#{built_on.strftime("%Y-%m-%d")}.pdf"
+  end
+
+  def save_locally
+    pdf_view.save_as(local_path)
   end
 end

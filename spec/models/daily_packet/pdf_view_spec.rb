@@ -1,10 +1,10 @@
 require "rails_helper"
 
-describe DailyPacketPdfView do
+describe DailyPacket::PdfView do
   it "renders the document" do
     warm_fuzzy = FactoryBot.create(:warm_fuzzy, received_at: Time.at(0))
     daily_packet = FactoryBot.create(:daily_packet, warm_fuzzy: warm_fuzzy)
-    view = DailyPacketPdfView.new(daily_packet)
+    view = DailyPacket::PdfView.new(daily_packet)
     inspector = PDF::Inspector::Page.analyze(view.pdf_data)
 
     expect(inspector.pages.size).to eq 3
