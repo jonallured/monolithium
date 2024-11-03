@@ -44,10 +44,14 @@ class DailyPacket::PdfView < ActiveRecord::AssociatedObject
 
       move_down 20
 
-      font_size(20) do
-        text "Reading Pace", style: :bold
-        text daily_packet.reading_list_phrase
-      end
+      text "Reading Pace", style: :bold, size: 20
+      text daily_packet.reading_list_phrase, size: 16
+
+      move_down 20
+
+      text "Feedbin Stats", style: :bold, size: 20
+      text daily_packet.feedbin_unread_phrase, size: 16
+      text daily_packet.feedbin_oldest_phrase, size: 16
     end
   end
 
