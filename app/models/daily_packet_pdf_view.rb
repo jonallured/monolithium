@@ -3,7 +3,6 @@ class DailyPacketPdfView
 
   def initialize(daily_packet)
     @daily_packet = daily_packet
-    @warm_fuzzy = WarmFuzzy.random
     reading_list = ReadingList.new
     @reading_list_phrase = "#{reading_list.pace} pages/day"
     build
@@ -40,11 +39,10 @@ class DailyPacketPdfView
     column_box([0, cursor], columns: 2, width: bounds.width) do
       text "Random Warm Fuzzy", style: :bold, size: 20
 
-      if @warm_fuzzy
-        text @warm_fuzzy.title, size: 16
-        text @warm_fuzzy.body, size: 12
-        text "\n- #{@warm_fuzzy.author}, #{@warm_fuzzy.received_at.to_fs}", size: 12, align: :right
-      end
+      warm_fuzzy = @daily_packet.warm_fuzzy
+      text warm_fuzzy.title, size: 16
+      text warm_fuzzy.body, size: 12
+      text "\n- #{warm_fuzzy.author}, #{warm_fuzzy.received_at.to_fs}", size: 12, align: :right
 
       move_down 20
 
