@@ -1,8 +1,8 @@
 class DailyPacketView
   include Prawn::View
 
-  def initialize(built_on)
-    @built_on_phrase = "#{built_on.to_fs}, week #{built_on.cweek}"
+  def initialize(daily_packet)
+    @built_on_phrase = "#{daily_packet.built_on.to_fs}, week #{daily_packet.built_on.cweek}"
     @warm_fuzzy = WarmFuzzy.random
     reading_list = ReadingList.new
     @reading_list_phrase = "#{reading_list.pace} pages/day"
