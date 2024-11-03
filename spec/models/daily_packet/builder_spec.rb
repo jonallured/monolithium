@@ -15,6 +15,7 @@ describe DailyPacket::Builder do
 
     context "without an existing DailyPacket record" do
       it "creates and returns a new record" do
+        expect(FeedbinStats).to receive(:compute).and_return([0, 0])
         FactoryBot.create(:warm_fuzzy)
 
         expect do

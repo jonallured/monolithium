@@ -19,7 +19,10 @@ describe DailyPacket::PdfView do
       "Your haircut is adequate.",
       "- Wife, 01/01/1970 12:00:00am",
       "Reading Pace",
-      "7.7 pages/day"
+      "7.7 pages/day",
+      "Feedbin Stats",
+      "unread: 9",
+      "oldest: 14 days ago"
     ])
 
     expect(page_two_strings).to eq([

@@ -2,6 +2,10 @@ require "rails_helper"
 
 describe DailyPacket::Producer do
   describe ".save_to" do
+    before do
+      allow(FeedbinStats).to receive(:compute).and_return([0, 0])
+    end
+
     context "with an invalid target" do
       it "raises an ArgumentError" do
         expect do
