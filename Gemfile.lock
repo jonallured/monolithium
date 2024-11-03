@@ -46,6 +46,8 @@ GEM
       erubi (~> 1.11)
       rails-dom-testing (~> 2.2)
       rails-html-sanitizer (~> 1.6)
+    active_record-associated_object (0.8.2)
+      activerecord (>= 6.1)
     activejob (7.2.1)
       activesupport (= 7.2.1)
       globalid (>= 0.3.6)
@@ -406,6 +408,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_record-associated_object
   aws-sdk-s3
   capybara
   csv
