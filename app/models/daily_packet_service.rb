@@ -14,13 +14,11 @@ class DailyPacketService
 
   def self.save_locally(date = Date.today)
     daily_packet = DailyPacketService.build_for(date)
-    packet = DailyPacketPdfView.new(daily_packet)
-    packet.save_as(daily_packet.local_path)
+    daily_packet.save_locally
   end
 
   def self.save_to_s3(date = Date.today)
     daily_packet = DailyPacketService.build_for(date)
-    packet = DailyPacketPdfView.new(daily_packet)
-    S3Api.write(daily_packet.s3_key, packet.pdf_data)
+    S3Api.write(daily_packet.s3_key, daily_packet.pdf_data)
   end
 end

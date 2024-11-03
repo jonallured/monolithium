@@ -1,8 +1,8 @@
-class DailyPacketPdfView
+class DailyPacket::PdfView < ActiveRecord::AssociatedObject
   include Prawn::View
 
   def initialize(daily_packet)
-    @daily_packet = daily_packet
+    super
     build
   end
 
@@ -26,7 +26,7 @@ class DailyPacketPdfView
 
     move_up 34
 
-    text @daily_packet.built_on_phrase, align: :right, size: 18
+    text daily_packet.built_on_phrase, align: :right, size: 18
 
     stroke do
       horizontal_rule
@@ -37,7 +37,7 @@ class DailyPacketPdfView
     column_box([0, cursor], columns: 2, width: bounds.width) do
       text "Random Warm Fuzzy", style: :bold, size: 20
 
-      warm_fuzzy = @daily_packet.warm_fuzzy
+      warm_fuzzy = daily_packet.warm_fuzzy
       text warm_fuzzy.title, size: 16
       text warm_fuzzy.body, size: 12
       text "\n- #{warm_fuzzy.author}, #{warm_fuzzy.received_at.to_fs}", size: 12, align: :right
@@ -46,7 +46,7 @@ class DailyPacketPdfView
 
       font_size(20) do
         text "Reading Pace", style: :bold
-        text @daily_packet.reading_list_phrase
+        text daily_packet.reading_list_phrase
       end
     end
   end
