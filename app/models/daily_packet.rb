@@ -22,4 +22,8 @@ class DailyPacket
   def initialize(attributes)
     @built_on = attributes[:built_on]
   end
+
+  def built_on_phrase
+    "#{built_on.to_fs}, week #{built_on.cweek}"
+  end
 end
