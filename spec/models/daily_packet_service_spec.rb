@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe DailyPacket do
+describe DailyPacketService do
   describe ".save_locally" do
     it "renders and writes the pdf data locally" do
       mock_view = double(:mock_view)
@@ -9,7 +9,7 @@ describe DailyPacket do
       expect(mock_view).to receive(:save_as).with("tmp/daily_packet.pdf").and_return(nil)
 
       date = Date.parse("2001-02-03")
-      DailyPacket.save_locally(date)
+      DailyPacketService.save_locally(date)
     end
   end
 
@@ -24,7 +24,7 @@ describe DailyPacket do
       )
 
       date = Date.parse("2001-02-03")
-      DailyPacket.save_to_s3(date)
+      DailyPacketService.save_to_s3(date)
     end
   end
 end
