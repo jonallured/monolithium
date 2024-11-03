@@ -1,6 +1,5 @@
 class DailyPacket
   def self.save_locally(date = Date.today)
-    file_path = "tmp/daily_packet.pdf"
     reading_list = ReadingList.new
     warm_fuzzy = WarmFuzzy.random
     daily_packet = DailyPacket.create(
@@ -9,11 +8,10 @@ class DailyPacket
       warm_fuzzy: warm_fuzzy
     )
     packet = DailyPacketPdfView.new(daily_packet)
-    packet.save_as(file_path)
+    packet.save_as(daily_packet.local_path)
   end
 
   def self.save_to_s3(date = Date.today)
-    file_path = "daily-packets/#{date.strftime("%Y-%m-%d")}.pdf"
     reading_list = ReadingList.new
     warm_fuzzy = WarmFuzzy.random
     daily_packet = DailyPacket.create(
@@ -22,7 +20,7 @@ class DailyPacket
       warm_fuzzy: warm_fuzzy
     )
     packet = DailyPacketPdfView.new(daily_packet)
-    S3Api.write(file_path, packet.pdf_data)
+    S3Api.write(daily_packet.s3_key, packet.pdf_data)
   end
 
   def self.create(attributes)
@@ -43,5 +41,13 @@ class DailyPacket
 
   def reading_list_phrase
     "#{reading_list_pace} pages/day"
+  end
+
+  def local_path
+    "tmp/daily_packet.pdf"
+  end
+
+  def s3_key
+    "daily-packets/#{built_on.strftime("%Y-%m-%d")}.pdf"
   end
 end
