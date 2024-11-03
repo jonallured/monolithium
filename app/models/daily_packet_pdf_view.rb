@@ -3,8 +3,6 @@ class DailyPacketPdfView
 
   def initialize(daily_packet)
     @daily_packet = daily_packet
-    reading_list = ReadingList.new
-    @reading_list_phrase = "#{reading_list.pace} pages/day"
     build
   end
 
@@ -48,7 +46,7 @@ class DailyPacketPdfView
 
       font_size(20) do
         text "Reading Pace", style: :bold
-        text @reading_list_phrase
+        text @daily_packet.reading_list_phrase
       end
     end
   end
