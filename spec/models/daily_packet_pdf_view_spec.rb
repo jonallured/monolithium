@@ -2,14 +2,8 @@ require "rails_helper"
 
 describe DailyPacketPdfView do
   it "renders the document" do
-    built_on = Date.new(2007, 7, 7)
     warm_fuzzy = FactoryBot.create(:warm_fuzzy, received_at: Time.at(0))
-    reading_list_pace = 4.7
-    daily_packet = DailyPacket.create(
-      built_on: built_on,
-      reading_list_pace: reading_list_pace,
-      warm_fuzzy: warm_fuzzy
-    )
+    daily_packet = FactoryBot.create(:daily_packet, warm_fuzzy: warm_fuzzy)
     view = DailyPacketPdfView.new(daily_packet)
     inspector = PDF::Inspector::Page.analyze(view.pdf_data)
 
@@ -25,7 +19,7 @@ describe DailyPacketPdfView do
       "Your haircut is adequate.",
       "- Wife, 01/01/1970 12:00:00am",
       "Reading Pace",
-      "4.7 pages/day"
+      "7.7 pages/day"
     ])
 
     expect(page_two_strings).to eq([

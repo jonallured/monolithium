@@ -1,15 +1,8 @@
-class DailyPacket
-  def self.create(attributes)
-    new(attributes)
-  end
+class DailyPacket < ApplicationRecord
+  belongs_to :warm_fuzzy
 
-  attr_reader :built_on, :reading_list_pace, :warm_fuzzy
-
-  def initialize(attributes)
-    @built_on = attributes[:built_on]
-    @reading_list_pace = attributes[:reading_list_pace]
-    @warm_fuzzy = attributes[:warm_fuzzy]
-  end
+  validates :built_on, presence: true
+  validates :reading_list_pace, presence: true
 
   def built_on_phrase
     "#{built_on.to_fs}, week #{built_on.cweek}"

@@ -14,6 +14,7 @@ describe "Admin views model counts" do
       "CrankCount 0",
       "CrankUser 0",
       "CsvUpload 0",
+      "DailyPacket 0",
       "FinancialAccount 0",
       "FinancialStatement 0",
       "FinancialTransaction 0",
@@ -42,12 +43,16 @@ describe "Admin views model counts" do
     FactoryBot.create(:post_bin_request)
     FactoryBot.create(:project)
     FactoryBot.create(:sneaker)
-    FactoryBot.create(:warm_fuzzy)
     FactoryBot.create(:work_day)
 
     FactoryBot.create(
       :crank_count,
       crank_user: FactoryBot.create(:crank_user)
+    )
+
+    FactoryBot.create(
+      :daily_packet,
+      warm_fuzzy: FactoryBot.create(:warm_fuzzy)
     )
 
     financial_account = FactoryBot.create(:financial_account)
@@ -77,6 +82,7 @@ describe "Admin views model counts" do
       "CrankCount 1",
       "CrankUser 1",
       "CsvUpload 1",
+      "DailyPacket 1",
       "FinancialAccount 1",
       "FinancialStatement 1",
       "FinancialTransaction 1",
@@ -96,6 +102,6 @@ describe "Admin views model counts" do
 
     expect(actual_rows).to match_array(expected_rows)
 
-    expect(page.find("tfoot tr").text).to eq "Total 20"
+    expect(page.find("tfoot tr").text).to eq "Total 21"
   end
 end
