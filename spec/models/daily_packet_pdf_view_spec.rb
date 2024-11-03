@@ -1,10 +1,10 @@
 require "rails_helper"
 
-describe DailyPacketView do
+describe DailyPacketPdfView do
   it "renders the document" do
     built_on = Date.new(2007, 7, 7)
     daily_packet = DailyPacket.create(built_on: built_on)
-    view = DailyPacketView.new(daily_packet)
+    view = DailyPacketPdfView.new(daily_packet)
     inspector = PDF::Inspector::Page.analyze(view.pdf_data)
 
     expect(inspector.pages.size).to eq 3
