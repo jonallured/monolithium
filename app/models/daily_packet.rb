@@ -12,7 +12,7 @@ class DailyPacket < ApplicationRecord
   validates :reading_list_pace, presence: true
 
   def built_on_phrase
-    "#{built_on.to_fs}, week #{built_on.cweek}"
+    "#{built_on.to_fs}\nweek #{built_on.cweek}"
   end
 
   def feedbin_oldest_phrase
@@ -21,6 +21,10 @@ class DailyPacket < ApplicationRecord
 
   def feedbin_unread_phrase
     "unread: #{feedbin_unread_count}"
+  end
+
+  def headline_phrase
+    "Daily Packet ##{id}"
   end
 
   def reading_list_phrase

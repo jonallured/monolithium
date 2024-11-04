@@ -22,11 +22,11 @@ class DailyPacket::PdfView < ActiveRecord::AssociatedObject
   end
 
   def draw_front_page
-    text "Daily Packet", style: :bold_italic, size: 42
+    text daily_packet.headline_phrase, style: :bold_italic, size: 42
 
-    move_up 34
+    move_up 45
 
-    text daily_packet.built_on_phrase, align: :right, size: 18
+    text daily_packet.built_on_phrase, align: :right, size: 14
 
     stroke do
       horizontal_rule
@@ -40,7 +40,7 @@ class DailyPacket::PdfView < ActiveRecord::AssociatedObject
       warm_fuzzy = daily_packet.warm_fuzzy
       text warm_fuzzy.title, size: 16
       text warm_fuzzy.body, size: 12
-      text "\n- #{warm_fuzzy.author}, #{warm_fuzzy.received_at.to_fs}", size: 12, align: :right
+      text "\n- #{warm_fuzzy.author}, #{warm_fuzzy.received_at.to_date.to_fs}", size: 12, align: :right
 
       move_down 20
 

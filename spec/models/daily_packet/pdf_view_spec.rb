@@ -12,12 +12,13 @@ describe DailyPacket::PdfView do
     page_one_strings, page_two_strings, page_three_strings = inspector.pages.map { |page| page[:strings] }
 
     expect(page_one_strings).to eq([
-      "Daily Packet",
-      "07/07/2007, week 27",
+      "Daily Packet ##{daily_packet.id}",
+      "07/07/2007",
+      "week 27",
       "Random Warm Fuzzy",
       "Alright Haircut",
       "Your haircut is adequate.",
-      "- Wife, 01/01/1970 12:00:00am",
+      "- Wife, 01/01/1970",
       "Reading Pace",
       "7.7 pages/day",
       "Feedbin Stats",
