@@ -63,6 +63,18 @@ describe DailyPacket::PdfView do
     end
   end
 
+  context "on a Saturday" do
+    let(:built_on) { Date.parse("2024-11-09") }
+
+    it "does not render the work top three section" do
+      inspector = PDF::Inspector::Page.analyze(daily_packet.pdf_data)
+
+      _, page_two_strings, _ = inspector.pages.map { |page| page[:strings] }
+
+      expect(page_two_strings).to_not include "Work"
+    end
+  end
+
   context "on a Saturday in the fall" do
     let(:built_on) { Date.parse("2024-11-09") }
 
