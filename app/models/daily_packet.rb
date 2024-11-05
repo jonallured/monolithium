@@ -33,25 +33,34 @@ class DailyPacket < ApplicationRecord
   end
 
   def chore_list
-    built_on_weekend = built_on.saturday? || built_on.sunday?
-    built_on_summertime = (4..10).cover?(built_on.month)
-
     chores = []
     chores << "unload dishwasher"
-    chores << "collect laundry" if built_on_weekend
+    chores << "collect laundry" if built_on_weekend?
     chores << "defrost meat"
 
-    if built_on_weekend && built_on_summertime
+    if built_on_weekend? && built_during_summer?
       chores << "poop patrol"
       chores << "mow front"
       chores << "mow back"
       chores << "mow way back"
     end
 
-    chores << "put out garbage cans" if built_on.monday?
+    chores << "put out garbage cans" if built_on_monday?
     chores << "wipe off kitchen table"
     chores << "run dishwasher"
 
     chores
+  end
+
+  def built_on_monday?
+    built_on.monday?
+  end
+
+  def built_on_weekend?
+    built_on.saturday? || built_on.sunday?
+  end
+
+  def built_during_summer?
+    (4..10).cover?(built_on.month)
   end
 end
