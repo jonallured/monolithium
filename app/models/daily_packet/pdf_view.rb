@@ -78,16 +78,18 @@ class DailyPacket::PdfView < ActiveRecord::AssociatedObject
 
     move_down 30
 
-    text "Work", size: 30
+    unless daily_packet.built_on_weekend?
+      text "Work", size: 30
 
-    move_down 10
+      move_down 10
 
-    font_size(20) do
-      text "1. #{"_" * 40}"
-      move_down 10
-      text "2. #{"_" * 40}"
-      move_down 10
-      text "3. #{"_" * 40}"
+      font_size(20) do
+        text "1. #{"_" * 40}"
+        move_down 10
+        text "2. #{"_" * 40}"
+        move_down 10
+        text "3. #{"_" * 40}"
+      end
     end
   end
 
