@@ -100,22 +100,10 @@ class DailyPacket::PdfView < ActiveRecord::AssociatedObject
 
     move_down 30
 
-    built_on_weekend = daily_packet.built_on.saturday? || daily_packet.built_on.sunday?
-    built_on_summertime = (4..10).cover?(daily_packet.built_on.month)
-
     font_size(20) do
-      text "unload dishwasher"
-      text "collect laundry" if daily_packet.built_on.saturday? || daily_packet.built_on.sunday?
-      text "defrost meat"
-      if built_on_weekend && built_on_summertime
-        text "poop patrol"
-        text "mow front"
-        text "mow back"
-        text "mow way back"
+      daily_packet.chore_list.each do |chore|
+        text chore
       end
-      text "put out garbage cans" if daily_packet.built_on.monday?
-      text "wipe off kitchen table"
-      text "run dishwasher"
     end
   end
 end
