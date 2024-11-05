@@ -45,10 +45,6 @@ describe DailyPacket::PdfView do
         "Chore List",
         "unload dishwasher",
         "defrost meat",
-        "poop patrol",
-        "mow front",
-        "mow back",
-        "mow way back",
         "wipe off kitchen table",
         "run dishwasher"
       ])
@@ -67,15 +63,39 @@ describe DailyPacket::PdfView do
     end
   end
 
-  context "on a Saturday" do
+  context "on a Saturday in the fall" do
     let(:built_on) { Date.parse("2024-11-09") }
 
-    it "renders the Saturday-specific chore" do
+    it "renders the Weekend-specific chore but not the summertime ones" do
       inspector = PDF::Inspector::Page.analyze(daily_packet.pdf_data)
 
       _, _, page_three_strings = inspector.pages.map { |page| page[:strings] }
 
       expect(page_three_strings).to include "collect laundry"
+
+      expect(page_three_strings).to_not include(
+        "poop patrol",
+        "mow front",
+        "mow back",
+        "mow way back"
+      )
+    end
+  end
+
+  context "on a Saturday in the summer" do
+    let(:built_on) { Date.parse("2024-07-13") }
+
+    it "renders the summertime Weekend-specific chores" do
+      inspector = PDF::Inspector::Page.analyze(daily_packet.pdf_data)
+
+      _, _, page_three_strings = inspector.pages.map { |page| page[:strings] }
+
+      expect(page_three_strings).to include(
+        "poop patrol",
+        "mow front",
+        "mow back",
+        "mow way back"
+      )
     end
   end
 end
