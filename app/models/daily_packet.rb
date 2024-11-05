@@ -57,6 +57,21 @@ class DailyPacket < ApplicationRecord
     chores
   end
 
+  def start_list
+    [
+      "drill master password",
+      "open dashboards",
+      "say hi in Slack"
+    ]
+  end
+
+  def stop_list
+    [
+      "plug in mouse",
+      "say bye in Slack"
+    ]
+  end
+
   def built_on_monday?
     built_on.monday?
   end

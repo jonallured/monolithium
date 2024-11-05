@@ -18,6 +18,8 @@ class DailyPacket::PdfView < ActiveRecord::AssociatedObject
     start_new_page
     draw_top_three_page
     start_new_page
+    draw_start_stop_list_page
+    start_new_page
     draw_chore_list_page
   end
 
@@ -107,6 +109,38 @@ class DailyPacket::PdfView < ActiveRecord::AssociatedObject
         move_down 10
         text "3."
       end
+    end
+  end
+
+  def draw_start_stop_list_page
+    text "Start List".upcase, style: :bold_italic, size: 42
+
+    move_up 12
+
+    stroke do
+      horizontal_rule
+    end
+
+    move_down 20
+
+    daily_packet.start_list.each do |item|
+      text item, size: 14
+    end
+
+    move_cursor_to bounds.top / 2
+
+    text "Stop List".upcase, style: :bold_italic, size: 42
+
+    move_up 12
+
+    stroke do
+      horizontal_rule
+    end
+
+    move_down 20
+
+    daily_packet.stop_list.each do |item|
+      text item, size: 14
     end
   end
 
