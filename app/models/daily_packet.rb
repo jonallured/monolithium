@@ -31,4 +31,27 @@ class DailyPacket < ApplicationRecord
   def reading_list_phrase
     "#{reading_list_pace} pages/day"
   end
+
+  def chore_list
+    built_on_weekend = built_on.saturday? || built_on.sunday?
+    built_on_summertime = (4..10).cover?(built_on.month)
+
+    chores = []
+    chores << "unload dishwasher"
+    chores << "collect laundry" if built_on_weekend
+    chores << "defrost meat"
+
+    if built_on_weekend && built_on_summertime
+      chores << "poop patrol"
+      chores << "mow front"
+      chores << "mow back"
+      chores << "mow way back"
+    end
+
+    chores << "put out garbage cans" if built_on.monday?
+    chores << "wipe off kitchen table"
+    chores << "run dishwasher"
+
+    chores
+  end
 end
