@@ -15,7 +15,7 @@ describe DailyPacket::PdfView do
       page_one_strings, page_two_strings, page_three_strings = inspector.pages.map { |page| page[:strings] }
 
       expect(page_one_strings).to eq([
-        "Daily Packet ##{daily_packet.id}",
+        "DAILY PACKET ##{daily_packet.id}",
         "11/05/2024",
         "week 45",
         "Random Warm Fuzzy",
@@ -30,7 +30,7 @@ describe DailyPacket::PdfView do
       ])
 
       expect(page_two_strings).to eq([
-        "Top Three",
+        "TOP THREE",
         "Personal",
         "1. #{"_" * 40}",
         "2. #{"_" * 40}",
@@ -42,7 +42,7 @@ describe DailyPacket::PdfView do
       ])
 
       expect(page_three_strings).to eq([
-        "Chore List",
+        "CHORE LIST",
         "unload dishwasher",
         "defrost meat",
         "wipe off kitchen table",

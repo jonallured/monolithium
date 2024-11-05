@@ -22,7 +22,7 @@ class DailyPacket::PdfView < ActiveRecord::AssociatedObject
   end
 
   def draw_front_page
-    text daily_packet.headline_phrase, style: :bold_italic, size: 42
+    text daily_packet.headline_phrase.upcase, style: :bold_italic, size: 42
 
     move_up 45
 
@@ -38,31 +38,33 @@ class DailyPacket::PdfView < ActiveRecord::AssociatedObject
       text "Random Warm Fuzzy", style: :bold, size: 20
 
       warm_fuzzy = daily_packet.warm_fuzzy
-      text warm_fuzzy.title, size: 16
+      text warm_fuzzy.title, size: 12
       text warm_fuzzy.body, size: 12
       text "\n- #{warm_fuzzy.author}, #{warm_fuzzy.received_at.to_date.to_fs}", size: 12, align: :right
 
       move_down 20
 
       text "Reading Pace", style: :bold, size: 20
-      text daily_packet.reading_list_phrase, size: 16
+      text daily_packet.reading_list_phrase, size: 12
 
       move_down 20
 
       text "Feedbin Stats", style: :bold, size: 20
-      text daily_packet.feedbin_unread_phrase, size: 16
-      text daily_packet.feedbin_oldest_phrase, size: 16
+      text daily_packet.feedbin_unread_phrase, size: 12
+      text daily_packet.feedbin_oldest_phrase, size: 12
     end
   end
 
   def draw_top_three_page
-    text "Top Three", size: 40
+    text "Top Three".upcase, style: :bold_italic, size: 42
+
+    move_up 12
 
     stroke do
       horizontal_rule
     end
 
-    move_down 30
+    move_down 20
 
     text "Personal", size: 30
 
@@ -76,9 +78,9 @@ class DailyPacket::PdfView < ActiveRecord::AssociatedObject
       text "3. #{"_" * 40}"
     end
 
-    move_down 30
-
     unless daily_packet.built_on_weekend?
+      move_down 20
+
       text "Work", size: 30
 
       move_down 10
@@ -94,17 +96,19 @@ class DailyPacket::PdfView < ActiveRecord::AssociatedObject
   end
 
   def draw_chore_list_page
-    text "Chore List", size: 40
+    text "Chore List".upcase, style: :bold_italic, size: 42
+
+    move_up 12
 
     stroke do
       horizontal_rule
     end
 
-    move_down 30
+    move_down 20
 
     font_size(20) do
       daily_packet.chore_list.each do |chore|
-        text chore
+        text chore, size: 14
       end
     end
   end
