@@ -11,11 +11,12 @@ describe DailyPacket::PdfView do
       it "renders the document" do
         inspector = PDF::Inspector::Page.analyze(daily_packet.pdf_data)
 
-        expect(inspector.pages.size).to eq 3
+        expect(inspector.pages.size).to eq 4
 
         page_one_strings,
           page_two_strings,
-          page_three_strings = inspector.pages.map { |page| page[:strings] }
+          page_three_strings,
+          page_four_strings = inspector.pages.map { |page| page[:strings] }
 
         expect(page_one_strings).to eq([
           "DAILY PACKET #19",
@@ -44,6 +45,16 @@ describe DailyPacket::PdfView do
         ])
 
         expect(page_three_strings).to eq([
+          "START LIST",
+          "drill master password",
+          "open dashboards",
+          "say hi in Slack",
+          "STOP LIST",
+          "plug in mouse",
+          "say bye in Slack"
+        ])
+
+        expect(page_four_strings).to eq([
           "CHORE LIST",
           "unload dishwasher",
           "defrost meat",
