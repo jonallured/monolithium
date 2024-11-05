@@ -19,7 +19,7 @@ class DailyPacket::Producer < ActiveRecord::AssociatedObject
   def save_to_s3
     timestamp = daily_packet.built_on.strftime("%Y-%m-%d")
     s3_key = "daily-packets/#{timestamp}.pdf"
-    pdf_data = daily_packet.pdf_view.pdf_data
+    pdf_data = daily_packet.pdf_data
     S3Api.write(s3_key, pdf_data)
   end
 end

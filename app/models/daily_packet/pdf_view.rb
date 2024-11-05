@@ -108,7 +108,7 @@ class DailyPacket::PdfView < ActiveRecord::AssociatedObject
       text "mow front"
       text "mow back"
       text "mow way back"
-      text "put out garbage cans"
+      text "put out garbage cans" if daily_packet.built_on.monday?
       text "wipe off kitchen table"
       text "run dishwasher"
     end

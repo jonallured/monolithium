@@ -1,55 +1,70 @@
 require "rails_helper"
 
 describe DailyPacket::PdfView do
-  it "renders the document" do
-    warm_fuzzy = FactoryBot.create(:warm_fuzzy, received_at: Time.at(0))
-    daily_packet = FactoryBot.create(:daily_packet, warm_fuzzy: warm_fuzzy)
-    view = DailyPacket::PdfView.new(daily_packet)
-    inspector = PDF::Inspector::Page.analyze(view.pdf_data)
+  let(:warm_fuzzy) { FactoryBot.create(:warm_fuzzy, received_at: Time.at(0)) }
+  let(:daily_packet) { FactoryBot.create(:daily_packet, built_on: built_on, warm_fuzzy: warm_fuzzy) }
 
-    expect(inspector.pages.size).to eq 3
+  context "on a Tuesday" do
+    let(:built_on) { Date.parse("2024-11-05") }
 
-    page_one_strings, page_two_strings, page_three_strings = inspector.pages.map { |page| page[:strings] }
+    it "renders the document" do
+      inspector = PDF::Inspector::Page.analyze(daily_packet.pdf_data)
 
-    expect(page_one_strings).to eq([
-      "Daily Packet ##{daily_packet.id}",
-      "07/07/2007",
-      "week 27",
-      "Random Warm Fuzzy",
-      "Alright Haircut",
-      "Your haircut is adequate.",
-      "- Wife, 01/01/1970",
-      "Reading Pace",
-      "7.7 pages/day",
-      "Feedbin Stats",
-      "unread: 9",
-      "oldest: 14 days ago"
-    ])
+      expect(inspector.pages.size).to eq 3
 
-    expect(page_two_strings).to eq([
-      "Top Three",
-      "Personal",
-      "1. #{"_" * 40}",
-      "2. #{"_" * 40}",
-      "3. #{"_" * 40}",
-      "Work",
-      "1. #{"_" * 40}",
-      "2. #{"_" * 40}",
-      "3. #{"_" * 40}"
-    ])
+      page_one_strings, page_two_strings, page_three_strings = inspector.pages.map { |page| page[:strings] }
 
-    expect(page_three_strings).to eq([
-      "Chore List",
-      "unload dishwasher",
-      "collect laundry",
-      "defrost meat",
-      "poop patrol",
-      "mow front",
-      "mow back",
-      "mow way back",
-      "put out garbage cans",
-      "wipe off kitchen table",
-      "run dishwasher"
-    ])
+      expect(page_one_strings).to eq([
+        "Daily Packet ##{daily_packet.id}",
+        "11/05/2024",
+        "week 45",
+        "Random Warm Fuzzy",
+        "Alright Haircut",
+        "Your haircut is adequate.",
+        "- Wife, 01/01/1970",
+        "Reading Pace",
+        "7.7 pages/day",
+        "Feedbin Stats",
+        "unread: 9",
+        "oldest: 14 days ago"
+      ])
+
+      expect(page_two_strings).to eq([
+        "Top Three",
+        "Personal",
+        "1. #{"_" * 40}",
+        "2. #{"_" * 40}",
+        "3. #{"_" * 40}",
+        "Work",
+        "1. #{"_" * 40}",
+        "2. #{"_" * 40}",
+        "3. #{"_" * 40}"
+      ])
+
+      expect(page_three_strings).to eq([
+        "Chore List",
+        "unload dishwasher",
+        "collect laundry",
+        "defrost meat",
+        "poop patrol",
+        "mow front",
+        "mow back",
+        "mow way back",
+        "wipe off kitchen table",
+        "run dishwasher"
+      ])
+    end
+  end
+
+  context "on a Monday" do
+    let(:built_on) { Date.parse("2024-11-04") }
+
+    it "renders the Monday-specific chore" do
+      inspector = PDF::Inspector::Page.analyze(daily_packet.pdf_data)
+
+      _, _, page_three_strings = inspector.pages.map { |page| page[:strings] }
+
+      expect(page_three_strings).to include "put out garbage cans"
+    end
   end
 end
