@@ -2,6 +2,7 @@ class DailyPacket < ApplicationRecord
   belongs_to :warm_fuzzy
 
   has_object :pdf_view
+  delegate :pdf_data, to: :pdf_view
 
   has_object :producer
   delegate :save_to_disk, :save_to_s3, to: :producer
