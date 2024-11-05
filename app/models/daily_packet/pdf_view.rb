@@ -102,7 +102,7 @@ class DailyPacket::PdfView < ActiveRecord::AssociatedObject
 
     font_size(20) do
       text "unload dishwasher"
-      text "collect laundry"
+      text "collect laundry" if daily_packet.built_on.saturday? || daily_packet.built_on.sunday?
       text "defrost meat"
       text "poop patrol"
       text "mow front"

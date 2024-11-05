@@ -44,7 +44,6 @@ describe DailyPacket::PdfView do
       expect(page_three_strings).to eq([
         "Chore List",
         "unload dishwasher",
-        "collect laundry",
         "defrost meat",
         "poop patrol",
         "mow front",
@@ -65,6 +64,18 @@ describe DailyPacket::PdfView do
       _, _, page_three_strings = inspector.pages.map { |page| page[:strings] }
 
       expect(page_three_strings).to include "put out garbage cans"
+    end
+  end
+
+  context "on a Saturday" do
+    let(:built_on) { Date.parse("2024-11-09") }
+
+    it "renders the Saturday-specific chore" do
+      inspector = PDF::Inspector::Page.analyze(daily_packet.pdf_data)
+
+      _, _, page_three_strings = inspector.pages.map { |page| page[:strings] }
+
+      expect(page_three_strings).to include "collect laundry"
     end
   end
 end
