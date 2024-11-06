@@ -8,6 +8,7 @@ class DailyPacket::Builder
     warm_fuzzy = WarmFuzzy.random
 
     attributes = {
+      edition_number: DailyPacket.next_edition_number,
       feedbin_oldest_ago: feedbin_oldest_ago,
       feedbin_unread_count: feedbin_unread_count,
       reading_list_pace: reading_list.pace,
