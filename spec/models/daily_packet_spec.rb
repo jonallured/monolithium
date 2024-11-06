@@ -24,4 +24,29 @@ describe DailyPacket do
       expect(daily_packet).to be_valid
     end
   end
+
+  describe ".next_edition_number" do
+    context "with no DailyPacket records" do
+      it "returns 1" do
+        expect(DailyPacket.next_edition_number).to eq 1
+      end
+    end
+
+    context "with a DailyPacket record" do
+      it "returns the edition number after that record's value" do
+        FactoryBot.create(:daily_packet, edition_number: 7)
+        expect(DailyPacket.next_edition_number).to eq 8
+      end
+    end
+
+    context "with a few DailyPacket records" do
+      it "returns the edition number after the record with the highest value" do
+        FactoryBot.create(:daily_packet, edition_number: 1)
+        FactoryBot.create(:daily_packet, edition_number: 7)
+        FactoryBot.create(:daily_packet, edition_number: 3)
+
+        expect(DailyPacket.next_edition_number).to eq 8
+      end
+    end
+  end
 end
