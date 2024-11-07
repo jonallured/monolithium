@@ -44,6 +44,20 @@ class DailyPacket::PdfView < ActiveRecord::AssociatedObject
 
       move_down 20
 
+      bounding_box([0, cursor], width: bounds.width, height: 40) do
+        stroke_bounds
+        star_count = Random.rand(20..50)
+        gap_size = 6
+        star_count.times do
+          star_size = Random.rand(1..4)
+          star_x = Random.rand(gap_size..(bounds.width - gap_size))
+          star_y = Random.rand(gap_size..(bounds.height - gap_size))
+          fill_rectangle [star_x, star_y], star_size, star_size
+        end
+      end
+
+      move_down 20
+
       text "Reading Pace", style: :bold, size: 20
       text daily_packet.reading_list_phrase, size: 12
 
