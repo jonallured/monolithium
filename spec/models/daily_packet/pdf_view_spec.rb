@@ -3,20 +3,19 @@ require "rails_helper"
 describe DailyPacket::PdfView do
   let(:warm_fuzzy) { FactoryBot.create(:warm_fuzzy, received_at: Time.at(0)) }
   let(:daily_packet) { FactoryBot.create(:daily_packet, built_on: built_on, warm_fuzzy: warm_fuzzy) }
+  let(:inspector) { PDF::Inspector::Page.analyze(daily_packet.pdf_data) }
+
+  let(:page_one_strings) { inspector.pages[0][:strings] }
+  let(:page_two_strings) { inspector.pages[1][:strings] }
+  let(:page_three_strings) { inspector.pages[2][:strings] }
+  let(:page_four_strings) { inspector.pages[3][:strings] }
 
   describe "full packet" do
     context "on a Tuesday" do
       let(:built_on) { Date.parse("2024-11-05") }
 
       it "renders the document" do
-        inspector = PDF::Inspector::Page.analyze(daily_packet.pdf_data)
-
         expect(inspector.pages.size).to eq 4
-
-        page_one_strings,
-          page_two_strings,
-          page_three_strings,
-          page_four_strings = inspector.pages.map { |page| page[:strings] }
 
         expect(page_one_strings).to eq([
           "DAILY PACKET #19",
@@ -70,10 +69,6 @@ describe DailyPacket::PdfView do
       let(:built_on) { Date.parse("2024-11-09") }
 
       it "does not render the work top three section" do
-        inspector = PDF::Inspector::Page.analyze(daily_packet.pdf_data)
-
-        page_two_strings = inspector.pages[1][:strings]
-
         expect(page_two_strings).to_not include "TOP 3: WORK"
       end
     end
@@ -84,11 +79,7 @@ describe DailyPacket::PdfView do
       let(:built_on) { Date.parse("2024-11-04") }
 
       it "renders the Monday-specific chore" do
-        inspector = PDF::Inspector::Page.analyze(daily_packet.pdf_data)
-
-        page_five_strings = inspector.pages.last[:strings]
-
-        expect(page_five_strings).to include "put out garbage cans"
+        expect(page_four_strings).to include "put out garbage cans"
       end
     end
 
@@ -96,13 +87,9 @@ describe DailyPacket::PdfView do
       let(:built_on) { Date.parse("2024-11-09") }
 
       it "renders the Weekend-specific chore but not the summertime ones" do
-        inspector = PDF::Inspector::Page.analyze(daily_packet.pdf_data)
+        expect(page_four_strings).to include "collect laundry"
 
-        page_five_strings = inspector.pages.last[:strings]
-
-        expect(page_five_strings).to include "collect laundry"
-
-        expect(page_five_strings).to_not include(
+        expect(page_four_strings).to_not include(
           "poop patrol",
           "mow front",
           "mow back",
@@ -115,11 +102,7 @@ describe DailyPacket::PdfView do
       let(:built_on) { Date.parse("2024-07-13") }
 
       it "renders the summertime Weekend-specific chores" do
-        inspector = PDF::Inspector::Page.analyze(daily_packet.pdf_data)
-
-        page_five_strings = inspector.pages.last[:strings]
-
-        expect(page_five_strings).to include(
+        expect(page_four_strings).to include(
           "poop patrol",
           "mow front",
           "mow back",
