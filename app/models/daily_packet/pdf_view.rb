@@ -120,10 +120,8 @@ class DailyPacket::PdfView < ActiveRecord::AssociatedObject
 
     move_down 20
 
-    font_size(20) do
-      daily_packet.chore_list.each do |chore|
-        text chore, size: 14
-      end
+    daily_packet.chore_list.each do |chore|
+      text chore, size: 14
     end
   end
 end
