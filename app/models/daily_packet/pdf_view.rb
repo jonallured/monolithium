@@ -70,7 +70,7 @@ class DailyPacket::PdfView < ActiveRecord::AssociatedObject
   end
 
   def draw_top_three_page
-    text "Top Three".upcase, style: :bold_italic, size: 42
+    text "Top 3: Personal".upcase, style: :bold_italic, size: 42
 
     move_up 12
 
@@ -80,31 +80,32 @@ class DailyPacket::PdfView < ActiveRecord::AssociatedObject
 
     move_down 20
 
-    text "Personal", size: 30
-
-    move_down 10
-
     font_size(20) do
-      text "1. #{"_" * 40}"
+      text "1."
       move_down 10
-      text "2. #{"_" * 40}"
+      text "2."
       move_down 10
-      text "3. #{"_" * 40}"
+      text "3."
     end
 
     unless daily_packet.built_on_weekend?
+      move_cursor_to bounds.top / 2
+      text "Top 3: Work".upcase, style: :bold_italic, size: 42
+
+      move_up 12
+
+      stroke do
+        horizontal_rule
+      end
+
       move_down 20
 
-      text "Work", size: 30
-
-      move_down 10
-
       font_size(20) do
-        text "1. #{"_" * 40}"
+        text "1."
         move_down 10
-        text "2. #{"_" * 40}"
+        text "2."
         move_down 10
-        text "3. #{"_" * 40}"
+        text "3."
       end
     end
   end

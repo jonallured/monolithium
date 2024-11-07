@@ -4,110 +4,117 @@ describe DailyPacket::PdfView do
   let(:warm_fuzzy) { FactoryBot.create(:warm_fuzzy, received_at: Time.at(0)) }
   let(:daily_packet) { FactoryBot.create(:daily_packet, built_on: built_on, warm_fuzzy: warm_fuzzy) }
 
-  context "on a Tuesday" do
-    let(:built_on) { Date.parse("2024-11-05") }
+  describe "full packet" do
+    context "on a Tuesday" do
+      let(:built_on) { Date.parse("2024-11-05") }
 
-    it "renders the document" do
-      inspector = PDF::Inspector::Page.analyze(daily_packet.pdf_data)
+      it "renders the document" do
+        inspector = PDF::Inspector::Page.analyze(daily_packet.pdf_data)
 
-      expect(inspector.pages.size).to eq 3
+        expect(inspector.pages.size).to eq 3
 
-      page_one_strings, page_two_strings, page_three_strings = inspector.pages.map { |page| page[:strings] }
+        page_one_strings,
+          page_two_strings,
+          page_three_strings = inspector.pages.map { |page| page[:strings] }
 
-      expect(page_one_strings).to eq([
-        "DAILY PACKET #19",
-        "11/05/2024",
-        "week 45",
-        "Random Warm Fuzzy",
-        "Alright Haircut",
-        "Your haircut is adequate.",
-        "- Wife, 01/01/1970",
-        "Reading Pace",
-        "7.7 pages/day",
-        "Feedbin Stats",
-        "unread: 9",
-        "oldest: 14 days ago"
-      ])
+        expect(page_one_strings).to eq([
+          "DAILY PACKET #19",
+          "11/05/2024",
+          "week 45",
+          "Random Warm Fuzzy",
+          "Alright Haircut",
+          "Your haircut is adequate.",
+          "- Wife, 01/01/1970",
+          "Reading Pace",
+          "7.7 pages/day",
+          "Feedbin Stats",
+          "unread: 9",
+          "oldest: 14 days ago"
+        ])
 
-      expect(page_two_strings).to eq([
-        "TOP THREE",
-        "Personal",
-        "1. #{"_" * 40}",
-        "2. #{"_" * 40}",
-        "3. #{"_" * 40}",
-        "Work",
-        "1. #{"_" * 40}",
-        "2. #{"_" * 40}",
-        "3. #{"_" * 40}"
-      ])
+        expect(page_two_strings).to eq([
+          "TOP 3: PERSONAL",
+          "1.",
+          "2.",
+          "3.",
+          "TOP 3: WORK",
+          "1.",
+          "2.",
+          "3."
+        ])
 
-      expect(page_three_strings).to eq([
-        "CHORE LIST",
-        "unload dishwasher",
-        "defrost meat",
-        "wipe off kitchen table",
-        "run dishwasher"
-      ])
+        expect(page_three_strings).to eq([
+          "CHORE LIST",
+          "unload dishwasher",
+          "defrost meat",
+          "wipe off kitchen table",
+          "run dishwasher"
+        ])
+      end
     end
   end
 
-  context "on a Monday" do
-    let(:built_on) { Date.parse("2024-11-04") }
+  describe "top three page" do
+    context "on a Saturday" do
+      let(:built_on) { Date.parse("2024-11-09") }
 
-    it "renders the Monday-specific chore" do
-      inspector = PDF::Inspector::Page.analyze(daily_packet.pdf_data)
+      it "does not render the work top three section" do
+        inspector = PDF::Inspector::Page.analyze(daily_packet.pdf_data)
 
-      _, _, page_three_strings = inspector.pages.map { |page| page[:strings] }
+        page_two_strings = inspector.pages[1][:strings]
 
-      expect(page_three_strings).to include "put out garbage cans"
+        expect(page_two_strings).to_not include "TOP 3: WORK"
+      end
     end
   end
 
-  context "on a Saturday" do
-    let(:built_on) { Date.parse("2024-11-09") }
+  describe "chore list page" do
+    context "on a Monday" do
+      let(:built_on) { Date.parse("2024-11-04") }
 
-    it "does not render the work top three section" do
-      inspector = PDF::Inspector::Page.analyze(daily_packet.pdf_data)
+      it "renders the Monday-specific chore" do
+        inspector = PDF::Inspector::Page.analyze(daily_packet.pdf_data)
 
-      _, page_two_strings, _ = inspector.pages.map { |page| page[:strings] }
+        page_five_strings = inspector.pages.last[:strings]
 
-      expect(page_two_strings).to_not include "Work"
+        expect(page_five_strings).to include "put out garbage cans"
+      end
     end
-  end
 
-  context "on a Saturday in the fall" do
-    let(:built_on) { Date.parse("2024-11-09") }
+    context "on a Saturday in the fall" do
+      let(:built_on) { Date.parse("2024-11-09") }
 
-    it "renders the Weekend-specific chore but not the summertime ones" do
-      inspector = PDF::Inspector::Page.analyze(daily_packet.pdf_data)
+      it "renders the Weekend-specific chore but not the summertime ones" do
+        inspector = PDF::Inspector::Page.analyze(daily_packet.pdf_data)
 
-      _, _, page_three_strings = inspector.pages.map { |page| page[:strings] }
+        page_five_strings = inspector.pages.last[:strings]
 
-      expect(page_three_strings).to include "collect laundry"
+        expect(page_five_strings).to include "collect laundry"
 
-      expect(page_three_strings).to_not include(
-        "poop patrol",
-        "mow front",
-        "mow back",
-        "mow way back"
-      )
+        expect(page_five_strings).to_not include(
+          "poop patrol",
+          "mow front",
+          "mow back",
+          "mow way back"
+        )
+      end
     end
-  end
 
-  context "on a Saturday in the summer" do
-    let(:built_on) { Date.parse("2024-07-13") }
+    context "on a Saturday in the summer" do
+      let(:built_on) { Date.parse("2024-07-13") }
 
-    it "renders the summertime Weekend-specific chores" do
-      inspector = PDF::Inspector::Page.analyze(daily_packet.pdf_data)
+      it "renders the summertime Weekend-specific chores" do
+        inspector = PDF::Inspector::Page.analyze(daily_packet.pdf_data)
 
-      _, _, page_three_strings = inspector.pages.map { |page| page[:strings] }
+        page_five_strings = inspector.pages.last[:strings]
 
-      expect(page_three_strings).to include(
-        "poop patrol",
-        "mow front",
-        "mow back",
-        "mow way back"
-      )
+        expect(page_five_strings).to include(
+          "poop patrol",
+          "mow front",
+          "mow back",
+          "mow way back"
+        )
+      end
     end
   end
 end
