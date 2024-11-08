@@ -41,7 +41,15 @@ class DailyPacket::PdfView < ActiveRecord::AssociatedObject
 
       warm_fuzzy = daily_packet.warm_fuzzy
       text warm_fuzzy.title, size: 12
-      text warm_fuzzy.body, size: 12
+
+      if warm_fuzzy.body.present?
+        text warm_fuzzy.body, size: 12
+      elsif warm_fuzzy.screenshot.representable?
+        image_data = warm_fuzzy.screenshot.download
+        image_io = StringIO.new(image_data)
+        image image_io, width: bounds.width
+      end
+
       text "\n- #{warm_fuzzy.author}, #{warm_fuzzy.received_at.to_date.to_fs}", size: 12, align: :right
 
       move_down 20

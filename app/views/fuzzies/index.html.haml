@@ -3,7 +3,7 @@
 - fuzzies.each do |fuzzy|
   %h2.mb-0= fuzzy.title
   %p from #{fuzzy.author} on #{fuzzy.received_at.to_fs}
-  - if fuzzy.body
+  - if fuzzy.body.present?
     %blockquote
       :markdown
         #{fuzzy.body}
