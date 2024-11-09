@@ -7,4 +7,6 @@
     .flash.bg-dark-gray.border-purple
       %p.notice= flash[:notice]
   = yield
-%footer= yield :footer
+- if admin?
+  %footer.border-t-8.border-dark-gray.text-center
+    %p= link_to "dashboard", dashboard_path
