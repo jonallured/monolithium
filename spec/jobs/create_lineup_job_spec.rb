@@ -1,15 +1,27 @@
 require "rails_helper"
 
 describe CreateLineupJob do
+  context "when there is a current Lineup" do
+    let(:current_on) { Date.today }
+
+    it "creates a Lineup for tomorrow" do
+      FactoryBot.create(:lineup, current_on: current_on)
+      expect(Lineup.current).to_not be_nil
+      expect do
+        CreateLineupJob.new.perform
+      end.to change(Lineup, :count).from(1).to(2)
+    end
+  end
+
   context "when there is a Lineup from yesterday" do
     let(:current_on) { Date.yesterday }
 
-    it "creates a Lineup for today" do
+    it "creates a Lineup for today and tomorrow" do
       FactoryBot.create(:lineup, current_on: current_on)
       expect(Lineup.current).to be_nil
       expect do
         CreateLineupJob.new.perform
-      end.to change(Lineup, :count).from(1).to(2)
+      end.to change(Lineup, :count).from(1).to(3)
       expect(Lineup.current).to_not be_nil
     end
   end
@@ -22,7 +34,7 @@ describe CreateLineupJob do
       expect(Lineup.current).to be_nil
       expect do
         CreateLineupJob.new.perform
-      end.to change(Lineup, :count).from(1).to(8)
+      end.to change(Lineup, :count).from(1).to(9)
       expect(Lineup.current).to_not be_nil
     end
   end
