@@ -2,7 +2,7 @@ source "https://rubygems.org"
 
 ruby file: ".tool-versions"
 
-gem "rails", "7.2.1"
+gem "rails", "8.0.0"
 
 gem "pg"
 gem "puma"
