@@ -24,7 +24,7 @@ class ReadingList
   def pace
     return if Time.now.year < @year
 
-    exact_pace = (total_pages * 1.0) / days_so_far
+    exact_pace = total_pages.to_f / days_so_far.to_f
     exact_pace.round(2)
   end
 
