@@ -1,7 +1,6 @@
 class CreateLineupJob < ApplicationJob
   def perform
-    while Lineup.current.nil?
-      Lineup.create_next
-    end
+    Lineup.create_next while Lineup.current.nil?
+    Lineup.create_next
   end
 end
