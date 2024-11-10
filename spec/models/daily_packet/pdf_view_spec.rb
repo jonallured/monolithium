@@ -2,13 +2,12 @@ require "rails_helper"
 
 describe DailyPacket::PdfView do
   let(:warm_fuzzy) { FactoryBot.create(:warm_fuzzy, received_at: Time.at(0)) }
-  let(:daily_packet) { FactoryBot.create(:daily_packet, built_on: built_on, warm_fuzzy: warm_fuzzy) }
-  let(:inspector) { PDF::Inspector::Page.analyze(daily_packet.pdf_data) }
 
-  let(:page_one_strings) { inspector.pages[0][:strings] }
-  let(:page_two_strings) { inspector.pages[1][:strings] }
-  let(:page_three_strings) { inspector.pages[2][:strings] }
-  let(:page_four_strings) { inspector.pages[3][:strings] }
+  let(:daily_packet) do
+    FactoryBot.create(:daily_packet, built_on: built_on, warm_fuzzy: warm_fuzzy)
+  end
+
+  include_context "pdf inspection"
 
   describe "full packet" do
     context "on a Tuesday" do
@@ -74,6 +73,28 @@ describe DailyPacket::PdfView do
     end
   end
 
+  describe "start/stop list page" do
+    context "on a Monday" do
+      let(:built_on) { Date.parse("2024-11-04") }
+
+      it "renders the start/stop list page" do
+        expect(inspector.pages.size).to eq 4
+        expect(page_three_strings).to include "START LIST"
+        expect(page_three_strings).to include "STOP LIST"
+      end
+    end
+
+    context "on a Saturday" do
+      let(:built_on) { Date.parse("2024-11-09") }
+
+      it "suppresses the start/stop list page" do
+        expect(inspector.pages.size).to eq 3
+        expect(page_three_strings).to_not include "START LIST"
+        expect(page_three_strings).to_not include "STOP LIST"
+      end
+    end
+  end
+
   describe "chore list page" do
     context "on a Monday" do
       let(:built_on) { Date.parse("2024-11-04") }
@@ -87,9 +108,9 @@ describe DailyPacket::PdfView do
       let(:built_on) { Date.parse("2024-11-09") }
 
       it "renders the Weekend-specific chore but not the summertime ones" do
-        expect(page_four_strings).to include "collect laundry"
+        expect(page_three_strings).to include "collect laundry"
 
-        expect(page_four_strings).to_not include(
+        expect(page_three_strings).to_not include(
           "poop patrol",
           "mow front",
           "mow back",
@@ -102,7 +123,7 @@ describe DailyPacket::PdfView do
       let(:built_on) { Date.parse("2024-07-13") }
 
       it "renders the summertime Weekend-specific chores" do
-        expect(page_four_strings).to include(
+        expect(page_three_strings).to include(
           "poop patrol",
           "mow front",
           "mow back",
