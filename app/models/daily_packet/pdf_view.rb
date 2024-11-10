@@ -18,8 +18,10 @@ class DailyPacket::PdfView < ActiveRecord::AssociatedObject
     start_new_page
     draw_top_three_page
     start_new_page
-    draw_start_stop_list_page
-    start_new_page
+    unless daily_packet.built_on_weekend?
+      draw_start_stop_list_page
+      start_new_page
+    end
     draw_chore_list_page
   end
 
