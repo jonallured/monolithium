@@ -51,6 +51,7 @@ class DailyPacket < ApplicationRecord
     end
 
     chores << "put out garbage cans" if built_on_monday?
+    chores << "refill soap dispensers"
     chores << "wipe off kitchen table"
     chores << "run dishwasher"
 
