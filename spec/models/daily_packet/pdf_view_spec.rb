@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe DailyPacket::PdfView do
-  let(:warm_fuzzy) { FactoryBot.create(:warm_fuzzy, received_at: Time.at(0)) }
+  let(:warm_fuzzy) { FactoryBot.create(:warm_fuzzy, received_at: Time.at(0), title: "alright haircut") }
 
   let(:daily_packet) do
     FactoryBot.create(:daily_packet, built_on: built_on, warm_fuzzy: warm_fuzzy)
@@ -56,6 +56,7 @@ describe DailyPacket::PdfView do
           "CHORE LIST",
           "unload dishwasher",
           "defrost meat",
+          "refill soap dispensers",
           "wipe off kitchen table",
           "run dishwasher"
         ])

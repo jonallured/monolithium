@@ -42,7 +42,7 @@ class DailyPacket::PdfView < ActiveRecord::AssociatedObject
       text "Random Warm Fuzzy", style: :bold, size: 20
 
       warm_fuzzy = daily_packet.warm_fuzzy
-      text warm_fuzzy.title, size: 12
+      text warm_fuzzy.title.titlecase, size: 12
 
       if warm_fuzzy.body.present?
         text warm_fuzzy.body, size: 12
