@@ -5,7 +5,7 @@ describe "Admin deletes financial account" do
 
   let(:financial_account) { FactoryBot.create(:financial_account) }
 
-  scenario "cancels delete" do
+  scenario "cancels delete", js: true do
     visit "/crud/financial_accounts/#{financial_account.id}"
 
     dismiss_confirm { click_on "Delete Financial Account" }
@@ -14,7 +14,7 @@ describe "Admin deletes financial account" do
     expect(page).to have_current_path crud_financial_account_path(financial_account)
   end
 
-  scenario "confirms delete" do
+  scenario "confirms delete", js: true do
     visit "/crud/financial_accounts/#{financial_account.id}"
 
     accept_confirm { click_on "Delete Financial Account" }

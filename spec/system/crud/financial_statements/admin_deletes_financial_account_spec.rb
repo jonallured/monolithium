@@ -8,7 +8,7 @@ describe "Admin deletes financial statement" do
     FactoryBot.create(:financial_statement, financial_account: financial_account)
   end
 
-  scenario "cancels delete" do
+  scenario "cancels delete", js: true do
     visit "/crud/financial_accounts/#{financial_account.id}/financial_statements/#{financial_statement.id}"
 
     dismiss_confirm { click_on "Delete Financial Statement" }
@@ -17,7 +17,7 @@ describe "Admin deletes financial statement" do
     expect(page).to have_current_path crud_financial_account_financial_statement_path(financial_account, financial_statement)
   end
 
-  scenario "confirms delete" do
+  scenario "confirms delete", js: true do
     visit "/crud/financial_accounts/#{financial_account.id}/financial_statements/#{financial_statement.id}"
 
     accept_confirm { click_on "Delete Financial Statement" }

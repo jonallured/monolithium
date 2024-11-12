@@ -5,7 +5,7 @@ describe "Admin deletes gift idea" do
 
   let(:gift_idea) { FactoryBot.create(:gift_idea) }
 
-  scenario "cancels delete" do
+  scenario "cancels delete", js: true do
     visit "/crud/gift_ideas/#{gift_idea.id}"
 
     dismiss_confirm { click_on "Delete Gift Idea" }
@@ -14,7 +14,7 @@ describe "Admin deletes gift idea" do
     expect(page).to have_current_path crud_gift_idea_path(gift_idea)
   end
 
-  scenario "confirms delete" do
+  scenario "confirms delete", js: true do
     visit "/crud/gift_ideas/#{gift_idea.id}"
 
     accept_confirm { click_on "Delete Gift Idea" }

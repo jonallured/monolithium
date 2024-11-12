@@ -5,7 +5,7 @@ describe "Admin deletes webhook sender" do
 
   let(:webhook_sender) { FactoryBot.create(:webhook_sender) }
 
-  scenario "cancels delete" do
+  scenario "cancels delete", js: true do
     visit "/crud/webhook_senders/#{webhook_sender.id}"
 
     dismiss_confirm { click_on "Delete Webhook Sender" }
@@ -14,7 +14,7 @@ describe "Admin deletes webhook sender" do
     expect(page).to have_current_path crud_webhook_sender_path(webhook_sender)
   end
 
-  scenario "confirms delete" do
+  scenario "confirms delete", js: true do
     visit "/crud/webhook_senders/#{webhook_sender.id}"
 
     accept_confirm { click_on "Delete Webhook Sender" }

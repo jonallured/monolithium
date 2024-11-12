@@ -5,7 +5,7 @@ describe "Admin deletes post bin request" do
 
   let(:post_bin_request) { FactoryBot.create(:post_bin_request) }
 
-  scenario "cancels delete" do
+  scenario "cancels delete", js: true do
     visit "/crud/post_bin_requests/#{post_bin_request.id}"
 
     dismiss_confirm { click_on "Delete Post Bin Request" }
@@ -14,7 +14,7 @@ describe "Admin deletes post bin request" do
     expect(page).to have_current_path crud_post_bin_request_path(post_bin_request)
   end
 
-  scenario "confirms delete" do
+  scenario "confirms delete", js: true do
     visit "/crud/post_bin_requests/#{post_bin_request.id}"
 
     accept_confirm { click_on "Delete Post Bin Request" }

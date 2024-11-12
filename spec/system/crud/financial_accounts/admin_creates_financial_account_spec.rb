@@ -11,7 +11,7 @@ describe "Admin creates financial account" do
     expect(page).to have_current_path new_crud_financial_account_path
   end
 
-  scenario "create with category error" do
+  scenario "create with category error", js: true do
     visit "/crud/financial_accounts/new"
     click_on "create"
     select = page.find("#financial_account_category")
