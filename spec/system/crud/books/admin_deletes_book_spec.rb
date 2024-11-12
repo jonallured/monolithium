@@ -5,7 +5,7 @@ describe "Admin deletes book" do
 
   let(:book) { FactoryBot.create(:book) }
 
-  scenario "cancels delete" do
+  scenario "cancels delete", js: true do
     visit "/crud/books/#{book.id}"
 
     dismiss_confirm { click_on "Delete Book" }
@@ -14,7 +14,7 @@ describe "Admin deletes book" do
     expect(page).to have_current_path crud_book_path(book)
   end
 
-  scenario "confirms delete" do
+  scenario "confirms delete", js: true do
     visit "/crud/books/#{book.id}"
 
     accept_confirm { click_on "Delete Book" }

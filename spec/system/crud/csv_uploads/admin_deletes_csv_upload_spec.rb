@@ -5,7 +5,7 @@ describe "Admin deletes csv upload" do
 
   let(:csv_upload) { FactoryBot.create(:csv_upload) }
 
-  scenario "cancels delete" do
+  scenario "cancels delete", js: true do
     visit "/crud/csv_uploads/#{csv_upload.id}"
 
     dismiss_confirm { click_on "Delete CSV Upload" }
@@ -14,7 +14,7 @@ describe "Admin deletes csv upload" do
     expect(page).to have_current_path crud_csv_upload_path(csv_upload)
   end
 
-  scenario "confirms delete" do
+  scenario "confirms delete", js: true do
     visit "/crud/csv_uploads/#{csv_upload.id}"
 
     accept_confirm { click_on "Delete CSV Upload" }

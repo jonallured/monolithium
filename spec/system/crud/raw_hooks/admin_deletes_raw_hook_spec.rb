@@ -5,7 +5,7 @@ describe "Admin deletes raw hook" do
 
   let(:raw_hook) { FactoryBot.create(:raw_hook) }
 
-  scenario "cancels delete" do
+  scenario "cancels delete", js: true do
     visit "/crud/raw_hooks/#{raw_hook.id}"
 
     dismiss_confirm { click_on "Delete Raw Hook" }
@@ -14,7 +14,7 @@ describe "Admin deletes raw hook" do
     expect(page).to have_current_path crud_raw_hook_path(raw_hook)
   end
 
-  scenario "confirms delete" do
+  scenario "confirms delete", js: true do
     visit "/crud/raw_hooks/#{raw_hook.id}"
 
     accept_confirm { click_on "Delete Raw Hook" }

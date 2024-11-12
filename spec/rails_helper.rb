@@ -23,14 +23,15 @@ RSpec.configure do |config|
   end
 
   config.before(:each, type: :system) do
-    Selenium::WebDriver.logger.ignore(:deprecations)
-    Capybara.server = :puma, {Silent: true}
-    driven_by :selenium, using: :headless_chrome
+    driven_by :rack_test
+  end
+
+  config.before(:each, type: :system, js: true) do
+    driven_by :selenium_chrome_headless
   end
 end
 
 Capybara.configure do |config|
-  config.default_set_options = {clear: :backspace}
   config.exact_text = true
 end
 

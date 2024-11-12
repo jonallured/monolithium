@@ -5,7 +5,7 @@ describe "Admin deletes warm fuzzy" do
 
   let(:warm_fuzzy) { FactoryBot.create(:warm_fuzzy) }
 
-  scenario "cancels delete" do
+  scenario "cancels delete", js: true do
     visit "/crud/warm_fuzzies/#{warm_fuzzy.id}"
 
     dismiss_confirm { click_on "Delete Warm Fuzzy" }
@@ -14,7 +14,7 @@ describe "Admin deletes warm fuzzy" do
     expect(page).to have_current_path crud_warm_fuzzy_path(warm_fuzzy)
   end
 
-  scenario "confirms delete" do
+  scenario "confirms delete", js: true do
     visit "/crud/warm_fuzzies/#{warm_fuzzy.id}"
 
     accept_confirm { click_on "Delete Warm Fuzzy" }

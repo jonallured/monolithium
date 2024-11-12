@@ -5,7 +5,7 @@ describe "Admin deletes sneaker" do
 
   let(:sneaker) { FactoryBot.create(:sneaker) }
 
-  scenario "cancels delete" do
+  scenario "cancels delete", js: true do
     visit "/crud/sneakers/#{sneaker.id}"
 
     dismiss_confirm { click_on "Delete Sneaker" }
@@ -14,7 +14,7 @@ describe "Admin deletes sneaker" do
     expect(page).to have_current_path crud_sneaker_path(sneaker)
   end
 
-  scenario "confirms delete" do
+  scenario "confirms delete", js: true do
     visit "/crud/sneakers/#{sneaker.id}"
 
     accept_confirm { click_on "Delete Sneaker" }

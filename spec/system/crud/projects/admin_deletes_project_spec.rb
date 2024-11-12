@@ -5,7 +5,7 @@ describe "Admin deletes project" do
 
   let(:project) { FactoryBot.create(:project) }
 
-  scenario "cancels delete" do
+  scenario "cancels delete", js: true do
     visit "/crud/projects/#{project.id}"
 
     dismiss_confirm { click_on "Delete Project" }
@@ -14,7 +14,7 @@ describe "Admin deletes project" do
     expect(page).to have_current_path crud_project_path(project)
   end
 
-  scenario "confirms delete" do
+  scenario "confirms delete", js: true do
     visit "/crud/projects/#{project.id}"
 
     accept_confirm { click_on "Delete Project" }
