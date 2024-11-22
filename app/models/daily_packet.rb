@@ -62,6 +62,7 @@ class DailyPacket < ApplicationRecord
     [
       "drill master password",
       "open dashboards",
+      "review calendar",
       "say hi in Slack"
     ]
   end
