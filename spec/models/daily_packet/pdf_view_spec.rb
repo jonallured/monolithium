@@ -46,6 +46,7 @@ describe DailyPacket::PdfView do
           "START LIST",
           "drill master password",
           "open dashboards",
+          "review calendar",
           "say hi in Slack",
           "STOP LIST",
           "plug in mouse",
