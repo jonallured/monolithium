@@ -58,6 +58,7 @@ describe DailyPacket::PdfView do
           "unload dishwasher",
           "defrost meat",
           "refill soap dispensers",
+          "do hand wash",
           "wipe off kitchen table",
           "run dishwasher"
         ])
