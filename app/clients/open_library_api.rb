@@ -3,12 +3,10 @@ class OpenLibraryApi
     endpoint_url = Monolithium.config.open_library_endpoint_url
     return unless endpoint_url
 
-    Faraday.new(
-      url: endpoint_url,
-      headers: {"Content-Type" => "application/json"}
-    ) do |f|
+    Faraday.new(url: endpoint_url) do |f|
       f.adapter Faraday.default_adapter
       f.response :follow_redirects
+      f.request :json
       f.response :json
     end
   end
