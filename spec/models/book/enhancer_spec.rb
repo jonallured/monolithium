@@ -5,23 +5,34 @@ describe Book::Enhancer do
     let(:book) do
       FactoryBot.create(
         :book,
-        isbn: "123456789",
+        isbn: isbn,
         pages: nil,
         title: nil
       )
     end
 
-    before do
-      expect(OpenLibraryApi).to receive(:get_book).and_return(api_data)
-    end
-
     context "with nil api data" do
       let(:api_data) { nil }
+      let(:isbn) { "123456789" }
 
       it "does nothing" do
+        expect(OpenLibraryApi).to receive(:get_book).and_return(api_data)
         book.enhancer.update_from_api
 
         expect(book.isbn).to eq "123456789"
+        expect(book.pages).to eq nil
+        expect(book.title).to eq nil
+      end
+    end
+
+    context "with a book that has none for isbn" do
+      let(:isbn) { "none" }
+
+      it "does nothing" do
+        expect(OpenLibraryApi).to_not receive(:get_book)
+        book.enhancer.update_from_api
+
+        expect(book.isbn).to eq "none"
         expect(book.pages).to eq nil
         expect(book.title).to eq nil
       end
@@ -36,7 +47,10 @@ describe Book::Enhancer do
         }
       end
 
+      let(:isbn) { "123456789" }
+
       it "updates the book with that api data" do
+        expect(OpenLibraryApi).to receive(:get_book).and_return(api_data)
         book.enhancer.update_from_api
 
         expect(book.isbn).to eq "123-456-789"
