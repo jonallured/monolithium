@@ -6,5 +6,6 @@
   = form.text_field :isbn, placeholder: "isbn"
   = form.text_field :title, placeholder: "title"
   = form.text_field :pages, placeholder: "pages"
+  = form.select :format, book_format_options, selected: book.format
   = form.date_field :finished_on, placeholder: "finished on"
   = form.button "update"

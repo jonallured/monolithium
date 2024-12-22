@@ -14,13 +14,14 @@ describe "Admin creates book" do
   scenario "create with errors" do
     visit "/crud/books/new"
     click_on "create"
-    expect(page).to have_css ".alert", text: "Isbn can't be blank and Finished on can't be blank"
+    expect(page).to have_css ".alert", text: "Finished on can't be blank, Format is not included in the list, and Isbn can't be blank"
     expect(page).to have_current_path new_crud_book_path
   end
 
   scenario "create successfully" do
     visit "/crud/books/new"
     fill_in "isbn", with: "abc-123"
+    select "print", from: "book_format"
     fill_in "finished on", with: "01/01/2000"
     click_on "create"
 
@@ -40,6 +41,7 @@ describe "Admin creates book" do
         ["ISBN", "abc-123"],
         ["Title", ""],
         ["Pages", ""],
+        ["Format", "print"],
         ["Finished On", "01/01/2000"],
         ["Created At", book.created_at.to_fs],
         ["Updated At", book.updated_at.to_fs]
