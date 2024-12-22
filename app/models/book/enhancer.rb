@@ -1,5 +1,7 @@
 class Book::Enhancer < ActiveRecord::AssociatedObject
   def update_from_api
+    return if book.isbn == "none"
+
     api_data = OpenLibraryApi.get_book(book.isbn)
     return unless api_data
 
