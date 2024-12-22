@@ -25,6 +25,20 @@ describe Book::Enhancer do
       end
     end
 
+    context "with empty api data" do
+      let(:api_data) { {} }
+      let(:isbn) { "123456789" }
+
+      it "does nothing" do
+        expect(OpenLibraryApi).to receive(:get_book).and_return(api_data)
+        book.enhancer.update_from_api
+
+        expect(book.isbn).to eq "123456789"
+        expect(book.pages).to eq nil
+        expect(book.title).to eq nil
+      end
+    end
+
     context "with a book that has none for isbn" do
       let(:isbn) { "none" }
 
