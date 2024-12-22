@@ -32,6 +32,7 @@ describe "Admin views book" do
         ["ISBN", "abc-123"],
         ["Title", "Whittling And You"],
         ["Pages", "777"],
+        ["Format", "print"],
         ["Finished On", book.finished_on.to_fs],
         ["Created At", book.created_at.to_fs],
         ["Updated At", book.updated_at.to_fs]

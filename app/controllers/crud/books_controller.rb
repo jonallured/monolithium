@@ -38,6 +38,6 @@ class Crud::BooksController < ApplicationController
   private
 
   def book_params
-    params.require(:book).permit(:finished_on, :isbn, :pages, :title)
+    params.require(:book).permit(:finished_on, :format, :isbn, :pages, :title)
   end
 end
