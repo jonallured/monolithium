@@ -17,21 +17,7 @@
 
 ### 1. Replace Action Cable Adapter
 
-**Option A: Use Async Adapter (Simple but Limited)**
-- Already configured for test environment
-- Change development and production environments to use the async adapter
-- Limitations: Only works for single server deployments, no cross-server communication
-
-```ruby
-# config/cable.yml
-development:
-  adapter: async
-
-production:
-  adapter: async
-```
-
-**Option B: Use PostgreSQL Adapter (More Robust)**
+**Use PostgreSQL Adapter**
 - Add the 'action_cable_postgresql_adapter' gem
 - Configure Action Cable to use PostgreSQL instead of Redis
 
@@ -51,9 +37,8 @@ production:
 
 ### 2. Replace Sidekiq with Alternative Job Queue
 
-**Option A: Switch to ActiveJob's Built-in Queues**
-- Use the `:async` adapter for development/testing
-- Use the `:good_job` adapter for production (SQL-backed job queue)
+**Switch to GoodJob (SQL-based Queue)**
+- Use the `:good_job` adapter for both development and production
 
 1. Remove Sidekiq gem and add GoodJob:
 ```ruby
@@ -69,7 +54,7 @@ gem "good_job"
 2. Update ActiveJob configuration:
 ```ruby
 # config/environments/development.rb
-config.active_job.queue_adapter = :async
+config.active_job.queue_adapter = :good_job
 
 # config/environments/production.rb
 config.active_job.queue_adapter = :good_job
@@ -141,6 +126,6 @@ config.cache_store = :postgres_cache, { table_name: "rails_cache" }
 
 1. **Background Job Reliability**: Sidekiq with Redis is known for its reliability and performance. Alternative solutions might not be as battle-tested.
 
-2. **Real-time Updates**: ActionCable with async adapter may not scale well for applications with many simultaneous connections.
+2. **Real-time Updates**: ActionCable with PostgreSQL adapter is less common than the Redis adapter and may require more configuration and testing.
 
 3. **Job Scheduling**: If you're using Sidekiq's scheduling features, you'll need to implement an alternative (like the rake tasks you're already using).
