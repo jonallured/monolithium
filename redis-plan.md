@@ -60,6 +60,7 @@ There are two excellent PostgreSQL-backed options for ActiveJob: **Solid Queue**
 - Added to Rails in version 7.1
 - Designed to be simple and minimal with no external dependencies
 - Focuses on core job processing without extra features
+- **Uses the same database connection as your Rails application by default**
 
 1. Add Solid Queue to your Gemfile:
 ```ruby
@@ -78,13 +79,33 @@ bin/rails generate solid_queue:install
 bin/rails db:migrate
 ```
 
+This migration creates several tables in your PostgreSQL database:
+- `solid_queue_jobs`: Stores job metadata
+- `solid_queue_ready_executions`: Queue of jobs ready to run
+- `solid_queue_scheduled_executions`: Jobs scheduled to run in the future
+- `solid_queue_semaphores`: Locks to prevent race conditions
+- `solid_queue_blocked_executions`: Jobs waiting for other jobs
+- `solid_queue_claimed_executions`: Currently running jobs
+- `solid_queue_recurring_executions`: Definitions for recurring jobs
+
 3. Configure ActiveJob to use Solid Queue:
 ```ruby
 # config/environments/development.rb and production.rb
 config.active_job.queue_adapter = :solid_queue
 ```
 
-4. Configure Solid Queue (optional):
+4. Database Configuration:
+Solid Queue automatically uses your Rails application's database configuration. No additional database configuration is required - it uses the same PostgreSQL connection defined in your `database.yml`.
+
+If you need to customize the database connection:
+
+```ruby
+# config/initializers/solid_queue.rb
+Rails.application.config.solid_queue.connect_to = 
+  { database: ActiveRecord::Base.configurations.configs_for(env_name: Rails.env, name: "job_queue") }
+```
+
+5. Configure Solid Queue performance options:
 ```ruby
 # config/initializers/solid_queue.rb
 Rails.application.config.solid_queue.concurrency = 5
@@ -147,6 +168,7 @@ end
 - Rich feature set including dashboard, metrics, and more
 - Built specifically for PostgreSQL with optimized queries
 - Excellent concurrency and thread management
+- **Designed specifically to leverage PostgreSQL's advanced features**
 
 1. Add GoodJob to your Gemfile:
 ```ruby
@@ -165,13 +187,39 @@ rails g good_job:install
 rails db:migrate
 ```
 
+This creates GoodJob's database schema in your PostgreSQL database, including:
+- `good_jobs`: Main table for storing job data
+- `good_job_processes`: Track worker processes
+- `good_job_settings`: Configuration storage
+- `good_job_batches`: Support for job batching
+- `good_job_executions`: Track job execution history
+
 3. Update ActiveJob configuration:
 ```ruby
 # config/environments/development.rb and production.rb
 config.active_job.queue_adapter = :good_job
 ```
 
-4. Set up GoodJob configuration:
+4. Database Configuration:
+By default, GoodJob uses your application's database configuration from `database.yml`. Unlike Solid Queue, it provides specific options for PostgreSQL:
+
+```ruby
+# config/initializers/good_job.rb
+GoodJob.configure do |config|
+  # Use a specific database connection if needed
+  config.connection_pool_size = ENV.fetch("GOOD_JOB_CONNECTION_POOL_SIZE", 5).to_i
+  
+  # PostgreSQL specific query optimization options
+  config.smaller_number_is_higher_priority = true # Optimize priority queries
+  config.indexed_at_to_scheduled_at = true  # Use indexed_at instead of scheduled_at for performance
+  
+  # You can specify a different database configuration
+  # config.active_record_parent_class = "ApplicationRecord"
+  # This will use the database connection from that class
+end
+```
+
+5. Set up GoodJob execution configuration:
 ```ruby
 # config/initializers/good_job.rb
 GoodJob.configure do |config|
@@ -204,7 +252,7 @@ GoodJob.configure do |config|
 end
 ```
 
-5. Update Procfile:
+6. Update Procfile:
 ```ruby
 # Procfile
 web: bundle exec puma -C config/puma.rb
@@ -220,9 +268,12 @@ worker: bundle exec good_job start
 | Maturity | Newer (since 2023) | More mature (since 2020) |
 | Features | Minimal, focused | Extensive (dashboard, metrics) |
 | Scheduling | Multiple options (interval, cron) | Native cron support |
-| Optimization | General database optimization | PostgreSQL-specific optimizations |
+| Database Support | Any ActiveRecord DB | PostgreSQL-optimized |
+| PostgreSQL Features | Basic | Advanced (advisory locks, LISTEN/NOTIFY) |
+| Job Prioritization | Standard | Advanced |
 | UI Dashboard | No (would need separate tool) | Yes (built-in) |
 | Documentation | Rails guides | Extensive GitHub docs |
+| Concurrency Model | Thread-based | Thread-based with advanced pool management |
 
 **Recommendation**: Consider Solid Queue if you prefer official Rails integrations and simpler maintenance. Choose GoodJob if you want more features like a built-in dashboard or more mature PostgreSQL optimization.
 
