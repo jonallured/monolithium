@@ -11,8 +11,8 @@ describe FeedbinStats do
       let(:unread_entry_ids) { [] }
       let(:oldest_entry) { {} }
 
-      it "returns an empty array" do
-        expect(FeedbinStats.compute).to eq []
+      it "returns zero for count and days" do
+        expect(FeedbinStats.compute).to eq [0, 0]
       end
     end
 
@@ -20,8 +20,8 @@ describe FeedbinStats do
       let(:unread_entry_ids) { [1] }
       let(:oldest_entry) { {"id" => 1} }
 
-      it "returns an empty array" do
-        expect(FeedbinStats.compute).to eq []
+      it "returns count and then zero for days" do
+        expect(FeedbinStats.compute).to eq [1, 0]
       end
     end
 
@@ -29,11 +29,8 @@ describe FeedbinStats do
       let(:unread_entry_ids) { [1, 2, 3] }
       let(:oldest_entry) { {"id" => 1, "published" => 10.days.ago.to_json} }
 
-      it "returns the count and timestamp of oldest" do
-        count, oldest_ago = FeedbinStats.compute
-
-        expect(count).to eq 3
-        expect(oldest_ago).to eq 10
+      it "returns the count and days" do
+        expect(FeedbinStats.compute).to eq [3, 10]
       end
     end
   end
