@@ -14,7 +14,7 @@ describe DailyPacket::PdfView do
       let(:built_on) { Date.parse("2024-11-05") }
 
       it "renders the document" do
-        expect(inspector.pages.size).to eq 4
+        expect(inspector.pages.size).to eq 3
 
         expect(page_one_strings).to eq([
           "DAILY PACKET #19",
@@ -36,13 +36,20 @@ describe DailyPacket::PdfView do
           "1.",
           "2.",
           "3.",
-          "TOP 3: WORK",
-          "1.",
-          "2.",
-          "3."
+          "CHORE LIST",
+          "unload dishwasher",
+          "defrost meat",
+          "refill soap dispensers",
+          "do hand wash",
+          "wipe off kitchen table",
+          "run dishwasher"
         ])
 
         expect(page_three_strings).to eq([
+          "TOP 3: WORK",
+          "1.",
+          "2.",
+          "3.",
           "START LIST",
           "drill master password",
           "open dashboards",
@@ -52,58 +59,26 @@ describe DailyPacket::PdfView do
           "plug in mouse",
           "say bye in Slack"
         ])
-
-        expect(page_four_strings).to eq([
-          "CHORE LIST",
-          "unload dishwasher",
-          "defrost meat",
-          "refill soap dispensers",
-          "do hand wash",
-          "wipe off kitchen table",
-          "run dishwasher"
-        ])
       end
     end
   end
 
-  describe "top three page" do
+  describe "work page" do
     context "on a Saturday" do
       let(:built_on) { Date.parse("2024-11-09") }
 
-      it "does not render the work top three section" do
-        expect(page_two_strings).to_not include "TOP 3: WORK"
+      it "does not render the work page" do
+        expect(inspector.pages.size).to eq 2
       end
     end
   end
 
-  describe "start/stop list page" do
-    context "on a Monday" do
-      let(:built_on) { Date.parse("2024-11-04") }
-
-      it "renders the start/stop list page" do
-        expect(inspector.pages.size).to eq 4
-        expect(page_three_strings).to include "START LIST"
-        expect(page_three_strings).to include "STOP LIST"
-      end
-    end
-
-    context "on a Saturday" do
-      let(:built_on) { Date.parse("2024-11-09") }
-
-      it "suppresses the start/stop list page" do
-        expect(inspector.pages.size).to eq 3
-        expect(page_three_strings).to_not include "START LIST"
-        expect(page_three_strings).to_not include "STOP LIST"
-      end
-    end
-  end
-
-  describe "chore list page" do
+  describe "chore list section" do
     context "on a Monday" do
       let(:built_on) { Date.parse("2024-11-04") }
 
       it "renders the Monday-specific chore" do
-        expect(page_four_strings).to include "put out garbage cans"
+        expect(page_two_strings).to include "put out garbage cans"
       end
     end
 
@@ -111,9 +86,9 @@ describe DailyPacket::PdfView do
       let(:built_on) { Date.parse("2024-11-09") }
 
       it "renders the Weekend-specific chore but not the summertime ones" do
-        expect(page_three_strings).to include "collect laundry"
+        expect(page_two_strings).to include "collect laundry"
 
-        expect(page_three_strings).to_not include(
+        expect(page_two_strings).to_not include(
           "poop patrol",
           "mow front",
           "mow back",
@@ -126,7 +101,7 @@ describe DailyPacket::PdfView do
       let(:built_on) { Date.parse("2024-07-13") }
 
       it "renders the summertime Weekend-specific chores" do
-        expect(page_three_strings).to include(
+        expect(page_two_strings).to include(
           "poop patrol",
           "mow front",
           "mow back",
