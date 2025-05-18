@@ -51,16 +51,9 @@ bin/rails generate channel_subscriptions
 bin/rails db:migrate
 ```
 
-### 2. Replace Sidekiq with Alternative Job Queue
+### 2. Replace Sidekiq with Solid Queue
 
-There are two excellent PostgreSQL-backed options for ActiveJob: **Solid Queue** and **GoodJob**. Let's examine both:
-
-#### Option A: Solid Queue (Rails Official)
-- Officially maintained by the Rails team
-- Added to Rails in version 7.1
-- Designed to be simple and minimal with no external dependencies
-- Focuses on core job processing without extra features
-- **Uses the same database connection as your Rails application by default**
+Solid Queue is officially maintained by the Rails team and added to Rails in version 7.1. It's designed to be simple and minimal with no external dependencies, focusing on core job processing without extra features. Most importantly, it uses the same database connection as your Rails application by default.
 
 1. Add Solid Queue to your Gemfile:
 ```ruby
@@ -122,14 +115,14 @@ Rails.application.config.solid_queue.on_error = ->(exception, job_class) do
 end
 ```
 
-5. Configure the worker in Procfile:
+6. Configure the worker in Procfile:
 ```ruby
 # Procfile
 web: bundle exec puma -C config/puma.rb
 worker: bundle exec rake solid_queue:start
 ```
 
-6. For regular scheduled jobs, you need to use the recurring jobs API:
+7. For regular scheduled jobs, you need to use the recurring jobs API:
 ```ruby
 # config/initializers/recurring_jobs.rb
 Rails.application.config.after_initialize do
@@ -162,120 +155,6 @@ Rails.application.config.after_initialize do
   )
 end
 ```
-
-#### Option B: GoodJob
-- More mature with a longer track record
-- Rich feature set including dashboard, metrics, and more
-- Built specifically for PostgreSQL with optimized queries
-- Excellent concurrency and thread management
-- **Designed specifically to leverage PostgreSQL's advanced features**
-
-1. Add GoodJob to your Gemfile:
-```ruby
-# Gemfile
-# Remove these lines
-# gem "redis"
-# gem "sidekiq"
-
-# Add this line
-gem "good_job"
-```
-
-2. Install and run migrations:
-```bash
-rails g good_job:install
-rails db:migrate
-```
-
-This creates GoodJob's database schema in your PostgreSQL database, including:
-- `good_jobs`: Main table for storing job data
-- `good_job_processes`: Track worker processes
-- `good_job_settings`: Configuration storage
-- `good_job_batches`: Support for job batching
-- `good_job_executions`: Track job execution history
-
-3. Update ActiveJob configuration:
-```ruby
-# config/environments/development.rb and production.rb
-config.active_job.queue_adapter = :good_job
-```
-
-4. Database Configuration:
-By default, GoodJob uses your application's database configuration from `database.yml`. Unlike Solid Queue, it provides specific options for PostgreSQL:
-
-```ruby
-# config/initializers/good_job.rb
-GoodJob.configure do |config|
-  # Use a specific database connection if needed
-  config.connection_pool_size = ENV.fetch("GOOD_JOB_CONNECTION_POOL_SIZE", 5).to_i
-  
-  # PostgreSQL specific query optimization options
-  config.smaller_number_is_higher_priority = true # Optimize priority queries
-  config.indexed_at_to_scheduled_at = true  # Use indexed_at instead of scheduled_at for performance
-  
-  # You can specify a different database configuration
-  # config.active_record_parent_class = "ApplicationRecord"
-  # This will use the database connection from that class
-end
-```
-
-5. Set up GoodJob execution configuration:
-```ruby
-# config/initializers/good_job.rb
-GoodJob.configure do |config|
-  # Execute jobs in their own thread pool
-  config.execution_mode = :async_server
-  
-  # Number of threads to use for executing jobs
-  config.max_threads = ENV.fetch("GOOD_JOB_MAX_THREADS", 5).to_i
-  
-  # How long to retain job records in the database (in days)
-  config.job_record_retention = ENV.fetch("GOOD_JOB_RETENTION_PERIOD", 30).to_i
-
-  # For time-based scheduling, GoodJob uses polling
-  config.enable_cron = true
-  config.cron = {
-    # Example cron configuration (maps to our current every.rake tasks)
-    ten_minutes: {
-      cron: "*/10 * * * *",
-      class: "TenMinuteJob"
-    },
-    hourly: {
-      cron: "0 * * * *", 
-      class: "OneHourJob"
-    },
-    daily: {
-      cron: "0 0 * * *",
-      class: "OneDayJob"
-    }
-  }
-end
-```
-
-6. Update Procfile:
-```ruby
-# Procfile
-web: bundle exec puma -C config/puma.rb
-worker: bundle exec good_job start
-```
-
-#### Comparison: Solid Queue vs GoodJob
-
-| Feature | Solid Queue | GoodJob |
-|---------|-------------|---------|
-| Maintainer | Rails core team | Independent |
-| Integration | Built into Rails 7.1+ | External gem |
-| Maturity | Newer (since 2023) | More mature (since 2020) |
-| Features | Minimal, focused | Extensive (dashboard, metrics) |
-| Scheduling | Multiple options (interval, cron) | Native cron support |
-| Database Support | Any ActiveRecord DB | PostgreSQL-optimized |
-| PostgreSQL Features | Basic | Advanced (advisory locks, LISTEN/NOTIFY) |
-| Job Prioritization | Standard | Advanced |
-| UI Dashboard | No (would need separate tool) | Yes (built-in) |
-| Documentation | Rails guides | Extensive GitHub docs |
-| Concurrency Model | Thread-based | Thread-based with advanced pool management |
-
-**Recommendation**: Consider Solid Queue if you prefer official Rails integrations and simpler maintenance. Choose GoodJob if you want more features like a built-in dashboard or more mature PostgreSQL optimization.
 
 ### 3. Cache Store Configuration
 
@@ -315,23 +194,23 @@ rails db:migrate
 
 1. **Gem Changes**:
    - Remove: `redis` and `sidekiq`
-   - Add either: `solid_queue` (Rails official) or `good_job` (third-party)
+   - Add: `solid_queue`
 
 2. **Configuration Changes**:
    - Update ActionCable adapter in `config/cable.yml` to use PostgreSQL
-   - Update ActiveJob queue adapter in environment files to use chosen queue adapter
+   - Update ActiveJob queue adapter in environment files to use Solid Queue
    - Create channel subscription tables for ActionCable
-   - Configure job queue adapter with appropriate options (including scheduled jobs)
+   - Configure Solid Queue with appropriate options (including scheduled jobs)
    - Set up PostgreSQL cache store for production 
    - Optionally set up ActiveRecord session store if needed
 
 3. **Database Changes**:
-   - Add database migrations for job queue tables (Solid Queue or GoodJob)
+   - Add database migrations for Solid Queue tables
    - Run ActionCable channel subscriptions migration
    - Optionally add cache tables migration
 
 4. **Deployment Changes**:
-   - Update Procfile to replace Sidekiq worker with chosen job queue worker
+   - Update Procfile to replace Sidekiq worker with Solid Queue worker
    - Remove Redis from infrastructure requirements
    - Ensure database pool size is appropriate for increased PostgreSQL connections
 
@@ -341,13 +220,11 @@ rails db:migrate
 
 2. **Database Load**: Moving ActionCable, background jobs, and possibly caching to PostgreSQL increases database load. Monitor and scale database resources accordingly.
 
-3. **Job Scheduling**: Configuring scheduled jobs to match your current rake tasks scheduling with the new system (different approaches for Solid Queue vs GoodJob).
+3. **Job Scheduling**: Configuring scheduled jobs to match your current rake tasks scheduling with the new Solid Queue system.
 
-4. **Implementation Choice**: Deciding between Solid Queue (official Rails integration) and GoodJob (more features) will depend on your specific needs.
-
-5. **Migration Process**: Consider implementing changes incrementally to minimize risks:
+4. **Migration Process**: Consider implementing changes incrementally to minimize risks:
    - First migrate ActionCable to PostgreSQL
-   - Then migrate background jobs to chosen queue adapter
+   - Then migrate background jobs to Solid Queue
    - Finally migrate cache store if needed
 
 ## Benefits
