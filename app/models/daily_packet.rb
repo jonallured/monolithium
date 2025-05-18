@@ -50,7 +50,7 @@ class DailyPacket < ApplicationRecord
       chores << "mow way back"
     end
 
-    chores << "put out garbage cans" if built_on_monday?
+    chores << "put out garbage cans" if built_on_sunday?
     chores << "refill soap dispensers"
     chores << "do hand wash"
     chores << "wipe off kitchen table"
@@ -75,8 +75,8 @@ class DailyPacket < ApplicationRecord
     ]
   end
 
-  def built_on_monday?
-    built_on.monday?
+  def built_on_sunday?
+    built_on.sunday?
   end
 
   def built_on_weekend?

@@ -74,10 +74,10 @@ describe DailyPacket::PdfView do
   end
 
   describe "chore list section" do
-    context "on a Monday" do
-      let(:built_on) { Date.parse("2024-11-04") }
+    context "on a Sunday" do
+      let(:built_on) { Date.parse("2024-11-03") }
 
-      it "renders the Monday-specific chore" do
+      it "renders the Sunday-specific chore" do
         expect(page_two_strings).to include "put out garbage cans"
       end
     end
