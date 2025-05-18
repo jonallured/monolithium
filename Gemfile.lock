@@ -375,6 +375,11 @@ GEM
       redis-client (>= 0.22.2)
     skylight (6.0.4)
       activesupport (>= 5.2.0)
+    solid_cable (3.0.8)
+      actioncable (>= 7.2)
+      activejob (>= 7.2)
+      activerecord (>= 7.2)
+      railties (>= 7.2)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -478,6 +483,7 @@ DEPENDENCIES
   selenium-webdriver
   sidekiq
   skylight
+  solid_cable
   sprockets-rails
   standard
   stimulus-rails
