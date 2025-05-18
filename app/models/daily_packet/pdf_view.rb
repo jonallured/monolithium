@@ -16,13 +16,11 @@ class DailyPacket::PdfView < ActiveRecord::AssociatedObject
     stroke_color "000000"
     draw_front_page
     start_new_page
-    draw_top_three_page
-    start_new_page
+    draw_personal_page
     unless daily_packet.built_on_weekend?
-      draw_start_stop_list_page
       start_new_page
+      draw_work_page
     end
-    draw_chore_list_page
   end
 
   def draw_front_page
@@ -81,7 +79,7 @@ class DailyPacket::PdfView < ActiveRecord::AssociatedObject
     end
   end
 
-  def draw_top_three_page
+  def draw_personal_page
     text "Top 3: Personal".upcase, style: :bold_italic, size: 42
 
     move_up 12
@@ -100,29 +98,44 @@ class DailyPacket::PdfView < ActiveRecord::AssociatedObject
       text "3."
     end
 
-    unless daily_packet.built_on_weekend?
-      move_cursor_to bounds.top / 2
-      text "Top 3: Work".upcase, style: :bold_italic, size: 42
+    move_cursor_to bounds.top / 2
 
-      move_up 12
+    text "Chore List".upcase, style: :bold_italic, size: 42
 
-      stroke do
-        horizontal_rule
-      end
+    move_up 12
 
-      move_down 20
+    stroke do
+      horizontal_rule
+    end
 
-      font_size(20) do
-        text "1."
-        move_down 10
-        text "2."
-        move_down 10
-        text "3."
-      end
+    move_down 20
+
+    daily_packet.chore_list.each do |chore|
+      text chore, size: 14
     end
   end
 
-  def draw_start_stop_list_page
+  def draw_work_page
+    text "Top 3: Work".upcase, style: :bold_italic, size: 42
+
+    move_up 12
+
+    stroke do
+      horizontal_rule
+    end
+
+    move_down 20
+
+    font_size(20) do
+      text "1."
+      move_down 10
+      text "2."
+      move_down 10
+      text "3."
+    end
+
+    move_cursor_to (bounds.top / 3) * 2
+
     text "Start List".upcase, style: :bold_italic, size: 42
 
     move_up 12
@@ -137,7 +150,7 @@ class DailyPacket::PdfView < ActiveRecord::AssociatedObject
       text item, size: 14
     end
 
-    move_cursor_to bounds.top / 2
+    move_cursor_to bounds.top / 3
 
     text "Stop List".upcase, style: :bold_italic, size: 42
 
@@ -151,22 +164,6 @@ class DailyPacket::PdfView < ActiveRecord::AssociatedObject
 
     daily_packet.stop_list.each do |item|
       text item, size: 14
-    end
-  end
-
-  def draw_chore_list_page
-    text "Chore List".upcase, style: :bold_italic, size: 42
-
-    move_up 12
-
-    stroke do
-      horizontal_rule
-    end
-
-    move_down 20
-
-    daily_packet.chore_list.each do |chore|
-      text chore, size: 14
     end
   end
 end
