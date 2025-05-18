@@ -4,5 +4,5 @@
   %code
     $ MLI_CLIENT_TOKEN=$(bundle exec rails runner "print Monolithium.config.client_token")
     $ http https://app.jonallured.com/api/v1/post_bin X-MLI-CLIENT-TOKEN:$MLI_CLIENT_TOKEN foo=bar
-= turbo_stream_from(PostBinRequest::CHANNEL_NAME)
+= turbo_stream_from PostBinRequest::CHANNEL_NAME
 %ul.m-0.p-0#post_bin_requests= render partial: "post_bin_request", collection: post_bin_requests

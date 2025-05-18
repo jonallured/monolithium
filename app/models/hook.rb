@@ -1,4 +1,6 @@
 class Hook < ApplicationRecord
+  CHANNEL_NAME = "hooks"
+
   belongs_to :raw_hook
   belongs_to :webhook_sender
 
@@ -7,6 +9,6 @@ class Hook < ApplicationRecord
   private
 
   def created
-    broadcast_prepend_later_to "hooks", template: "cybertail/_hook"
+    broadcast_prepend_later_to CHANNEL_NAME, template: "cybertail/_hook"
   end
 end
