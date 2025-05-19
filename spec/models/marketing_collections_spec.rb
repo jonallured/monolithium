@@ -16,10 +16,8 @@ describe MarketingCollections do
 
       it "does nothing" do
         expect(Artwork).to_not receive(:pluck).with(:gravity_id)
-
-        expect do
-          MarketingCollections.load_artworks(slugs)
-        end.to_not change(Artwork, :count)
+        new_artworks = MarketingCollections.load_artworks(slugs)
+        expect(new_artworks).to eq []
       end
     end
 
@@ -45,9 +43,8 @@ describe MarketingCollections do
       end
 
       it "does nothing" do
-        expect do
-          MarketingCollections.load_artworks(slugs)
-        end.to_not change(Artwork, :count)
+        new_artworks = MarketingCollections.load_artworks(slugs)
+        expect(new_artworks).to eq []
       end
     end
 
@@ -71,12 +68,9 @@ describe MarketingCollections do
       end
 
       it "creates an Artwork record" do
-        expect do
-          MarketingCollections.load_artworks(slugs)
-        end.to change(Artwork, :count).by(1)
-
-        new_artwork = Artwork.last
-        expect(new_artwork.gravity_id).to eq "new_gravity_id"
+        new_artworks = MarketingCollections.load_artworks(slugs)
+        expect(new_artworks.count).to eq 1
+        expect(new_artworks.first.gravity_id).to eq "new_gravity_id"
       end
     end
   end

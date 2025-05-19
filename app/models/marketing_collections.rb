@@ -18,14 +18,14 @@ class MarketingCollections
       edges.map { |edge| edge["node"] }
     end.flatten
 
-    return unless payloads.any?
+    return [] unless payloads.any?
 
     existing_gravity_ids = Artwork.pluck(:gravity_id)
 
-    payloads.each do |payload|
+    payloads.map do |payload|
       next if existing_gravity_ids.include?(payload["gravity_id"])
 
       Artwork.create(gravity_id: payload["gravity_id"], payload: payload)
-    end
+    end.compact
   end
 end
