@@ -5,7 +5,7 @@ class Crud::SneakersController < ApplicationController
   end
 
   def show
-    redirect_to crud_sneaker_path(Sneaker.random) if params[:id] == "random"
+    redirect_to crud_sneaker_path(Sneaker.random) if random_id?
   end
 
   def create

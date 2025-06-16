@@ -5,7 +5,7 @@ class Crud::WarmFuzziesController < ApplicationController
   end
 
   def show
-    redirect_to crud_warm_fuzzy_path(WarmFuzzy.random) if params[:id] == "random"
+    redirect_to crud_warm_fuzzy_path(WarmFuzzy.random) if random_id?
   end
 
   def create

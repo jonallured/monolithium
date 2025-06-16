@@ -5,7 +5,7 @@ class Crud::BooksController < ApplicationController
   end
 
   def show
-    redirect_to crud_book_path(Book.random) if params[:id] == "random"
+    redirect_to crud_book_path(Book.random) if random_id?
   end
 
   def create

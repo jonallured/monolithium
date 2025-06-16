@@ -5,7 +5,7 @@ class Crud::RawHooksController < ApplicationController
   end
 
   def show
-    redirect_to crud_raw_hook_path(RawHook.random) if params[:id] == "random"
+    redirect_to crud_raw_hook_path(RawHook.random) if random_id?
   end
 
   def create
