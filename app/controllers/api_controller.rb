@@ -9,7 +9,9 @@ class ApiController < ActionController::Base
   private
 
   def client_token_valid?
-    client_token = request.headers.to_h[CLIENT_TOKEN_HEADER] || params[CLIENT_TOKEN_PARAM]
+    client_token_header = request.headers.to_h[CLIENT_TOKEN_HEADER]
+    client_token_param = params[CLIENT_TOKEN_PARAM]
+    client_token = client_token_header || client_token_param
     Monolithium.config.client_token == client_token
   end
 
