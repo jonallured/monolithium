@@ -3,7 +3,7 @@ class ApiController < ActionController::Base
   CLIENT_TOKEN_PARAM = :mli_client_token
 
   protect_from_forgery with: :null_session
-
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
   before_action :validate_client_token
 
   private
@@ -17,5 +17,9 @@ class ApiController < ActionController::Base
 
   def validate_client_token
     head :not_found unless client_token_valid?
+  end
+
+  def record_not_found(error)
+    render json: {error: error}, status: :not_found
   end
 end
