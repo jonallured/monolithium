@@ -6,6 +6,10 @@ class ApiController < ActionController::Base
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
   before_action :validate_client_token
 
+  exposure_config(:random_or_find, find: lambda do |id, scope|
+    random_id? ? scope.random : scope.find(id)
+  end)
+
   private
 
   def client_token_valid?
@@ -21,5 +25,9 @@ class ApiController < ActionController::Base
 
   def record_not_found(error)
     render json: {error: error}, status: :not_found
+  end
+
+  def random_id?
+    params[:id] == "random"
   end
 end
