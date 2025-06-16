@@ -21,4 +21,8 @@ class ApplicationController < ActionController::Base
     session[:redirect_to] = request.path
     redirect_to sign_in_path
   end
+
+  def random_id?
+    params[:id] == "random"
+  end
 end

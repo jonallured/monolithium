@@ -7,7 +7,7 @@ class Crud::FinancialStatementsController < ApplicationController
   end
 
   def show
-    if params[:id] == "random"
+    if random_id?
       if random_financial_statement
         redirect_to crud_financial_account_financial_statement_path(financial_account, random_financial_statement)
       else

@@ -5,7 +5,7 @@ class Crud::CsvUploadsController < ApplicationController
   end
 
   def show
-    redirect_to crud_csv_upload_path(CsvUpload.random) if params[:id] == "random"
+    redirect_to crud_csv_upload_path(CsvUpload.random) if random_id?
   end
 
   def create

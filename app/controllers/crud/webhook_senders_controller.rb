@@ -5,7 +5,7 @@ class Crud::WebhookSendersController < ApplicationController
   end
 
   def show
-    redirect_to crud_webhook_sender_path(WebhookSender.random) if params[:id] == "random"
+    redirect_to crud_webhook_sender_path(WebhookSender.random) if random_id?
   end
 
   def create

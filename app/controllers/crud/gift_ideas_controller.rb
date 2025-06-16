@@ -5,7 +5,7 @@ class Crud::GiftIdeasController < ApplicationController
   end
 
   def show
-    redirect_to crud_gift_idea_path(GiftIdea.random) if params[:id] == "random"
+    redirect_to crud_gift_idea_path(GiftIdea.random) if random_id?
   end
 
   def create

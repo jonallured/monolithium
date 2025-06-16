@@ -5,7 +5,7 @@ class Crud::ProjectsController < ApplicationController
   end
 
   def show
-    redirect_to crud_project_path(Project.random) if params[:id] == "random"
+    redirect_to crud_project_path(Project.random) if random_id?
   end
 
   def create

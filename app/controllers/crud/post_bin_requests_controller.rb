@@ -5,7 +5,7 @@ class Crud::PostBinRequestsController < ApplicationController
   end
 
   def show
-    redirect_to crud_post_bin_request_path(PostBinRequest.random) if params[:id] == "random"
+    redirect_to crud_post_bin_request_path(PostBinRequest.random) if random_id?
   end
 
   def create
