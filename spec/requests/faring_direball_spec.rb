@@ -22,7 +22,7 @@ describe "faring_direball" do
     res = double(:res, body: body.to_json)
     expect(Faraday).to receive(:get).and_return(res)
 
-    get "/faring_direball.json"
+    get "/faring_direball"
 
     expect(response.parsed_body).to eq(
       "authors" => [{"name" => "John Gruber"}],
