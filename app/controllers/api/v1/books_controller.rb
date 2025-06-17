@@ -6,6 +6,17 @@ module Api
       expose(:books) do
         Book.order(created_at: :desc).page(params[:page])
       end
+
+      def create
+        book.save!
+        render :show, status: :created
+      end
+
+      private
+
+      def book_params
+        params.require(:book).permit(:finished_on, :format, :isbn, :pages, :title)
+      end
     end
   end
 end
