@@ -51,7 +51,7 @@ Rails.application.routes.draw do
     resources :webhook_senders
   end
 
-  namespace :api do
+  namespace :api, defaults: {format: :json} do
     namespace :v1 do
       get :decode_jwt, to: "decode_jwt#show"
       get :ping, to: "ping#show"
