@@ -53,7 +53,7 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: {format: :json} do
     namespace :v1 do
-      resources :books, only: %i[index show create]
+      resources :books, only: %i[index show create update]
 
       get :decode_jwt, to: "decode_jwt#show"
       get :ping, to: "ping#show"
