@@ -12,6 +12,11 @@ module Api
         render :show, status: :created
       end
 
+      def update
+        book.update!(book_params)
+        render :show
+      end
+
       private
 
       def book_params
