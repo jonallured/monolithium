@@ -28,6 +28,7 @@ describe "POST /api/v1/raw_hooks" do
     {
       "action" => "create",
       "controller" => "api/v1/raw_hooks",
+      "format" => "json",
       "raw_hook" => {}
     }
   end
