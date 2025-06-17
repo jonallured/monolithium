@@ -17,6 +17,11 @@ module Api
         render :show
       end
 
+      def destroy
+        book.destroy
+        head :ok
+      end
+
       private
 
       def book_params
