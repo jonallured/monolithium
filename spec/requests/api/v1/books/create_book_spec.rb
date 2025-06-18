@@ -58,6 +58,8 @@ describe "POST /api/v1/books" do
     it "returns 201 and the json for the book" do
       post "/api/v1/books", params: params, headers: headers
 
+      expect(EnhanceBookJob).to have_been_enqueued.with(response.parsed_body["id"])
+
       expect(response.status).to eq 201
       expect(response.parsed_body).to match({
         "created_at" => anything,
