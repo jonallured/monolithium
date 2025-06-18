@@ -9,6 +9,7 @@ module Api
 
       def create
         book.save!
+        EnhanceBookJob.perform_later(book.id)
         render :show, status: :created
       end
 
