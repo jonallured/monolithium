@@ -1,0 +1,11 @@
+json.call(
+  work_day,
+  :adjust_minutes,
+  :created_at,
+  :date,
+  :id,
+  :in_minutes,
+  :out_minutes,
+  :pto_minutes,
+  :updated_at
+)
