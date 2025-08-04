@@ -15,6 +15,11 @@ module Api
         render :show, status: :created
       end
 
+      def update
+        work_day.update!(work_day_params)
+        render :show
+      end
+
       private
 
       def work_day_params
