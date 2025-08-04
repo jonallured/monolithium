@@ -6,6 +6,21 @@ module Api
       expose(:gift_ideas) do
         GiftIdea.order(created_at: :desc).page(params[:page])
       end
+
+      def create
+        gift_idea.save!
+        render :show, status: :created
+      end
+
+      private
+
+      def gift_idea_params
+        params.require(:gift_idea).permit(
+          :note,
+          :title,
+          :website_url
+        )
+      end
     end
   end
 end
