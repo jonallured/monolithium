@@ -12,6 +12,16 @@ module Api
         render :show, status: :created
       end
 
+      def update
+        gift_idea.update!(gift_idea_params)
+        render :show
+      end
+
+      def destroy
+        gift_idea.destroy
+        head :ok
+      end
+
       private
 
       def gift_idea_params
