@@ -54,7 +54,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: {format: :json} do
     namespace :v1 do
       resources :books, only: %i[index show create update destroy]
-      resources :gift_ideas, only: %i[index]
+      resources :gift_ideas, only: %i[index show]
       resources :work_days, only: %i[index show create update destroy]
 
       get :decode_jwt, to: "decode_jwt#show"

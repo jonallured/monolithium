@@ -1,0 +1,9 @@
+json.call(
+  gift_idea,
+  :created_at,
+  :id,
+  :note,
+  :title,
+  :updated_at,
+  :website_url
+)
