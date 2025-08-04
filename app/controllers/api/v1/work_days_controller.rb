@@ -10,7 +10,22 @@ module Api
         work_week.work_days
       end
 
+      def create
+        work_day.save!
+        render :show, status: :created
+      end
+
       private
+
+      def work_day_params
+        params.require(:work_day).permit(
+          :adjust_minutes,
+          :date,
+          :in_minutes,
+          :out_minutes,
+          :pto_minutes
+        )
+      end
 
       def ensure_work_week_params
         error = nil
