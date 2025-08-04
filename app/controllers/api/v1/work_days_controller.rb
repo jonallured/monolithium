@@ -20,6 +20,11 @@ module Api
         render :show
       end
 
+      def destroy
+        work_day.destroy
+        head :ok
+      end
+
       private
 
       def work_day_params
