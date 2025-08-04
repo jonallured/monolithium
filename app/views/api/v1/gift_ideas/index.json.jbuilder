@@ -1,0 +1,9 @@
+json.array!(
+  gift_ideas,
+  :created_at,
+  :id,
+  :note,
+  :title,
+  :updated_at,
+  :website_url
+)
