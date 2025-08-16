@@ -28,13 +28,7 @@ module Api
       private
 
       def work_day_params
-        params.require(:work_day).permit(
-          :adjust_minutes,
-          :date,
-          :in_minutes,
-          :out_minutes,
-          :pto_minutes
-        )
+        params.require(:work_day).permit(WorkDay.permitted_params)
       end
 
       def ensure_work_week_params

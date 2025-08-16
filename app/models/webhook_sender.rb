@@ -3,6 +3,13 @@ class WebhookSender < ApplicationRecord
   validates :name, presence: true
   validates :parser, presence: true
 
+  def self.permitted_params
+    [
+      :name,
+      :parser
+    ]
+  end
+
   def self.circle
     find_by(name: "Circle CI")
   end

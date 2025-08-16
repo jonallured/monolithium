@@ -26,7 +26,7 @@ module Api
       private
 
       def book_params
-        params.require(:book).permit(:finished_on, :format, :isbn, :pages, :title)
+        params.require(:book).permit(Book.permitted_params)
       end
     end
   end

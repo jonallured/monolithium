@@ -37,6 +37,6 @@ class Crud::WarmFuzziesController < ApplicationController
   private
 
   def warm_fuzzy_params
-    params.require(:warm_fuzzy).permit(:author, :body, :received_at, :screenshot, :title)
+    params.require(:warm_fuzzy).permit(WarmFuzzy.permitted_params)
   end
 end

@@ -3,6 +3,14 @@ class PostBinRequest < ApplicationRecord
 
   after_create_commit :created
 
+  def self.permitted_params
+    [
+      :body,
+      :headers,
+      :params
+    ]
+  end
+
   def table_attrs
     [
       ["Created At", created_at.to_fs],

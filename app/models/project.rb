@@ -1,6 +1,13 @@
 class Project < ApplicationRecord
   validates :name, presence: true, uniqueness: true
 
+  def self.permitted_params
+    [
+      :name,
+      :touched_at
+    ]
+  end
+
   def table_attrs
     [
       ["Name", name],

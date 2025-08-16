@@ -6,6 +6,14 @@ class GiftIdea < ApplicationRecord
   scope :received, -> { where("received_at IS NOT NULL") }
   scope :not_received, -> { where("received_at IS NULL") }
 
+  def self.permitted_params
+    [
+      :note,
+      :title,
+      :website_url
+    ]
+  end
+
   def table_attrs
     [
       ["Title", title],

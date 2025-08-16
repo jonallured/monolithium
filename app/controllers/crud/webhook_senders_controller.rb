@@ -37,6 +37,6 @@ class Crud::WebhookSendersController < ApplicationController
   private
 
   def webhook_sender_params
-    params.require(:webhook_sender).permit(:name, :parser)
+    params.require(:webhook_sender).permit(WebhookSender.permitted_params)
   end
 end

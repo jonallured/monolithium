@@ -38,7 +38,7 @@ class Crud::CsvUploadsController < ApplicationController
   private
 
   def csv_upload_params
-    safe_params = params.require(:csv_upload).permit(:original_filename, :parser_class_name)
+    safe_params = params.require(:csv_upload).permit(CsvUpload.permitted_params)
 
     if params[:file]
       safe_params[:original_filename] = params[:file].original_filename

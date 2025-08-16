@@ -6,6 +6,16 @@ class Sneaker < ApplicationRecord
 
   has_one_attached :image
 
+  def self.permitted_params
+    [
+      :amount_cents,
+      :details,
+      :image,
+      :name,
+      :ordered_on
+    ]
+  end
+
   def table_attrs
     [
       ["Name", name],

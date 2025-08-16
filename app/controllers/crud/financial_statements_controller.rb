@@ -46,7 +46,7 @@ class Crud::FinancialStatementsController < ApplicationController
   private
 
   def financial_statement_params
-    params.require(:financial_statement).permit(:ending_amount_cents, :period_start_on, :starting_amount_cents)
+    params.require(:financial_statement).permit(FinancialStatement.permitted_params)
   end
 
   def random_financial_statement

@@ -37,6 +37,6 @@ class Crud::RawHooksController < ApplicationController
   private
 
   def raw_hook_params
-    params.require(:raw_hook).permit(:body, :headers, :params)
+    params.require(:raw_hook).permit(RawHook.permitted_params)
   end
 end

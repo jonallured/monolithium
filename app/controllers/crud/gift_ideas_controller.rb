@@ -37,6 +37,6 @@ class Crud::GiftIdeasController < ApplicationController
   private
 
   def gift_idea_params
-    params.require(:gift_idea).permit(:title, :website_url, :note)
+    params.require(:gift_idea).permit(GiftIdea.permitted_params)
   end
 end

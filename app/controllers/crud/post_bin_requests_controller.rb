@@ -37,6 +37,6 @@ class Crud::PostBinRequestsController < ApplicationController
   private
 
   def post_bin_request_params
-    params.require(:post_bin_request).permit(:body, :headers, :params)
+    params.require(:post_bin_request).permit(PostBinRequest.permitted_params)
   end
 end
