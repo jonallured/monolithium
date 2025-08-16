@@ -1,0 +1,42 @@
+class Crud::<%= controller_class_name %>Controller < ApplicationController
+  expose(:<%= singular_name %>)
+  expose(:<%= plural_name %>) do
+    <%= class_name %>.order(created_at: :desc).page(params[:page])
+  end
+
+  def show
+    redirect_to crud_<%= singular_name %>_path(<%= class_name %>.random) if random_id?
+  end
+
+  def create
+    if <%= singular_name %>.save
+      flash.notice = "<%= human_name.titleize %> created"
+      redirect_to crud_<%= singular_name %>_path(<%= singular_name %>)
+    else
+      flash.alert = <%= singular_name %>.errors.full_messages.to_sentence
+      redirect_to new_crud_<%= singular_name %>_path
+    end
+  end
+
+  def update
+    if <%= singular_name %>.update(<%= singular_name %>_params)
+      flash.notice = "<%= human_name.titleize %> updated"
+      redirect_to crud_<%= singular_name %>_path(<%= singular_name %>)
+    else
+      flash.alert = <%= singular_name %>.errors.full_messages.to_sentence
+      redirect_to edit_crud_<%= singular_name %>_path(<%= singular_name %>)
+    end
+  end
+
+  def destroy
+    <%= singular_name %>.destroy
+    flash.notice = "<%= human_name.titleize %> deleted"
+    redirect_to crud_<%= plural_name %>_path
+  end
+
+  private
+
+  def <%= singular_name %>_params
+    params.require(:<%= singular_name %>).permit(<%= class_name %>.permitted_params)
+  end
+end

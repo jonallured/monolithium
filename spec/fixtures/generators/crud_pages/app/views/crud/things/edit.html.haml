@@ -1,0 +1,5 @@
+%h1 Edit Thing #{thing.id}
+
+%p= link_to "Show Thing", crud_thing_path(thing)
+
+= render "form", thing: thing, button_label: "update"

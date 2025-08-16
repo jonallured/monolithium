@@ -1,0 +1,18 @@
+%h1 <%= human_name.pluralize.titleize %>
+
+%p= link_to "New <%= human_name.titleize %>", new_crud_<%= singular_name %>_path
+
+%p= link_to "Random <%= human_name.titleize %>", crud_<%= singular_name %>_path("random")
+
+%table
+  %thead
+    %tr
+      %th ID
+      %th.text-right Created At
+  %tbody
+    - <%= plural_name %>.each do |<%= singular_name %>|
+      %tr
+        %td= link_to <%= singular_name %>.id, crud_<%= singular_name %>_path(<%= singular_name %>)
+        %td.text-right= <%= singular_name %>.created_at.to_fs
+
+= paginate <%= plural_name %>

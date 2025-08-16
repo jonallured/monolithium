@@ -1,0 +1,14 @@
+      create  app/controllers/crud/things_controller.rb
+       route  namespace :crud do
+                resources :things
+              end
+      create  app/views/crud/things/_form.html.haml
+      create  app/views/crud/things/edit.html.haml
+      create  app/views/crud/things/index.html.haml
+      create  app/views/crud/things/new.html.haml
+      create  app/views/crud/things/show.html.haml
+      create  spec/system/crud/things/admin_creates_thing_spec.rb
+      create  spec/system/crud/things/admin_edits_thing_spec.rb
+      create  spec/system/crud/things/admin_views_things_spec.rb
+      create  spec/system/crud/things/admin_views_thing_spec.rb
+      insert  app/views/dashboard/show.html.haml

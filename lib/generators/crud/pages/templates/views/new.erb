@@ -1,0 +1,5 @@
+%h1 New <%= human_name.titleize %>
+
+%p= link_to "<%= human_name.titleize %> List", crud_<%= plural_name %>_path
+
+= render "form", <%= singular_name %>: <%= singular_name %>, button_label: "create"
