@@ -3,6 +3,13 @@ require "csv"
 class CsvUpload < ApplicationRecord
   validates_presence_of :data, :original_filename, :parser_class_name
 
+  def self.permitted_params
+    [
+      :original_filename,
+      :parser_class_name
+    ]
+  end
+
   def parsed_data
     CSV.parse(data)
   rescue CSV::MalformedCSVError

@@ -37,6 +37,6 @@ class Crud::ProjectsController < ApplicationController
   private
 
   def project_params
-    params.require(:project).permit(:name, :touched_at)
+    params.require(:project).permit(Project.permitted_params)
   end
 end

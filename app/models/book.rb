@@ -7,6 +7,16 @@ class Book < ApplicationRecord
 
   has_object :enhancer
 
+  def self.permitted_params
+    [
+      :finished_on,
+      :format,
+      :isbn,
+      :pages,
+      :title
+    ]
+  end
+
   def table_attrs
     [
       ["ISBN", isbn],

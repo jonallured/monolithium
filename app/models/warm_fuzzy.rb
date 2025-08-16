@@ -5,6 +5,16 @@ class WarmFuzzy < ApplicationRecord
   validates :received_at, presence: true
   validates :title, presence: true
 
+  def self.permitted_params
+    [
+      :author,
+      :body,
+      :received_at,
+      :screenshot,
+      :title
+    ]
+  end
+
   def table_attrs
     [
       ["Title", title],

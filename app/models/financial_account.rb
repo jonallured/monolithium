@@ -15,6 +15,13 @@ class FinancialAccount < ApplicationRecord
   validates_uniqueness_of :name
   validates_inclusion_of :category, in: CATEGORIES
 
+  def self.permitted_params
+    [
+      :category,
+      :name
+    ]
+  end
+
   def table_attrs
     [
       ["Name", name],

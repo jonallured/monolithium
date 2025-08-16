@@ -37,6 +37,6 @@ class Crud::SneakersController < ApplicationController
   private
 
   def sneaker_params
-    params.require(:sneaker).permit(:amount_cents, :details, :image, :name, :ordered_on)
+    params.require(:sneaker).permit(Sneaker.permitted_params)
   end
 end

@@ -6,6 +6,14 @@ class FinancialStatement < ApplicationRecord
 
   scope :for_year, ->(year) { where("extract(year from period_start_on) = ?", year) }
 
+  def self.permitted_params
+    [
+      :ending_amount_cents,
+      :period_start_on,
+      :starting_amount_cents
+    ]
+  end
+
   def net_amount_cents
     ending_amount_cents - starting_amount_cents
   end
