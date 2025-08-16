@@ -1,0 +1,9 @@
+%h1 <%= human_name.titleize %> #{<%= singular_name %>.id}
+
+%p= link_to "<%= human_name.titleize %> List", crud_<%= plural_name %>_path
+
+%p= link_to "Edit <%= human_name.titleize %>", edit_crud_<%= singular_name %>_path(<%= singular_name %>)
+
+%p= link_to "Delete <%= human_name.titleize %>", crud_<%= singular_name %>_path(<%= singular_name %>), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }
+
+= render partial: "attrs_table", locals: { attrs: <%= singular_name %>.table_attrs }

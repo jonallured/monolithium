@@ -1,0 +1,5 @@
+%h1 Edit <%= human_name.titleize %> #{<%= singular_name %>.id}
+
+%p= link_to "Show <%= human_name.titleize %>", crud_<%= singular_name %>_path(<%= singular_name %>)
+
+= render "form", <%= singular_name %>: <%= singular_name %>, button_label: "update"

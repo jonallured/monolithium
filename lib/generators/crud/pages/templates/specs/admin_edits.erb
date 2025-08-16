@@ -1,0 +1,36 @@
+require "rails_helper"
+
+describe "Admin edits <%= human_name.downcase %>" do
+  include_context "admin password matches"
+
+  scenario "from show page" do
+    <%= singular_name %> = FactoryBot.create(:<%= singular_name %>)
+    visit "/crud/<%= plural_name %>/#{<%= singular_name %>.id}"
+    click_on "Edit <%= human_name.titleize %>"
+    expect(page).to have_css "h1", text: "Edit <%= human_name.titleize %> #{<%= singular_name %>.id}"
+    expect(page).to have_css "a", text: "Show <%= human_name.titleize %>"
+    expect(page).to have_current_path edit_crud_<%= singular_name %>_path(<%= singular_name %>)
+  end
+
+  scenario "edit with errors" do
+    <%= singular_name %> = FactoryBot.create(:<%= singular_name %>)
+    visit "/crud/<%= plural_name %>/#{<%= singular_name %>.id}/edit"
+    fill_in "REPLACE_ME", with: ""
+    click_on "update"
+    expect(page).to have_css ".alert", text: "REPLACE_ME"
+  end
+
+  scenario "edit successfully" do
+    <%= singular_name %> = FactoryBot.create(
+      :<%= singular_name %>,
+      REPLACE_ME: "REPLACE_ME"
+    )
+    visit "/crud/<%= plural_name %>/#{<%= singular_name %>.id}/edit"
+    fill_in "REPLACE_ME", with: "REPLACE_ME"
+    click_on "update"
+
+    expect(page).to have_css ".notice", text: "<%= human_name.titleize %> updated"
+    expect(page).to have_current_path crud_<%= singular_name %>_path(<%= singular_name %>)
+    expect(page).to have_css "td", text: "REPLACE_ME"
+  end
+end

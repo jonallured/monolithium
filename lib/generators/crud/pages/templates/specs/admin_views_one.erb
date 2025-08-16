@@ -1,0 +1,46 @@
+require "rails_helper"
+
+describe "Admin views <%= human_name.downcase %>" do
+  include_context "admin password matches"
+
+  scenario "from list page" do
+    <%= singular_name %> = FactoryBot.create(:<%= singular_name %>)
+    visit "/crud/<%= plural_name %>"
+    click_on <%= singular_name %>.id.to_s
+    expect(page).to have_css "h1", text: "<%= human_name.titleize %> #{<%= singular_name %>.id}"
+    expect(page).to have_css "a", text: "<%= human_name.titleize %> List"
+    expect(page).to have_current_path crud_<%= singular_name %>_path(<%= singular_name %>)
+  end
+
+  scenario "viewing a record" do
+    <%= singular_name %> = FactoryBot.create(
+      :<%= singular_name %>,
+      REPLACE_ME: "REPLACE_ME"
+    )
+
+    visit "/crud/<%= plural_name %>/#{<%= singular_name %>.id}"
+
+    actual_values = page.all("tr").map do |table_row|
+      table_row.all("td").map(&:text)
+    end
+
+    expect(actual_values).to eq(
+      [
+        ["REPLACE_ME", "REPLACE_ME"],
+        ["Created At", <%= singular_name %>.created_at.to_fs],
+        ["Updated At", <%= singular_name %>.updated_at.to_fs]
+      ]
+    )
+  end
+
+  scenario "views random record" do
+    <%= singular_name %> = FactoryBot.create(:<%= singular_name %>)
+    expect(<%= class_name %>).to receive(:random).and_return(<%= singular_name %>)
+
+    visit "/crud/<%= plural_name %>"
+    click_on "Random <%= human_name.titleize %>"
+
+    expect(page).to have_css "h1", text: "<%= human_name.titleize %> #{<%= singular_name %>.id}"
+    expect(page).to have_current_path crud_<%= singular_name %>_path(<%= singular_name %>)
+  end
+end

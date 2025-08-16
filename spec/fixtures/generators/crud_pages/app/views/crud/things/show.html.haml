@@ -1,0 +1,9 @@
+%h1 Thing #{thing.id}
+
+%p= link_to "Thing List", crud_things_path
+
+%p= link_to "Edit Thing", edit_crud_thing_path(thing)
+
+%p= link_to "Delete Thing", crud_thing_path(thing), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }
+
+= render partial: "attrs_table", locals: { attrs: thing.table_attrs }

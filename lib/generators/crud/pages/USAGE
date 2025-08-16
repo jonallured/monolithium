@@ -1,0 +1,17 @@
+Description:
+    Make CRUD pages for NAME
+
+Example:
+    bin/rails generate crud:pages Thing
+
+    This will create:
+        app/controllers/crud/things_controller.rb
+        app/views/crud/things/_form.html.haml
+        app/views/crud/things/edit.html.haml
+        app/views/crud/things/index.html.haml
+        app/views/crud/things/new.html.haml
+        app/views/crud/things/show.html.haml
+        spec/system/crud/things/admin_creates_thing_spec.rb
+        spec/system/crud/things/admin_edits_thing_spec.rb
+        spec/system/crud/things/admin_views_thing_spec.rb
+        spec/system/crud/things/admin_views_things_spec.rb

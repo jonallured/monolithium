@@ -1,0 +1,18 @@
+%h1 Things
+
+%p= link_to "New Thing", new_crud_thing_path
+
+%p= link_to "Random Thing", crud_thing_path("random")
+
+%table
+  %thead
+    %tr
+      %th ID
+      %th.text-right Created At
+  %tbody
+    - things.each do |thing|
+      %tr
+        %td= link_to thing.id, crud_thing_path(thing)
+        %td.text-right= thing.created_at.to_fs
+
+= paginate things
