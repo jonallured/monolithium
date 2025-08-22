@@ -1,10 +1,7 @@
 class VanishingBoxController < ApplicationController
   def create
-    payload = {
-      body: params[:body],
-      created_at: Time.now.to_fs
-    }
-    VanishingBoxChannel.broadcast(payload)
+    VanishingMessage.fire_and_forget(params[:body])
+
     head :created
   end
 end

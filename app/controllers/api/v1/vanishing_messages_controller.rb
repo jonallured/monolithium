@@ -4,11 +4,7 @@ module Api
       def create
         head :bad_request and return unless params[:body].present?
 
-        payload = {
-          body: params[:body],
-          created_at: Time.now.to_fs
-        }
-        VanishingBoxChannel.broadcast(payload)
+        VanishingMessage.fire_and_forget(params[:body])
         head :created
       end
     end
