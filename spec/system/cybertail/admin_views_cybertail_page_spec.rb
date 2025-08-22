@@ -3,7 +3,7 @@ require "rails_helper"
 describe "Admin views Cybertail page", js: true do
   include_context "admin password matches"
 
-  scenario "something else" do
+  scenario "new hook shows up after existing one" do
     mock_parser = Class.new do
       def self.check_and_maybe_parse(raw_hook)
         raw_hook.create_hook(
