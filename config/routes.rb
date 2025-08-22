@@ -63,6 +63,7 @@ Rails.application.routes.draw do
       get :ping, to: "ping#show"
       post :post_bin, to: "post_bin#create"
       post :raw_hooks, to: "raw_hooks#create"
+      post :vanishing_messages, to: "vanishing_messages#create"
 
       namespace :word_rot do
         get :killswitch, to: "killswitch#show"
