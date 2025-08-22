@@ -18,6 +18,9 @@ Rails.application.routes.draw do
   get "project_list", to: "project_list#index", as: :project_list
   patch "project_list/:id", to: "project_list#update"
 
+  get "vanishing-box", to: "vanishing_box#show"
+  post "vanishing-box", to: "vanishing_box#create"
+
   scope :style do
     get :article, to: "static#article", as: "article_styles"
     get :color, to: "static#color", as: "color_styles"

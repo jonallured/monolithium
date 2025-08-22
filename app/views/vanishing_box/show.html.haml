@@ -1,0 +1,7 @@
+%h1 Vanishing Box
+%p Go ahead - put something into the box...
+= form_with url: vanishing_box_path, local: false do |form|
+  = form.text_area :body, placeholder: "message body", autofocus: true
+  = form.button "Add"
+%p ...just remember it'll be gone the next time you look!
+%section(data-controller="vanishing-box")
