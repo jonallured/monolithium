@@ -1,7 +1,7 @@
 require "rails_helper"
 
-describe MarketingCollections do
-  describe ".load_artworks" do
+describe Artwork::Loader do
+  describe ".crawl_collections" do
     let(:slugs) { %w[mock-slug] }
     let(:mock_response) { double(:mock_response, to_h: mock_data) }
 
@@ -16,7 +16,7 @@ describe MarketingCollections do
 
       it "does nothing" do
         expect(Artwork).to_not receive(:pluck).with(:gravity_id)
-        new_artworks = MarketingCollections.load_artworks(slugs)
+        new_artworks = Artwork::Loader.crawl_collections(slugs)
         expect(new_artworks).to eq []
       end
     end
@@ -43,7 +43,7 @@ describe MarketingCollections do
       end
 
       it "does nothing" do
-        new_artworks = MarketingCollections.load_artworks(slugs)
+        new_artworks = Artwork::Loader.crawl_collections(slugs)
         expect(new_artworks).to eq []
       end
     end
@@ -68,7 +68,7 @@ describe MarketingCollections do
       end
 
       it "creates an Artwork record" do
-        new_artworks = MarketingCollections.load_artworks(slugs)
+        new_artworks = Artwork::Loader.crawl_collections(slugs)
         expect(new_artworks.count).to eq 1
         expect(new_artworks.first.gravity_id).to eq "new_gravity_id"
       end

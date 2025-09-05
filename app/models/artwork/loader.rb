@@ -1,4 +1,4 @@
-class MarketingCollections
+class Artwork::Loader
   BEST_SLUGS = %w[
     artists-on-the-rise
     artsy-vanguard-artists
@@ -10,7 +10,7 @@ class MarketingCollections
     trove-editors-picks
   ].freeze
 
-  def self.load_artworks(slugs = BEST_SLUGS)
+  def self.crawl_collections(slugs = BEST_SLUGS)
     payloads = slugs.map do |slug|
       response = MetaphysicsApi.marketing_collection(slug)
       data = response.to_h

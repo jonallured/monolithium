@@ -8,7 +8,7 @@ namespace :every do
   task one_day: :environment do
     DrainHooksJob.perform_later
     ProduceDailyPacketJob.perform_later
-    LoadArtworksJob.perform_later
+    CrawlArtworksJob.perform_later
     CreateLineupJob.perform_later
   end
 end
