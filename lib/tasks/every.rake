@@ -9,6 +9,6 @@ namespace :every do
     DrainHooksJob.perform_later
     ProduceDailyPacketJob.perform_later
     CrawlArtworksJob.perform_later
-    CreateLineupJob.perform_later
+    EnsureCurrentLineupJob.perform_later
   end
 end
