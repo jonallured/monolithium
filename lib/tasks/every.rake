@@ -6,12 +6,9 @@ namespace :every do
 
   desc "Task to run every one day."
   task one_day: :environment do
-    job_klasses = [
-      OneDayJob,
-      LoadArtworksJob,
-      CreateLineupJob
-    ]
-
-    job_klasses.each(&:perform_later)
+    DrainHooksJob.perform_later
+    ProduceDailyPacketJob.perform_later
+    LoadArtworksJob.perform_later
+    CreateLineupJob.perform_later
   end
 end
