@@ -13,3 +13,18 @@ production:
   clear_solid_queue_finished_jobs:
     command: "SolidQueue::Job.clear_finished_in_batches(sleep_between_batches: 0.3)"
     schedule: every hour at minute 12
+  push_current_lineup_job:
+    class: PushCurrentLineupJob
+    schedule: every hour
+  crawl_artworks_job:
+    class: CrawlArtworksJob
+    schedule: every day at at 4am in UTC
+  drain_hooks_job:
+    class: DrainHooksJob
+    schedule: every day at at 5am in UTC
+  ensure_current_lineup_job:
+    class: EnsureCurrentLineupJob
+    schedule: every day at at 6am in UTC
+  produce_daily_packet_job:
+    class: ProduceDailyPacketJob
+    schedule: every day at at 7am in UTC
