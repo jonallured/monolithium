@@ -18,7 +18,7 @@
   - Always write tests (RSpec + FactoryBot)
   - One assertion per test when possible
   - Use descriptive context/describe blocks
-- Background jobs: Use Sidekiq for async processing
+- Background jobs: Use Solid Queue for async processing
 
 ## Error Handling
 - Use Ruby exceptions with descriptive messages
