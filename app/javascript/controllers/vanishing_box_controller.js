@@ -16,9 +16,9 @@ export default class extends Controller {
     const parElement = document.createElement("p")
     parElement.appendChild(timestampNode)
 
-    const bodyNode = document.createTextNode(data.body)
+    const secretNode = document.createTextNode(data.secret)
     const codeElement = document.createElement("code")
-    codeElement.appendChild(bodyNode)
+    codeElement.appendChild(secretNode)
 
     const preElement = document.createElement("pre")
     preElement.className = "text-off-black"

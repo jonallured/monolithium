@@ -1,12 +1,12 @@
 class VanishingMessage
-  def self.fire_and_forget(body)
-    vanishing_message = new(body)
+  def self.fire_and_forget(secret)
+    vanishing_message = new(secret)
     vanishing_message.broadcast
     nil
   end
 
-  def initialize(body)
-    @body = body
+  def initialize(secret)
+    @secret = secret
     @created_at = Time.now
   end
 
@@ -17,6 +17,6 @@ class VanishingMessage
   private
 
   def as_payload
-    {body: @body, created_at: @created_at.to_fs}
+    {secret: @secret, created_at: @created_at.to_fs}
   end
 end
