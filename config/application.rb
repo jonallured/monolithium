@@ -37,9 +37,10 @@ module Monolithium
     # config.eager_load_paths << Rails.root.join("extras")
 
     # Don't generate system test files.
-    config.generators.system_tests = nil
-    config.active_record.schema_format = :sql
     config.action_cable.disable_request_forgery_protection = true
+    config.active_record.schema_format = :sql
+    config.generators.system_tests = nil
+    config.mission_control.jobs.http_basic_auth_enabled = false
     config.skylight.probes << "active_job"
   end
 end
