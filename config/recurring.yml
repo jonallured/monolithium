@@ -18,13 +18,13 @@ production:
     schedule: every hour
   crawl_artworks_job:
     class: CrawlArtworksJob
-    schedule: every day at at 4am in UTC
+    schedule: every day at 4am in UTC
   drain_hooks_job:
     class: DrainHooksJob
-    schedule: every day at at 5am in UTC
+    schedule: every day at 5am in UTC
   ensure_current_lineup_job:
     class: EnsureCurrentLineupJob
-    schedule: every day at at 6am in UTC
+    schedule: every day at 6am in UTC
   produce_daily_packet_job:
     class: ProduceDailyPacketJob
-    schedule: every day at at 7am in UTC
+    schedule: every day at 7am in UTC
