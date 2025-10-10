@@ -32,6 +32,7 @@ gem "sprockets-rails"
 gem "stimulus-rails"
 gem "tailwindcss-rails"
 gem "turbo-rails"
+gem "ynab"
 
 group :development do
   gem "rails-erd"
