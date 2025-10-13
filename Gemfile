@@ -30,7 +30,7 @@ gem "solid_cable"
 gem "solid_queue"
 gem "sprockets-rails"
 gem "stimulus-rails"
-gem "tailwindcss-rails"
+gem "tailwindcss-rails", "~> 3.0"
 gem "turbo-rails"
 
 group :development do
