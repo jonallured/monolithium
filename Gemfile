@@ -9,6 +9,7 @@ gem "puma"
 
 gem "active_record-associated_object"
 gem "aws-sdk-s3"
+gem "browser", require: "browser/browser"
 gem "csv"
 gem "decent_exposure"
 gem "faraday"
