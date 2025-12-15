@@ -9,6 +9,8 @@ describe "Admin views model counts" do
     actual_rows = page.all("tbody tr").map(&:text)
 
     expected_rows = [
+      "ApacheLogFile 0",
+      "ApacheLogItem 0",
       "Artwork 0",
       "Book 0",
       "CrankCount 0",
@@ -36,6 +38,7 @@ describe "Admin views model counts" do
   end
 
   scenario "with some models" do
+    FactoryBot.create(:apache_log_item)
     FactoryBot.create(:book)
     FactoryBot.create(:csv_upload)
     FactoryBot.create(:gift_idea)
@@ -77,6 +80,8 @@ describe "Admin views model counts" do
     actual_rows = page.all("tbody tr").map(&:text)
 
     expected_rows = [
+      "ApacheLogFile 1",
+      "ApacheLogItem 1",
       "Artwork 1",
       "Book 1",
       "CrankCount 1",
@@ -102,6 +107,6 @@ describe "Admin views model counts" do
 
     expect(actual_rows).to match_array(expected_rows)
 
-    expect(page.find("tfoot tr").text).to eq "Total 21"
+    expect(page.find("tfoot tr").text).to eq "Total 23"
   end
 end
