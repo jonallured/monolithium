@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   mount MissionControl::Jobs::Engine, at: "/jobs"
 
+  get "analytics/:metric/:mode/:year/:month", to: "analytics_reports#show", as: :analytics_report
   get "artsy-viewer", to: "artsy_viewer#show"
   get "crank-champ/leaderboard", to: "crank_champ/leaderboard#index"
   get "cybertail", to: "cybertail#index"

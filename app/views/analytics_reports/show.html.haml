@@ -1,0 +1,19 @@
+- content_for :header do
+  %nav.flex.justify-between.items-center.py-6.border-b-8.border-dark-gray
+    %p.m-0= link_to "prev", analytics_report_path(analytics_report.prev_params)
+    %h1.m-0= analytics_report.period_start.strftime("%Y-%m")
+    %p.m-0= link_to "next", analytics_report_path(analytics_report.next_params)
+
+%p= summary_description(analytics_report)
+
+%table
+  %thead
+    %tr
+      %th Page
+      %th.text-right Count
+
+  %tbody
+    - analytics_report.rows.each do |row|
+      %tr
+        %td= row.label
+        %td.text-right= row.count.to_fs(:delimited)
