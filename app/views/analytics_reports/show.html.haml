@@ -1,8 +1,10 @@
 - content_for :header do
-  %nav.flex.justify-between.items-center.py-6.border-b-8.border-dark-gray
+  %nav.flex.justify-between.items-center.py-6
     %p.m-0= link_to "prev", analytics_report_path(analytics_report.prev_params)
     %h1.m-0= analytics_report.period_start.strftime("%Y-%m")
     %p.m-0= link_to "next", analytics_report_path(analytics_report.next_params)
+  %div.flex.justify-between.border-b-8.pb-6.border-dark-gray
+    %p.m-0 Metrics: #{link_to "Browsers", analytics_report_path(metric: "browsers")}, #{link_to "Pages", analytics_report_path(metric: "pages")}, #{link_to "Referrers", analytics_report_path(metric: "referrers")}
 
 %p= summary_description(analytics_report)
 

@@ -2,7 +2,8 @@ module Analytics
   class SummaryReport
     METRIC_TO_FIELD_MAP = {
       "browser" => :browser_name,
-      "page" => :request_path
+      "page" => :request_path,
+      "referrer" => :referrer_host
     }
 
     def self.for(options)
