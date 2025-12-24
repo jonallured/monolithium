@@ -25,4 +25,11 @@ describe ApacheLogFile do
       expect(apache_log_file).to be_valid
     end
   end
+
+  describe "#starting_s3_key" do
+    it "returns a full s3 key with dateext" do
+      apache_log_file = FactoryBot.create(:apache_log_file, dateext: "20251201")
+      expect(apache_log_file.starting_s3_key).to eq("domino/logs/access.log-20251201.gz")
+    end
+  end
 end

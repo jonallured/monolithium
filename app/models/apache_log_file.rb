@@ -3,6 +3,8 @@ class ApacheLogFile < ApplicationRecord
 
   has_many :apache_log_items, dependent: :destroy
 
+  has_object :extractor
+
   validates :dateext, presence: true
   validates :state, inclusion: {in: STATES}
 
@@ -20,5 +22,9 @@ class ApacheLogFile < ApplicationRecord
 
   def loaded?
     state == "loaded"
+  end
+
+  def starting_s3_key
+    "domino/logs/access.log-#{dateext}.gz"
   end
 end
