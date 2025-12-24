@@ -5,6 +5,7 @@ class ApacheLogFile < ApplicationRecord
 
   has_object :extractor
   has_object :transformer
+  has_object :loader
 
   validates :dateext, presence: true
   validates :state, inclusion: {in: STATES}
