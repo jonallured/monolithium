@@ -4,6 +4,7 @@ class ApacheLogFile < ApplicationRecord
   has_many :apache_log_items, dependent: :destroy
 
   has_object :extractor
+  has_object :transformer
 
   validates :dateext, presence: true
   validates :state, inclusion: {in: STATES}
