@@ -10,6 +10,14 @@ class ApacheLogFile < ApplicationRecord
   validates :dateext, presence: true
   validates :state, inclusion: {in: STATES}
 
+  def self.import(dateext)
+    apache_log_file = create(dateext: dateext, state: "pending")
+    apache_log_file.extractor.run
+    apache_log_file.transformer.run
+    apache_log_file.loader.run
+    apache_log_file
+  end
+
   def pending?
     state == "pending"
   end
