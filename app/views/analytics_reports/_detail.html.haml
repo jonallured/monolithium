@@ -1,0 +1,15 @@
+%p= detail_description(analytics_report)
+
+%table
+  %thead
+    %tr
+      %th Requested At
+      %th= analytics_report.metric_name.capitalize
+
+  %tbody
+    - analytics_report.rows.each do |row|
+      %tr
+        %td= row.requested_at.to_fs
+        %td= row.label
+
+= paginate analytics_report.paginated_items
