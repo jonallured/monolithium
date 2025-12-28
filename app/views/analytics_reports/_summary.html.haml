@@ -1,0 +1,13 @@
+%p= summary_description(analytics_report)
+
+%table
+  %thead
+    %tr
+      %th= analytics_report.metric_name.capitalize
+      %th.text-right Count
+
+  %tbody
+    - analytics_report.rows.each do |row|
+      %tr
+        %td= row.label
+        %td.text-right= row.count.to_fs(:delimited)
