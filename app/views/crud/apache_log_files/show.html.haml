@@ -1,0 +1,9 @@
+%h1 Apache Log File #{apache_log_file.id}
+
+%p= link_to "Apache Log File List", crud_apache_log_files_path
+
+%p= link_to "Edit Apache Log File", edit_crud_apache_log_file_path(apache_log_file)
+
+%p= link_to "Delete Apache Log File", crud_apache_log_file_path(apache_log_file), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }
+
+= render partial: "attrs_table", locals: { attrs: apache_log_file.table_attrs }
