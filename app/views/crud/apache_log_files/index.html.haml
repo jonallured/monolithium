@@ -1,0 +1,18 @@
+%h1 Apache Log Files
+
+%p= link_to "New Apache Log File", new_crud_apache_log_file_path
+
+%p= link_to "Random Apache Log File", crud_apache_log_file_path("random")
+
+%table
+  %thead
+    %tr
+      %th ID
+      %th.text-right Created At
+  %tbody
+    - apache_log_files.each do |apache_log_file|
+      %tr
+        %td= link_to apache_log_file.id, crud_apache_log_file_path(apache_log_file)
+        %td.text-right= apache_log_file.created_at.to_fs
+
+= paginate apache_log_files
