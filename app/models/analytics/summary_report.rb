@@ -1,5 +1,10 @@
 module Analytics
   class SummaryReport < BaseReport
+    def self.default_params
+      month, year = Date.today.strftime("%m %Y").split
+      {metric: "pages", mode: "summary", month: month, year: year}
+    end
+
     def calculate
       @matching_items = ApacheLogItem.where(requested_at: @period_start.all_month)
       report_field = METRIC_TO_FIELD_MAP[@metric_name]
