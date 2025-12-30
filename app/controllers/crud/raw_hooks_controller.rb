@@ -37,6 +37,12 @@ class Crud::RawHooksController < ApplicationController
   private
 
   def raw_hook_params
-    params.require(:raw_hook).permit(RawHook.permitted_params)
+    permitted_params = params.require(:raw_hook).permit(RawHook.permitted_params)
+
+    {
+      body: permitted_params[:body],
+      headers: MaybeJson.parse(permitted_params[:headers]),
+      params: MaybeJson.parse(permitted_params[:params])
+    }
   end
 end

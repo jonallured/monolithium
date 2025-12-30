@@ -16,8 +16,8 @@ describe "Admin views post bin request" do
     post_bin_request = FactoryBot.create(
       :post_bin_request,
       body: "payload",
-      headers: {"x-header-name" => "header-value"}.to_json,
-      params: {"param-name" => "param-value"}.to_json
+      headers: {"x-header-name" => "header-value"},
+      params: {"param-name" => "param-value"}
     )
 
     visit "/crud/post_bin_requests/#{post_bin_request.id}"
@@ -34,7 +34,7 @@ describe "Admin views post bin request" do
     )
 
     expect(page.all("h2").map(&:text)).to eq %w[Headers Params Body]
-    expect(page.all("pre code").map(&:text)).to eq(
+    expect(page.all("pre code").map(&:native).map(&:text)).to eq(
       [
         JSON.pretty_generate(post_bin_request.headers),
         JSON.pretty_generate(post_bin_request.params),
