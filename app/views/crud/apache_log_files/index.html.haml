@@ -8,11 +8,15 @@
   %thead
     %tr
       %th ID
+      %th dateext
+      %th state
       %th.text-right Created At
   %tbody
     - apache_log_files.each do |apache_log_file|
       %tr
         %td= link_to apache_log_file.id, crud_apache_log_file_path(apache_log_file)
+        %td= apache_log_file.dateext
+        %td= apache_log_file.state
         %td.text-right= apache_log_file.created_at.to_fs
 
 = paginate apache_log_files

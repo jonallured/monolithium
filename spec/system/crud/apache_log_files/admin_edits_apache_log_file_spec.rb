@@ -15,22 +15,22 @@ describe "Admin edits apache log file" do
   scenario "edit with errors" do
     apache_log_file = FactoryBot.create(:apache_log_file)
     visit "/crud/apache_log_files/#{apache_log_file.id}/edit"
-    fill_in "REPLACE_ME", with: ""
+    fill_in "dateext", with: ""
     click_on "update"
-    expect(page).to have_css ".alert", text: "REPLACE_ME"
+    expect(page).to have_css ".alert", text: "Dateext can't be blank"
   end
 
   scenario "edit successfully" do
     apache_log_file = FactoryBot.create(
       :apache_log_file,
-      REPLACE_ME: "REPLACE_ME"
+      dateext: "200251201"
     )
     visit "/crud/apache_log_files/#{apache_log_file.id}/edit"
-    fill_in "REPLACE_ME", with: "REPLACE_ME"
+    fill_in "dateext", with: "20251201"
     click_on "update"
 
     expect(page).to have_css ".notice", text: "Apache Log File updated"
     expect(page).to have_current_path crud_apache_log_file_path(apache_log_file)
-    expect(page).to have_css "td", text: "REPLACE_ME"
+    expect(page).to have_css "td", text: "20251201"
   end
 end

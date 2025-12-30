@@ -14,13 +14,16 @@ describe "Admin creates apache log file" do
   scenario "create with errors" do
     visit "/crud/apache_log_files/new"
     click_on "create"
-    expect(page).to have_css ".alert", text: "REPLACE_ME"
+    expect(page).to have_css ".alert", text: "Dateext can't be blank and State is not included in the list"
     expect(page).to have_current_path new_crud_apache_log_file_path
   end
 
   scenario "create successfully" do
     visit "/crud/apache_log_files/new"
-    fill_in "REPLACE_ME", with: "REPLACE_ME"
+    fill_in "dateext", with: "20251201"
+    fill_in "state", with: "pending"
+    fill_in "raw lines", with: "GET /index.html"
+    fill_in "parsed entries", with: [{request_path: "/index.html"}].to_json
     click_on "create"
 
     expect(page).to have_css ".notice", text: "Apache Log File created"
@@ -34,9 +37,18 @@ describe "Admin creates apache log file" do
 
     expect(actual_values).to eq(
       [
-        ["REPLACE_ME", "REPLACE_ME"],
+        ["dateext", "20251201"],
+        ["State", "pending"],
         ["Created At", apache_log_file.created_at.to_fs],
         ["Updated At", apache_log_file.updated_at.to_fs]
+      ]
+    )
+
+    expect(page.all("h2").map(&:text)).to eq ["Raw Lines", "Parsed Entries"]
+    expect(page.all("pre code").map(&:native).map(&:text)).to eq(
+      [
+        apache_log_file.raw_lines,
+        JSON.pretty_generate(apache_log_file.parsed_entries)
       ]
     )
   end
