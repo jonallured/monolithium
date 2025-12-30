@@ -2,4 +2,8 @@
 
 %p= link_to "Post Bin Request List", crud_post_bin_requests_path
 
-= render "form", post_bin_request: post_bin_request, button_label: "create"
+= form_with model: [:crud, post_bin_request] do |form|
+  = form.text_area :headers, placeholder: "headers"
+  = form.text_area :params, placeholder: "params"
+  = form.text_area :body, placeholder: "body"
+  = form.button "create"

@@ -2,4 +2,8 @@
 
 %p= link_to "Show Raw Hook", crud_raw_hook_path(raw_hook)
 
-= render "form", raw_hook: raw_hook, button_label: "update"
+= form_with model: [:crud, raw_hook] do |form|
+  = form.text_area :headers, placeholder: "headers", value: raw_hook.headers.to_json
+  = form.text_area :params, placeholder: "params", value: raw_hook.params.to_json
+  = form.text_area :body, placeholder: "body"
+  = form.button "update"

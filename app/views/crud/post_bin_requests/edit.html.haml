@@ -2,4 +2,8 @@
 
 %p= link_to "Show Post Bin Request", crud_post_bin_request_path(post_bin_request)
 
-= render "form", post_bin_request: post_bin_request, button_label: "update"
+= form_with model: [:crud, post_bin_request] do |form|
+  = form.text_area :headers, placeholder: "headers", value: post_bin_request.headers.to_json
+  = form.text_area :params, placeholder: "params", value: post_bin_request.params.to_json
+  = form.text_area :body, placeholder: "body"
+  = form.button "update"

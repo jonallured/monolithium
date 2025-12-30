@@ -35,7 +35,7 @@ describe "Admin creates post bin request" do
     )
 
     expect(page.all("h2").map(&:text)).to eq %w[Headers Params Body]
-    expect(page.all("pre code").map(&:text)).to eq(
+    expect(page.all("pre code").map(&:native).map(&:text)).to eq(
       [
         JSON.pretty_generate(post_bin_request.headers),
         JSON.pretty_generate(post_bin_request.params),

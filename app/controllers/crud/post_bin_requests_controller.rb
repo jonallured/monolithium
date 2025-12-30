@@ -37,6 +37,12 @@ class Crud::PostBinRequestsController < ApplicationController
   private
 
   def post_bin_request_params
-    params.require(:post_bin_request).permit(PostBinRequest.permitted_params)
+    permitted_params = params.require(:post_bin_request).permit(PostBinRequest.permitted_params)
+
+    {
+      body: permitted_params[:body],
+      headers: MaybeJson.parse(permitted_params[:headers]),
+      params: MaybeJson.parse(permitted_params[:params])
+    }
   end
 end

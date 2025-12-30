@@ -42,7 +42,7 @@ describe "Admin creates raw hook" do
     )
 
     expect(page.all("h2").map(&:text)).to eq %w[Headers Params Body]
-    expect(page.all("pre code").map(&:text)).to eq(
+    expect(page.all("pre code").map(&:native).map(&:text)).to eq(
       [
         JSON.pretty_generate(raw_hook.headers),
         JSON.pretty_generate(raw_hook.params),
