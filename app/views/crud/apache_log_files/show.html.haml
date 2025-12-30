@@ -7,3 +7,13 @@
 %p= link_to "Delete Apache Log File", crud_apache_log_file_path(apache_log_file), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }
 
 = render partial: "attrs_table", locals: { attrs: apache_log_file.table_attrs }
+
+%h2 Raw Lines
+
+%pre.text-off-black.h-72
+  %code= apache_log_file.raw_lines
+
+%h2 Parsed Entries
+
+%pre.text-off-black.h-72
+  %code= JSON.pretty_generate(apache_log_file.parsed_entries)

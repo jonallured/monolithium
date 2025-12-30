@@ -2,4 +2,9 @@
 
 %p= link_to "Apache Log File List", crud_apache_log_files_path
 
-= render "form", apache_log_file: apache_log_file, button_label: "create"
+= form_with model: [:crud, apache_log_file] do |form|
+  = form.text_field :dateext, placeholder: "dateext"
+  = form.text_field :state, placeholder: "state"
+  = form.text_area :raw_lines, placeholder: "raw lines"
+  = form.text_area :parsed_entries, placeholder: "parsed entries"
+  = form.button "create"

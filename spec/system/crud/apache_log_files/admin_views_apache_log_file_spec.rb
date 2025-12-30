@@ -15,7 +15,10 @@ describe "Admin views apache log file" do
   scenario "viewing a record" do
     apache_log_file = FactoryBot.create(
       :apache_log_file,
-      REPLACE_ME: "REPLACE_ME"
+      dateext: "20251201",
+      parsed_entries: [{request_path: "/index.html"}, {request_path: "/admin"}],
+      raw_lines: "GET /index.html\nPOST /admin\n",
+      state: "pending"
     )
 
     visit "/crud/apache_log_files/#{apache_log_file.id}"
@@ -26,9 +29,20 @@ describe "Admin views apache log file" do
 
     expect(actual_values).to eq(
       [
-        ["REPLACE_ME", "REPLACE_ME"],
+        ["dateext", "20251201"],
+        ["State", "pending"],
         ["Created At", apache_log_file.created_at.to_fs],
         ["Updated At", apache_log_file.updated_at.to_fs]
+      ]
+    )
+
+    expect(page.all("h2").map(&:text)).to eq ["Raw Lines", "Parsed Entries"]
+
+    actual_pre_text = page.all("pre").map { |pre_tag| pre_tag.native.text }
+    expect(actual_pre_text).to eq(
+      [
+        apache_log_file.raw_lines,
+        JSON.pretty_generate(apache_log_file.parsed_entries)
       ]
     )
   end

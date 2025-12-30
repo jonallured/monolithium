@@ -18,6 +18,15 @@ class ApacheLogFile < ApplicationRecord
     apache_log_file
   end
 
+  def self.permitted_params
+    [
+      :dateext,
+      :parsed_entries,
+      :raw_lines,
+      :state
+    ]
+  end
+
   def pending?
     state == "pending"
   end
@@ -36,5 +45,14 @@ class ApacheLogFile < ApplicationRecord
 
   def starting_s3_key
     "domino/logs/access.log-#{dateext}.gz"
+  end
+
+  def table_attrs
+    [
+      ["dateext", dateext],
+      ["State", state],
+      ["Created At", created_at.to_fs],
+      ["Updated At", updated_at.to_fs]
+    ]
   end
 end

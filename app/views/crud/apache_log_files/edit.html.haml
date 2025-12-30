@@ -2,4 +2,9 @@
 
 %p= link_to "Show Apache Log File", crud_apache_log_file_path(apache_log_file)
 
-= render "form", apache_log_file: apache_log_file, button_label: "update"
+= form_with model: [:crud, apache_log_file] do |form|
+  = form.text_field :dateext, placeholder: "dateext"
+  = form.text_field :state, placeholder: "state"
+  = form.text_area :raw_lines, placeholder: "raw lines"
+  = form.text_area :parsed_entries, placeholder: "parsed entries", value: apache_log_file.parsed_entries.to_json
+  = form.button "update"
