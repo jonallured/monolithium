@@ -1,0 +1,5 @@
+%h1 Edit Apache Log Item #{apache_log_item.id}
+
+%p= link_to "Show Apache Log Item", crud_apache_log_item_path(apache_log_item)
+
+= render "form", apache_log_item: apache_log_item, button_label: "update"

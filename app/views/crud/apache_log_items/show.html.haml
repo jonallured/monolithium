@@ -1,0 +1,9 @@
+%h1 Apache Log Item #{apache_log_item.id}
+
+%p= link_to "Apache Log Item List", crud_apache_log_items_path
+
+%p= link_to "Edit Apache Log Item", edit_crud_apache_log_item_path(apache_log_item)
+
+%p= link_to "Delete Apache Log Item", crud_apache_log_item_path(apache_log_item), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }
+
+= render partial: "attrs_table", locals: { attrs: apache_log_item.table_attrs }
