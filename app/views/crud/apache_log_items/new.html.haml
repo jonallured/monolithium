@@ -2,4 +2,24 @@
 
 %p= link_to "Apache Log Item List", crud_apache_log_items_path
 
-= render "form", apache_log_item: apache_log_item, button_label: "create"
+= form_with model: [:crud, apache_log_item] do |form|
+  = form.text_field :apache_log_file_id, placeholder: "ApacheLogFile record ID"
+  = form.text_field :browser_name, placeholder: "browser name"
+  = form.text_field :line_number, placeholder: "line number"
+  = form.text_field :port, placeholder: "port"
+  = form.text_field :raw_line, placeholder: "raw line"
+  = form.text_field :referrer_host, placeholder: "referrer host"
+  = form.text_field :remote_ip_address, placeholder: "remote ip address"
+  = form.text_field :remote_logname, placeholder: "remote logname"
+  = form.text_field :remote_user, placeholder: "remote user"
+  = form.datetime_local_field :requested_at, placeholder: "requested at"
+  = form.text_field :request_method, placeholder: "request method"
+  = form.text_field :request_params, placeholder: "request params"
+  = form.text_field :request_path, placeholder: "request path"
+  = form.text_field :request_protocol, placeholder: "request protocol"
+  = form.text_field :request_referrer, placeholder: "request referrer"
+  = form.text_field :request_user_agent, placeholder: "request user agent"
+  = form.text_field :response_size, placeholder: "response size"
+  = form.text_field :response_status, placeholder: "response status"
+  = form.text_field :website, placeholder: "website"
+  = form.button "create"

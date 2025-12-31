@@ -15,7 +15,24 @@ describe "Admin views apache log item" do
   scenario "viewing a record" do
     apache_log_item = FactoryBot.create(
       :apache_log_item,
-      REPLACE_ME: "REPLACE_ME"
+      browser_name: "Safari",
+      line_number: 1,
+      port: "443",
+      raw_line: "GET /index.html",
+      referrer_host: "jon.zone",
+      remote_ip_address: "1.1.1.1",
+      remote_logname: "-",
+      remote_user: "-",
+      request_method: "GET",
+      request_params: nil,
+      request_path: "/index.html",
+      request_protocol: "HTTP1.1",
+      request_referrer: "https://jon.zone/post-1",
+      request_user_agent: "Safari",
+      requested_at: Time.now,
+      response_size: 100,
+      response_status: "200",
+      website: "www.jonallured.com"
     )
 
     visit "/crud/apache_log_items/#{apache_log_item.id}"
@@ -26,7 +43,25 @@ describe "Admin views apache log item" do
 
     expect(actual_values).to eq(
       [
-        ["REPLACE_ME", "REPLACE_ME"],
+        ["ApacheLogFile ID", apache_log_item.apache_log_file_id.to_s],
+        ["Browser Name", "Safari"],
+        ["Line Number", "1"],
+        ["Port", "443"],
+        ["Raw Line", "GET /index.html"],
+        ["Referrer Host", "jon.zone"],
+        ["Remote IP Address", "1.1.1.1"],
+        ["Remote Logname", "-"],
+        ["Remote User", "-"],
+        ["Request Method", "GET"],
+        ["Request Params", ""],
+        ["Request Path", "/index.html"],
+        ["Request Protocol", "HTTP1.1"],
+        ["Request Referrer", "https://jon.zone/post-1"],
+        ["Request User Agent", "Safari"],
+        ["Requested At", apache_log_item.requested_at.to_fs],
+        ["Response Size", "100"],
+        ["Response Status", "200"],
+        ["Website", "www.jonallured.com"],
         ["Created At", apache_log_item.created_at.to_fs],
         ["Updated At", apache_log_item.updated_at.to_fs]
       ]

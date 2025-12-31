@@ -44,6 +44,7 @@ Rails.application.routes.draw do
 
   namespace :crud do
     resources :things
+    resources :apache_log_items
     resources :apache_log_files
     resources :books
     resources :csv_uploads
