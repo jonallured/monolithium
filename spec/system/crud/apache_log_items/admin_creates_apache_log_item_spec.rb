@@ -14,13 +14,32 @@ describe "Admin creates apache log item" do
   scenario "create with errors" do
     visit "/crud/apache_log_items/new"
     click_on "create"
-    expect(page).to have_css ".alert", text: "REPLACE_ME"
+    expected_error_message = [
+      "Apache log file must exist",
+      "Line number can't be blank",
+      "Raw line can't be blank",
+      "Port irrelevant",
+      "Request method irrelevant",
+      "Request path irrelevant",
+      "Request user agent irrelevant",
+      "Response status irrelevant"
+    ].join(", ") + ", and Website irrelevant"
+    expect(page).to have_css ".alert", text: expected_error_message
     expect(page).to have_current_path new_crud_apache_log_item_path
   end
 
   scenario "create successfully" do
     visit "/crud/apache_log_items/new"
-    fill_in "REPLACE_ME", with: "REPLACE_ME"
+    apache_log_file = FactoryBot.create(:apache_log_file)
+    fill_in "ApacheLogFile record ID", with: apache_log_file.id
+    fill_in "line number", with: "1"
+    fill_in "raw line", with: "GET /index.html"
+    fill_in "port", with: "443"
+    fill_in "request method", with: "GET"
+    fill_in "request path", with: "/index.html"
+    fill_in "request user agent", with: "Safari"
+    fill_in "response status", with: "200"
+    fill_in "website", with: "www.jonallured.com"
     click_on "create"
 
     expect(page).to have_css ".notice", text: "Apache Log Item created"
@@ -32,9 +51,27 @@ describe "Admin creates apache log item" do
       table_row.all("td").map(&:text)
     end
 
-    expect(actual_values).to eq(
+    expect(actual_values).to match_array(
       [
-        ["REPLACE_ME", "REPLACE_ME"],
+        ["ApacheLogFile ID", apache_log_item.apache_log_file_id.to_s],
+        ["Browser Name", ""],
+        ["Line Number", "1"],
+        ["Port", "443"],
+        ["Raw Line", "GET /index.html"],
+        ["Referrer Host", ""],
+        ["Remote IP Address", ""],
+        ["Remote Logname", ""],
+        ["Remote User", ""],
+        ["Request Method", "GET"],
+        ["Request Params", ""],
+        ["Request Path", "/index.html"],
+        ["Request Protocol", ""],
+        ["Request Referrer", ""],
+        ["Request User Agent", "Safari"],
+        ["Requested At", ""],
+        ["Response Size", ""],
+        ["Response Status", "200"],
+        ["Website", "www.jonallured.com"],
         ["Created At", apache_log_item.created_at.to_fs],
         ["Updated At", apache_log_item.updated_at.to_fs]
       ]
