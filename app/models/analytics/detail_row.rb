@@ -1,8 +1,9 @@
 module Analytics
   class DetailRow
-    attr_reader :label, :requested_at
+    attr_reader :id, :label, :requested_at
 
-    def initialize(label, requested_at)
+    def initialize(id, label, requested_at)
+      @id = id
       @label = label
       @requested_at = requested_at
     end

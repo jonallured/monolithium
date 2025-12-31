@@ -10,6 +10,6 @@
     - analytics_report.rows.each do |row|
       %tr
         %td= row.requested_at.to_fs
-        %td= row.label
+        %td= link_to row.label, crud_apache_log_item_path(row.id)
 
 = paginate analytics_report.paginated_items
