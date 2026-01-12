@@ -41,6 +41,7 @@ class DailyPacket < ApplicationRecord
     chores = []
     chores << "unload dishwasher"
     chores << "collect laundry" if built_on_weekend?
+    chores << "collect and wash towels" if built_on_wednesday?
     chores << "defrost meat"
 
     if built_on_weekend? && built_during_summer?
@@ -54,6 +55,7 @@ class DailyPacket < ApplicationRecord
     chores << "refill soap dispensers"
     chores << "do hand wash"
     chores << "wipe off kitchen table"
+    chores << "wash dog bowls" if built_on_tuesday?
     chores << "run dishwasher"
 
     chores
@@ -73,6 +75,14 @@ class DailyPacket < ApplicationRecord
       "plug in mouse",
       "say bye in Slack"
     ]
+  end
+
+  def built_on_tuesday?
+    built_on.tuesday?
+  end
+
+  def built_on_wednesday?
+    built_on.wednesday?
   end
 
   def built_on_sunday?
