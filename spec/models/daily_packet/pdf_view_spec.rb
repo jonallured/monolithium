@@ -10,15 +10,15 @@ describe DailyPacket::PdfView do
   include_context "pdf inspection"
 
   describe "full packet" do
-    context "on a Tuesday" do
-      let(:built_on) { Date.parse("2024-11-05") }
+    context "on a Monday" do
+      let(:built_on) { Date.parse("2024-11-04") }
 
       it "renders the document" do
         expect(inspector.pages.size).to eq 3
 
         expect(page_one_strings).to eq([
           "DAILY PACKET #19",
-          "11/05/2024",
+          "11/04/2024",
           "week 45",
           "Random Warm Fuzzy",
           "Alright Haircut",
@@ -79,6 +79,22 @@ describe DailyPacket::PdfView do
 
       it "renders the Sunday-specific chore" do
         expect(page_two_strings).to include "put out garbage cans"
+      end
+    end
+
+    context "on a Tuesday" do
+      let(:built_on) { Date.parse("2024-11-05") }
+
+      it "renders the Tuesday-specific chore" do
+        expect(page_two_strings).to include "wash dog bowls"
+      end
+    end
+
+    context "on a Wednesday" do
+      let(:built_on) { Date.parse("2024-11-06") }
+
+      it "renders the Wednesday-specific chore" do
+        expect(page_two_strings).to include "collect and wash towels"
       end
     end
 
