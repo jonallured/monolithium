@@ -1,0 +1,12 @@
+from this doc:
+
+https://devcenter.heroku.com/articles/upgrading-heroku-postgres-databases
+
+
+heroku pg:upgrade:run --confirm monolithium
+heroku pg:upgrade:wait DATABASE_URL
+
+brew install postgresql@17
+
+gem pristine pg
+brew link postgresql@17
