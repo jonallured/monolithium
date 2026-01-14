@@ -1,4 +1,4 @@
-# Monolithium [![CircleCI][badge]][circleci]
+# Monolithium [![CI Badge][badge]][action_page]
 
 This is my personal Rails monolith where I keep things that I've built for
 myself.
@@ -63,6 +63,6 @@ I feel strongly about keeping my projects up-to-date, so I made a thing to keep
 track of which apps are due for an update. It's really just a list of projects
 with timestamps to keep track of update state.
 
-[badge]: https://circleci.com/gh/jonallured/monolithium.svg?style=svg
-[circleci]: https://circleci.com/gh/jonallured/monolithium
+[action_page]: https://github.com/jonallured/monolithium/actions/workflows/main.yml
+[badge]: https://github.com/jonallured/monolithium/actions/workflows/main.yml/badge.svg
 [feedbin]: https://github.com/feedbin/feedbin-api

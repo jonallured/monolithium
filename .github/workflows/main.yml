@@ -1,0 +1,32 @@
+name: main
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17.6-alpine
+        ports: ["5432:5432"]
+        env:
+          POSTGRES_DB: monolithium_test
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: postgres
+    env:
+      CREDS_GROUP: ${{ secrets.CREDS_GROUP }}
+      DATABASE_URL: "postgres://postgres:postgres@localhost:5432/monolithium_test"
+      RAILS_ENV: test
+      RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - run: bin/rails db:migrate
+      - run: bin/rails assets:precompile
+      - run: bin/rake
