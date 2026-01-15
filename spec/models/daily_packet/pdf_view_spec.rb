@@ -87,6 +87,7 @@ describe DailyPacket::PdfView do
 
       it "renders the Tuesday-specific chore" do
         expect(page_two_strings).to include "wash dog bowls"
+        expect(page_two_strings).to include "wash bathroom cups"
       end
     end
 

@@ -56,6 +56,7 @@ class DailyPacket < ApplicationRecord
     chores << "do hand wash"
     chores << "wipe down kitchen"
     chores << "wash dog bowls" if built_on_tuesday?
+    chores << "wash bathroom cups" if built_on_tuesday?
     chores << "run dishwasher"
 
     chores
