@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example 3: Data Channels</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            background: #0f172a;
+            color: #e2e8f0;
+        }
+        h1 {
+            color: #60a5fa;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .peer {
+            background: #1e293b;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .peer h2 {
+            color: #60a5fa;
+            margin-top: 0;
+        }
+        button {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            margin: 5px 5px 5px 0;
+        }
+        button:hover {
+            background: #2563eb;
+        }
+        button:disabled {
+            background: #475569;
+            cursor: not-allowed;
+        }
+        .info {
+            background: #1e293b;
+            padding: 16px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #3b82f6;
+        }
+        .status {
+            font-size: 14px;
+            padding: 8px;
+            border-radius: 4px;
+            margin: 10px 0;
+            background: #334155;
+        }
+        .status.connected {
+            background: #065f46;
+        }
+        .chat-box {
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 15px;
+            height: 300px;
+            overflow-y: auto;
+            margin: 15px 0;
+        }
+        .message {
+            margin: 8px 0;
+            padding: 8px 12px;
+            border-radius: 6px;
+            max-width: 80%;
+        }
+        .message.sent {
+            background: #1e40af;
+            margin-left: auto;
+            text-align: right;
+        }
+        .message.received {
+            background: #334155;
+        }
+        .input-group {
+            display: flex;
+            gap: 10px;
+        }
+        input[type="text"] {
+            flex: 1;
+            background: #334155;
+            border: 1px solid #475569;
+            color: #e2e8f0;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #3b82f6;
+        }
+        code {
+            background: #334155;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <h1>💬 WebRTC Example 3: Data Channels</h1>
+    
+    <div class="info">
+        <strong>What this demonstrates:</strong> Using <code>RTCDataChannel</code> to send arbitrary data 
+        between peers. Data channels can transfer text, binary data, files, or any serializable data 
+        peer-to-peer without going through a server. Perfect for chat, gaming, or collaborative apps.
+    </div>
+
+    <div class="info">
+        <strong>Key features of Data Channels:</strong>
+        <ul>
+            <li><strong>Reliable or unreliable:</strong> Choose TCP-like reliability or UDP-like speed</li>
+            <li><strong>Ordered or unordered:</strong> Messages can arrive in any order for speed</li>
+            <li><strong>Binary or text:</strong> Send strings, ArrayBuffers, or Blobs</li>
+            <li><strong>Low latency:</strong> Direct peer-to-peer communication</li>
+        </ul>
+    </div>
+
+    <button id="connectBtn">🔗 Connect Peers</button>
+
+    <div class="container">
+        <div class="peer">
+            <h2>👤 Peer 1</h2>
+            <div id="status1" class="status">Not connected</div>
+            <div id="chatBox1" class="chat-box"></div>
+            <div class="input-group">
+                <input type="text" id="input1" placeholder="Type a message..." disabled>
+                <button id="sendBtn1" disabled>Send</button>
+            </div>
+        </div>
+
+        <div class="peer">
+            <h2>👤 Peer 2</h2>
+            <div id="status2" class="status">Not connected</div>
+            <div id="chatBox2" class="chat-box"></div>
+            <div class="input-group">
+                <input type="text" id="input2" placeholder="Type a message..." disabled>
+                <button id="sendBtn2" disabled>Send</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="info">
+        <strong>Try this:</strong>
+        <ul>
+            <li>Click "Connect Peers" to establish the data channel</li>
+            <li>Once connected, type messages in either chat box</li>
+            <li>Notice the messages arrive instantly peer-to-peer</li>
+            <li>Open the console to see the connection process and message transfer</li>
+            <li>Try sending lots of messages quickly - data channels are fast!</li>
+        </ul>
+    </div>
+
+    <script>
+        let peerConnection1 = null;
+        let peerConnection2 = null;
+        let dataChannel1 = null;
+        let dataChannel2 = null;
+
+        const connectBtn = document.getElementById('connectBtn');
+        const status1 = document.getElementById('status1');
+        const status2 = document.getElementById('status2');
+        const chatBox1 = document.getElementById('chatBox1');
+        const chatBox2 = document.getElementById('chatBox2');
+        const input1 = document.getElementById('input1');
+        const input2 = document.getElementById('input2');
+        const sendBtn1 = document.getElementById('sendBtn1');
+        const sendBtn2 = document.getElementById('sendBtn2');
+
+        const configuration = {
+            iceServers: [
+                { urls: 'stun:stun.l.google.com:19302' }
+            ]
+        };
+
+        connectBtn.addEventListener('click', async () => {
+            connectBtn.disabled = true;
+            status1.textContent = 'Connecting...';
+            status2.textContent = 'Waiting...';
+
+            try {
+                // Create peer connections
+                peerConnection1 = new RTCPeerConnection(configuration);
+                peerConnection2 = new RTCPeerConnection(configuration);
+
+                // Peer 1 creates the data channel
+                // You can configure reliability and ordering here
+                dataChannel1 = peerConnection1.createDataChannel('chat', {
+                    ordered: true, // Messages arrive in order
+                    // maxRetransmits: 3, // Or use this for unreliable but faster transfer
+                });
+
+                console.log('Data channel created:', dataChannel1.label);
+
+                // Set up data channel event handlers for Peer 1
+                dataChannel1.addEventListener('open', () => {
+                    console.log('Data channel 1 opened');
+                    status1.textContent = 'Connected ✓';
+                    status1.className = 'status connected';
+                    input1.disabled = false;
+                    sendBtn1.disabled = false;
+                });
+
+                dataChannel1.addEventListener('close', () => {
+                    console.log('Data channel 1 closed');
+                    status1.textContent = 'Disconnected';
+                    status1.className = 'status';
+                });
+
+                dataChannel1.addEventListener('message', event => {
+                    console.log('Peer 1 received:', event.data);
+                    addMessage(chatBox1, event.data, 'received');
+                });
+
+                // Peer 2 listens for the data channel
+                peerConnection2.addEventListener('datachannel', event => {
+                    dataChannel2 = event.channel;
+                    console.log('Data channel received:', dataChannel2.label);
+
+                    dataChannel2.addEventListener('open', () => {
+                        console.log('Data channel 2 opened');
+                        status2.textContent = 'Connected ✓';
+                        status2.className = 'status connected';
+                        input2.disabled = false;
+                        sendBtn2.disabled = false;
+                    });
+
+                    dataChannel2.addEventListener('close', () => {
+                        console.log('Data channel 2 closed');
+                        status2.textContent = 'Disconnected';
+                        status2.className = 'status';
+                    });
+
+                    dataChannel2.addEventListener('message', event => {
+                        console.log('Peer 2 received:', event.data);
+                        addMessage(chatBox2, event.data, 'received');
+                    });
+                });
+
+                // Set up ICE candidate exchange
+                peerConnection1.addEventListener('icecandidate', event => {
+                    if (event.candidate) {
+                        peerConnection2.addIceCandidate(event.candidate);
+                    }
+                });
+
+                peerConnection2.addEventListener('icecandidate', event => {
+                    if (event.candidate) {
+                        peerConnection1.addIceCandidate(event.candidate);
+                    }
+                });
+
+                // Create offer and answer
+                const offer = await peerConnection1.createOffer();
+                await peerConnection1.setLocalDescription(offer);
+                console.log('Offer created');
+
+                await peerConnection2.setRemoteDescription(offer);
+                const answer = await peerConnection2.createAnswer();
+                await peerConnection2.setLocalDescription(answer);
+                console.log('Answer created');
+
+                await peerConnection1.setRemoteDescription(answer);
+                console.log('Connection established');
+
+            } catch (error) {
+                console.error('Error connecting:', error);
+                status1.textContent = 'Error: ' + error.message;
+                status2.textContent = 'Error: ' + error.message;
+            }
+        });
+
+        // Send message from Peer 1
+        function sendMessage1() {
+            const message = input1.value.trim();
+            if (message && dataChannel1 && dataChannel1.readyState === 'open') {
+                dataChannel1.send(message);
+                addMessage(chatBox1, message, 'sent');
+                input1.value = '';
+                console.log('Peer 1 sent:', message);
+            }
+        }
+
+        // Send message from Peer 2
+        function sendMessage2() {
+            const message = input2.value.trim();
+            if (message && dataChannel2 && dataChannel2.readyState === 'open') {
+                dataChannel2.send(message);
+                addMessage(chatBox2, message, 'sent');
+                input2.value = '';
+                console.log('Peer 2 sent:', message);
+            }
+        }
+
+        sendBtn1.addEventListener('click', sendMessage1);
+        sendBtn2.addEventListener('click', sendMessage2);
+
+        input1.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendMessage1();
+        });
+
+        input2.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendMessage2();
+        });
+
+        function addMessage(chatBox, text, type) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${type}`;
+            messageDiv.textContent = text;
+            chatBox.appendChild(messageDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        // Cleanup
+        window.addEventListener('beforeunload', () => {
+            if (dataChannel1) dataChannel1.close();
+            if (dataChannel2) dataChannel2.close();
+            if (peerConnection1) peerConnection1.close();
+            if (peerConnection2) peerConnection2.close();
+        });
+    </script>
+</body>
+</html>
