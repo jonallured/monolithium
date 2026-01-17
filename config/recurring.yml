@@ -16,11 +16,14 @@ production:
   push_current_lineup_job:
     class: PushCurrentLineupJob
     schedule: every hour
+  drain_hooks_job:
+    class: DrainHooksJob
+    schedule: every day at 3am in UTC
   crawl_artworks_job:
     class: CrawlArtworksJob
     schedule: every day at 4am in UTC
-  drain_hooks_job:
-    class: DrainHooksJob
+  get_missing_apache_log_data_job:
+    class: GetMissingApacheLogDataJob
     schedule: every day at 5am in UTC
   ensure_current_lineup_job:
     class: EnsureCurrentLineupJob
