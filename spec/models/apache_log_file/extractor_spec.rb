@@ -14,9 +14,12 @@ describe ApacheLogFile::Extractor do
     context "with an ApacheLogFile record that is pending" do
       let(:state) { "pending" }
 
-      it "reads and unzips apache log data then updates the file record" do
+      it "downloads raw lines, archives files, and then updates the file record" do
         expect(S3Api).to receive(:read).with("domino/logs/access.log-20251201.gz").and_return("binary-data")
         expect(Zlib).to receive(:gunzip).with("binary-data").and_return("GET index.html\n")
+
+        expect(S3Api).to receive(:move).with("domino/logs/access.log-20251201.gz", "domino/archives/access.log-20251201.gz").and_return(nil)
+        expect(S3Api).to receive(:move).with("domino/logs/error.log-20251201.gz", "domino/archives/error.log-20251201.gz").and_return(nil)
 
         apache_log_file.extractor.run
 

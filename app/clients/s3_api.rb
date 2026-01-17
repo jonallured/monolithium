@@ -15,6 +15,21 @@ class S3Api
     @client ||= generate_client
   end
 
+  def self.move(source_key, destination_key)
+    return unless client
+
+    begin
+      copy_source = "#{BUCKET_NAME}/#{source_key}"
+      options = {bucket: BUCKET_NAME, copy_source: copy_source, key: destination_key}
+      client.copy_object(options)
+      client.delete_object(bucket: BUCKET_NAME, key: source_key)
+      destination_key
+    rescue Aws::S3::Errors::NoSuchKey => e
+      Rails.logger.error("bad S3Api.move source key: #{source_key}")
+      raise e
+    end
+  end
+
   def self.read(key)
     return unless client
 
