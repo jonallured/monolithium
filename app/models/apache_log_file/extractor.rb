@@ -1,5 +1,22 @@
 class ApacheLogFile::Extractor < ActiveRecord::AssociatedObject
   class NotPendingError < StandardError; end
+  class UnexpectedOverlapError < StandardError; end
+
+  def self.find_missing
+    keys = S3Api.list("domino/logs/")
+    pattern = /domino\/logs\/access\.log-(\d{8})\.gz/
+
+    dateexts = keys.map do |key|
+      match_data = key.match(pattern)
+      next if match_data.nil?
+      match_data[1]
+    end.compact.sort
+
+    overlap = ApacheLogFile.where(dateext: dateexts).count
+    raise UnexpectedOverlapError unless overlap.zero?
+
+    dateexts
+  end
 
   def run
     raise NotPendingError unless apache_log_file.pending?
