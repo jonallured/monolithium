@@ -4,11 +4,19 @@ class ApacheLogFile::Extractor < ActiveRecord::AssociatedObject
   def run
     raise NotPendingError unless apache_log_file.pending?
 
-    binary = S3Api.read(apache_log_file.starting_s3_key)
-    raw_lines = Zlib.gunzip(binary)
+    download_raw_lines
+
     apache_log_file.update(
-      raw_lines: raw_lines,
+      raw_lines: @raw_lines,
       state: "extracted"
     )
+  end
+
+  private
+
+  def download_raw_lines
+    access_log_key = apache_log_file.starting_s3_key
+    binary = S3Api.read(access_log_key)
+    @raw_lines = Zlib.gunzip(binary)
   end
 end
