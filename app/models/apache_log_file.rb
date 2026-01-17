@@ -43,8 +43,11 @@ class ApacheLogFile < ApplicationRecord
     state == "loaded"
   end
 
-  def starting_s3_key
-    "domino/logs/access.log-#{dateext}.gz"
+  def s3_keys
+    {
+      access_log: "domino/logs/access.log-#{dateext}.gz",
+      error_log: "domino/logs/error.log-#{dateext}.gz"
+    }
   end
 
   def table_attrs
