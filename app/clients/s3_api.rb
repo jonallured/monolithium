@@ -15,6 +15,19 @@ class S3Api
     @client ||= generate_client
   end
 
+  def self.list(prefix)
+    return unless client
+
+    begin
+      options = {bucket: BUCKET_NAME, prefix: prefix, start_after: prefix}
+      response = client.list_objects_v2(options)
+      response.contents.map(&:key).sort
+    rescue Aws::S3::Errors::NoSuchKey => e
+      Rails.logger.error("bad S3Api.read key: #{key}")
+      raise e
+    end
+  end
+
   def self.move(source_key, destination_key)
     return unless client
 
