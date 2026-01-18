@@ -22,8 +22,8 @@ production:
   crawl_artworks_job:
     class: CrawlArtworksJob
     schedule: every day at 4am in UTC
-  get_missing_apache_log_data_job:
-    class: GetMissingApacheLogDataJob
+  manage_apache_log_data_job:
+    class: ManageApacheLogDataJob
     schedule: every day at 5am in UTC
   ensure_current_lineup_job:
     class: EnsureCurrentLineupJob
