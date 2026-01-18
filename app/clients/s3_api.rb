@@ -15,6 +15,17 @@ class S3Api
     @client ||= generate_client
   end
 
+  def self.delete(key)
+    return unless client
+
+    begin
+      client.delete_object(bucket: BUCKET_NAME, key: key)
+    rescue Aws::S3::Errors::NoSuchKey => e
+      Rails.logger.error("bad S3Api.delete key: #{key}")
+      raise e
+    end
+  end
+
   def self.list(prefix)
     return unless client
 
