@@ -3,7 +3,7 @@ class GithubParser < BaseParser
   SIGNATURE_HEADER_KEY = "HTTP_X_HUB_SIGNATURE_256"
   USER_AGENT_KEY = "HTTP_USER_AGENT"
 
-  KNOWN_EVENT_TYPES = %w[pull_request]
+  KNOWN_EVENT_TYPES = %w[pull_request workflow_run]
   KNOWN_USER_AGENT = "GitHub-Hookshot"
 
   def self.valid_for?(raw_hook)
@@ -35,6 +35,16 @@ class GithubParser < BaseParser
       raw_hook.headers[EVENT_TYPE_KEY],
       parsed["action"]
     ].compact.join(" ")
+
+    if raw_hook.headers[EVENT_TYPE_KEY] == "workflow_run"
+      if parsed["repository"]["name"] == "jonallured.com"
+        if parsed["action"] == "completed"
+          if parsed["workflow_run"]["name"] == "deploy"
+            # we have just completed a deploy of the site
+          end
+        end
+      end
+    end
 
     raw_hook.create_hook(
       message: message,
