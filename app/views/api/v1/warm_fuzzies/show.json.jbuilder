@@ -1,0 +1,10 @@
+json.call(
+  warm_fuzzy,
+  :author,
+  :body,
+  :created_at,
+  :id,
+  :received_at,
+  :title,
+  :updated_at
+)

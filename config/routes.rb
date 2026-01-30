@@ -65,6 +65,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :books
       resources :boops
+      resources :warm_fuzzies
       resources :work_days
 
       get :decode_jwt, to: "decode_jwt#show"

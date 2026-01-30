@@ -9,6 +9,9 @@ class Crud::WarmFuzziesController < ApplicationController
   end
 
   def create
+    puts "*" * 80
+    puts warm_fuzzy_params.inspect
+    puts "*" * 80
     if warm_fuzzy.save
       flash.notice = "Warm Fuzzy created"
       redirect_to crud_warm_fuzzy_path(warm_fuzzy)

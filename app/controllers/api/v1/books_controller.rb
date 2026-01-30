@@ -8,6 +8,10 @@ module Api
       end
 
       def create
+        puts "*" * 80
+        puts params.inspect
+        puts book_params.inspect
+        puts "*" * 80
         book.save!
         EnhanceBookJob.perform_later(book.id)
         render :show, status: :created
