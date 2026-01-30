@@ -55,6 +55,13 @@ class HookRequest
       unsafe_params[secret_param] = "REDACTED" if unsafe_params.key? secret_param
     end
 
+    unsafe_params["warm_fuzzy"].each do |key, value|
+      puts key
+      puts value.class
+      puts value
+      puts "*****"
+    end
+
     unsafe_params
   end
 end
