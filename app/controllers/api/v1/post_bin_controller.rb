@@ -8,7 +8,8 @@ module Api
 
       def create
         post_bin_request.save
-        head :created
+        status = request.get? ? :ok : :created
+        head status
       end
     end
   end
