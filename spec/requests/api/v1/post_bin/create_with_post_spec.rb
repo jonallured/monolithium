@@ -50,4 +50,24 @@ describe "POST /api/v1/post_bin" do
       expect(response.status).to eq 404
     end
   end
+
+  context "with data for body, headers, and params" do
+    it "returns an empty 201 and captures that data" do
+      body = "hello world!"
+      headers = {
+        "Content-Type" => "text/plain",
+        ApiController::CLIENT_TOKEN_HEADER => Monolithium.config.client_token,
+        "Sent-By" => "Me"
+      }
+      params = {"mode" => "hard"}
+
+      post "/api/v1/post_bin?#{params.to_query}", params: body, headers: headers
+
+      expect(response.status).to eq 201
+      post_bin_request = PostBinRequest.first
+      expect(post_bin_request.body).to eq "hello world!"
+      expect(post_bin_request.headers["HTTP_SENT_BY"]).to eq "Me"
+      expect(post_bin_request.params["mode"]).to eq "hard"
+    end
+  end
 end
