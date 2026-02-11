@@ -66,6 +66,7 @@ Rails.application.routes.draw do
 
       get :decode_jwt, to: "decode_jwt#show"
       get :ping, to: "ping#show"
+      get :post_bin, to: "post_bin#create"
       post :post_bin, to: "post_bin#create"
       post :raw_hooks, to: "raw_hooks#create"
       post :vanishing_messages, to: "vanishing_messages#create"
