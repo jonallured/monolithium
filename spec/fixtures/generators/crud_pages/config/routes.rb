@@ -72,6 +72,11 @@ Rails.application.routes.draw do
       post :raw_hooks, to: "raw_hooks#create"
       post :vanishing_messages, to: "vanishing_messages#create"
 
+      namespace :time_clock do
+        get :clicks, to: "clicks#create"
+        get :frames, to: "frames#index"
+      end
+
       namespace :word_rot do
         get :killswitch, to: "killswitch#show"
       end
