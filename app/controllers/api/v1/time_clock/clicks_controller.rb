@@ -3,6 +3,7 @@ module Api
     module TimeClock
       class ClicksController < Api::V1Controller
         def create
+          Boop.next&.dismiss!
           head :ok
         end
       end
