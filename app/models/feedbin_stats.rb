@@ -35,6 +35,6 @@ class FeedbinStats
     return 0 unless oldest_entry_published
 
     oldest_published_on = Date.parse(oldest_entry_published)
-    (Date.today - oldest_published_on).to_i
+    (Date.current - oldest_published_on).to_i
   end
 end
