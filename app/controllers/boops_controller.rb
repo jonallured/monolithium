@@ -5,6 +5,7 @@ class BoopsController < ApplicationController
   expose(:pending_boops) { Boop.pending }
 
   def create
+    boop.number = Boop.next_number
     if boop.save
       flash.notice = "Boop created!"
     else
@@ -17,6 +18,6 @@ class BoopsController < ApplicationController
   private
 
   def boop_params
-    params.require(:boop).permit(:display_type, :number)
+    params.require(:boop).permit(:display_type)
   end
 end
