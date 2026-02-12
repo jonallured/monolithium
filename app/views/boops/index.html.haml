@@ -25,7 +25,6 @@
     = form.label :display_type, value: "beer" do
       = form.radio_button :display_type, "beer", class: "hidden"
       = image_tag "/boop_icons/beer.png", class: "m-0"
-  = form.hidden_field :number, value: Boop.next_number
   = form.button "send boop"
 
 %h2 Some Boop Facts
