@@ -5,8 +5,10 @@ module Api
         expose(:frames) do
           next_boop = Boop.next
           if next_boop
-            text = "boop ##{next_boop.number}"
-            [::TimeClock::Frame.new(next_boop.display_type, text)]
+            [
+              ::TimeClock::Frame.new(next_boop.display_type, "boop"),
+              ::TimeClock::Frame.new(next_boop.display_type, next_boop.number.to_s)
+            ]
           else
             [::TimeClock::Frame.default]
           end
