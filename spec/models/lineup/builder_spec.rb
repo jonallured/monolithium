@@ -3,7 +3,7 @@ require "rails_helper"
 describe Lineup::Builder do
   describe ".ensure_current" do
     context "when there is a current Lineup" do
-      let(:current_on) { Date.today }
+      let(:current_on) { Date.current }
 
       it "creates a Lineup for tomorrow" do
         FactoryBot.create(:lineup, current_on: current_on)
@@ -15,7 +15,7 @@ describe Lineup::Builder do
     end
 
     context "when there is a Lineup from yesterday" do
-      let(:current_on) { Date.yesterday }
+      let(:current_on) { Date.current - 1.day }
 
       it "creates a Lineup for today and tomorrow" do
         FactoryBot.create(:lineup, current_on: current_on)
@@ -28,7 +28,7 @@ describe Lineup::Builder do
     end
 
     context "when there is a gap in Lineup records" do
-      let(:current_on) { Date.today - 7.days }
+      let(:current_on) { Date.current - 7.days }
 
       it "creates enough Lineup records to catch up" do
         FactoryBot.create(:lineup, current_on: current_on)
