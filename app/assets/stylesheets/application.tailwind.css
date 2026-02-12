@@ -114,3 +114,16 @@
     @apply justify-between;
   }
 }
+
+#boop_icons img {
+  @apply border-b-8;
+  @apply border-purple;
+}
+
+#boop_icons img:hover {
+  @apply border-pink;
+}
+
+#boop_icons :checked + img {
+  @apply border-pink;
+}

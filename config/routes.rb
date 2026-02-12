@@ -36,6 +36,7 @@ Rails.application.routes.draw do
   post "sign_in", to: "password#create"
   get "sign_out", to: "password#clear", as: :sign_out
 
+  resources :boops, only: %i[index create]
   resources :gift_ideas, only: %i[update]
 
   resources :crank_users, only: %i[create new show], param: :code do
