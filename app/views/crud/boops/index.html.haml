@@ -1,0 +1,18 @@
+%h1 Boops
+
+%p= link_to "New Boop", new_crud_boop_path
+
+%p= link_to "Random Boop", crud_boop_path("random")
+
+%table
+  %thead
+    %tr
+      %th ID
+      %th.text-right Created At
+  %tbody
+    - boops.each do |boop|
+      %tr
+        %td= link_to boop.id, crud_boop_path(boop)
+        %td.text-right= boop.created_at.to_fs
+
+= paginate boops

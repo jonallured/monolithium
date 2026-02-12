@@ -1,0 +1,9 @@
+%h1 Boop #{boop.id}
+
+%p= link_to "Boop List", crud_boops_path
+
+%p= link_to "Edit Boop", edit_crud_boop_path(boop)
+
+%p= link_to "Delete Boop", crud_boop_path(boop), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }
+
+= render partial: "attrs_table", locals: { attrs: boop.table_attrs }

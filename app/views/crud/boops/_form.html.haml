@@ -1,0 +1,5 @@
+= form_with model: [:crud, boop] do |form|
+  = form.text_field :number, placeholder: "number"
+  = form.text_field :display_type, placeholder: "display_type"
+  = form.datetime_local_field :dismissed_at, placeholder: "dismissed at"
+  = form.button button_label

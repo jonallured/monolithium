@@ -1,0 +1,5 @@
+%h1 Edit Boop #{boop.id}
+
+%p= link_to "Show Boop", crud_boop_path(boop)
+
+= render "form", boop: boop, button_label: "update"
