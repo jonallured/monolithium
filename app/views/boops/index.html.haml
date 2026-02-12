@@ -1,0 +1,66 @@
+%h1 BOOP!
+
+%p
+  Imagine reaching through time and space and making contact. From wherever you
+  are to where I am. Real world impact. A Boop starts over there and then lands
+  in my office, #{link_to "shown on a display", "https://lametric.com/en-US/time/overview"}
+  for me to see and dismiss with the press of a button.
+
+%p
+  Pick an icon and then click the button to send me a Boop. Some Boops are
+  spooky, some are fun. Others are straight from the heart. There is no wrong
+  way to Boop.
+
+= form_with model: boop do |form|
+  %div#boop_icons.flex
+    = form.label :display_type, value: "smile" do
+      = form.radio_button :display_type, "smile", checked: true, class: "hidden"
+      = image_tag "/boop_icons/smile.png", class: "m-0"
+    = form.label :display_type, value: "skull" do
+      = form.radio_button :display_type, "skull", class: "hidden"
+      = image_tag "/boop_icons/skull.png", class: "m-0"
+    = form.label :display_type, value: "heart" do
+      = form.radio_button :display_type, "heart", class: "hidden"
+      = image_tag "/boop_icons/heart.png", class: "m-0"
+    = form.label :display_type, value: "beer" do
+      = form.radio_button :display_type, "beer", class: "hidden"
+      = image_tag "/boop_icons/beer.png", class: "m-0"
+  = form.hidden_field :number, value: Boop.next_number
+  = form.button "send boop"
+
+%h2 Some Boop Facts
+
+%table
+  %thead
+    %tr
+      %th Stat
+      %th.text-right Value
+  %tbody
+    %tr
+      %td Total Boop Count
+      %td.text-right= Boop.count
+    %tr
+      %td Oldest Known Boop
+      %td.text-right= Boop.oldest.created_at.to_fs
+    %tr
+      %td Current Boop Latency
+      %td.text-right #{Boop.latency} seconds
+
+%h2 Pending Boops
+
+- if pending_boops.none?
+  %p There are currently no pending Boops. Sieze the moment, this is your best chance.
+
+- else
+  %table
+    %thead
+      %tr
+        %th Number
+        %th Icon Type
+        %th.text-right Created At
+    %tbody
+      - pending_boops.each do |boop|
+        %tr
+          %td= boop.number
+          %td= boop.display_type
+          %td.text-right= boop.created_at.to_fs
