@@ -93,8 +93,7 @@ describe "POST /api/v1/boops" do
     let(:params) do
       {
         boop: {
-          display_type: "skull",
-          number: 1
+          display_type: "skull"
         }
       }
     end

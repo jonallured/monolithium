@@ -1,6 +1,32 @@
 require "rails_helper"
 
 describe Boop do
+  describe "validation" do
+    context "without required attrs" do
+      it "is invalid" do
+        boop = Boop.new
+        expect(boop).to_not be_valid
+      end
+    end
+
+    context "with required attrs" do
+      it "is valid" do
+        boop = Boop.new(display_type: "skull", number: 1)
+        expect(boop).to be_valid
+      end
+    end
+
+    context "with no number" do
+      it "finds the next number and is valid" do
+        FactoryBot.create(:boop, number: 1)
+        boop = Boop.new(display_type: "skull")
+        boop.validate
+        expect(boop.number).to eq 2
+        expect(boop).to be_valid
+      end
+    end
+  end
+
   describe ".next" do
     context "with no records" do
       it "returns nil" do

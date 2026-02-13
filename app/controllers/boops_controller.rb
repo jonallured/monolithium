@@ -5,7 +5,6 @@ class BoopsController < ApplicationController
   expose(:pending_boops) { Boop.pending }
 
   def create
-    boop.number = Boop.next_number
     if boop.save
       flash.notice = "Boop created!"
     else

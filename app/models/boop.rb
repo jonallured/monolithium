@@ -4,6 +4,8 @@ class Boop < ApplicationRecord
   validates :display_type, inclusion: {in: DISPLAY_TYPES}
   validates :number, presence: true
 
+  before_validation :maybe_set_number
+
   def self.latency
     next_boop = Boop.next
     return 0 unless next_boop
@@ -46,5 +48,13 @@ class Boop < ApplicationRecord
 
   def dismiss!
     update(dismissed_at: Time.now)
+  end
+
+  private
+
+  def maybe_set_number
+    return if number
+
+    self.number = Boop.next_number
   end
 end
