@@ -14,7 +14,7 @@ describe "Admin creates boop" do
   scenario "create with errors" do
     visit "/crud/boops/new"
     click_on "create"
-    expect(page).to have_css ".alert", text: "Display type can't be blank and Number can't be blank"
+    expect(page).to have_css ".alert", text: "Display type is not included in the list and Number can't be blank"
     expect(page).to have_current_path new_crud_boop_path
   end
 
