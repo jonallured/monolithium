@@ -1,0 +1,9 @@
+json.call(
+  boop,
+  :created_at,
+  :dismissed_at,
+  :display_type,
+  :id,
+  :number,
+  :updated_at
+)
