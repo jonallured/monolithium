@@ -27,6 +27,29 @@
       = image_tag "/boop_icons/beer.png", class: "m-0"
   = form.button "send boop"
 
+%p If you are curious you can read the blog post #{link_to "Making Time for Boops", "https://www.jonallured.com/posts/2026/02/13/making-time-for-boops.html"} to learn more about how this all works.
+
+%h2 Alternate Boop Methods
+
+%p You might be wondering if there are other ways you can send me a Boop and if you are then you are in luck! My recomendation is to use #{link_to "httpie", "https://httpie.io"} like so:
+
+%pre.text-off-black
+  %code
+    $ http https://app.jonallured.com/api/v1/boops display_type=robot
+
+%p If that's not enough you could also install #{link_to "mli", "https://github.com/jonallured/mli"} and then either use it from the command line or from Ruby directly:
+
+%pre.text-off-black
+  %code
+    $ mli boop create --display-type robot
+
+%pre.text-off-black
+  %code
+    require "mli"
+    Mli::Boop.create({display_type: "robot"})
+
+%p There are a lot of ways to send me a Boop!
+
 %h2 Some Boop Facts
 
 %table
