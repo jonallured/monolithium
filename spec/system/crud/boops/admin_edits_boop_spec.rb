@@ -17,20 +17,20 @@ describe "Admin edits boop" do
     visit "/crud/boops/#{boop.id}/edit"
     fill_in "display_type", with: ""
     click_on "update"
-    expect(page).to have_css ".alert", text: "Display type can't be blank"
+    expect(page).to have_css ".alert", text: "Display type is not included in the list"
   end
 
   scenario "edit successfully" do
     boop = FactoryBot.create(
       :boop,
-      display_type: "skulk"
+      display_type: "skull"
     )
     visit "/crud/boops/#{boop.id}/edit"
-    fill_in "display_type", with: "skull"
+    fill_in "display_type", with: "smile"
     click_on "update"
 
     expect(page).to have_css ".notice", text: "Boop updated"
     expect(page).to have_current_path crud_boop_path(boop)
-    expect(page).to have_css "td", text: "skull"
+    expect(page).to have_css "td", text: "smile"
   end
 end

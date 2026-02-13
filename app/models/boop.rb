@@ -1,5 +1,7 @@
 class Boop < ApplicationRecord
-  validates :display_type, presence: true
+  DISPLAY_TYPES = %w[beer heart skull smile]
+
+  validates :display_type, inclusion: {in: DISPLAY_TYPES}
   validates :number, presence: true
 
   def self.latency
