@@ -1,5 +1,5 @@
 class Boop < ApplicationRecord
-  DISPLAY_TYPES = %w[beer heart skull smile]
+  DISPLAY_TYPES = %w[beer heart monster robot skull smile]
 
   validates :display_type, inclusion: {in: DISPLAY_TYPES}
   validates :number, presence: true

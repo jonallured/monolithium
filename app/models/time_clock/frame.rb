@@ -4,6 +4,8 @@ module TimeClock
       "beer" => 613,
       "heart" => 794,
       "monolithium" => 71783,
+      "monster" => 2761,
+      "robot" => 59018,
       "skull" => 148,
       "smile" => 4907
     }
