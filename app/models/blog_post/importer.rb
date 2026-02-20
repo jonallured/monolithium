@@ -2,6 +2,14 @@ class BlogPost::Importer
   FEED_URL = "https://www.jonallured.com/atom.xml"
   URL_PATTERN = /\/(\d\d\d\d)\/(\d\d)\/(\d\d)\/.*.html/
 
+  def self.backfill
+    response = Faraday.get("https://jonallured-public.s3.amazonaws.com/blog_post_urls.txt")
+    urls = response.body.split
+    existing_urls = BlogPost.pluck(:url)
+    new_urls = urls - existing_urls
+    new_urls.each { |url| create_from(url) }
+  end
+
   def self.add_new
     response = Faraday.get(FEED_URL)
     doc = Nokogiri::XML(response.body)
