@@ -31,3 +31,6 @@ production:
   produce_daily_packet_job:
     class: ProduceDailyPacketJob
     schedule: every day at 7am in UTC
+  import_new_blog_posts_job:
+    class: ImportNewBlogPostsJob
+    schedule: every 10 minutes
