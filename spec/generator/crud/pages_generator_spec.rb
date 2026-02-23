@@ -28,6 +28,7 @@ describe Crud::PagesGenerator, type: :generator do
       actual_filename = actual_path.gsub("tmp/generators", "")
       expected_filename = expected_path.gsub("spec/fixtures/generators", "")
       expect(actual_filename).to eq expected_filename
+      # bundle exec rake update_snapshots
       expect(FileUtils.compare_file(actual_path, expected_path)).to eq true
     end
   end
