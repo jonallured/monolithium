@@ -107,6 +107,24 @@
     @apply outline-none;
   }
 
+  label {
+    @apply text-base;
+    @apply w-80;
+  }
+
+  input[type='checkbox'] {
+    @apply border-0;
+    @apply bg-purple;
+  }
+
+  input:hover[type='checkbox'],
+  input:focus[type='checkbox'] {
+    @apply border-0;
+    @apply bg-pink;
+    @apply ring-0;
+    @apply ring-offset-0;
+  }
+
   form {
     @apply flex;
     @apply flex-col;
