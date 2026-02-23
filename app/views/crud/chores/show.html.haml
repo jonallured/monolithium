@@ -1,0 +1,9 @@
+%h1 Chore #{chore.id}
+
+%p= link_to "Chore List", crud_chores_path
+
+%p= link_to "Edit Chore", edit_crud_chore_path(chore)
+
+%p= link_to "Delete Chore", crud_chore_path(chore), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }
+
+= render partial: "attrs_table", locals: { attrs: chore.table_attrs }

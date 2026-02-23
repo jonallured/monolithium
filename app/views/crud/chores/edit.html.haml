@@ -1,0 +1,5 @@
+%h1 Edit Chore #{chore.id}
+
+%p= link_to "Show Chore", crud_chore_path(chore)
+
+= render "form", chore: chore, button_label: "update"

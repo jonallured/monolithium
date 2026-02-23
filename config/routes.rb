@@ -48,6 +48,7 @@ Rails.application.routes.draw do
     resources :apache_log_items
     resources :books
     resources :boops
+    resources :chores
     resources :csv_uploads
     resources :financial_accounts do
       resources :financial_statements

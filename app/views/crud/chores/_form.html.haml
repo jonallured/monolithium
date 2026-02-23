@@ -1,0 +1,15 @@
+= form_with model: [:crud, chore] do |form|
+  = form.text_field :title, placeholder: "title"
+
+  = form.select :assignee, ["jon", "jess", "jack"]
+
+  = form.label :due_days, value: "all" do
+    = form.checkbox :due_days, { checked: chore.daily?, include_hidden: false, multiple: true}, "all"
+    all
+
+  - Chore::DAY_NAMES.each do |day_name|
+    = form.label :due_days, value: day_name do
+      = form.checkbox :due_days, { checked: !chore.daily? && chore.due_on?(day_name), include_hidden: false, multiple: true}, day_name
+      #{day_name}
+
+  = form.button button_label
