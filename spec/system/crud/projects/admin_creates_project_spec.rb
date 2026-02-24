@@ -35,7 +35,7 @@ describe "Admin creates project" do
     expect(actual_values).to eq(
       [
         ["Name", "Yet Another Ruby Gem"],
-        ["Touched At", ""],
+        ["Touched At", "NIL"],
         ["Created At", project.created_at.to_fs],
         ["Updated At", project.updated_at.to_fs]
       ]

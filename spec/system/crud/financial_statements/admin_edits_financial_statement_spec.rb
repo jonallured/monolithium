@@ -34,6 +34,6 @@ describe "Admin edits financial statement" do
 
     expect(page).to have_css ".notice", text: "Financial Statement updated"
     expect(page).to have_current_path crud_financial_account_financial_statement_path(financial_account, financial_statement)
-    expect(page).to have_css "td", text: "77777"
+    expect(page).to have_css "td", text: "77,777"
   end
 end

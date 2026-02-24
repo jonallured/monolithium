@@ -23,9 +23,9 @@ class Book < ApplicationRecord
       ["Title", title],
       ["Pages", pages],
       ["Format", format],
-      ["Finished On", finished_on.to_fs],
-      ["Created At", created_at.to_fs],
-      ["Updated At", updated_at.to_fs]
+      ["Finished On", finished_on],
+      ["Created At", created_at],
+      ["Updated At", updated_at]
     ]
   end
 end

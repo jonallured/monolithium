@@ -20,9 +20,9 @@ class WarmFuzzy < ApplicationRecord
       ["Title", title],
       ["Author", author],
       ["Body", body],
-      ["Received At", received_at.to_fs],
-      ["Created At", created_at.to_fs],
-      ["Updated At", updated_at.to_fs]
+      ["Received At", received_at],
+      ["Created At", created_at],
+      ["Updated At", updated_at]
     ]
   end
 end

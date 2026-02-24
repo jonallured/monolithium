@@ -37,7 +37,7 @@ describe "Admin creates boop" do
       [
         ["Number", "1"],
         ["Display Type", "skull"],
-        ["Dismissed At", ""],
+        ["Dismissed At", "NIL"],
         ["Created At", boop.created_at.to_fs],
         ["Updated At", boop.updated_at.to_fs]
       ]

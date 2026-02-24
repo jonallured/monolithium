@@ -20,11 +20,11 @@ class FinancialStatement < ApplicationRecord
 
   def table_attrs
     [
-      ["Period Start On", period_start_on.to_fs],
+      ["Period Start On", period_start_on],
       ["Starting Amount Cents", starting_amount_cents],
       ["Ending Amount Cents", ending_amount_cents],
-      ["Created At", created_at.to_fs],
-      ["Updated At", updated_at.to_fs]
+      ["Created At", created_at],
+      ["Updated At", updated_at]
     ]
   end
 end

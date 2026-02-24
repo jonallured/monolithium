@@ -39,8 +39,8 @@ class WebhookSender < ApplicationRecord
     [
       ["Name", name],
       ["Parser", parser],
-      ["Created At", created_at.to_fs],
-      ["Updated At", updated_at.to_fs]
+      ["Created At", created_at],
+      ["Updated At", updated_at]
     ]
   end
 end

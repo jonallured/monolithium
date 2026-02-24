@@ -32,8 +32,8 @@ describe "Admin views financial statement" do
     expect(actual_values).to eq(
       [
         ["Period Start On", financial_statement.period_start_on.to_fs],
-        ["Starting Amount Cents", "40000"],
-        ["Ending Amount Cents", "20000"],
+        ["Starting Amount Cents", "40,000"],
+        ["Ending Amount Cents", "20,000"],
         ["Created At", financial_account.created_at.to_fs],
         ["Updated At", financial_account.updated_at.to_fs]
       ]

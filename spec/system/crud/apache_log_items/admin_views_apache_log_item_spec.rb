@@ -53,7 +53,7 @@ describe "Admin views apache log item" do
         ["Remote Logname", "-"],
         ["Remote User", "-"],
         ["Request Method", "GET"],
-        ["Request Params", ""],
+        ["Request Params", "NIL"],
         ["Request Path", "/index.html"],
         ["Request Protocol", "HTTP1.1"],
         ["Request Referrer", "https://jon.zone/post-1"],

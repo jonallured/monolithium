@@ -39,8 +39,8 @@ describe "Admin creates book" do
     expect(actual_values).to eq(
       [
         ["ISBN", "abc-123"],
-        ["Title", ""],
-        ["Pages", ""],
+        ["Title", "NIL"],
+        ["Pages", "NIL"],
         ["Format", "print"],
         ["Finished On", "01/01/2000"],
         ["Created At", book.created_at.to_fs],
