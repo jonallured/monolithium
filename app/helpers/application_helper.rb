@@ -1,4 +1,18 @@
 module ApplicationHelper
+  def attr_table_value(value)
+    if value.nil?
+      "NIL"
+    elsif value.is_a?(Date)
+      value.to_fs
+    elsif value.is_a?(Time)
+      value.to_fs
+    elsif value.is_a?(Integer)
+      value.to_fs(:delimited)
+    else
+      value
+    end
+  end
+
   def book_format_options
     placeholder_option = [["please select", ""]]
 

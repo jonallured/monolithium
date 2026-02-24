@@ -21,9 +21,9 @@ class Sneaker < ApplicationRecord
       ["Name", name],
       ["Details", details],
       ["Amount Cents", amount_cents],
-      ["Ordered On", ordered_on.to_fs],
-      ["Created At", created_at.to_fs],
-      ["Updated At", updated_at.to_fs]
+      ["Ordered On", ordered_on],
+      ["Created At", created_at],
+      ["Updated At", updated_at]
     ]
   end
 end

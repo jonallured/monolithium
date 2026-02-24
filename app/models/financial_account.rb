@@ -26,8 +26,8 @@ class FinancialAccount < ApplicationRecord
     [
       ["Name", name],
       ["Category", category],
-      ["Created At", created_at.to_fs],
-      ["Updated At", updated_at.to_fs]
+      ["Created At", created_at],
+      ["Updated At", updated_at]
     ]
   end
 end

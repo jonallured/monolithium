@@ -29,7 +29,7 @@ class ApacheLogItem < ApplicationRecord
 
   def table_attrs
     [
-      ["ApacheLogFile ID", apache_log_file_id],
+      ["ApacheLogFile ID", apache_log_file_id.to_s],
       ["Browser Name", browser_name],
       ["Line Number", line_number],
       ["Port", port],
@@ -44,12 +44,12 @@ class ApacheLogItem < ApplicationRecord
       ["Request Protocol", request_protocol],
       ["Request Referrer", request_referrer],
       ["Request User Agent", request_user_agent],
-      ["Requested At", requested_at&.to_fs],
+      ["Requested At", requested_at],
       ["Response Size", response_size],
       ["Response Status", response_status],
       ["Website", website],
-      ["Created At", created_at.to_fs],
-      ["Updated At", updated_at.to_fs]
+      ["Created At", created_at],
+      ["Updated At", updated_at]
     ]
   end
 end

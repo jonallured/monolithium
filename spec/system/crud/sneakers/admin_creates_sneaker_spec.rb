@@ -39,7 +39,7 @@ describe "Admin creates sneaker" do
       [
         ["Name", "Air Jordan 1"],
         ["Details", "Style abc123"],
-        ["Amount Cents", "10375"],
+        ["Amount Cents", "10,375"],
         ["Ordered On", "01/01/2000"],
         ["Created At", sneaker.created_at.to_fs],
         ["Updated At", sneaker.updated_at.to_fs]
