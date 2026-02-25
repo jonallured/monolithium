@@ -202,6 +202,7 @@ GEM
     kaminari-core (1.2.2)
     language_server-protocol (3.17.0.5)
     lint_roller (1.1.0)
+    local_time (3.0.3)
     logger (1.7.0)
     loofah (2.25.0)
       crass (~> 1.0.2)
@@ -507,6 +508,7 @@ DEPENDENCIES
   jbuilder
   jwt
   kaminari
+  local_time
   mission_control-jobs
   ostruct
   pdf-inspector
