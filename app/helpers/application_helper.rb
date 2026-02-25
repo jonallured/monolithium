@@ -13,6 +13,10 @@ module ApplicationHelper
     end
   end
 
+  def in_tz(time)
+    local_time(time, Time::DATE_FORMATS[:default])
+  end
+
   def book_format_options
     placeholder_option = [["please select", ""]]
 
