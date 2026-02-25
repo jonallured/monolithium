@@ -13,6 +13,10 @@ module ApplicationHelper
     end
   end
 
+  def in_tz(time)
+    time_tag time, time.to_fs, data: {intz: false}
+  end
+
   def book_format_options
     placeholder_option = [["please select", ""]]
 
