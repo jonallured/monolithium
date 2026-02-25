@@ -13,6 +13,6 @@
     - apache_log_items.each do |apache_log_item|
       %tr
         %td= link_to apache_log_item.id, crud_apache_log_item_path(apache_log_item)
-        %td.text-right= apache_log_item.created_at.to_fs
+        %td.text-right= in_tz apache_log_item.created_at
 
 = paginate apache_log_items

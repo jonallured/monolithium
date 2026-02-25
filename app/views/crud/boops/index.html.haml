@@ -13,6 +13,6 @@
     - boops.each do |boop|
       %tr
         %td= link_to boop.id, crud_boop_path(boop)
-        %td.text-right= boop.created_at.to_fs
+        %td.text-right= in_tz boop.created_at
 
 = paginate boops
