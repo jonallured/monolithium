@@ -17,6 +17,6 @@
         %td= link_to apache_log_file.id, crud_apache_log_file_path(apache_log_file)
         %td= apache_log_file.dateext
         %td= apache_log_file.state
-        %td.text-right= apache_log_file.created_at.to_fs
+        %td.text-right= in_tz apache_log_file.created_at
 
 = paginate apache_log_files

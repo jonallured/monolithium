@@ -15,6 +15,6 @@
       %tr
         %td= link_to sneaker.id, crud_sneaker_path(sneaker)
         %td= sneaker.name
-        %td.text-right= sneaker.created_at.to_fs
+        %td.text-right= in_tz sneaker.created_at
 
 = paginate sneakers

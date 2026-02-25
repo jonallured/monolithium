@@ -17,6 +17,6 @@
       %tr
         %td= link_to financial_statement.id, crud_financial_account_financial_statement_path(financial_account, financial_statement)
         %td= financial_statement.period_start_on.to_fs
-        %td.text-right= financial_statement.created_at.to_fs
+        %td.text-right= in_tz financial_statement.created_at
 
 = paginate financial_statements

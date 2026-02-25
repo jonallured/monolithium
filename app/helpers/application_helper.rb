@@ -5,7 +5,7 @@ module ApplicationHelper
     elsif value.is_a?(Date)
       value.to_fs
     elsif value.is_a?(Time)
-      value.to_fs
+      in_tz(value)
     elsif value.is_a?(Integer)
       value.to_fs(:delimited)
     else

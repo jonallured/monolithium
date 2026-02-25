@@ -15,6 +15,6 @@
       %tr
         %td= link_to post_bin_request.id, crud_post_bin_request_path(post_bin_request)
         %td= post_bin_request.body.first(100)
-        %td.text-right= post_bin_request.created_at.to_fs
+        %td.text-right= in_tz post_bin_request.created_at
 
 = paginate post_bin_requests

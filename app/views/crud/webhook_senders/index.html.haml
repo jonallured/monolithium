@@ -15,6 +15,6 @@
       %tr
         %td= link_to webhook_sender.id, crud_webhook_sender_path(webhook_sender)
         %td= webhook_sender.name
-        %td.text-right= webhook_sender.created_at.to_fs
+        %td.text-right= in_tz webhook_sender.created_at
 
 = paginate webhook_senders

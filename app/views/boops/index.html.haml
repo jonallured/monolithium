@@ -63,7 +63,7 @@
       %td.text-right= Boop.count
     %tr
       %td Oldest Known Boop
-      %td.text-right= Boop.oldest.created_at.to_fs
+      %td.text-right= in_tz Boop.oldest.created_at
     %tr
       %td Current Boop Latency
       %td.text-right #{Boop.latency} seconds
@@ -85,4 +85,4 @@
         %tr
           %td= boop.number
           %td= boop.display_type
-          %td.text-right= boop.created_at.to_fs
+          %td.text-right= in_tz boop.created_at

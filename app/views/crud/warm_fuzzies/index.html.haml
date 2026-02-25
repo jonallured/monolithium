@@ -15,6 +15,6 @@
       %tr
         %td= link_to warm_fuzzy.id, crud_warm_fuzzy_path(warm_fuzzy)
         %td= warm_fuzzy.title
-        %td.text-right= warm_fuzzy.created_at.to_fs
+        %td.text-right= in_tz warm_fuzzy.created_at
 
 = paginate warm_fuzzies
