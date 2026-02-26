@@ -2,4 +2,4 @@
 import "@hotwired/turbo-rails"
 import "controllers"
 import { intz } from "./intz"
-document.addEventListener("DOMContentLoaded", intz)
+document.addEventListener("turbo:load", intz)
