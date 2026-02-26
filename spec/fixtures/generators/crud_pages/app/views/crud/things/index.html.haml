@@ -13,6 +13,6 @@
     - things.each do |thing|
       %tr
         %td= link_to thing.id, crud_thing_path(thing)
-        %td.text-right= thing.created_at.to_fs
+        %td.text-right= in_tz thing.created_at
 
 = paginate things
