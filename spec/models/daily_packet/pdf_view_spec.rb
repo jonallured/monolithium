@@ -36,13 +36,7 @@ describe DailyPacket::PdfView do
           "1.",
           "2.",
           "3.",
-          "CHORE LIST",
-          "unload dishwasher",
-          "defrost meat",
-          "refill soap dispensers",
-          "do hand wash",
-          "wipe down kitchen",
-          "run dishwasher"
+          "CHORE LIST"
         ])
 
         expect(page_three_strings).to eq([
@@ -74,56 +68,12 @@ describe DailyPacket::PdfView do
   end
 
   describe "chore list section" do
-    context "on a Sunday" do
-      let(:built_on) { Date.parse("2024-11-03") }
-
-      it "renders the Sunday-specific chore" do
-        expect(page_two_strings).to include "put out garbage cans"
-      end
-    end
-
-    context "on a Tuesday" do
-      let(:built_on) { Date.parse("2024-11-05") }
-
-      it "renders the Tuesday-specific chore" do
-        expect(page_two_strings).to include "wash dog bowls"
-        expect(page_two_strings).to include "wash bathroom cups"
-      end
-    end
-
-    context "on a Wednesday" do
-      let(:built_on) { Date.parse("2024-11-06") }
-
-      it "renders the Wednesday-specific chore" do
-        expect(page_two_strings).to include "collect and wash towels"
-      end
-    end
-
-    context "on a Saturday in the fall" do
+    context "with a chore" do
       let(:built_on) { Date.parse("2024-11-09") }
 
-      it "renders the Weekend-specific chore but not the summertime ones" do
-        expect(page_two_strings).to include "collect laundry"
-
-        expect(page_two_strings).to_not include(
-          "poop patrol",
-          "mow front",
-          "mow back",
-          "mow way back"
-        )
-      end
-    end
-
-    context "on a Saturday in the summer" do
-      let(:built_on) { Date.parse("2024-07-13") }
-
-      it "renders the summertime Weekend-specific chores" do
-        expect(page_two_strings).to include(
-          "poop patrol",
-          "mow front",
-          "mow back",
-          "mow way back"
-        )
+      it "renders that chore title" do
+        FactoryBot.create(:chore, assignee: "jon", due_days: [built_on.wday], title: "Clean Up")
+        expect(page_two_strings).to include "clean up"
       end
     end
   end
