@@ -49,4 +49,89 @@ describe DailyPacket do
       end
     end
   end
+
+  describe "#chore_list" do
+    context "with no matching chores" do
+      it "returns an empty array" do
+        built_on = Date.parse("2007-07-07")
+
+        FactoryBot.create(
+          :chore,
+          assignee: "jon",
+          due_days: [built_on.wday - 1],
+          title: "Clean Up"
+        )
+
+        daily_packet = FactoryBot.create(
+          :daily_packet,
+          built_on: built_on
+        )
+
+        expect(daily_packet.chore_list).to eq []
+      end
+    end
+
+    context "with a valid due_day and a matching chore" do
+      it "returns the title for that chore" do
+        built_on = Date.parse("2007-07-07")
+
+        FactoryBot.create(
+          :chore,
+          assignee: "jon",
+          due_days: [built_on.wday],
+          title: "Clean Up"
+        )
+
+        daily_packet = FactoryBot.create(
+          :daily_packet,
+          built_on: built_on
+        )
+
+        expect(daily_packet.chore_list).to eq ["clean up"]
+      end
+    end
+
+    context "with a valid due_day and some matching chores" do
+      it "returns the titles sorted by oldest first" do
+        built_on = Date.parse("2007-07-07")
+
+        FactoryBot.create(
+          :chore,
+          assignee: "jon",
+          created_at: 1.week.ago,
+          due_days: [built_on.wday],
+          title: "Middlest Chore"
+        )
+
+        FactoryBot.create(
+          :chore,
+          assignee: "jon",
+          created_at: 1.day.ago,
+          due_days: [built_on.wday],
+          title: "Newest Chore"
+        )
+
+        FactoryBot.create(
+          :chore,
+          assignee: "jon",
+          created_at: 1.month.ago,
+          due_days: [built_on.wday],
+          title: "Oldest Chore"
+        )
+
+        daily_packet = FactoryBot.create(
+          :daily_packet,
+          built_on: built_on
+        )
+
+        expect(daily_packet.chore_list).to eq(
+          [
+            "oldest chore",
+            "middlest chore",
+            "newest chore"
+          ]
+        )
+      end
+    end
+  end
 end

@@ -38,28 +38,12 @@ class DailyPacket < ApplicationRecord
   end
 
   def chore_list
-    chores = []
-    chores << "unload dishwasher"
-    chores << "collect laundry" if built_on_weekend?
-    chores << "collect and wash towels" if built_on_wednesday?
-    chores << "defrost meat"
+    chores = Chore
+      .where(assignee: "jon")
+      .where("? = ANY(due_days)", built_on.wday)
+      .order(created_at: :asc)
 
-    if built_on_weekend? && built_during_summer?
-      chores << "poop patrol"
-      chores << "mow front"
-      chores << "mow back"
-      chores << "mow way back"
-    end
-
-    chores << "put out garbage cans" if built_on_sunday?
-    chores << "refill soap dispensers"
-    chores << "do hand wash"
-    chores << "wipe down kitchen"
-    chores << "wash dog bowls" if built_on_tuesday?
-    chores << "wash bathroom cups" if built_on_tuesday?
-    chores << "run dishwasher"
-
-    chores
+    chores.pluck(:title).map(&:downcase)
   end
 
   def start_list
@@ -78,23 +62,7 @@ class DailyPacket < ApplicationRecord
     ]
   end
 
-  def built_on_tuesday?
-    built_on.tuesday?
-  end
-
-  def built_on_wednesday?
-    built_on.wednesday?
-  end
-
-  def built_on_sunday?
-    built_on.sunday?
-  end
-
   def built_on_weekend?
     built_on.saturday? || built_on.sunday?
-  end
-
-  def built_during_summer?
-    (4..10).cover?(built_on.month)
   end
 end
