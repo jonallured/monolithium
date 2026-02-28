@@ -8,11 +8,15 @@
   %thead
     %tr
       %th ID
+      %th Assignee
+      %th Title
       %th.text-right Created At
   %tbody
     - chores.each do |chore|
       %tr
         %td= link_to chore.id, crud_chore_path(chore)
+        %td= chore.assignee
+        %td= chore.title
         %td.text-right= in_tz chore.created_at
 
 = paginate chores
