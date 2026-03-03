@@ -32,6 +32,7 @@ gem "solid_queue"
 gem "sprockets-rails"
 gem "stimulus-rails"
 gem "tailwindcss-rails", "~> 3.0"
+gem "tinysky"
 gem "turbo-rails"
 
 group :development do
