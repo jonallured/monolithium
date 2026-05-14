@@ -1,0 +1,5 @@
+%h1 Edit Training Day #{training_day.id}
+
+%p= link_to "Show Training Day", crud_training_day_path(training_day)
+
+= render "form", training_day: training_day, button_label: "update"

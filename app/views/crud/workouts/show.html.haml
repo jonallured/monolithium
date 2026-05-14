@@ -1,0 +1,9 @@
+%h1 Workout #{workout.id}
+
+%p= link_to "Workout List", crud_workouts_path
+
+%p= link_to "Edit Workout", edit_crud_workout_path(workout)
+
+%p= link_to "Delete Workout", crud_workout_path(workout), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }
+
+= render partial: "attrs_table", locals: { attrs: workout.table_attrs }

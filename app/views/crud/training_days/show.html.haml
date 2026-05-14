@@ -1,0 +1,9 @@
+%h1 Training Day #{training_day.id}
+
+%p= link_to "Training Day List", crud_training_days_path
+
+%p= link_to "Edit Training Day", edit_crud_training_day_path(training_day)
+
+%p= link_to "Delete Training Day", crud_training_day_path(training_day), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }
+
+= render partial: "attrs_table", locals: { attrs: training_day.table_attrs }

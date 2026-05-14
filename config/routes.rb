@@ -58,8 +58,11 @@ Rails.application.routes.draw do
     resources :projects
     resources :raw_hooks
     resources :sneakers
+    resources :training_activities
+    resources :training_days
     resources :warm_fuzzies
     resources :webhook_senders
+    resources :workouts
   end
 
   namespace :api, defaults: {format: :json} do

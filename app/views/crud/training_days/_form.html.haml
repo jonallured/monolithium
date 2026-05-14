@@ -1,0 +1,6 @@
+= form_with model: [:crud, training_day] do |form|
+  = form.date_field :date, placeholder: "date"
+  = form.select :intensity, training_day_intensity_options, selected: training_day.intensity
+  = form.select :with_coach, training_day_with_coach_options, selected: training_day.with_coach
+  = form.datetime_local_field :completed_at, placeholder: "completed at"
+  = form.button button_label

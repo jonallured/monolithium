@@ -1,0 +1,18 @@
+%h1 Workouts
+
+%p= link_to "New Workout", new_crud_workout_path
+
+%p= link_to "Random Workout", crud_workout_path("random")
+
+%table
+  %thead
+    %tr
+      %th ID
+      %th.text-right Created At
+  %tbody
+    - workouts.each do |workout|
+      %tr
+        %td= link_to workout.id, crud_workout_path(workout)
+        %td.text-right= in_tz workout.created_at
+
+= paginate workouts

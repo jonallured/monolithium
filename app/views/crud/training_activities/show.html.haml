@@ -1,0 +1,9 @@
+%h1 Training Activity #{training_activity.id}
+
+%p= link_to "Training Activity List", crud_training_activities_path
+
+%p= link_to "Edit Training Activity", edit_crud_training_activity_path(training_activity)
+
+%p= link_to "Delete Training Activity", crud_training_activity_path(training_activity), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }
+
+= render partial: "attrs_table", locals: { attrs: training_activity.table_attrs }
