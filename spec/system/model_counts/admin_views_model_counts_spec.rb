@@ -32,9 +32,12 @@ describe "Admin views model counts" do
       "Project 0",
       "RawHook 0",
       "Sneaker 0",
+      "TrainingActivity 0",
+      "TrainingDay 0",
       "WarmFuzzy 0",
       "WebhookSender 0",
-      "WorkDay 0"
+      "WorkDay 0",
+      "Workout 0"
     ]
 
     expect(actual_rows).to match_array(expected_rows)
@@ -53,6 +56,12 @@ describe "Admin views model counts" do
     FactoryBot.create(:project)
     FactoryBot.create(:sneaker)
     FactoryBot.create(:work_day)
+
+    FactoryBot.create(
+      :training_activity,
+      training_day: FactoryBot.create(:training_day),
+      workout: FactoryBot.create(:workout)
+    )
 
     FactoryBot.create(
       :crank_count,
@@ -109,13 +118,16 @@ describe "Admin views model counts" do
       "Project 1",
       "RawHook 1",
       "Sneaker 1",
+      "TrainingActivity 1",
+      "TrainingDay 1",
       "WarmFuzzy 1",
       "WebhookSender 1",
-      "WorkDay 1"
+      "WorkDay 1",
+      "Workout 1"
     ]
 
     expect(actual_rows).to match_array(expected_rows)
 
-    expect(page.find("tfoot tr").text).to eq "Total 26"
+    expect(page.find("tfoot tr").text).to eq "Total 29"
   end
 end
