@@ -20,6 +20,8 @@
 %p= link_to "Live Post Bin", post_bin_path
 %p= link_to "Model Counts", model_counts_path
 %p= link_to "Project List", project_list_path
+%p= link_to "Training Calendar", training_calendar_path(TrainingDay::CalendarReport.default_params)
+%p= link_to "Training Week", training_week_path(TrainingDay::WeekReport.default_params)
 %p= link_to "Today", today_path
 %p= link_to "Vanishing Box", vanishing_box_path
 

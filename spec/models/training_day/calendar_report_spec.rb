@@ -1,0 +1,32 @@
+require "rails_helper"
+
+describe TrainingDay::CalendarReport do
+  describe "#training_day_groups" do
+    context "with no matching TrainingDay records" do
+      it "returns an empty array" do
+        report = TrainingDay::CalendarReport.new(2026, 5)
+        expect(report.training_day_groups).to eq([])
+      end
+    end
+
+    context "with matching TrainingDay records" do
+      it "returns those matching records and filler" do
+        TrainingDay.populate(2026, 5)
+        report = TrainingDay::CalendarReport.new(2026, 5)
+
+        date_strings = report.training_day_groups.map do |training_day_group|
+          training_day_group.map { |training_day| training_day.date.to_fs }
+        end
+
+        expect(date_strings).to eq([
+          ["04/26/2026", "04/27/2026", "04/28/2026", "04/29/2026", "04/30/2026", "05/01/2026", "05/02/2026"],
+          ["05/03/2026", "05/04/2026", "05/05/2026", "05/06/2026", "05/07/2026", "05/08/2026", "05/09/2026"],
+          ["05/10/2026", "05/11/2026", "05/12/2026", "05/13/2026", "05/14/2026", "05/15/2026", "05/16/2026"],
+          ["05/17/2026", "05/18/2026", "05/19/2026", "05/20/2026", "05/21/2026", "05/22/2026", "05/23/2026"],
+          ["05/24/2026", "05/25/2026", "05/26/2026", "05/27/2026", "05/28/2026", "05/29/2026", "05/30/2026"],
+          ["05/31/2026", "06/01/2026", "06/02/2026", "06/03/2026", "06/04/2026", "06/05/2026", "06/06/2026"]
+        ])
+      end
+    end
+  end
+end

@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   get "reading-list/:year", to: "reading_list#index", as: :reading_list
   get "sneakers", to: "sneakers#index", as: :sneakers
   get "today", to: "today#show", as: :today
+  get "training/calendar/:year/:month", to: "training_calendar#index", as: "training_calendar"
+  get "training/week/:year/:number", to: "training_week#index", as: "training_week"
   get "wishlist", to: "wishlist#index"
   get "work_weeks/:target", to: "work_weeks#show", as: :work_week
 
@@ -38,6 +40,7 @@ Rails.application.routes.draw do
 
   resources :boops, only: %i[index create]
   resources :gift_ideas, only: %i[update]
+  resources :training_days, only: %i[create update]
 
   resources :crank_users, only: %i[create new show], param: :code do
     resources :crank_counts, only: %i[create new show]

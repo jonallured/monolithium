@@ -1,0 +1,38 @@
+- content_for :header do
+  %nav.flex.justify-between.items-center.py-6(class="max-w-[800px]")
+    %p.m-0= link_to "prev", training_week_path(week_report.prev_params)
+    %h1.m-0= week_report.title
+    %p.m-0= link_to "next", training_week_path(week_report.next_params)
+  %div.flex.justify-between.border-b-8.pb-6.border-dark-gray(class="max-w-[800px]")
+    - week_report.month_dates.each do |date|
+      %p.m-0= link_to date.strftime("%b"), training_calendar_path(TrainingDay::CalendarReport.params_for(date))
+
+%h1 Training Week
+
+%ul.list-none.m-0.p-0.grid.grid-cols-7(class="gap-[20px]")
+  - week_report.training_days.each do |training_day|
+    %li.m-0.p-0.bg-off-white.text-black(class="[aspect-ratio:1/1]")
+      %dl.m-0.py-1.px-3.flex.justify-between(class="#{week_color(training_day.outcome)} #{calendar_color(training_day.outcome)}")
+        %dt.m-0.font-normal(class="#{week_color(training_day.outcome)}")= training_day.summary
+        %dd.m-0.p-0= training_day.date.strftime("%m/%d")
+
+      %ul.list-none.m-0.py-1.px-3
+        - training_day.training_activities.each do |training_activity|
+          %li.m-0.p-0= training_activity.workout.title
+
+- week_report.training_days.each do |training_day|
+  %details
+    %summary= training_day.date.strftime("%A")
+
+    = form_with model: training_day do |form|
+      = form.select :intensity, training_day_intensity_options, selected: training_day.intensity
+      = form.select :with_coach, training_day_with_coach_options, selected: training_day.with_coach
+      = form.datetime_local_field :completed_at, placeholder: "completed at"
+
+      - training_day.training_activities.build
+      = form.fields_for :training_activities do |training_activity_form|
+        = training_activity_form.select :workout_id, workout_options, selected: training_activity_form.object&.workout_id
+        = training_activity_form.label :_destroy do
+          = training_activity_form.checkbox :_destroy
+          remove
+      = form.button "update"
