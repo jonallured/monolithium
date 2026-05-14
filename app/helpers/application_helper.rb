@@ -27,6 +27,26 @@ module ApplicationHelper
     placeholder_option + format_options
   end
 
+  def training_day_intensity_options
+    placeholder_option = [["please select", ""]]
+
+    intensity_options = TrainingDay::INTENSITIES.map do |intensity|
+      [intensity, intensity]
+    end
+
+    placeholder_option + intensity_options
+  end
+
+  def training_day_with_coach_options
+    placeholder_option = [["please select", ""]]
+
+    with_coach_options = [true, false].map do |with_coach|
+      [with_coach, with_coach]
+    end
+
+    placeholder_option + with_coach_options
+  end
+
   def last_week_path(work_week)
     target_date = work_week.target_date - 1.week
     target = TargetSlug.for(target_date)

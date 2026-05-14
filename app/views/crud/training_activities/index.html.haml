@@ -1,0 +1,18 @@
+%h1 Training Activities
+
+%p= link_to "New Training Activity", new_crud_training_activity_path
+
+%p= link_to "Random Training Activity", crud_training_activity_path("random")
+
+%table
+  %thead
+    %tr
+      %th ID
+      %th.text-right Created At
+  %tbody
+    - training_activities.each do |training_activity|
+      %tr
+        %td= link_to training_activity.id, crud_training_activity_path(training_activity)
+        %td.text-right= in_tz training_activity.created_at
+
+= paginate training_activities

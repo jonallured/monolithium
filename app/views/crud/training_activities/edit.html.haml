@@ -1,0 +1,5 @@
+%h1 Edit Training Activity #{training_activity.id}
+
+%p= link_to "Show Training Activity", crud_training_activity_path(training_activity)
+
+= render "form", training_activity: training_activity, button_label: "update"
