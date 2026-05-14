@@ -1,12 +1,43 @@
 module ApplicationHelper
-  def attr_table_value(value)
+  def workout_options
+    placeholder_option = [["please select", ""]]
+
+    title_options = Workout.all.map do |workout|
+      [workout.title, workout.id]
+    end
+
+    placeholder_option + title_options
+  end
+
+  def calendar_color(outcome)
+    map = {
+      filler: "bg-black",
+      going: "bg-dark-gray",
+      missed: "bg-white",
+      went: "bg-purple"
+    }
+
+    map[outcome]
+  end
+
+  def week_color(outcome)
+    map = {
+      going: "text-off-white",
+      missed: "text-black",
+      went: "text-off-white"
+    }
+
+    map[outcome]
+  end
+
+  def attr_table_value(key, value)
     if value.nil?
       "NIL"
     elsif value.is_a?(Date)
       value.to_fs
     elsif value.is_a?(Time)
       in_tz(value)
-    elsif value.is_a?(Integer)
+    elsif value.is_a?(Integer) && !key.ends_with?("ID")
       value.to_fs(:delimited)
     else
       value

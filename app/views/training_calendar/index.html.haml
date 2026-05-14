@@ -1,0 +1,22 @@
+- content_for :header do
+  %nav.flex.justify-between.items-center.py-6
+    %p.m-0= link_to "prev", training_calendar_path(calendar_report.prev_params)
+    %h1.m-0= calendar_report.title
+    %p.m-0= link_to "next", training_calendar_path(calendar_report.next_params)
+
+%h1 Training Calendar
+
+- if calendar_report.training_day_groups.any?
+  %ul.list-none.m-0.p-0(class="space-y-[20px]")
+    - calendar_report.training_day_groups.each do |training_day_group|
+      %li.m-0.p-0
+        %a.block{href: training_week_path(TrainingDay::WeekReport.params_for(training_day_group.first.date))}
+          %ul.list-none.m-0.p-0.grid.grid-cols-7(class="gap-[20px]")
+            - training_day_group.each do |training_day|
+              %li.m-0.p-0(class="[aspect-ratio:1/1] #{calendar_color(training_day.outcome)}" title="#{training_day.date.to_fs}")
+                %span.hidden= training_day.date.to_fs
+                %span.hidden= training_day.intensity
+- else
+  = form_with model: TrainingDay.new do |form|
+    = form.hidden_field :date, value: calendar_report.period_start
+    = form.button "populate"
