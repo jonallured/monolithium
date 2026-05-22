@@ -28,7 +28,8 @@ describe DailyPacket::PdfView do
           "7.7 pages/day",
           "Feedbin Stats",
           "unread: 9",
-          "oldest: 14 days ago"
+          "oldest: 14 days ago",
+          "November Workouts"
         ])
 
         expect(page_two_strings).to eq([

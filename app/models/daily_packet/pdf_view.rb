@@ -76,6 +76,28 @@ class DailyPacket::PdfView < ActiveRecord::AssociatedObject
       text "Feedbin Stats", style: :bold, size: 20
       text daily_packet.feedbin_unread_phrase, size: 12
       text daily_packet.feedbin_oldest_phrase, size: 12
+
+      move_down 20
+
+      text daily_packet.workouts_title, style: :bold, size: 20
+      move_down 5
+
+      day_gap = 10
+      daily_packet.calendar_report.training_day_groups.each do |training_day_group|
+        training_day_group.each_with_index do |training_day, offset|
+          next if training_day.is_a? TrainingDay::FillerDay
+
+          box_x = offset * 10 + day_gap * offset
+
+          if training_day.outcome == :went
+            fill_rectangle [box_x, 0], 10, 10
+          else
+            stroke_rectangle [box_x, 0], 10, 10
+          end
+        end
+
+        move_down 20
+      end
     end
   end
 
