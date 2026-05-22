@@ -38,12 +38,11 @@ class DailyPacket < ApplicationRecord
   end
 
   def chore_list
-    chores = Chore
-      .where(assignee: "jon")
-      .where("? = ANY(due_days)", built_on.wday)
-      .order(created_at: :asc)
-
     chores.pluck(:title).map(&:downcase)
+  end
+
+  def chores
+    @chores ||= generate_chores
   end
 
   def start_list
@@ -64,5 +63,27 @@ class DailyPacket < ApplicationRecord
 
   def built_on_weekend?
     built_on.saturday? || built_on.sunday?
+  end
+
+  def workouts_title
+    "#{calendar_report.period_start.strftime("%B")} Workouts"
+  end
+
+  def calendar_report
+    @calendar_report ||= generate_calendar_report
+  end
+
+  private
+
+  def generate_chores
+    Chore
+      .where(assignee: "jon")
+      .where("? = ANY(due_days)", built_on.wday)
+      .order(created_at: :asc)
+  end
+
+  def generate_calendar_report
+    month, year = TrainingDay::CalendarReport.params_for(built_on).values
+    TrainingDay::CalendarReport.new(year, month)
   end
 end
