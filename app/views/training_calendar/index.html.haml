@@ -4,8 +4,6 @@
     %h1.m-0= calendar_report.title
     %p.m-0= link_to "next", training_calendar_path(calendar_report.next_params)
 
-%h1 Training Calendar
-
 - if calendar_report.training_day_groups.any?
   %ul.list-none.m-0.p-0(class="space-y-[20px]")
     - calendar_report.training_day_groups.each do |training_day_group|

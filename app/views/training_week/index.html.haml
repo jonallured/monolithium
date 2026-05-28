@@ -7,8 +7,6 @@
     - week_report.month_dates.each do |date|
       %p.m-0= link_to date.strftime("%b"), training_calendar_path(TrainingDay::CalendarReport.params_for(date))
 
-%h1 Training Week
-
 %ul.list-none.m-0.p-0.grid.grid-cols-7(class="gap-[20px]")
   - week_report.training_days.each do |training_day|
     %li.m-0.p-0.bg-off-white.text-black(class="[aspect-ratio:1/1]")
