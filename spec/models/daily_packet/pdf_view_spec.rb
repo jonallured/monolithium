@@ -24,11 +24,17 @@ describe DailyPacket::PdfView do
           "Alright Haircut",
           "Your haircut is adequate.",
           "- Wife, 01/01/1970",
-          "Reading Pace",
+          "Stats",
+          "reading pace",
           "7.7 pages/day",
-          "Feedbin Stats",
-          "unread: 9",
-          "oldest: 14 days ago",
+          "feedbin unread",
+          "9 items",
+          "feedbin oldest",
+          "14 days",
+          "best workout streak",
+          "0 days",
+          "current workout streak",
+          "0 days",
           "November Workouts"
         ])
 
