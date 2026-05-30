@@ -22,18 +22,26 @@ class DailyPacket < ApplicationRecord
   end
 
   def feedbin_oldest_phrase
-    "oldest: #{feedbin_oldest_ago} days ago"
+    "#{feedbin_oldest_ago} days"
   end
 
   def feedbin_unread_phrase
-    "unread: #{feedbin_unread_count}"
+    "#{feedbin_unread_count} items"
+  end
+
+  def workout_streak_phrase
+    "#{TrainingDay.current_streak} days"
+  end
+
+  def best_workout_streak_phrase
+    "#{TrainingDay.longest_streak} days"
   end
 
   def headline_phrase
     "Daily Packet ##{edition_number}"
   end
 
-  def reading_list_phrase
+  def reading_pace_phrase
     "#{reading_list_pace} pages/day"
   end
 

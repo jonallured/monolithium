@@ -68,14 +68,27 @@ class DailyPacket::PdfView < ActiveRecord::AssociatedObject
 
       move_down 20
 
-      text "Reading Pace", style: :bold, size: 20
-      text daily_packet.reading_list_phrase, size: 12
+      text "Stats", style: :bold, size: 20
 
-      move_down 20
+      text "reading pace", size: 12
+      move_up 14
+      text daily_packet.reading_pace_phrase, size: 12, align: :right
 
-      text "Feedbin Stats", style: :bold, size: 20
-      text daily_packet.feedbin_unread_phrase, size: 12
-      text daily_packet.feedbin_oldest_phrase, size: 12
+      text "feedbin unread", size: 12
+      move_up 14
+      text daily_packet.feedbin_unread_phrase, size: 12, align: :right
+
+      text "feedbin oldest", size: 12
+      move_up 14
+      text daily_packet.feedbin_oldest_phrase, size: 12, align: :right
+
+      text "best workout streak", size: 12
+      move_up 14
+      text daily_packet.best_workout_streak_phrase, size: 12, align: :right
+
+      text "current workout streak", size: 12
+      move_up 14
+      text daily_packet.workout_streak_phrase, size: 12, align: :right
 
       move_down 20
 
