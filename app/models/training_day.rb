@@ -8,8 +8,16 @@ class TrainingDay < ApplicationRecord
   validates :intensity, presence: true, inclusion: {in: INTENSITIES}
   validates :with_coach, inclusion: {in: [true, false]}
 
+  def self.streak_candidate_dates
+    where("date <= ?", Date.today)
+      .where.not(completed_at: nil)
+      .where.not(intensity: "rest")
+      .order(date: :desc)
+      .pluck(:date)
+  end
+
   def self.current_streak
-    dates = where.not(intensity: "rest").order(date: :desc).pluck(:date)
+    dates = streak_candidate_dates
     return 0 if dates.empty?
 
     most_recent_is_too_old = dates.first < Date.yesterday
@@ -26,7 +34,7 @@ class TrainingDay < ApplicationRecord
   end
 
   def self.longest_streak
-    dates = where.not(intensity: "rest").order(date: :desc).pluck(:date)
+    dates = streak_candidate_dates
     return 0 if dates.empty?
 
     max_streak = streak = 1
