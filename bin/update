@@ -11,7 +11,7 @@ Dependency Updates
 This commit updates project dependencies like this:
 
 ```
-$ bundle update
+$ bundle update --all
 ```
 
 It was automatically created with this script:
@@ -24,7 +24,7 @@ END
 
 git fetch --all --quiet
 git checkout -b updates
-bundle update
+bundle update --all
 bundle exec rake
 git add .
 git commit --message "$message"
