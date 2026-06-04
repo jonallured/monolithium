@@ -6,19 +6,19 @@ myself.
 ### Start a Server
 
 ```
-$ ./bin/start
+$ bin/start
 ```
 
 ### Open a Console
 
 ```
-$ ./bin/console
+$ bin/console
 ```
 
 ### Run all the tests
 
 ```
-$ bundle exec rake
+$ bin/rake
 ```
 
 ## Projects
