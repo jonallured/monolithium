@@ -5,7 +5,7 @@ module Monolithium
 
   private_class_method def self.create_config
     attributes = Rails.application.credentials[Rails.env.to_sym]
-    Struct.new("Config", *attributes.keys, keyword_init: true)
+    Struct.new("Config", *attributes.keys, keyword_init: true) # standard:disable Style/RedundantStructKeywordInit
     Struct::Config.new(attributes)
   end
 end
