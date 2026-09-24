@@ -16,8 +16,9 @@ describe "Admin edits workout" do
     workout = FactoryBot.create(:workout)
     visit "/crud/workouts/#{workout.id}/edit"
     fill_in "title", with: ""
+    select "please select", from: "workout_active"
     click_on "update"
-    expect(page).to have_css ".alert", text: "Title can't be blank"
+    expect(page).to have_css ".alert", text: "Title can't be blank and Active is not included in the list"
   end
 
   scenario "edit successfully" do

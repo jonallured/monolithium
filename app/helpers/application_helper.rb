@@ -2,7 +2,7 @@ module ApplicationHelper
   def workout_options
     placeholder_option = [["please select", ""]]
 
-    title_options = Workout.all.map do |workout|
+    title_options = Workout.active.map do |workout|
       [workout.title, workout.id]
     end
 
@@ -66,6 +66,16 @@ module ApplicationHelper
     end
 
     placeholder_option + intensity_options
+  end
+
+  def workout_active_options
+    placeholder_option = [["please select", ""]]
+
+    active_options = [true, false].map do |active|
+      [active, active]
+    end
+
+    placeholder_option + active_options
   end
 
   def training_day_with_coach_options
