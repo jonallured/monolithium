@@ -12,7 +12,38 @@ describe "Admin views workouts" do
 
   scenario "with no records" do
     visit "/crud/workouts"
+    headers = page.find("thead tr").text
+    expect(headers).to eq "ID Title Active Created At"
     expect(page.all("tbody tr").count).to eq 0
+  end
+
+  scenario "with a record" do
+    workout = FactoryBot.create(
+      :workout,
+      active: true,
+      title: "Warm Up"
+    )
+    visit "/crud/workouts"
+    rows = page.all("tbody tr")
+    expect(rows.count).to eq 1
+
+    cells = rows.first.all("td").map(&:text)
+    expect(cells).to eq([
+      workout.id.to_s,
+      "Warm Up",
+      "true",
+      workout.created_at.to_fs
+    ])
+  end
+
+  scenario "with a record that has a long title" do
+    workout = FactoryBot.create(
+      :workout,
+      title: "This title is so long that it would cause rendering issues and what I'd rather see is it cut off"
+    )
+    visit "/crud/workouts"
+    title_cell = page.all("tbody td")[1].text
+    expect(title_cell).to eq workout.title.truncate(20)
   end
 
   scenario "with a page of records" do
