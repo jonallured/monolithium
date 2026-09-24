@@ -8,11 +8,15 @@
   %thead
     %tr
       %th ID
+      %th Title
+      %th Active
       %th.text-right Created At
   %tbody
     - workouts.each do |workout|
       %tr
         %td= link_to workout.id, crud_workout_path(workout)
+        %td= workout.title.truncate(20)
+        %td= workout.active
         %td.text-right= in_tz workout.created_at
 
 = paginate workouts
