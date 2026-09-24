@@ -13,14 +13,16 @@ describe "Admin creates workout" do
 
   scenario "create with errors" do
     visit "/crud/workouts/new"
+    select "please select", from: "workout_active"
     click_on "create"
-    expect(page).to have_css ".alert", text: "Title can't be blank"
+    expect(page).to have_css ".alert", text: "Title can't be blank and Active is not included in the list"
     expect(page).to have_current_path new_crud_workout_path
   end
 
   scenario "create successfully" do
     visit "/crud/workouts/new"
     fill_in "title", with: "Warm Up"
+    select "true", from: "workout_active"
     click_on "create"
 
     expect(page).to have_css ".notice", text: "Workout created"
@@ -35,6 +37,7 @@ describe "Admin creates workout" do
     expect(actual_values).to eq(
       [
         ["Title", "Warm Up"],
+        ["Active", "true"],
         ["Created At", workout.created_at.to_fs],
         ["Updated At", workout.updated_at.to_fs]
       ]

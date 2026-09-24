@@ -15,6 +15,7 @@ describe "Admin views workout" do
   scenario "viewing a record" do
     workout = FactoryBot.create(
       :workout,
+      active: true,
       title: "Warm Up"
     )
 
@@ -27,6 +28,7 @@ describe "Admin views workout" do
     expect(actual_values).to eq(
       [
         ["Title", "Warm Up"],
+        ["Active", "true"],
         ["Created At", workout.created_at.to_fs],
         ["Updated At", workout.updated_at.to_fs]
       ]
