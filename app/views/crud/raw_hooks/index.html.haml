@@ -14,7 +14,7 @@
     - raw_hooks.each do |raw_hook|
       %tr
         %td= link_to raw_hook.id, crud_raw_hook_path(raw_hook)
-        %td= raw_hook.body.first(100)
+        %td= raw_hook.body.truncate(100)
         %td.text-right= in_tz raw_hook.created_at
 
 = paginate raw_hooks
