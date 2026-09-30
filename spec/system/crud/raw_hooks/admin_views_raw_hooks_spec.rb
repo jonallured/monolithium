@@ -15,6 +15,16 @@ describe "Admin views raw hooks" do
     expect(page.all("tbody tr").count).to eq 0
   end
 
+  scenario "with a record that has a long body" do
+    raw_hook = FactoryBot.create(
+      :raw_hook,
+      body: "This body is so long that it would cause rendering issues and what I'd rather see is it cut off at one hundred characters right here"
+    )
+    visit "/crud/raw_hooks"
+    body_cell = page.all("tbody td")[1].text
+    expect(body_cell).to eq raw_hook.body.truncate(100)
+  end
+
   scenario "with a page of records" do
     FactoryBot.create_list(:raw_hook, 3)
     visit "/crud/raw_hooks"

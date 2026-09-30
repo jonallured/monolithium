@@ -14,7 +14,7 @@
     - post_bin_requests.each do |post_bin_request|
       %tr
         %td= link_to post_bin_request.id, crud_post_bin_request_path(post_bin_request)
-        %td= post_bin_request.body.first(100)
+        %td= post_bin_request.body.truncate(100)
         %td.text-right= in_tz post_bin_request.created_at
 
 = paginate post_bin_requests
