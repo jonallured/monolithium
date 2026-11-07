@@ -8,6 +8,8 @@ class ApiController < ActionController::Base
   rescue_from ActiveRecord::RecordInvalid, with: :record_invalid
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
+  rate_limit to: 300, within: 1.minute
+
   before_action :validate_client_token
 
   exposure_config(:random_or_find, find: lambda do |id, scope|
@@ -20,7 +22,7 @@ class ApiController < ActionController::Base
     client_token_header = request.headers.to_h[CLIENT_TOKEN_HEADER]
     client_token_param = params[CLIENT_TOKEN_PARAM]
     client_token = client_token_header || client_token_param
-    Monolithium.config.client_token == client_token
+    SecretCheck.match?(Monolithium.config.client_token, client_token)
   end
 
   def validate_client_token

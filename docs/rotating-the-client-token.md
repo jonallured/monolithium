@@ -34,7 +34,7 @@ Commit `config/credentials.yml.enc`, open a PR, merge, and deploy.
 Every shell still has the old token, so this should return `404`:
 
 ```sh
-http --headers https://app.jonallured.com/api/v1/work_days X-MLI-CLIENT-TOKEN:$MLI_CLIENT_TOKEN
+http --headers https://app.jonallured.com/api/v1/check X-MLI-CLIENT-TOKEN:$MLI_CLIENT_TOKEN
 ```
 
 ## 7. Regenerate the exports
