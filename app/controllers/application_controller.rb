@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
   private
 
   def session_password_matches?
-    Monolithium.config.admin_password == session[:admin_password]
+    SecretCheck.match?(SecretCheck.digest(Monolithium.config.admin_password), session[:admin_password_digest])
   end
 
   def ensure_admin

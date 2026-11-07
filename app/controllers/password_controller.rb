@@ -1,11 +1,12 @@
 class PasswordController < ApplicationController
   skip_before_action :ensure_admin
+  rate_limit to: 10, within: 3.minutes, only: :create, with: :too_many_attempts
   before_action :verify_password, only: :create
 
   def create
     path = session.fetch(:redirect_to, dashboard_path)
     session.clear
-    session[:admin_password] = params[:admin_password]
+    session[:admin_password_digest] = SecretCheck.digest(params[:admin_password])
     flash[:notice] = t("password.saved")
     redirect_to path
   end
@@ -26,6 +27,11 @@ class PasswordController < ApplicationController
   end
 
   def password_matches?
-    Monolithium.config.admin_password == params[:admin_password]
+    SecretCheck.match?(Monolithium.config.admin_password, params[:admin_password])
+  end
+
+  def too_many_attempts
+    flash[:alert] = t("password.too_many_attempts")
+    redirect_to sign_in_path
   end
 end

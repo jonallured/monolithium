@@ -74,6 +74,7 @@ Rails.application.routes.draw do
       resources :boops
       resources :work_days
 
+      get :check, to: "check#show"
       get :decode_jwt, to: "decode_jwt#show"
       get :ping, to: "ping#show"
       get :post_bin, to: "post_bin#create"
