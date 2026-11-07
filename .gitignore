@@ -5,6 +5,7 @@
 .sass-cache
 .yarn-integrity
 /.bundle
+/config/master.key
 /log/*
 /node_modules
 /public/packs

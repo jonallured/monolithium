@@ -27,4 +27,18 @@ describe "Authentication" do
     visit "/dashboard"
     expect(page).to have_current_path sign_in_path
   end
+
+  scenario "signing in too many times shows an alert" do
+    10.times do
+      visit "/sign_in"
+      fill_in "admin_password", with: "invalid"
+      click_on "sign in"
+    end
+    expect(page).to have_css ".alert", text: "Password did not match"
+
+    fill_in "admin_password", with: "shhh"
+    click_on "sign in"
+    expect(page).to have_css ".alert", text: "Too many attempts, try again later"
+    expect(page).to have_current_path sign_in_path
+  end
 end

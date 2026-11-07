@@ -3,5 +3,6 @@ en:
     clear: 'Password removed from session'
     mismatch: 'Password did not match'
     saved: 'Password saved to session'
+    too_many_attempts: 'Too many attempts, try again later'
   projects:
     create_error: 'Something went wrong - project not created!'
