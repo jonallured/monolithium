@@ -6,6 +6,18 @@ class FinancialStatement < ApplicationRecord
 
   scope :for_year, ->(year) { where("extract(year from period_start_on) = ?", year) }
 
+  def self.default_index_sort
+    "-period_start_on"
+  end
+
+  def self.index_filters
+    {financial_account_id: :id, period_start_on: :date}
+  end
+
+  def self.index_sorts
+    %w[period_start_on]
+  end
+
   def self.permitted_params
     [
       :ending_amount_cents,
