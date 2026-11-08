@@ -1,0 +1,10 @@
+json.array!(
+  financial_transactions,
+  :amount_cents,
+  :created_at,
+  :description,
+  :financial_account_id,
+  :id,
+  :posted_on,
+  :updated_at
+)

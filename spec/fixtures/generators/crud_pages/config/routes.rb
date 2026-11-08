@@ -73,6 +73,9 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :books
       resources :boops
+      resources :financial_accounts, only: %i[index show]
+      resources :financial_statements, only: :index
+      resources :financial_transactions, only: :index
       resources :work_days
 
       get :check, to: "check#show"

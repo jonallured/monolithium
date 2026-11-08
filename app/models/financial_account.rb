@@ -15,6 +15,18 @@ class FinancialAccount < ApplicationRecord
   validates_uniqueness_of :name
   validates_inclusion_of :category, in: CATEGORIES
 
+  def self.default_index_sort
+    "category,name"
+  end
+
+  def self.index_filters
+    {category: CATEGORIES}
+  end
+
+  def self.index_sorts
+    %w[category name]
+  end
+
   def self.permitted_params
     [
       :category,
