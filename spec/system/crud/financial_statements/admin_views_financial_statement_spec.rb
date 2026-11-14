@@ -18,7 +18,7 @@ describe "Admin views financial statement" do
     financial_statement = FactoryBot.create(
       :financial_statement,
       financial_account: financial_account,
-      period_start_on: Date.today,
+      period_start_on: Date.today.beginning_of_month,
       starting_amount_cents: 400_00,
       ending_amount_cents: 200_00
     )

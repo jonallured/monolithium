@@ -24,7 +24,7 @@ describe FinancialStatement do
         financial_account = FactoryBot.create(:financial_account)
         financial_statement = FinancialStatement.new(
           financial_account: financial_account,
-          period_start_on: Date.today,
+          period_start_on: Date.today.beginning_of_month,
           starting_amount_cents: 1_000,
           ending_amount_cents: 2_000
         )
@@ -32,10 +32,18 @@ describe FinancialStatement do
       end
     end
 
+    context "with a period_start_on that isn't the first of a month" do
+      it "is invalid" do
+        financial_statement = FactoryBot.build(:financial_statement, period_start_on: "2024-06-15")
+        financial_statement.validate
+        expect(financial_statement.errors[:period_start_on]).to eq ["must be the first of a month"]
+      end
+    end
+
     context "with a duplicate period_start_on for same account" do
       it "is invalid" do
         financial_account = FactoryBot.create(:financial_account)
-        period_start_on = Date.today
+        period_start_on = Date.today.beginning_of_month
         FinancialStatement.create(
           financial_account: financial_account,
           period_start_on: period_start_on,
@@ -55,7 +63,7 @@ describe FinancialStatement do
 
   describe "scopes" do
     describe "for_year" do
-      let(:period_start_on) { Date.today }
+      let(:period_start_on) { Date.today.beginning_of_month }
 
       let!(:financial_statement) do
         FactoryBot.create(

@@ -1,0 +1,11 @@
+json.call(
+  financial_statement,
+  :created_at,
+  :ending_amount_cents,
+  :financial_account_id,
+  :id,
+  :net_amount_cents,
+  :period_start_on,
+  :starting_amount_cents,
+  :updated_at
+)
