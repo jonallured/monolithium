@@ -74,7 +74,7 @@ Rails.application.routes.draw do
       resources :books
       resources :boops
       resources :financial_accounts, only: %i[index show]
-      resources :financial_statements, only: :index
+      resources :financial_statements, only: %i[index create update]
       resources :financial_transactions, only: :index
       resources :work_days
 
