@@ -72,7 +72,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :books
       resources :boops
-      resources :financial_accounts, only: %i[index show]
+      resources :financial_accounts, only: %i[index show create update]
       resources :financial_statements, only: %i[index create update]
       resources :financial_transactions, only: :index
       resources :work_days
