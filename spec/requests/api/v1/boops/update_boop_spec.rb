@@ -1,11 +1,11 @@
 require "rails_helper"
 
-describe "PUT /api/v1/boops/:id" do
+describe "PATCH /api/v1/boops/:id" do
   let(:headers) { {ApiController::CLIENT_TOKEN_HEADER => Monolithium.config.client_token} }
 
   context "with an invalid id" do
     it "returns 404 and an error message" do
-      put "/api/v1/boops/invalid", headers: headers
+      patch "/api/v1/boops/invalid", headers: headers
 
       expect(response.status).to eq 404
       expect(response.body).to match "Couldn't find Boop"
@@ -17,7 +17,7 @@ describe "PUT /api/v1/boops/:id" do
     let(:params) { {} }
 
     it "returns 400 and an error message" do
-      put "/api/v1/boops/#{boop.id}", params: params, headers: headers
+      patch "/api/v1/boops/#{boop.id}", params: params, headers: headers
 
       expect(response.status).to eq 400
       expect(response.body).to match "param is missing"
@@ -29,7 +29,7 @@ describe "PUT /api/v1/boops/:id" do
     let(:params) { {boop: {display_type: "invalid"}} }
 
     it "returns 400 and an error message" do
-      put "/api/v1/boops/#{boop.id}", params: params, headers: headers
+      patch "/api/v1/boops/#{boop.id}", params: params, headers: headers
 
       expect(response.status).to eq 400
       expect(response.body).to match "Validation failed"
@@ -41,7 +41,7 @@ describe "PUT /api/v1/boops/:id" do
     let(:params) { {boop: {display_type: "smile"}} }
 
     it "returns 200 and the updated json" do
-      put "/api/v1/boops/#{boop.id}", params: params, headers: headers
+      patch "/api/v1/boops/#{boop.id}", params: params, headers: headers
 
       expect(response.status).to eq 200
       expect(response.parsed_body["display_type"]).to eq "smile"
@@ -54,7 +54,7 @@ describe "PUT /api/v1/boops/:id" do
     let(:params) { {boop: {created_at: zero_time}} }
 
     it "ignores bonus attributes" do
-      put "/api/v1/boops/#{boop.id}", params: params, headers: headers
+      patch "/api/v1/boops/#{boop.id}", params: params, headers: headers
 
       expect(response.status).to eq 200
       expect(response.parsed_body["created_at"]).to_not eq zero_time.as_json
