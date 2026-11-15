@@ -6,7 +6,7 @@
 - Run tests: `bundle exec rspec`
 - Run single test: `bundle exec rspec path/to/spec.rb:LINE_NUMBER`
 - Run system tests: `bundle exec rspec spec/system/`
-- Lint Ruby: `./bin/rubocop`
+- Lint Ruby: `bundle exec standardrb`
 - Ruby console: `./bin/console`
 
 ## Code Style & Conventions
