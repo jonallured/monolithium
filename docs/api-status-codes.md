@@ -25,6 +25,15 @@ is `ActiveRecord::RecordInvalid`.
 Use the `:unprocessable_content` symbol for 422. Rack 3.1 renamed it, and
 `:unprocessable_entity` is deprecated.
 
+## Updates use PATCH
+
+An update changes only the fields it's sent, which is what PATCH means, so
+PATCH is the verb for updates. Write routes with `resources`, write
+hand-rolled update routes with `patch`, and write request specs as
+`describe "PATCH /api/v1/..."` with `patch` calls. `resources` also routes PUT
+to `update`, and that's fine to accept, but nothing in the project should be
+written as PUT.
+
 ## Why the codes don't leak anything
 
 A common worry with status codes is enumeration: if a login endpoint returns
