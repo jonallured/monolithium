@@ -1,8 +1,8 @@
 # API status codes
 
 Every `/api/v1` endpoint should answer the same way for the same kind of
-problem. The financial statement endpoints are the first to follow all of
-this; books, boops and work days still return 400 for validation failures
+problem. The financial account and financial statement endpoints follow all
+of this; books, boops and work days still return 400 for validation failures
 and move to 422 in a follow-up.
 
 ## The codes
@@ -13,7 +13,7 @@ and move to 422 in a follow-up.
 | 201 | A record was created | a POST | the new record |
 | 400 | The request itself is broken | a missing root param, an unknown filter, a date that doesn't parse | `{"error": "..."}` |
 | 404 | The thing named doesn't exist, or the caller has no token | `/financial_statements/0`, an unknown `financial_account_id` | `{"error": "..."}`, or empty without a token |
-| 422 | The request is well formed but the data breaks a rule | a second statement for the same month, a `period_start_on` that isn't the 1st | `{"error": "..."}` |
+| 422 | The request is well formed but the data breaks a rule | a second statement for the same month, a `period_start_on` that isn't the 1st, an account name that's taken | `{"error": "..."}` |
 
 The 400 and 422 line comes down to who has to change something. A 400 means
 the client is building requests wrong, so the fix is in the code that sends
