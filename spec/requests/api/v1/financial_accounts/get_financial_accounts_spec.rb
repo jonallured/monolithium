@@ -29,6 +29,7 @@ describe "GET /api/v1/financial_accounts" do
       expect(response.status).to eq 200
       expect(response.parsed_body.first).to match({
         "category" => "savings",
+        "closed_on" => nil,
         "created_at" => anything,
         "id" => account.id,
         "name" => "Boat Money",

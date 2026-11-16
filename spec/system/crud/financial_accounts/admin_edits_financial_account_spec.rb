@@ -33,4 +33,13 @@ describe "Admin edits financial account" do
     expect(page).to have_current_path crud_financial_account_path(financial_account)
     expect(page).to have_css "td", text: "Brand new account"
   end
+
+  scenario "mark account closed" do
+    financial_account = FactoryBot.create(:financial_account)
+    visit "/crud/financial_accounts/#{financial_account.id}/edit"
+    fill_in "closed on", with: "2019-04-30"
+    click_on "update"
+
+    expect(page).to have_css "td", text: Date.new(2019, 4, 30).to_fs
+  end
 end

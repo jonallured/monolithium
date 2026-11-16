@@ -1,6 +1,7 @@
 json.call(
   financial_account,
   :category,
+  :closed_on,
   :created_at,
   :id,
   :name,

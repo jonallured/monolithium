@@ -9,12 +9,14 @@
     %tr
       %th ID
       %th Name
+      %th Closed On
       %th.text-right Created At
   %tbody
     - financial_accounts.each do |financial_account|
       %tr
         %td= link_to financial_account.id, crud_financial_account_path(financial_account)
         %td= financial_account.name
+        %td= financial_account.closed_on&.to_fs
         %td.text-right= in_tz financial_account.created_at
 
 = paginate financial_accounts

@@ -4,4 +4,5 @@
     - FinancialAccount::CATEGORIES.each do |category|
       %option{value: category, selected: financial_account.category == category}= category
   = form.text_field :name, placeholder: "name"
+  = form.date_field :closed_on, placeholder: "closed on"
   = form.button button_label

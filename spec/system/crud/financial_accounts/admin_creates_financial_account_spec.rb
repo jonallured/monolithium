@@ -46,6 +46,7 @@ describe "Admin creates financial account" do
       [
         ["Name", "Brand new account"],
         ["Category", "checking"],
+        ["Closed On", "NIL"],
         ["Created At", financial_account.created_at.to_fs],
         ["Updated At", financial_account.updated_at.to_fs]
       ]
