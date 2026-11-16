@@ -26,6 +26,60 @@ describe FinancialAccount do
     end
   end
 
+  describe "closed?" do
+    context "without a closed_on date" do
+      it "is false" do
+        financial_account = FactoryBot.build(:financial_account, closed_on: nil)
+        expect(financial_account.closed?).to eq false
+      end
+    end
+
+    context "with a closed_on date" do
+      it "is true" do
+        financial_account = FactoryBot.build(:financial_account, closed_on: Date.new(2019, 4, 30))
+        expect(financial_account.closed?).to eq true
+      end
+    end
+  end
+
+  describe "open_on?" do
+    context "without a closed_on date" do
+      it "is true for any date" do
+        financial_account = FactoryBot.build(:financial_account, closed_on: nil)
+        expect(financial_account.open_on?(Date.new(2030, 1, 1))).to eq true
+      end
+    end
+
+    context "with a closed_on date" do
+      let(:financial_account) { FactoryBot.build(:financial_account, closed_on: Date.new(2019, 4, 30)) }
+
+      it "is true before the close date" do
+        expect(financial_account.open_on?(Date.new(2019, 4, 1))).to eq true
+      end
+
+      it "is true on the close date" do
+        expect(financial_account.open_on?(Date.new(2019, 4, 30))).to eq true
+      end
+
+      it "is false after the close date" do
+        expect(financial_account.open_on?(Date.new(2019, 5, 1))).to eq false
+      end
+    end
+  end
+
+  describe "scopes" do
+    let!(:open_account) { FactoryBot.create(:financial_account, closed_on: nil) }
+    let!(:closed_account) { FactoryBot.create(:financial_account, closed_on: Date.new(2019, 4, 30)) }
+
+    it "closed returns only accounts with a closed_on date" do
+      expect(FinancialAccount.closed).to eq [closed_account]
+    end
+
+    it "not_closed returns only accounts without a closed_on date" do
+      expect(FinancialAccount.not_closed).to eq [open_account]
+    end
+  end
+
   describe "destroying" do
     context "with an associated FinancialStatement record" do
       it "destroys that associated record too" do

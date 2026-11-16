@@ -36,6 +36,7 @@ describe "Admin views financial account" do
       [
         ["Name", "Slush fund"],
         ["Category", "checking"],
+        ["Closed On", "NIL"],
         ["Created At", financial_account.created_at.to_fs],
         ["Updated At", financial_account.updated_at.to_fs]
       ]

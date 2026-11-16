@@ -70,11 +70,20 @@ describe "POST /api/v1/financial_accounts" do
       expect(response.status).to eq 201
       expect(response.parsed_body).to match({
         "category" => "savings",
+        "closed_on" => nil,
         "created_at" => anything,
         "id" => anything,
         "name" => "Boat Money",
         "updated_at" => anything
       })
+    end
+  end
+
+  context "with a closed_on date" do
+    it "creates a closed account" do
+      post "/api/v1/financial_accounts", params: {financial_account: attrs.merge(closed_on: "2019-04-30")}, headers: headers
+
+      expect(response.parsed_body["closed_on"]).to eq "2019-04-30"
     end
   end
 

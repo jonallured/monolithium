@@ -65,4 +65,23 @@ describe "PATCH /api/v1/financial_accounts/:id" do
       expect(response.parsed_body).to include("category" => "savings", "name" => "Boat Money")
     end
   end
+
+  context "setting a closed_on date" do
+    it "returns 200 and the closed_on date" do
+      patch "/api/v1/financial_accounts/#{account.id}", params: {financial_account: {closed_on: "2019-04-30"}}, headers: headers
+
+      expect(response.status).to eq 200
+      expect(response.parsed_body["closed_on"]).to eq "2019-04-30"
+    end
+  end
+
+  context "clearing a closed_on date" do
+    before { account.update!(closed_on: Date.new(2019, 4, 30)) }
+
+    it "reopens the account" do
+      patch "/api/v1/financial_accounts/#{account.id}", params: {financial_account: {closed_on: ""}}, headers: headers
+
+      expect(account.reload.closed_on).to be_nil
+    end
+  end
 end
