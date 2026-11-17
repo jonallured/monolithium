@@ -1,0 +1,9 @@
+#!/bin/sh
+# Readies a fresh worktree; taskmaster's tm-slot runs it with the main checkout as $1.
+set -e
+
+main_checkout="${1:?usage: bin/setup-tree <main checkout>}"
+
+[ -f .env ] || cp "$main_checkout/.env" .env
+bundle check >/dev/null || bundle install
+bin/rails tailwindcss:build
