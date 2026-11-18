@@ -1,5 +1,5 @@
 class S3Api
-  BUCKET_NAME = "mli-data"
+  BUCKET_NAME = "monolithium-data"
 
   def self.generate_client
     aws_access_key = Monolithium.config.aws_access_key
