@@ -2,17 +2,10 @@
 set -e
 
 main_checkout="${1:?usage: bin/setup-tree <main checkout>}"
+task_id="${TASKMASTER_TASK_ID:?TASKMASTER_TASK_ID is not set}"
 
 [ -f .env ] || cp "$main_checkout/.env" .env
-
-if ! grep -q '^MONOLITHIUM_DB_SUFFIX=' .env; then
-  slug=$(basename "$PWD" | tr -c 'A-Za-z0-9\n' '_' | tr 'A-Z' 'a-z')
-  if [ ${#slug} -gt 32 ]; then
-    hash=$(printf %s "$slug" | cksum | cut -c1-6)
-    slug="$(printf %s "$slug" | cut -c1-25)_$hash"
-  fi
-  printf '\nMONOLITHIUM_DB_SUFFIX=_%s\n' "$slug" >>.env
-fi
+grep -q '^MONOLITHIUM_DB_SUFFIX=' .env || printf '\nMONOLITHIUM_DB_SUFFIX=_%s\n' "$task_id" >>.env
 
 bundle check >/dev/null || bundle install
 bin/rails db:prepare

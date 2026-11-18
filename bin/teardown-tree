@@ -1,0 +1,9 @@
+#!/bin/sh
+set -e
+
+if ! grep -q '^MONOLITHIUM_DB_SUFFIX=_' .env 2>/dev/null; then
+  echo "no MONOLITHIUM_DB_SUFFIX in .env; refusing to drop the main checkout's databases" >&2
+  exit 1
+fi
+
+bin/rails db:drop
