@@ -1,3 +1,5 @@
+# A worktree sets MONOLITHIUM_DB_SUFFIX in its .env (bin/setup-tree writes it) so it gets
+# databases of its own; the main checkout leaves it unset and keeps the plain names.
 default: &default
   adapter: postgresql
   encoding: unicode
@@ -5,8 +7,8 @@ default: &default
 
 development:
   <<: *default
-  database: monolithium_development
+  database: monolithium_development<%= ENV["MONOLITHIUM_DB_SUFFIX"] %>
 
 test:
   <<: *default
-  database: monolithium_test
+  database: monolithium_test<%= ENV["MONOLITHIUM_DB_SUFFIX"] %>

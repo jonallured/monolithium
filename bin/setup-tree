@@ -5,5 +5,20 @@ set -e
 main_checkout="${1:?usage: bin/setup-tree <main checkout>}"
 
 [ -f .env ] || cp "$main_checkout/.env" .env
+
+# Give the tree its own databases, named after its directory: per-tree-thing becomes
+# monolithium_test_per_tree_thing. Postgres cuts names at 63 bytes, so a long slug is
+# shortened and made unique again with a hash of the whole thing.
+if ! grep -q '^MONOLITHIUM_DB_SUFFIX=' .env; then
+  slug=$(basename "$PWD" | tr -c 'A-Za-z0-9\n' '_' | tr 'A-Z' 'a-z')
+  if [ ${#slug} -gt 32 ]; then
+    hash=$(printf %s "$slug" | cksum | cut -c1-6)
+    slug="$(printf %s "$slug" | cut -c1-25)_$hash"
+  fi
+  printf '\nMONOLITHIUM_DB_SUFFIX=_%s\n' "$slug" >>.env
+fi
+
 bundle check >/dev/null || bundle install
+bin/rails db:prepare
+RAILS_ENV=test bin/rails db:prepare
 bin/rails tailwindcss:build
