@@ -1,14 +1,10 @@
 #!/bin/sh
-# Readies a fresh worktree; taskmaster's tm-slot runs it with the main checkout as $1.
 set -e
 
 main_checkout="${1:?usage: bin/setup-tree <main checkout>}"
 
 [ -f .env ] || cp "$main_checkout/.env" .env
 
-# Give the tree its own databases, named after its directory: per-tree-thing becomes
-# monolithium_test_per_tree_thing. Postgres cuts names at 63 bytes, so a long slug is
-# shortened and made unique again with a hash of the whole thing.
 if ! grep -q '^MONOLITHIUM_DB_SUFFIX=' .env; then
   slug=$(basename "$PWD" | tr -c 'A-Za-z0-9\n' '_' | tr 'A-Z' 'a-z')
   if [ ${#slug} -gt 32 ]; then
