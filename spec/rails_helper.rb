@@ -7,6 +7,7 @@ require "webmock/rspec"
 # Add additional requires below this line. Rails is not loaded until this point!
 
 require File.expand_path("support/shared", __dir__)
+require File.expand_path("support/turbo_streams", __dir__)
 
 ActiveRecord::Migration.maintain_test_schema!
 
@@ -30,6 +31,8 @@ RSpec.configure do |config|
   config.before(:each, type: :system, js: true) do
     driven_by :selenium_chrome_headless
   end
+
+  config.include TurboStreamsHelper, type: :system, js: true
 end
 
 Capybara.configure do |config|
