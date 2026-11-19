@@ -23,13 +23,13 @@
     %summary= training_day.date.strftime("%A")
 
     = form_with model: training_day do |form|
-      = form.select :intensity, training_day_intensity_options, selected: training_day.intensity
-      = form.select :with_coach, training_day_with_coach_options, selected: training_day.with_coach
+      = form.select :intensity, TrainingDay::INTENSITIES, include_blank: "please select", selected: training_day.intensity
+      = form.select :with_coach, [true, false], include_blank: "please select", selected: training_day.with_coach
       = form.datetime_local_field :completed_at, placeholder: "completed at"
 
       - training_day.training_activities.build
       = form.fields_for :training_activities do |training_activity_form|
-        = training_activity_form.select :workout_id, workout_options, selected: training_activity_form.object&.workout_id
+        = training_activity_form.select :workout_id, Workout.active.pluck(:title, :id), include_blank: "please select", selected: training_activity_form.object&.workout_id
         = training_activity_form.label :_destroy do
           = training_activity_form.checkbox :_destroy
           remove
