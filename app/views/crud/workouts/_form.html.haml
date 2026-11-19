@@ -1,4 +1,4 @@
 = form_with model: [:crud, workout] do |form|
   = form.text_field :title, placeholder: "title"
-  = form.select :active, workout_active_options, selected: workout.active
+  = form.select :active, [true, false], include_blank: "please select", selected: workout.active
   = form.button button_label
