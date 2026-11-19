@@ -40,8 +40,8 @@ describe MaybeJson do
       it "passes those options along" do
         source = '{"foo":"bar"}'
         opts = {symbolize_names: true}
-        expect(JSON).to receive(:parse).with(source, opts).and_call_original
-        result = MaybeJson.parse(source, opts)
+        expect(JSON).to receive(:parse).with(source, **opts).and_call_original
+        result = MaybeJson.parse(source, **opts)
         expect(result).to eq({foo: "bar"})
       end
     end
