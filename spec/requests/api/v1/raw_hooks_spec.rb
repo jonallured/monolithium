@@ -71,4 +71,23 @@ describe "POST /api/v1/raw_hooks" do
       expect(raw_hook.params["integer_param"]).to eq 11
     end
   end
+
+  context "with non-ASCII characters in the body" do
+    let(:params) { {body: "mise.run → ~/.local/bin/mise"} }
+
+    it "stores the hook" do
+      post "/api/v1/raw_hooks", params: params, as: :json
+      expect(response.status).to eq 201
+    end
+
+    it "keeps the body as UTF-8" do
+      post "/api/v1/raw_hooks", params: params, as: :json
+      expect(RawHook.first.body).to eq '{"body":"mise.run → ~/.local/bin/mise"}'
+    end
+
+    it "keeps the raw post data header as UTF-8" do
+      post "/api/v1/raw_hooks", params: params, as: :json
+      expect(RawHook.first.headers["RAW_POST_DATA"]).to eq '{"body":"mise.run → ~/.local/bin/mise"}'
+    end
+  end
 end

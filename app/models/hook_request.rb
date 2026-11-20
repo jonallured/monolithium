@@ -29,7 +29,7 @@ class HookRequest
   private
 
   def computed_body
-    @request_body ||= request.body&.read
+    @request_body ||= to_utf8(request.body&.read)
   end
 
   def computed_headers
@@ -39,7 +39,7 @@ class HookRequest
       key == key.upcase && !key.starts_with?("ROUTES")
     end
 
-    sliced_headers = headers_hash.slice(*header_keys)
+    sliced_headers = headers_hash.slice(*header_keys).transform_values { |value| to_utf8(value) }
 
     SECRET_HEADER_KEYS.each do |secret_key|
       sliced_headers[secret_key] = "REDACTED" if sliced_headers.key? secret_key
@@ -56,5 +56,11 @@ class HookRequest
     end
 
     unsafe_params
+  end
+
+  def to_utf8(value)
+    return value unless value.is_a?(String)
+
+    value.dup.force_encoding(Encoding::UTF_8).scrub
   end
 end
